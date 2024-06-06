@@ -11,7 +11,7 @@
 #' @export
 obtain_keys <- function(info_table, method){
   id_name = paste0(method, "_id")
-  key_name = paste0(method, "_name")
+  key_name = paste0(method, "_num")
   
   if (!id_name %in% names(info_table)){
     stop("Remember to add the proper db ids to the table first")

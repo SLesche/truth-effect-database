@@ -70,7 +70,7 @@ data_exp_1_clean <- data_exp_1 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    data_num = ifelse(warning_or_no_warning == 0, 1, 2),
+    dataset_num = ifelse(warning_or_no_warning == 0, 1, 2),
     repetition_num_in_data = 2,
     within_num_in_data = 1
   ) %>% 
@@ -83,7 +83,7 @@ data_exp_1_clean <- data_exp_1 %>%
     response = truth_rating
   ) %>% 
   select(
-    data_num,
+    dataset_num,
     repetition_num_in_data,
     within_num_in_data,
     subject,
@@ -127,7 +127,7 @@ data_exp_2_clean <- data_exp_2 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    data_num = case_when(
+    dataset_num = case_when(
       warning_condition == 0 ~ 3,
       warning_condition == 1 ~ 4,
       warning_condition == 2 ~ 5
@@ -144,7 +144,7 @@ data_exp_2_clean <- data_exp_2 %>%
     response = truth_rating
   ) %>% 
   select(
-    data_num,
+    dataset_num,
     repetition_num_in_data,
     within_num_in_data,
     subject,
@@ -188,7 +188,7 @@ data_exp_3_clean <- data_exp_3 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    data_num = case_when(
+    dataset_num = case_when(
       some_or_half_warning == 0 & warning == 0 ~ 6,
       some_or_half_warning == 0 & warning == 1 ~ 7,
       some_or_half_warning == 1 & warning == 0 ~ 8,
@@ -206,7 +206,7 @@ data_exp_3_clean <- data_exp_3 %>%
     response = truth_rating
   ) %>% 
   select(
-    data_num,
+    dataset_num,
     repetition_num_in_data,
     within_num_in_data,
     subject,
@@ -221,37 +221,37 @@ data_exp_3_clean <- data_exp_3 %>%
 
 # For datasets
 # Within each dataset, start numbering the repetition, within, statement
-# and then join this to the correct data_num and update the repetition based on that
+# and then join this to the correct dataset_num and update the repetition based on that
 replace_ids <- function(data, info){
-  dataset_nums_used = unique(data$data_num)
+  dataset_nums_used = unique(data$dataset_num)
   
   repetition_keys = info$repetition_table %>% 
-    filter(data_num %in% dataset_nums_used) %>% 
-    select(data_num, repetition_num) %>% 
-    group_by(data_num) %>% 
+    filter(dataset_num %in% dataset_nums_used) %>% 
+    select(dataset_num, repetition_num) %>% 
+    group_by(dataset_num) %>% 
     mutate(repetition_num_in_data = row_number()) %>% 
     ungroup()
   
   within_keys = info$within_table %>% 
-    filter(data_num %in% dataset_nums_used) %>% 
-    select(data_num, within_num) %>% 
-    group_by(data_num) %>% 
+    filter(dataset_num %in% dataset_nums_used) %>% 
+    select(dataset_num, within_num) %>% 
+    group_by(dataset_num) %>% 
     mutate(within_num_in_data = row_number()) %>% 
     ungroup()
   
   statements_keys = info$statements_table %>% 
     filter(
       statementset_num %in% (info$dataset_table %>%
-                               filter(data_num %in% dataset_nums_used) %>%
+                               filter(dataset_num %in% dataset_nums_used) %>%
                                pull(statementset_num) %>% 
                                unique()
                              )
       ) %>% 
-    left_join(., info$dataset_table[, c("statementset_num", "data_num")]) %>% 
-    group_by(data_num) %>% 
+    left_join(., info$dataset_table[, c("statementset_num", "dataset_num")]) %>% 
+    group_by(dataset_num) %>% 
     mutate(statement_num_in_data = row_number()) %>% 
     ungroup() %>% 
-    select(data_num, statement_num, statement_num_in_data)
+    select(dataset_num, statement_num, statement_num_in_data)
   
   joined_data = data %>% 
     left_join(., repetition_keys) %>% 
@@ -270,6 +270,6 @@ for (i in seq_along(data_list)){
 }
 
 add_list$data = data.table::rbindlist(data_list) %>% 
-  mutate(subject = dense_rank(interaction(data_num, subject)))
+  mutate(subject = dense_rank(interaction(dataset_num, subject)))
 
 saveRDS(add_list, file = "processed_data/jalbert2020only.rdata")
