@@ -269,4 +269,7 @@ for (i in seq_along(data_list)){
   data_list[[i]] = replace_ids(data_list[[i]], info)
 }
 
-add_list$data = data.table::rbindlist(data_list)
+add_list$data = data.table::rbindlist(data_list) %>% 
+  mutate(subject = dense_rank(interaction(data_num, subject)))
+
+saveRDS(add_list, file = "processed_data/jalbert2020only.rdata")
