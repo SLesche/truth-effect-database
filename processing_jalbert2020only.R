@@ -269,6 +269,8 @@ for (i in seq_along(data_list)){
   data_list[[i]] = replace_ids(data_list[[i]], info)
 }
 
+add_list <- info
+
 add_list$data = data.table::rbindlist(data_list) %>% 
   mutate(subject = dense_rank(interaction(dataset_num, subject)))
 
