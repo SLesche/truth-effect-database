@@ -96,6 +96,28 @@ create_empty_db <- function(file_path){
   
   DBI::dbExecute(
     conn,
+    "CREATE TABLE repetition_table (
+    repetition_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dataset_id INTEGER,
+    repetition_time FLOAT,
+    repetition_location VARCHAR(255),
+    repetition_type VARCHAR(255),
+    n_repetitions INTEGER,
+    n_statements INTEGER,
+    time_pressure INTEGER,
+    truth_instructions INTEGER,
+    presentation_time_s FLOAT,
+    percent_repeated FLOAT,
+    presentation_type VARCHAR(255),
+    phase VARCHAR(255),
+    secondary_task VARCHAR(1023),
+    repetition_instructions INTEGER,
+    FOREIGN KEY (dataset_id) REFERENCES dataset_table(dataset_id)
+    );"
+  )
+  
+  DBI::dbExecute(
+    conn,
     "CREATE TABLE observation_table (
     observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
     dataset_id INTEGER,
