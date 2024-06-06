@@ -23,25 +23,26 @@ create_empty_db <- function(file_path){
     study_id INTEGER PRIMARY KEY AUTOINCREMENT,
     publication_id INTEGER,
     n_groups INTEGER,
-    n_tasks INTEGER,
     study_comment VARCHAR(10000),
+    github BOOLEAN,
+    osf BOOLEAN,
+    participant_age FLOAT,
+    percentage_female FLOAT,
+    external_vars BOOLEAN,
+    rt_measured INTEGER,
+    rt_onset VARCHAR(255),
+    physiological_measures BOOLEAN,
+    cognitive_models BOOLEAN,
+    truth_rating_scale VARCHAR(255),
+    truth_rating_steps INTEGER,
     FOREIGN KEY (publication_id) REFERENCES publication_table(publication_id)
     );"
   )
   
   DBI::dbExecute(
     conn,
-    "CREATE TABLE task_table (
-    task_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    task_name VARCHAR(255),
-    task_description VARCHAR(10000)
-    );"
-  )
-  
-  DBI::dbExecute(
-    conn,
-    "CREATE TABLE measures_table (
-    measures_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    "CREATE TABLE measure_table (
+    measure_id INTEGER PRIMARY KEY AUTOINCREMENT,
     study_id INTEGER,
     measure_name VARCHAR(10000),
     FOREIGN KEY (study_id) REFERENCES study_table(study_id)
@@ -50,27 +51,36 @@ create_empty_db <- function(file_path){
   
   DBI::dbExecute(
     conn,
+    "CREATE TABLE statementset_table (
+    statementset_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    statementset_publication VARCHAR(10000)
+    );"
+  )
+  DBI::dbExecute(
+    conn,
+    "CREATE TABLE statement_table (
+    statement_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    statementset_id INTEGER,
+    statement_text VARCHAR(10000),
+    statement_accuracy INTEGER,
+    statement_category VARCHAR(255),
+    proportion_true FLOAT,
+    FOREIGN KEY (statementset_id) REFERENCES statementset_table(statementset_id)
+    );"
+  )
+  
+  DBI::dbExecute(
+    conn,
     "CREATE TABLE dataset_table (
     dataset_id INTEGER PRIMARY KEY AUTOINCREMENT,
     study_id INTEGER,
-    task_id INTEGER,
-    data_excl VARCHAR(10000),
+    statementset_id INTEGER,
     n_participants INTEGER,
-    n_blocks INTEGER,
-    n_trials INTEGER,
-    neutral_trials BOOLEAN,
-    fixation_cross VARCHAR(255),
-    time_limit INTEGER,
-    mean_dataset_rt INTEGER,
-    mean_dataset_acc INTEGER,
-    github VARCHAR(1000),
-    mean_age FLOAT,
-    percentage_female FLOAT,
-    n_members INTEGER,
-    number_within_conditions INTEGER,
-    group_description VARCHAR(10000),
+    has_within_conditions BOOLEAN,
+    has_between_conditions BOOLEAN,
+    between_description VARCHAR(10000),
     FOREIGN KEY (study_id) REFERENCES study_table(study_id),
-    FOREIGN KEY (task_id) REFERENCES task_table(task_id)
+    FOREIGN KEY (statementset_id) REFERENCES statementset_table(statementset_id)
     );"
   )
   
@@ -80,12 +90,6 @@ create_empty_db <- function(file_path){
     within_id INTEGER PRIMARY KEY AUTOINCREMENT,
     dataset_id INTEGER,
     within_description VARCHAR(10000),
-    percentage_congruent FLOAT,
-    percentage_neutral FLOAT,
-    n_obs INTEGER,
-    mean_obs_per_participant INTEGER,
-    mean_condition_rt INTEGER, 
-    mean_condition_acc INTEGER,
     FOREIGN KEY (dataset_id) REFERENCES dataset_table(dataset_id)
     );"
   )
@@ -95,16 +99,20 @@ create_empty_db <- function(file_path){
     "CREATE TABLE observation_table (
     observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
     dataset_id INTEGER,
-    subject INTEGER,
-    block INTEGER,
-    trial INTEGER,
     within_id INTEGER,
-    congruency VARCHAR(20),
-    accuracy BOOLEAN,
+    repetition_id INTEGER,
+    subject INTEGER,
+    trial INTEGER,
+    statement_id INTEGER,
     rt FLOAT,
+    response FLOAT,
+    repeated INTEGER,
+    certainty FLOAT,
     FOREIGN KEY (dataset_id) REFERENCES dataset_table(dataset_id),
     FOREIGN KEY (within_id) REFERENCES within_table(within_id),
-    UNIQUE (dataset_id, subject, block, trial, within_id)
+    FOREIGN KEY (repetition_id) REFERENCES repetition_table(repetition_id),
+    FOREIGN KEY (statement_id) REFERENCES statement_table(statement_id),
+    UNIQUE (dataset_id, subject, trial, within_id, repetition_id, statement_id)
     );"
   )
 }
