@@ -38,7 +38,7 @@ add_object <- function(conn, object){
     # For statementset
     statementset_id = find_next_free_id(conn, "statementset_table")
     statementset_info = object[[ientry]]$statements_table %>% 
-      distinct(statementset_num, publication)
+      distinct(statementset_num, statementset_publication)
     statementset_info$statementset_id = statementset_info$statementset_num + statementset_id - 1
     statementset_keys = obtain_keys(statementset_info, "statementset")
     add_table(conn, statementset_info, "statementset_table")
@@ -58,5 +58,40 @@ add_object <- function(conn, object){
     dataset_id = find_next_free_id(conn, "dataset_table")
     dataset_info = object[[ientry]]$dataset_table
     dataset_info$dataset_id = dataset_info$dataset_num + dataset_id - 1
+    dataset_info = dataset_info %>% 
+      replace_id_keys_in_data(., study_keys, "study", suffix = "_num") %>% 
+      replace_id_keys_in_data(., statementset_keys, "statementset", suffix = "_num")
+    
+    dataset_keys = obtain_keys(dataset_info, "dataset")
+    add_table(conn, dataset_info, "dataset_table")
+    
+    # Repetition
+    repetition_id = find_next_free_id(conn, "repetition_table")
+    repetition_info = object[[ientry]]$repetition_table
+    repetition_info$repetition_id = repetition_info$repetition_num + repetition_id - 1
+    repetition_info = repetition_info %>% 
+      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num")
+    
+    repetition_keys = obtain_keys(repetition_info, "repetition")
+    add_table(conn, repetition_info, "repetition_table")
+    
+    # Within
+    within_id = find_next_free_id(conn, "within_table")
+    within_info = object[[ientry]]$within_table
+    within_info$within_id = within_info$within_num + within_id - 1
+    within_info = within_info %>% 
+      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num")
+    
+    within_keys = obtain_keys(within_info, "within")
+    add_table(conn, within_info, "within_table")
+    
+    # Observation
+    observation_table = object[[ientry]]$data
+    observation_table = observation_table %>% 
+      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num") %>% 
+      replace_id_keys_in_data(., within_keys, "within", suffix = "_num") %>% 
+      replace_id_keys_in_data(., repetition_keys, "repetition", suffix = "_num") %>% 
+      replace_id_keys_in_data(., statement_keys, "statement", suffix = "_num")
+    add_table(conn, as.data.frame(observation_table), "observation_table")
   }
 }
