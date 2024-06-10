@@ -19,8 +19,10 @@ for (i in seq_along(list_files)){
 files.sources = list.files("./functions", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
 sapply(files.sources, source)
 
-create_empty_db("./truth_db.db")
+create_empty_db("./truth_db_test.db")
 
-db_conn = DBI::dbConnect(RSQLite::SQLite(), "./truth_db.db")
+db_conn = DBI::dbConnect(RSQLite::SQLite(), "./truth_db_test.db")
+
+add_object(db_conn, lists)
 
 DBI::dbDisconnect(db_conn)

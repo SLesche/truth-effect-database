@@ -1,14 +1,14 @@
 library(acdcquery)
 library(dplyr)
 
-conn <- connect_to_db("truth_db.db")
+conn <- acdcquery::connect_to_db("truth_db_test.db")
 
 arguments <- list() %>% 
-  add_argument(
+  acdcquery::add_argument(
     conn,
-    "phase",
-    "equal",
-    "test"
+    "participant_age",
+    "greater",
+    30
   )
 
-results <- query_db(conn, arguments, c("default", "statement_text","statement_accuracy"))
+results <- acdcquery::query_db(conn, arguments, c("study_id", "default", "statement_text","statement_accuracy"))
