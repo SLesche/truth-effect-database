@@ -1,12 +1,7 @@
 function addStudy(parentElement, control, publication_idx) {
     const study_idx = control.publication_info[publication_idx].num_studies;
     const studyName = "Study " + (study_idx + 1);
-    control.publication_info[publication_idx].study_info[study_idx] = {
-        study_name: studyName,
-        data: {},
-        num_datasets: 0,
-        dataset_info: {},
-    };
+    control.publication_info[publication_idx].study_info[study_idx] = setupStudyInfo(studyName);
 
     // Create a new list item for the study
     const listItem = document.createElement("li");
@@ -77,12 +72,6 @@ function addStudy(parentElement, control, publication_idx) {
 
     // Update study counter for this publication
     control.publication_info[publication_idx].num_studies++;
-    control.publication_info[publication_idx].study_info[study_idx] = {
-        study_name: studyName,
-        data: {},
-        num_datasets: 0,
-        dataset_info: {},
-    };
 
     // Add the measurement survey
     addMeasurement(nestedList, publication_idx, study_idx);

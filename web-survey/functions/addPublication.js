@@ -1,6 +1,9 @@
 function addPublication(control) {
     const publication_idx = control.num_publications;
     const publication_name = "Publication " + (control.num_publications + 1);
+
+    control.publication_info[publication_idx] = setupPublicationInfo(publication_name);
+    
     if (!publication_name) return;
     // Create a new list item for the publication
     const listItem = document.createElement("li");
@@ -71,10 +74,4 @@ function addPublication(control) {
 
     // Initialize study counter for this publication
     control.num_publications++;
-    control.publication_info[publication_idx] = {
-        publication_name: publication_name,
-        data: {},
-        num_studies: 0,
-        study_info: {},
-    }
 }

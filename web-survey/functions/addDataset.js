@@ -1,10 +1,8 @@
 function addDataset(parentElement, publication_idx, study_idx) {
     const dataset_idx = control.publication_info[publication_idx].study_info[study_idx].num_datasets;
     const dataset_name = "Dataset " + (dataset_idx + 1);
-    control.publication_info[publication_idx].study_info[study_idx].dataset_info = {
-        dataset_name: dataset_name,
-        data: {},
-    };
+    control.publication_info[publication_idx].study_info[study_idx].dataset_info = setupDatasetInfo(dataset_name);
+    
     // Create a new list item for the dataset
     const listItem = document.createElement("li");
     listItem.className = "collapsible";
