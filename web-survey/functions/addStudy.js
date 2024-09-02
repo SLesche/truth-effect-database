@@ -43,7 +43,7 @@ function addStudy(parentElement, control, publication_idx) {
     addDatasetButton.className = "menu-button";
     addDatasetButton.textContent = "Add Dataset";
     addDatasetButton.onclick = function() {
-        addDataset(nestedList, publication_idx, study_idx);
+        addDataset(nestedList, control, publication_idx, study_idx);
     };
     addDatasetListItem.appendChild(addDatasetButton);
     
@@ -74,5 +74,5 @@ function addStudy(parentElement, control, publication_idx) {
     control.publication_info[publication_idx].num_studies++;
 
     // Add the measurement survey
-    addMeasurement(nestedList, publication_idx, study_idx);
+    addMeasurement(nestedList, control, publication_idx, study_idx);
 }

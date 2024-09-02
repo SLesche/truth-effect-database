@@ -1,6 +1,7 @@
 function setupStudyInfo(study_name){
     study_info = {
         study_name: study_name,
+        measurement_info: {},
         data: {},
         num_datasets: 0,
         dataset_info: {},
@@ -18,9 +19,8 @@ function setupPublicationInfo(publication_name){
     return publication_info
 }
 
-function setupMeasurementInfo(measurement_name){
+function setupMeasurementInfo(){
     measurement_info = {
-        measurement_name: measurement_name,
         data: {},
     };
     return measurement_info
