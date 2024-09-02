@@ -1,4 +1,4 @@
-function updatePublicationSurvey(publication_idx) {
+function updatePublicationSurvey(control, publication_idx) {
     // Get values from the input fields
     const authors = document.getElementById('authors').value;
     const date = document.getElementById('date').value;

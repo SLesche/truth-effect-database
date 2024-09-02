@@ -1,4 +1,4 @@
-function addPublication() {
+function addPublication(control) {
     const publication_idx = control.num_publications;
     const publication_name = "Publication " + (control.num_publications + 1);
     if (!publication_name) return;
@@ -66,7 +66,7 @@ function addPublication() {
     // Update content area
     span.addEventListener("click", function(event) {
         event.stopPropagation(); // Prevent the collapsible toggle
-        initializePublicationSurvey(publication_idx);
+        initializePublicationSurvey(control, publication_idx);
     });
 
     // Initialize study counter for this publication

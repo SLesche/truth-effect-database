@@ -1,4 +1,4 @@
-function initializePublicationSurvey(publication_idx) {
+function initializePublicationSurvey(control, publication_idx) {
     const publication = control.publication_info[publication_idx].data;
     const publication_name = control.publication_info[publication_idx].publication_name;
     document.getElementById("content").innerHTML = `
@@ -27,6 +27,6 @@ function initializePublicationSurvey(publication_idx) {
     // Add event listener to the form's submit button
     document.getElementById('publicationSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        updatePublicationSurvey(publication_idx);
+        updatePublicationSurvey(control, publication_idx);
     });
 }
