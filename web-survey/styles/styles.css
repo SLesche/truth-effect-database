@@ -5,7 +5,7 @@ body {
 .sidebar {
     width: 300px;
     background-color: #f4f4f4;
-    padding: 10px;
+    padding: 20px;
     height: 100vh;
     overflow-y: auto;
 }
@@ -41,10 +41,11 @@ ul {
 .active::before {
     content: '\25BC'; /* Down-pointing triangle */
 }
-/* Specific styling for top-level (publication) triangles */
+/* Specific styling for top-level (publication) triangles
 #sidebarList > .collapsible::before {
-    font-size: 1.5em; /* Increase the size of the triangle */
-}
+    font-size: 1.5em; /* Increase the size of the triangle 
+} */
+ 
 .content {
     padding: 20px;
     flex-grow: 1;
