@@ -52,6 +52,9 @@ function addDataset(parentElement, publication_idx, study_idx) {
         }
     });
 
+    // Toggle the collapsible on by default
+    listItem.classList.add("active");
+
     // Update content area
     span.addEventListener("click", function(event) {
         event.stopPropagation(); // Prevent the collapsible toggle

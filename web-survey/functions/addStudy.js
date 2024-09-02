@@ -65,6 +65,8 @@ function addStudy(parentElement, publication_idx) {
             this.classList.toggle("active");
         }
     });
+    // Toggle the collapsible on by default
+    listItem.classList.add("active");
 
     // Update content area
     span.addEventListener("click", function(event) {
