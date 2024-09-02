@@ -12,7 +12,7 @@
         .sidebar {
             width: 300px;
             background-color: #f4f4f4;
-            padding: 20px;
+            padding: 10px;
             height: 100vh;
             overflow-y: auto;
         }
@@ -48,14 +48,22 @@
         .active::before {
             content: '\25BC'; /* Down-pointing triangle */
         }
-        /* Specific styling for top-level (publication) triangles 
+        /* Specific styling for top-level (publication) triangles */
         #sidebarList > .collapsible::before {
-            font-size: 1.5em; /* Increase the size of the triangle 
+            font-size: 1.5em; /* Increase the size of the triangle */
         }
-        */
         .content {
             padding: 20px;
             flex-grow: 1;
+        }
+        .actions {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        .collapsible:hover .actions {
+            display: inline-block;
         }
     </style>
 </head>
@@ -89,8 +97,27 @@
             const span = document.createElement("span");
             span.textContent = publicationName;
 
-            // Append the span to the list item
+            // Create action buttons
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const renameButton = document.createElement("button");
+            renameButton.textContent = "Rename";
+            renameButton.onclick = function(event) {
+                event.stopPropagation();
+                renameItem(span, publicationName);
+            };
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function(event) {
+                event.stopPropagation();
+                removeItem(listItem);
+            };
+            actions.appendChild(renameButton);
+            actions.appendChild(removeButton);
+
+            // Append the span and actions to the list item
             listItem.appendChild(span);
+            listItem.appendChild(actions);
 
             // Create a nested list for studies
             const nestedList = document.createElement("ul");
@@ -152,8 +179,27 @@
             const span = document.createElement("span");
             span.textContent = studyName;
 
-            // Append the span to the list item
+            // Create action buttons
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const renameButton = document.createElement("button");
+            renameButton.textContent = "Rename";
+            renameButton.onclick = function(event) {
+                event.stopPropagation();
+                renameItem(span, studyName);
+            };
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function(event) {
+                event.stopPropagation();
+                removeItem(listItem);
+            };
+            actions.appendChild(renameButton);
+            actions.appendChild(removeButton);
+
+            // Append the span and actions to the list item
             listItem.appendChild(span);
+            listItem.appendChild(actions);
 
             // Create a nested list for datasets
             const nestedList = document.createElement("ul");
@@ -219,8 +265,27 @@
             const span = document.createElement("span");
             span.textContent = datasetName;
 
-            // Append the span to the list item
+            // Create action buttons
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const renameButton = document.createElement("button");
+            renameButton.textContent = "Rename";
+            renameButton.onclick = function(event) {
+                event.stopPropagation();
+                renameItem(span, datasetName);
+            };
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function(event) {
+                event.stopPropagation();
+                removeItem(listItem);
+            };
+            actions.appendChild(renameButton);
+            actions.appendChild(removeButton);
+
+            // Append the span and actions to the list item
             listItem.appendChild(span);
+            listItem.appendChild(actions);
 
             // Create a nested list for raw data
             const nestedList = document.createElement("ul");
@@ -280,8 +345,27 @@
             const span = document.createElement("span");
             span.textContent = rawDataName;
 
-            // Append the span to the list item
+            // Create action buttons
+            const actions = document.createElement("div");
+            actions.className = "actions";
+            const renameButton = document.createElement("button");
+            renameButton.textContent = "Rename";
+            renameButton.onclick = function(event) {
+                event.stopPropagation();
+                renameItem(span, rawDataName);
+            };
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.onclick = function(event) {
+                event.stopPropagation();
+                removeItem(listItem);
+            };
+            actions.appendChild(renameButton);
+            actions.appendChild(removeButton);
+
+            // Append the span and actions to the list item
             listItem.appendChild(span);
+            listItem.appendChild(actions);
 
             // Append the new list item to the parent element
             parentElement.appendChild(listItem);
@@ -293,8 +377,38 @@
                     <h2>${rawDataName}</h2>
                     <p>Here, length and other things should be checked.</p>
                     <p>Maybe an option to upload untreated data here.</p>
-                `;
+                                `;
             });
+        }
+
+        function renameItem(span, oldName) {
+            const newName = prompt("Enter new name:", oldName);
+            if (newName) {
+                span.textContent = newName;
+                // Update content area if the item is currently displayed
+                const content = document.getElementById("content");
+                if (content.querySelector("h2").textContent === oldName) {
+                    content.innerHTML = `
+                        <h2>${newName}</h2>
+                        <p>Here, length and other things should be checked.</p>
+                        <p>Maybe an option to upload untreated data here.</p>
+                    `;
+                }
+            }
+        }
+
+        function removeItem(listItem) {
+            if (confirm("Are you sure you want to remove this item?")) {
+                listItem.remove();
+                // Clear content area if the removed item was displayed
+                const content = document.getElementById("content");
+                if (content.querySelector("h2").textContent === listItem.querySelector("span").textContent) {
+                    content.innerHTML = `
+                        <h2>Welcome</h2>
+                        <p>Select an item from the sidebar to see details.</p>
+                    `;
+                }
+            }
         }
     </script>
 </body>
