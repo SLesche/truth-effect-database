@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+}
+.sidebar {
+    width: 300px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    height: 100vh;
+    overflow-y: auto;
+}
+ul {
+    padding-left: 0;
+}
+.nested {
+    margin-left: 20px;
+    list-style-type: none;
+    display: none;
+}
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+.collapsible {
+    cursor: pointer;
+    position: relative;
+    list-style-type: none;
+}
+.collapsible::before {
+    content: '\25B6'; /* Right-pointing triangle */
+    position: absolute;
+    left: -20px;
+    top: 0;
+}
+.active > .nested {
+    display: block;
+}
+.active::before {
+    content: '\25BC'; /* Down-pointing triangle */
+}
+/* Specific styling for top-level (publication) triangles */
+#sidebarList > .collapsible::before {
+    font-size: 1.5em; /* Increase the size of the triangle */
+}
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+.actions {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.collapsible:hover .actions {
+    display: inline-block;
+}

@@ -1,0 +1,77 @@
+function addPublication() {
+    const publication_idx = control.num_publications;
+    const publication_name = "Publication " + (control.num_publications + 1);
+    if (!publication_name) return;
+    // Create a new list item for the publication
+    const listItem = document.createElement("li");
+    listItem.className = "collapsible";
+
+    // Create a span for the publication name
+    const span = document.createElement("span");
+    span.textContent = publication_name;
+
+    // Create action buttons
+    const actions = document.createElement("div");
+    actions.className = "actions";
+    const renameButton = document.createElement("button");
+    renameButton.textContent = "Rename";
+    renameButton.onclick = function(event) {
+        event.stopPropagation();
+        renameItem(span, publication_idx);
+    };
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.onclick = function(event) {
+        event.stopPropagation();
+        removeItem(listItem);
+    };
+    actions.appendChild(renameButton);
+    actions.appendChild(removeButton);
+
+    // Append the span and actions to the list item
+    listItem.appendChild(span);
+    listItem.appendChild(actions);
+
+    // Create a nested list for studies
+    const nestedList = document.createElement("ul");
+    nestedList.className = "nested";
+
+    // Create a list item for the "Add Study" button
+    const addStudyListItem = document.createElement("li");
+    const addStudyButton = document.createElement("button");
+    addStudyButton.className = "menu-button";
+    addStudyButton.textContent = "Add Study";
+    addStudyButton.onclick = function() {
+        addStudy(nestedList, publication_idx);
+    };
+    addStudyListItem.appendChild(addStudyButton);
+    nestedList.appendChild(addStudyListItem);
+
+    // Append the nested list to the publication item
+    listItem.appendChild(nestedList);
+
+    // Append the new list item to the sidebar list
+    document.getElementById("sidebarList").appendChild(listItem);
+
+    // Add collapsible functionality
+    listItem.addEventListener("click", function(event) {
+        if (event.target === this) {
+            this.classList.toggle("active");
+        }
+    });
+
+    // Update content area
+    span.addEventListener("click", function(event) {
+        event.stopPropagation(); // Prevent the collapsible toggle
+        initializePublicationSurvey(publication_idx);
+    });
+
+    // Initialize study counter for this publication
+    control.num_publications++;
+    control.publication_info[publication_idx] = {
+        publication_name: publication_name,
+        data: {},
+        num_studies: 0,
+        study_info: {},
+    }
+}
