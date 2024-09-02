@@ -142,7 +142,6 @@
             // Append the new list item to the sidebar list
             document.getElementById("sidebarList").appendChild(listItem);
 
-
             // Add collapsible functionality
             listItem.addEventListener("click", function(event) {
                 if (event.target === this) {
@@ -153,17 +152,9 @@
             // Update content area
             span.addEventListener("click", function(event) {
                 event.stopPropagation(); // Prevent the collapsible toggle
-                document.getElementById("content").innerHTML = `
-                    <h2>${publication_name}</h2>
-                    <p>How many studies are part of this publication? (Add studies)</p>
-                    <p>Provide the additional measures you collected in this study.</p>
-                    <p>Checklist:</p>
-                    <ul>
-                        <li>Dataset provided and checked</li>
-                        <li>Additional measures provided</li>
-                    </ul>
-                `;
+                initializePublicationSurvey(publication_idx, publication_name);
             });
+
             // Initialize study counter for this publication
             control.num_publications++;
             control.publication_info[publication_idx] = {
@@ -172,6 +163,56 @@
                 num_studies: 0,
                 study_info: {},
             }
+        }
+
+        function initializePublicationSurvey(publication_idx) {
+            const publication = control.publication_info[publication_idx].data;
+            const publication_name = control.publication_info[publication_idx].publication_name;
+            document.getElementById("content").innerHTML = `
+                <h2>${publication_name}</h2>
+                <p>How many studies are part of this publication? (Add studies)</p>
+                <p>Provide the additional measures you collected in this study.</p>
+                <p>Checklist:</p>
+                <ul>
+                    <li>Dataset provided and checked</li>
+                    <li>Additional measures provided</li>
+                </ul>
+                <form id="publicationSurvey">
+                    <label for="authors">Authors:</label>
+                    <input type="text" id="authors" name="authors" value="${publication.authors || ''}" required><br>
+
+                    <label for="date">Date Conducted:</label>
+                    <input type="date" id="date" name="date" value="${publication.date_conducted || ''}" required><br>
+
+                    <label for="title">Title of Publication:</label>
+                    <input type="text" id="title" name="title" value="${publication.title || ''}" required><br>
+
+                    <button type="submit">Submit</button>
+                </form>
+            `;
+
+            // Add event listener to the form's submit button
+            document.getElementById('publicationSurvey').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                updateSurvey(publication_idx);
+            });
+        }
+
+        function updateSurvey(publication_idx) {
+            // Get values from the input fields
+            const authors = document.getElementById('authors').value;
+            const date = document.getElementById('date').value;
+            const title = document.getElementById('title').value;
+
+            // Store the values in the control object
+            control.publication_info[publication_idx].data = {
+                authors: authors,
+                date_conducted: date,
+                title: title,
+            }
+
+            // Optionally, display a confirmation message
+            alert('Survey submitted successfully!');
         }
 
         function addStudy(parentElement, publication_idx) {
@@ -312,17 +353,6 @@
             const nestedList = document.createElement("ul");
             nestedList.className = "nested";
 
-            // // Create a list item for the "Add Raw Data" button
-            // const addRawDataListItem = document.createElement("li");
-            // const addRawDataButton = document.createElement("button");
-            // addRawDataButton.className = "menu-button";
-            // addRawDataButton.textContent = "Add Raw Data";
-            // addRawDataButton.onclick = function() {
-            //     addRawData(nestedList);
-            // };
-            // addRawDataListItem.appendChild(addRawDataButton);
-            // nestedList.appendChild(addRawDataListItem);
-
             // Append the nested list to the dataset item
             listItem.appendChild(nestedList);
 
@@ -351,7 +381,37 @@
                     <p>What statementset did you use in this study?</p>
                     <p>How were the repetitions done in this study?</p>
                     <p>What within conditions?</p>
+                    <form id="publicationSurvey">
+                        <label for="authors">Authors:</label>
+                        <input type="text" id="authors" name="authors" required><br>
+
+                        <label for="date">Date Conducted:</label>
+                        <input type="date" id="date" name="date" required><br>
+
+                        <label for="title">Title of Publication:</label>
+                        <input type="text" id="title" name="title" required><br>
+
+                        <button type="submit">Submit</button>
+                    </form>
                 `;
+
+                // Add event listener to the form's submit button
+                document.getElementById('publicationSurvey').addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // Get values from the input fields
+                    const authors = document.getElementById('authors').value;
+                    const date = document.getElementById('date').value;
+                    const title = document.getElementById('title').value;
+
+                    // Store the values in the control object
+                    control.publication_info[publication_idx].authors = authors;
+                    control.publication_info[publication_idx].date_conducted = date;
+                    control.publication_info[publication_idx].title = title;
+
+                    // Optionally, display a confirmation message
+                    alert('Survey submitted successfully!');
+                });
             });
 
             control.publication_info[publication_idx].study_info[study_idx].num_datasets++;
@@ -361,75 +421,28 @@
             };
         }
 
-        // function addRawData(parentElement) {
-        //     const rawDataName = prompt("Enter raw data name:");
-        //     if (!rawDataName) return;
-
-        //     // Create a new list item for the raw data
-        //     const listItem = document.createElement("li");
-
-        //     // Create a span for the raw data name
-        //     const span = document.createElement("span");
-        //     span.textContent = rawDataName;
-
-        //     // Create action buttons
-        //     const actions = document.createElement("div");
-        //     actions.className = "actions";
-        //     const renameButton = document.createElement("button");
-        //     renameButton.textContent = "Rename";
-        //     renameButton.onclick = function(event) {
-        //         event.stopPropagation();
-        //         renameItem(span, rawDataName);
-        //     };
-        //     const removeButton = document.createElement("button");
-        //     removeButton.textContent = "Remove";
-        //     removeButton.onclick = function(event) {
-        //         event.stopPropagation();
-        //         removeItem(listItem);
-        //     };
-        //     actions.appendChild(renameButton);
-        //     actions.appendChild(removeButton);
-
-        //     // Append the span and actions to the list item
-        //     listItem.appendChild(span);
-        //     listItem.appendChild(actions);
-
-        //     // Append the new list item to the parent element
-        //     parentElement.appendChild(listItem);
-
-        //     // Update content area
-        //     span.addEventListener("click", function(event) {
-        //         event.stopPropagation(); // Prevent the collapsible toggle
-        //         document.getElementById("content").innerHTML = `
-        //             <h2>${rawDataName}</h2>
-        //             <p>Here, length and other things should be checked.</p>
-        //             <p>Maybe an option to upload untreated data here.</p>
-        //                         `;
-        //     });
-        // }
-
         function renameItem(span, oldName) {
             const newName = prompt("Enter new name:", oldName);
             if (newName) {
-            span.textContent = newName;
-            // Update content area if the item is currently displayed
-            const content = document.getElementById("content");
-            if (content.querySelector("h2").textContent === oldName) {
-                content.innerHTML = `
-                <h2>${newName}</h2>
-                <p>Here, length and other things should be checked.</p>
-                <p>Maybe an option to upload untreated data here.</p>
-                `;
-            }
-            // Update control item name
-            const publication_idx = Array.from(document.getElementById("sidebarList").children).indexOf(span.parentElement);
-            const study_idx = Array.from(span.parentElement.parentElement.children).indexOf(span.parentElement);
-            const dataset_idx = Array.from(span.parentElement.parentElement.parentElement.children).indexOf(span.parentElement.parentElement);
-            if (dataset_idx === -1) {
-                control.publication_info[publication_idx].study_info[study_idx].study_name = newName;
-            } else {
-                control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].dataset_name = newName;
-            }
+                span.textContent = newName;
+                // Update content area if the item is currently displayed
+                const content = document.getElementById("content");
+                if (content.querySelector("h2").textContent === oldName) {
+                    content.innerHTML = `
+                        <h2>${newName}</h2>
+                        <p>Here, length and other things should be checked.</p>
+                        <p>Maybe an option to upload untreated data here.</p>
+                    `;
+                }
+                // Update control item name
+                const publication_idx = Array.from(document.getElementById("sidebarList").children).indexOf(span.parentElement);
+                const study_idx = Array.from(span.parentElement.parentElement.children).indexOf(span.parentElement);
+                const dataset_idx = Array.from(span.parentElement.parentElement.parentElement.children).indexOf(span.parentElement.parentElement);
+                if (dataset_idx === -1) {
+                    control.publication_info[publication_idx].study_info[study_idx].study_name = newName;
+                } else {
+                    control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].dataset_name = newName;
+                }
             }
         }
 
