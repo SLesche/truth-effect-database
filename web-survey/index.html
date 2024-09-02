@@ -106,7 +106,7 @@
             renameButton.textContent = "Rename";
             renameButton.onclick = function(event) {
                 event.stopPropagation();
-                renameItem(span, publication_name);
+                renameItem(span, publication_idx);
             };
             const removeButton = document.createElement("button");
             removeButton.textContent = "Remove";
@@ -131,7 +131,7 @@
             addStudyButton.className = "menu-button";
             addStudyButton.textContent = "Add Study";
             addStudyButton.onclick = function() {
-                addStudy(nestedList, publication_name);
+                addStudy(nestedList, publication_idx);
             };
             addStudyListItem.appendChild(addStudyButton);
             nestedList.appendChild(addStudyListItem);
@@ -172,11 +172,9 @@
                 num_studies: 0,
                 study_info: {},
             }
-            console.log(control);
         }
 
-        function addStudy(parentElement, publicationName) {
-            const publication_idx = Object.keys(control.publication_info).find(key => control.publication_info[key].publication_name === publicationName);
+        function addStudy(parentElement, publication_idx) {
             const study_idx = control.publication_info[publication_idx].num_studies;
             const studyName = "Study " + (study_idx + 1);
             control.publication_info[publication_idx].study_info[study_idx] = {
@@ -226,7 +224,7 @@
             addDatasetButton.className = "menu-button";
             addDatasetButton.textContent = "Add Dataset";
             addDatasetButton.onclick = function() {
-                addDataset(nestedList);
+                addDataset(nestedList, publication_idx, study_idx);
             };
             addDatasetListItem.appendChild(addDatasetButton);
             nestedList.appendChild(addDatasetListItem);
@@ -263,9 +261,6 @@
                 `;
             });
 
-            // Initialize dataset counter for this study
-            listItem.datasetCounter = 0;
-
             // Update study counter for this publication
             control.publication_info[publication_idx].num_studies++;
             control.publication_info[publication_idx].study_info[study_idx] = {
@@ -276,18 +271,20 @@
             };
         }
 
-        function addDataset(parentElement) {
-            const parentStudy = parentElement.parentElement;
-            parentStudy.datasetCounter++;
-            const datasetName = "Dataset " + parentStudy.datasetCounter;
-
+        function addDataset(parentElement, publication_idx, study_idx) {
+            const dataset_idx = control.publication_info[publication_idx].study_info[study_idx].num_datasets;
+            const dataset_name = "Dataset " + (dataset_idx + 1);
+            control.publication_info[publication_idx].study_info[study_idx].dataset_info = {
+                dataset_name: dataset_name,
+                data: {},
+            };
             // Create a new list item for the dataset
             const listItem = document.createElement("li");
             listItem.className = "collapsible";
 
             // Create a span for the dataset name
             const span = document.createElement("span");
-            span.textContent = datasetName;
+            span.textContent = dataset_name;
 
             // Create action buttons
             const actions = document.createElement("div");
@@ -296,7 +293,7 @@
             renameButton.textContent = "Rename";
             renameButton.onclick = function(event) {
                 event.stopPropagation();
-                renameItem(span, datasetName);
+                renameItem(span, dataset_name);
             };
             const removeButton = document.createElement("button");
             removeButton.textContent = "Remove";
@@ -315,16 +312,16 @@
             const nestedList = document.createElement("ul");
             nestedList.className = "nested";
 
-            // Create a list item for the "Add Raw Data" button
-            const addRawDataListItem = document.createElement("li");
-            const addRawDataButton = document.createElement("button");
-            addRawDataButton.className = "menu-button";
-            addRawDataButton.textContent = "Add Raw Data";
-            addRawDataButton.onclick = function() {
-                addRawData(nestedList);
-            };
-            addRawDataListItem.appendChild(addRawDataButton);
-            nestedList.appendChild(addRawDataListItem);
+            // // Create a list item for the "Add Raw Data" button
+            // const addRawDataListItem = document.createElement("li");
+            // const addRawDataButton = document.createElement("button");
+            // addRawDataButton.className = "menu-button";
+            // addRawDataButton.textContent = "Add Raw Data";
+            // addRawDataButton.onclick = function() {
+            //     addRawData(nestedList);
+            // };
+            // addRawDataListItem.appendChild(addRawDataButton);
+            // nestedList.appendChild(addRawDataListItem);
 
             // Append the nested list to the dataset item
             listItem.appendChild(nestedList);
@@ -343,7 +340,7 @@
             span.addEventListener("click", function(event) {
                 event.stopPropagation(); // Prevent the collapsible toggle
                 document.getElementById("content").innerHTML = `
-                    <h2>${datasetName}</h2>
+                    <h2>${dataset_name}</h2>
                     <p>Checklist:</p>
                     <ul>
                         <li>Statementset (plus questions)</li>
@@ -356,68 +353,83 @@
                     <p>What within conditions?</p>
                 `;
             });
+
+            control.publication_info[publication_idx].study_info[study_idx].num_datasets++;
+            control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx] = {
+                dataset_name: dataset_name,
+                data: {},
+            };
         }
 
-        function addRawData(parentElement) {
-            const rawDataName = prompt("Enter raw data name:");
-            if (!rawDataName) return;
+        // function addRawData(parentElement) {
+        //     const rawDataName = prompt("Enter raw data name:");
+        //     if (!rawDataName) return;
 
-            // Create a new list item for the raw data
-            const listItem = document.createElement("li");
+        //     // Create a new list item for the raw data
+        //     const listItem = document.createElement("li");
 
-            // Create a span for the raw data name
-            const span = document.createElement("span");
-            span.textContent = rawDataName;
+        //     // Create a span for the raw data name
+        //     const span = document.createElement("span");
+        //     span.textContent = rawDataName;
 
-            // Create action buttons
-            const actions = document.createElement("div");
-            actions.className = "actions";
-            const renameButton = document.createElement("button");
-            renameButton.textContent = "Rename";
-            renameButton.onclick = function(event) {
-                event.stopPropagation();
-                renameItem(span, rawDataName);
-            };
-            const removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
-            removeButton.onclick = function(event) {
-                event.stopPropagation();
-                removeItem(listItem);
-            };
-            actions.appendChild(renameButton);
-            actions.appendChild(removeButton);
+        //     // Create action buttons
+        //     const actions = document.createElement("div");
+        //     actions.className = "actions";
+        //     const renameButton = document.createElement("button");
+        //     renameButton.textContent = "Rename";
+        //     renameButton.onclick = function(event) {
+        //         event.stopPropagation();
+        //         renameItem(span, rawDataName);
+        //     };
+        //     const removeButton = document.createElement("button");
+        //     removeButton.textContent = "Remove";
+        //     removeButton.onclick = function(event) {
+        //         event.stopPropagation();
+        //         removeItem(listItem);
+        //     };
+        //     actions.appendChild(renameButton);
+        //     actions.appendChild(removeButton);
 
-            // Append the span and actions to the list item
-            listItem.appendChild(span);
-            listItem.appendChild(actions);
+        //     // Append the span and actions to the list item
+        //     listItem.appendChild(span);
+        //     listItem.appendChild(actions);
 
-            // Append the new list item to the parent element
-            parentElement.appendChild(listItem);
+        //     // Append the new list item to the parent element
+        //     parentElement.appendChild(listItem);
 
-            // Update content area
-            span.addEventListener("click", function(event) {
-                event.stopPropagation(); // Prevent the collapsible toggle
-                document.getElementById("content").innerHTML = `
-                    <h2>${rawDataName}</h2>
-                    <p>Here, length and other things should be checked.</p>
-                    <p>Maybe an option to upload untreated data here.</p>
-                                `;
-            });
-        }
+        //     // Update content area
+        //     span.addEventListener("click", function(event) {
+        //         event.stopPropagation(); // Prevent the collapsible toggle
+        //         document.getElementById("content").innerHTML = `
+        //             <h2>${rawDataName}</h2>
+        //             <p>Here, length and other things should be checked.</p>
+        //             <p>Maybe an option to upload untreated data here.</p>
+        //                         `;
+        //     });
+        // }
 
         function renameItem(span, oldName) {
             const newName = prompt("Enter new name:", oldName);
             if (newName) {
-                span.textContent = newName;
-                // Update content area if the item is currently displayed
-                const content = document.getElementById("content");
-                if (content.querySelector("h2").textContent === oldName) {
-                    content.innerHTML = `
-                        <h2>${newName}</h2>
-                        <p>Here, length and other things should be checked.</p>
-                        <p>Maybe an option to upload untreated data here.</p>
-                    `;
-                }
+            span.textContent = newName;
+            // Update content area if the item is currently displayed
+            const content = document.getElementById("content");
+            if (content.querySelector("h2").textContent === oldName) {
+                content.innerHTML = `
+                <h2>${newName}</h2>
+                <p>Here, length and other things should be checked.</p>
+                <p>Maybe an option to upload untreated data here.</p>
+                `;
+            }
+            // Update control item name
+            const publication_idx = Array.from(document.getElementById("sidebarList").children).indexOf(span.parentElement);
+            const study_idx = Array.from(span.parentElement.parentElement.children).indexOf(span.parentElement);
+            const dataset_idx = Array.from(span.parentElement.parentElement.parentElement.children).indexOf(span.parentElement.parentElement);
+            if (dataset_idx === -1) {
+                control.publication_info[publication_idx].study_info[study_idx].study_name = newName;
+            } else {
+                control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].dataset_name = newName;
+            }
             }
         }
 
