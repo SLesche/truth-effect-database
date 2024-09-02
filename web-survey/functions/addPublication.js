@@ -42,7 +42,7 @@ function addPublication(control) {
     addStudyButton.className = "menu-button";
     addStudyButton.textContent = "Add Study";
     addStudyButton.onclick = function() {
-        addStudy(nestedList, publication_idx);
+        addStudy(nestedList, control, publication_idx);
     };
     addStudyListItem.appendChild(addStudyButton);
     nestedList.appendChild(addStudyListItem);

@@ -1,4 +1,4 @@
-function addStudy(parentElement, publication_idx) {
+function addStudy(parentElement, control, publication_idx) {
     const study_idx = control.publication_info[publication_idx].num_studies;
     const studyName = "Study " + (study_idx + 1);
     control.publication_info[publication_idx].study_info[study_idx] = {
@@ -72,20 +72,7 @@ function addStudy(parentElement, publication_idx) {
     // Update content area
     span.addEventListener("click", function(event) {
         event.stopPropagation(); // Prevent the collapsible toggle
-        document.getElementById("content").innerHTML = `
-            <h2>${studyName}</h2>
-            <p>How many datasets are in this study? (Add dataset view)</p>
-            <p>Checklist:</p>
-            <ul>
-                <li>Statementset (plus questions)</li>
-                <li>Repetitions done</li>
-                <li>Within conditions done</li>
-                <li>Raw data uploaded</li>
-            </ul>
-            <p>What statementset did you use in this study?</p>
-            <p>How were the repetitions done in this study?</p>
-            <p>What within conditions?</p>
-        `;
+        initializeStudySurvey(control, publication_idx, study_idx);
     });
 
     // Update study counter for this publication
