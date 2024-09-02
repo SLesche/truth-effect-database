@@ -48,10 +48,11 @@
         .active::before {
             content: '\25BC'; /* Down-pointing triangle */
         }
-        /* Specific styling for top-level (publication) triangles */
+        /* Specific styling for top-level (publication) triangles 
         #sidebarList > .collapsible::before {
-            font-size: 1.5em; /* Increase the size of the triangle */
+            font-size: 1.5em; /* Increase the size of the triangle 
         }
+        */
         .content {
             padding: 20px;
             flex-grow: 1;
@@ -133,11 +134,15 @@
                     </ul>
                 `;
             });
+
+            // Initialize study counter for this publication
+            listItem.studyCounter = 0;
         }
 
         function addStudy(parentElement) {
-            const studyName = prompt("Enter study name:");
-            if (!studyName) return;
+            const parentPublication = parentElement.parentElement;
+            parentPublication.studyCounter++;
+            const studyName = "Study " + parentPublication.studyCounter;
 
             // Create a new list item for the study
             const listItem = document.createElement("li");
@@ -196,11 +201,15 @@
                     <p>What within conditions?</p>
                 `;
             });
+
+            // Initialize dataset counter for this study
+            listItem.datasetCounter = 0;
         }
 
         function addDataset(parentElement) {
-            const datasetName = prompt("Enter dataset name:");
-            if (!datasetName) return;
+            const parentStudy = parentElement.parentElement;
+            parentStudy.datasetCounter++;
+            const datasetName = "Dataset " + parentStudy.datasetCounter;
 
             // Create a new list item for the dataset
             const listItem = document.createElement("li");
