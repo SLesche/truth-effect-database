@@ -31,3 +31,11 @@ function setupDatasetInfo(dataset_name){
     };
     return dataset_info
 }
+
+function setupStatementSetInfo(statementset_name){
+    statementset_info = {
+        statementset_name: statementset_name,
+        data: {},
+    };
+    return statementset_info
+}

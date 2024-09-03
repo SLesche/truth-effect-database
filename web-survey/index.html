@@ -8,7 +8,9 @@
     <script src = "functions/addStudy.js"></script>
     <script src = "functions/addDataset.js"></script>
     <script src = "functions/addMeasurement.js"></script>
+    <script src = "functions/addStatementSet.js"></script>
     <script src = "functions/setupPublicationSurvey.js"></script>
+    <script src = "functions/setupStatementSetSurvey.js"></script>
     <script src = "functions/setupStudySurvey.js"></script>
     <script src = "functions/setupMeasurementSurvey.js"></script>
     <script src = "functions/setupDatasetSurvey.js"></script>
@@ -19,6 +21,7 @@
 <body>
     <div class="sidebar">
         <button onclick="addPublication(control)">Add Publication</button>
+        <button onclick="addStatementSet(control)">Add a set of Statements</button>
         <ul id="sidebarList">
             <!-- Sidebar elements will be dynamically added here -->
         </ul>
@@ -34,7 +37,8 @@
         // Initialize control object
         var control = {
             num_publications: 0,
-            publication_info: {}
+            publication_info: {},
+            statementset_info: {},
         }
     </script>
 </body>
