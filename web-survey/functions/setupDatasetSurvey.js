@@ -22,7 +22,17 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             </fieldset>
 
             <label for="has_between_conditions" class="survey-label">Does this data contain any between conditions?</label>
-            <input type="number" id="has_between_conditions" name="has_between_conditions" value="${dataset_data.has_between_conditions || ''}" required><br>
+            <div class="form-item">
+                <label><input type="radio" name="has_between_conditions" value="1" ${dataset_data.has_between_conditions == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="has_between_conditions" value="0" ${dataset_data.has_between_conditions == 0 ? 'checked' : ''}/>No</label>
+            </div>
+
+            <fieldset id="betweenConditionsFieldset" ${dataset_data.has_between_conditions == 1 ? '' : 'disabled'}>
+                <div class="form-item">
+                    <label for="between_condition_details" class="survey-label">Please provide details about the between conditions:</label>
+                    <input type="text" id="between_condition_details" name="between_condition_details" value="${dataset_data.between_condition_details || ''}" required/>
+                </div>
+            </fieldset>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
@@ -45,14 +55,26 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             }
         });
     });
+
+    // Add event listener to the within conditions radio buttons
+    document.querySelectorAll('input[name="has_between_conditions"]').forEach((elem) => {
+        elem.addEventListener("change", function(event) {
+            const fieldset = document.getElementById("betweenConditionsFieldset");
+            if (event.target.value == "1") {
+                fieldset.disabled = false;
+            } else {
+                fieldset.disabled = true;
+            }
+        });
+    });
 }
 
 function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     // Get values from the input fields
     const n_participants = document.getElementById('n_participants').value;
-    const has_within_conditions = document.querySelector('input[name="has_within_conditions"]:checked').value;
+    const has_within_conditions = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? 1 : 0;
     const within_condition_details = document.getElementById('within_condition_details').value;
-    const has_between_conditions = document.getElementById('has_between_conditions').value;
+    const has_between_conditions = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? 1 : 0;
 
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {

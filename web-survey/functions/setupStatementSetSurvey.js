@@ -19,7 +19,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         <label for="statement_publication" class="survey-label">If available, provide the original publication where this set of statements originates from.</label>
         <input type="text" id="statement_publication" name="statement_publication" value="${statementset_data.statement_publication || ''}"><br>
 
-        <button type="submit" class="survey-button">${statementset_data.statement_publication_file ? 'New Upload' : 'Upload'}</button>
+        <button type="submit" class="survey-button">Submit</button>
     </form>
     `;
 

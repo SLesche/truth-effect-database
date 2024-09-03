@@ -96,17 +96,17 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
 function updateStudySurvey(control, publication_idx, study_idx) {
     // Get values from the input fields
-    const truth_rating_scale = document.getElementById('truth_rating_scale').value;
+    const truth_rating_scale = document.querySelector('input[name="truth_rating_scale"]:checked').value === "1" ? 1 : 0;
     const truth_rating_scale_details = document.getElementById('truth_rating_scale_details').value;
     const truth_rating_steps = document.getElementById('truth_rating_steps').value;
-    const rt_measured = document.getElementById('rt_measured').value;
+    const rt_measured = document.querySelector('input[name="rt_measured"]:checked').value === "1" ? 1 : 0;
     const rt_onset = document.getElementById('rt_onset').value;
     const n_groups = document.getElementById('n_groups').value;
     const participant_age = document.getElementById('participant_age').value;
     const percentage_female = document.getElementById('percentage_female').value;
-    const external_vars = document.getElementById('external_vars').checked;
-    const physiological_measures = document.getElementById('physiological_measures').value;
-    const cognitive_models = document.getElementById('cognitive_models').value;
+    const external_vars = document.getElementById('external_vars').value;
+    const physiological_measures = document.querySelector('input[name="physiological_measures"]:checked').value === "1" ? 1 : 0;
+    const cognitive_models = document.querySelector('input[name="cognitive_models"]:checked').value === "1" ? 1 : 0;
     const github = document.getElementById('github').value;
     const osf = document.getElementById('osf').value;
     const study_comment = document.getElementById('study_comment').value;
