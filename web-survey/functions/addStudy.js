@@ -69,4 +69,7 @@ function addStudy(parentElement, control, publication_idx) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializeStudySurvey(control, publication_idx, study_idx);
     });
+
+    // Add measurement survey
+    addMeasurement(nestedList, control, publication_idx, study_idx);
 }
