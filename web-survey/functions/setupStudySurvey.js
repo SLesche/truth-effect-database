@@ -4,14 +4,14 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
         <h2>${studyName}</h2>
-        <form id="studySurvey">
-            <label for="statementset">What statementset did you use in this study?</label>
+        <form id="studySurvey" class = "survey-form">
+            <label for="statementset" class = "survey-label">What statementset did you use in this study?</label>
             <input type="text" id="statementset" name="statementset" value="${study_data.statementset || ''}" required><br>
 
-            <label for="numRepetitions">How many repetitions were done in this study?</label>
+            <label for="numRepetitions" class = "survey-label">How many repetitions were done in this study?</label>
             <input type="number" id="numRepetitions" name="numRepetitions" value="${study_data.num_repetitions || ''}" required><br>
 
-            <button type="submit">Submit</button>
+            <button type="submit" class = "survey-button">Submit</button>
         </form>
     `;
 

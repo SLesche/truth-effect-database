@@ -11,17 +11,17 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <li>Dataset provided and checked</li>
             <li>Additional measures provided</li>
         </ul>
-        <form id="statementSetSurvey">
-            <label for="authors">Authors:</label>
+        <form id="statementSetSurvey" class = "survey-form">
+            <label for="authors" class ="survey-label">Authors:</label>
             <input type="text" id="authors" name="authors" value="${statementset_data.authors || ''}" required><br>
 
-            <label for="date">Date Conducted:</label>
+            <label for="date" class = "survey-label">Date Conducted:</label>
             <input type="date" id="date" name="date" value="${statementset_data.date_conducted || ''}" required><br>
 
-            <label for="title">Title of Publication:</label>
+            <label for="title" class = "survey-label">Title of Publication:</label>
             <input type="text" id="title" name="title" value="${statementset_data.title || ''}" required><br>
 
-            <button type="submit">Submit</button>
+            <button type="submit" class = "survey-button">Submit</button>
         </form>
     `;
 

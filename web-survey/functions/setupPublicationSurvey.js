@@ -10,26 +10,26 @@ function initializePublicationSurvey(control, publication_idx) {
             <li>Dataset provided and checked</li>
             <li>Additional measures provided</li>
         </ul>
-        <form id="publicationSurvey">
-        <label for="authors">Who are the authors of the publication?</label>
+        <form id="publicationSurvey" class = "survey-form">
+        <label for="authors" class = "survey-label">Who are the authors of the publication?</label>
         <input type="text" id="authors" name="authors" value="${publication.authors || ''}" required><br>
 
-        <label for="apa_reference">Please provide an APA7 style reference for the publication:</label>
+        <label for="apa_reference" class = "survey-label">Please provide an APA7 style reference for the publication:</label>
         <input type="text" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}" required><br>
 
-        <label for="conducted">In what year was the study conducted?</label>
+        <label for="conducted" class = "survey-label">In what year was the study conducted?</label>
         <input type="number" id="conducted" name="conducted" value="${publication.conducted || ''}" required><br>
 
-        <label for="country">In what country was the study conducted?</label>
+        <label for="country" class = "survey-label">In what country was the study conducted?</label>
         <input type="text" id="country" name="country" value="${publication.country || ''}" required><br>
 
-        <label for="keywords">What are the keywords associated with the publication?</label>
+        <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
         <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}" required><br>
         
-        <label for="contact">Provide contact information for further questions.</label>
+        <label for="contact" class = "survey-label">Provide contact information for further questions.</label>
         <input type="text" id="contact" name="contact" value="${publication.contact || ''}" required><br>
 
-        <button type="submit">Submit</button>
+        <button type="submit" class = "survey-button">Submit</button>
     </form>
 
     `;
