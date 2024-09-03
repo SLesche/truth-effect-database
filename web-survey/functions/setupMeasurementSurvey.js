@@ -5,7 +5,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     document.getElementById("content").innerHTML = `
         <h2>${measurement_name}</h2>
         <form id="measurementSurvey">
-            <label for="measureInput" class="survey-label">Add a measure used in the study:</label>
+            <label for="measureInput" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measureInput" name="measureInput"><br>
 
             <button type="button" onclick="addMeasureToList()" class="survey-button">Add Measure</button><br><br>
