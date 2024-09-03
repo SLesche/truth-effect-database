@@ -25,6 +25,12 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
         <label for="truth_rating_steps" class="survey-label">How many steps did your rating scale have?</label>
         <input type="number" id="truth_rating_steps" name="truth_rating_steps" value="${study_data.truth_rating_steps || ''}" required><br>
+        
+        <label for="certainty_measured" class="survey-label">Was subjective certainty measured?</label>
+        <div class="radio-buttons">
+            <label><input type="radio" name="certainty_measured" value="1" ${study_data.certainty_measured == 1 ? 'checked' : ''} required/>Yes</label>
+            <label><input type="radio" name="certainty_measured" value="0" ${study_data.certainty_measured == 0 ? 'checked' : ''} required/>No</label>
+        </div>
 
         <label for="rt_measured" class="survey-label">Did you measure response time?</label>
         <div class="radio-buttons">
@@ -99,6 +105,7 @@ function updateStudySurvey(control, publication_idx, study_idx) {
     const truth_rating_scale = document.querySelector('input[name="truth_rating_scale"]:checked').value === "1" ? 1 : 0;
     const truth_rating_scale_details = document.getElementById('truth_rating_scale_details').value;
     const truth_rating_steps = document.getElementById('truth_rating_steps').value;
+    const subjective_certainty = document.querySelector('input[name="subjective_certainty"]:checked').value === "1" ? 1 : 0;
     const rt_measured = document.querySelector('input[name="rt_measured"]:checked').value === "1" ? 1 : 0;
     const rt_onset = document.getElementById('rt_onset').value;
     const n_groups = document.getElementById('n_groups').value;
@@ -116,6 +123,7 @@ function updateStudySurvey(control, publication_idx, study_idx) {
         truth_rating_scale: truth_rating_scale,
         truth_rating_scale_details: truth_rating_scale_details,
         truth_rating_steps: truth_rating_steps,
+        subjective_certainty: subjective_certainty,
         rt_measured: rt_measured,
         rt_onset: rt_onset,
         n_groups: n_groups,
