@@ -1,5 +1,5 @@
 function addStudy(parentElement, control, publication_idx) {
-    const study_idx = control.publication_info[publication_idx].num_studies;
+    const study_idx = Object.keys(control.publication_info[publication_idx].study_info).length;
     const studyName = "Study " + (study_idx + 1);
     control.publication_info[publication_idx].study_info[study_idx] = setupStudyInfo(studyName);
 
@@ -69,10 +69,4 @@ function addStudy(parentElement, control, publication_idx) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializeStudySurvey(control, publication_idx, study_idx);
     });
-
-    // Update study counter for this publication
-    control.publication_info[publication_idx].num_studies++;
-
-    // Add the measurement survey
-    addMeasurement(nestedList, control, publication_idx, study_idx);
 }

@@ -3,7 +3,7 @@ function addDataset(parentElement, control, publication_idx, study_idx) {
     // Determine the number of entries in dataset_info
     const dataset_idx = Object.keys(dataset_info).length;
     const dataset_name = "Dataset " + (dataset_idx + 1);
-    
+
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx] = setupDatasetInfo(dataset_name);
 
     // Create a new list item for the dataset
@@ -61,7 +61,4 @@ function addDataset(parentElement, control, publication_idx, study_idx) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializeDatasetSurvey(control, publication_idx, study_idx, dataset_idx)
     });
-
-    // Increase Num Datasets
-    control.publication_info[publication_idx].study_info[study_idx].num_datasets++;
 }

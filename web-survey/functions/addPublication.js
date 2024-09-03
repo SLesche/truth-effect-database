@@ -1,6 +1,7 @@
 function addPublication(control) {
-    const publication_idx = control.num_publications;
-    const publication_name = "Publication " + (control.num_publications + 1);
+    // Determine the number of entries in dataset_info
+    const publication_idx = Object.keys(control.publication_info).length;
+    const publication_name = "Publication " + (publication_idx + 1);
 
     control.publication_info[publication_idx] = setupPublicationInfo(publication_name);
     
@@ -71,7 +72,4 @@ function addPublication(control) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializePublicationSurvey(control, publication_idx);
     });
-
-    // Initialize study counter for this publication
-    control.num_publications++;
 }
