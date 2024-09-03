@@ -101,3 +101,13 @@ input[type="text"], input[type="number"], input[type="date"] {
 .survey-button:hover {
     background-color: #45a049;
 }
+
+
+input:disabled {
+    border: darkgray thin solid;
+    background-color: lightgray;
+}
+
+fieldset:disabled {
+    display: none;
+}
