@@ -90,6 +90,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <label class="survey-label">List of Repetitions</label>
                 <ul id="repetitionsList"></ul>
+                <div id="repetitionTableContainer"></div>
+
             </fieldset>
 
 
@@ -131,6 +133,11 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             betweenConditionsList.appendChild(li);
         });
     }
+    
+    if (dataset_data && dataset_data.repetitions) {
+        displayRepetition(dataset_data.repetitions);
+    }
+
 
     // Add event listener to the form's submit button
     document.getElementById('datasetSurvey').addEventListener('submit', function(event) {
@@ -248,12 +255,29 @@ function addRepetition() {
         const repetitionsList = document.getElementById('repetitionsList');
 
         if (repetitionsList) {
-            // Create a new list item for the repetition
-            const listItem = document.createElement('li');
-            listItem.textContent = `Time: ${repetitionTime}, Location: ${repetitionLocation}, Type: ${repetitionType}, Repetitions: ${nRepetitions}, Statements: ${nStatements}, Time Pressure: ${timePressure}, Truth Instructions: ${truthInstructions}, Presentation Time: ${presentationTime}, Percent Repeated: ${percentRepeated}, Presentation Type: ${presentationType}, Phase: ${phase}, Secondary Task: ${secondaryTask}, Repetition Instructions: ${repetitionInstructions}`;
+            // Create a new repetition object
+            const repetition = {
+                repetition_time: repetitionTime,
+                repetition_location: repetitionLocation,
+                repetition_type: repetitionType,
+                n_repetitions: nRepetitions,
+                n_statements: nStatements,
+                time_pressure: timePressure,
+                truth_instructions: truthInstructions,
+                presentation_time_s: presentationTime,
+                percent_repeated: percentRepeated,
+                presentation_type: presentationType,
+                phase: phase,
+                secondary_task: secondaryTask,
+                repetition_instructions: repetitionInstructions
+            };
 
-            // Append the new list item to the repetitions list
-            repetitionsList.appendChild(listItem);
+            // Add the repetition to the list
+            const repetitions = collectRepetitions();
+            repetitions.push(repetition);
+
+            // Display the updated table
+            displayRepetition(repetitions);
 
             // Clear the input fields
             document.getElementById('repetition_time').value = '';
@@ -342,4 +366,50 @@ function collectRepetitions() {
         });
     }
     return repetitions;
+}
+
+function displayRepetition(repetition_info) {
+    // Create a table element
+    const table = document.createElement('table');
+    table.className = 'repetition-table';
+
+    // Create the header row
+    const headerRow = document.createElement('tr');
+    const fields = [
+        'Repetition Time', 'Repetition Location', 'Repetition Type', 'Number of Repetitions', 'Number of Statements',
+        'Time Pressure', 'Truth Instructions', 'Presentation Time (s)', 'Percent Repeated', 'Presentation Type',
+        'Phase', 'Secondary Task', 'Repetition Instructions'
+    ];
+    const headerCell = document.createElement('th');
+    headerCell.textContent = 'Fields';
+    headerRow.appendChild(headerCell);
+
+    repetition_info.forEach((_, index) => {
+        const headerCell = document.createElement('th');
+        headerCell.textContent = `Entry ${index + 1}`;
+        headerRow.appendChild(headerCell);
+    });
+
+    table.appendChild(headerRow);
+
+    // Create rows for each field
+    fields.forEach(field => {
+        const row = document.createElement('tr');
+        const fieldCell = document.createElement('td');
+        fieldCell.textContent = field;
+        row.appendChild(fieldCell);
+
+        repetition_info.forEach(entry => {
+            const valueCell = document.createElement('td');
+            valueCell.textContent = entry[field.toLowerCase().replace(/ /g, '_')];
+            row.appendChild(valueCell);
+        });
+
+        table.appendChild(row);
+    });
+
+    // Append the table to the document
+    const container = document.getElementById('repetitionTableContainer');
+    container.innerHTML = ''; // Clear any existing content
+    container.appendChild(table);
 }
