@@ -53,8 +53,6 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
         <label for="external_vars" class="survey-label">Please list any external variables you measured.</label>
         <input type="text" id="external_vars" name="external_vars" ${study_data.external_vars ? 'checked' : ''} required><br>
 
-        <input type="number" id="physiological_measures" name="physiological_measures" ${study_data.physiological_measures || ''} required><br>
-
         <label for="physiological_measures" class="survey-label">Did you collect any physiological data?</label>
         <div class="radio-buttons">
             <label><input type="radio" name="physiological_measures" value="1" ${study_data.physiological_measures == 1 ? 'checked' : ''} required/>Yes</label>
