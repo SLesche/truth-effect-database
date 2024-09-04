@@ -46,7 +46,7 @@ function addPublication(control) {
     const addStudyListItem = document.createElement("li");
     const addStudyButton = document.createElement("button");
     addStudyButton.className = "menu-button";
-    addStudyButton.textContent = "Add Study";
+    addStudyButton.textContent = "+ Add Study";
     addStudyButton.onclick = function() {
         addStudy(nestedList, control, publication_idx);
     };

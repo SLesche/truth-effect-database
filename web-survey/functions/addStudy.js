@@ -30,7 +30,7 @@ function addStudy(parentElement, control, publication_idx) {
         removeItem(listItem);
     };
     actions.appendChild(removeButton);
-    
+
     // Append the span and actions to the list item
     listItem.appendChild(span);
     listItem.appendChild(actions);
@@ -43,7 +43,7 @@ function addStudy(parentElement, control, publication_idx) {
     const addDatasetListItem = document.createElement("li");
     const addDatasetButton = document.createElement("button");
     addDatasetButton.className = "menu-button";
-    addDatasetButton.textContent = "Add Dataset";
+    addDatasetButton.textContent = "+ Add Dataset";
     addDatasetButton.onclick = function() {
         addDataset(nestedList, control, publication_idx, study_idx);
     };
