@@ -90,26 +90,12 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <label class="survey-label">List of Repetitions</label>
                 <div id="repetitionTableContainer" style = "display: none;">
-                    <table id="repetitionsTable" border="1">
+                    <table id="repetitionsTable">
                         <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Location</th>
-                                <th>Type</th>
-                                <th>Repetitions</th>
-                                <th>Statements</th>
-                                <th>Time Pressure</th>
-                                <th>Truth Instructions</th>
-                                <th>Presentation Time</th>
-                                <th>Percent Repeated</th>
-                                <th>Presentation Type</th>
-                                <th>Phase</th>
-                                <th>Secondary Task</th>
-                                <th>Repetition Instructions</th>
-                            </tr>
+                            <!-- Header will be populated by JavaScript -->
                         </thead>
                         <tbody>
-                            <!-- Repetition rows will be dynamically added here -->
+                            <!-- Body will be populated by JavaScript -->
                         </tbody>
                     </table>
                 </div>
@@ -247,25 +233,24 @@ function collectRepetitions() {
     var table = document.getElementById("repetitionsTable");
     var rows = table.getElementsByTagName("tr");
 
+    if (rows.length < 2) return repetitions; // Ensure there are at least two rows (header + data)
+
+    var keys = [];
     for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
-        var cells = rows[i].getElementsByTagName("td");
-        var repetition = {
-            repetition_time: cells[0].textContent.trim(),
-            repetition_location: cells[1].textContent.trim(),
-            repetition_type: cells[2].textContent.trim(),
-            n_repetitions: cells[3].textContent.trim(),
-            n_statements: cells[4].textContent.trim(),
-            time_pressure: cells[5].textContent.trim(),
-            truth_instructions: cells[6].textContent.trim(),
-            presentation_time_s: cells[7].textContent.trim(),
-            percent_repeated: cells[8].textContent.trim(),
-            presentation_type: cells[9].textContent.trim(),
-            phase: cells[10].textContent.trim(),
-            secondary_task: cells[11].textContent.trim(),
-            repetition_instructions: cells[12].textContent.trim()
-        };
+        keys.push(rows[i].getElementsByTagName("th")[0].textContent.trim());
+    }
+
+    var columns = rows[0].getElementsByTagName("th").length - 1; // Number of repetitions (columns) excluding the first empty header cell
+
+    for (var col = 1; col <= columns; col++) {
+        var repetition = {};
+        for (var row = 1; row < rows.length; row++) { // Start from 1 to skip the header row
+            var cells = rows[row].getElementsByTagName("td");
+            repetition[keys[row - 1]] = cells[col - 1].textContent.trim();
+        }
         repetitions.push(repetition);
     }
+
     return repetitions;
 }
 
@@ -370,12 +355,31 @@ function displayRepetitionSummary(repetitions) {
     const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
     repetitionsTable.innerHTML = ''; // Clear existing entries
 
-    // Create rows for each repetition
-    repetitions.forEach(repetition => {
+    if (repetitions.length === 0) return;
+
+    // Get the keys from the first repetition object
+    const keys = Object.keys(repetitions[0]);
+
+    // Create header row
+    const headerRow = document.createElement('tr');
+    const emptyHeaderCell = document.createElement('th');
+    headerRow.appendChild(emptyHeaderCell); // Empty cell for the corner
+    repetitions.forEach((_, index) => {
+        const th = document.createElement('th');
+        th.textContent = `Session ${index + 1}`;
+        headerRow.appendChild(th);
+    });
+    repetitionsTable.appendChild(headerRow);
+
+    // Create rows for each key
+    keys.forEach(key => {
         const row = document.createElement('tr');
-        Object.values(repetition).forEach(value => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        row.appendChild(th);
+        repetitions.forEach(repetition => {
             const td = document.createElement('td');
-            td.textContent = value;
+            td.textContent = repetition[key];
             row.appendChild(td);
         });
         repetitionsTable.appendChild(row);
