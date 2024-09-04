@@ -47,44 +47,44 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             </fieldset>
 
             <fieldset id="repetitionsFieldset">
-                <label for="repetition_time" class="survey-label">Repetition Time:</label>
-                <input type="number" id="repetition_time" name="repetition_time" step="0.01"><br>
+                <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
+                <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
 
-                <label for="repetition_location" class="survey-label">Repetition Location:</label>
+                <label for="repetition_location" class="survey-label">Where was this session conducted? (Lab / Online)</label>
                 <input type="text" id="repetition_location" name="repetition_location"><br>
 
-                <label for="repetition_type" class="survey-label">Repetition Type:</label>
-                <input type="text" id="repetition_type" name="repetition_type"><br>
-
-                <label for="n_repetitions" class="survey-label">Number of Repetitions:</label>
-                <input type="number" id="n_repetitions" name="n_repetitions"><br>
-
-                <label for="n_statements" class="survey-label">Number of Statements:</label>
-                <input type="number" id="n_statements" name="n_statements"><br>
-
-                <label for="time_pressure" class="survey-label">Time Pressure (1 for Yes, 0 for No):</label>
-                <input type="number" id="time_pressure" name="time_pressure" min="0" max="1"><br>
-
-                <label for="truth_instructions" class="survey-label">Truth Instructions (1 for Yes, 0 for No):</label>
-                <input type="number" id="truth_instructions" name="truth_instructions" min="0" max="1"><br>
-
-                <label for="presentation_time_s" class="survey-label">Presentation Time (seconds):</label>
-                <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.01"><br>
-
-                <label for="percent_repeated" class="survey-label">Percent Repeated:</label>
-                <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
-
-                <label for="presentation_type" class="survey-label">Presentation Type:</label>
-                <input type="text" id="presentation_type" name="presentation_type"><br>
-
-                <label for="phase" class="survey-label">Phase:</label>
+                <label for="phase" class="survey-label">What phase was this repetition (i.e. exposure / test)?</label>
                 <input type="text" id="phase" name="phase"><br>
 
-                <label for="secondary_task" class="survey-label">Secondary Task:</label>
-                <input type="text" id="secondary_task" name="secondary_task"><br>
+                <label for="repetition_type" class="survey-label">What type was the repetition (exact / semantic)?</label>
+                <input type="text" id="repetition_type" name="repetition_type"><br>
 
-                <label for="repetition_instructions" class="survey-label">Repetition Instructions (1 for Yes, 0 for No):</label>
+                <label for="n_repetitions" class="survey-label">How many times was each statement presented?</label>
+                <input type="number" id="n_repetitions" name="n_repetitions"><br>
+
+                <label for="n_statements" class="survey-label">How many statements were presented?</label>
+                <input type="number" id="n_statements" name="n_statements"><br>
+
+                <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
+                <input type="number" id="time_pressure" name="time_pressure" min="0" max="1"><br>
+
+                <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
+                <input type="number" id="truth_instructions" name="truth_instructions" min="0" max="1"><br>
+
+                <label for="repetition_instructions" class="survey-label">Were the participants instructed that some of the statements may be repeated?</label>
                 <input type="number" id="repetition_instructions" name="repetition_instructions" min="0" max="1"><br>
+
+                <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
+                <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
+
+                <label for="percent_repeated" class="survey-label">What percentage of the statements was repeated?</label>
+                <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
+
+                <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
+                <input type="text" id="presentation_type" name="presentation_type"><br>
+
+                <label for="secondary_task" class="survey-label">What secondary task were the participants instructed to complete (can be "none")?</label>
+                <input type="text" id="secondary_task" name="secondary_task"><br>
 
                 <button type="button" onclick="addRepetition()" class="survey-button">Add Repetition</button><br><br>
 
@@ -114,6 +114,9 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                     </table>
                 </div>
             </fieldset>
+
+            <label for="raw_data" class="survey-label">Question</label>
+            <input type="text" id="raw_data" name="raw_data"><br>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
