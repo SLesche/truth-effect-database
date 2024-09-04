@@ -18,17 +18,19 @@ function addStudy(parentElement, control, publication_idx) {
     renameButton.textContent = "Rename";
     renameButton.onclick = function(event) {
         event.stopPropagation();
-        renameItem(span, studyName);
+        renameItem(span, publication_idx);
     };
+    actions.appendChild(renameButton);
+
     const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
+    removeButton.innerHTML = '&times;'; // Red X
+    removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
         removeItem(listItem);
     };
-    actions.appendChild(renameButton);
     actions.appendChild(removeButton);
-
+    
     // Append the span and actions to the list item
     listItem.appendChild(span);
     listItem.appendChild(actions);
