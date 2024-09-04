@@ -21,8 +21,10 @@
 </head>
 <body>
     <div class="sidebar">
-        <button onclick="addPublication(control)">Add Publication</button>
-        <button onclick="addStatementSet(control)">Add a set of Statements</button>
+        <div class="button-container">
+            <button onclick="addPublication(control)" class="add-button">Add Publication</button>
+            <button onclick="addStatementSet(control)" class="add-button">Add a set of Statements</button>
+        </div>
         <ul id="sidebarList">
             <!-- Sidebar elements will be dynamically added here -->
         </ul>

@@ -24,6 +24,32 @@ ul {
     color: green;
     text-decoration: underline;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.add-button {
+    background-color: green;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.add-button:last-child {
+    margin-right: 0;
+}
 .collapsible {
     cursor: pointer;
     position: relative;
