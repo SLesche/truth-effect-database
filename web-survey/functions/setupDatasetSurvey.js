@@ -46,6 +46,53 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <ul id="betweenConditionsList"></ul>
             </fieldset>
 
+            <fieldset id="repetitionsFieldset">
+                <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
+                <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
+
+                <label for="repetition_location" class="survey-label">Where was this session conducted? (Lab / Online)</label>
+                <input type="text" id="repetition_location" name="repetition_location"><br>
+
+                <label for="phase" class="survey-label">What phase was this repetition (i.e. exposure / test)?</label>
+                <input type="text" id="phase" name="phase"><br>
+
+                <label for="repetition_type" class="survey-label">What type was the repetition (exact / semantic)?</label>
+                <input type="text" id="repetition_type" name="repetition_type"><br>
+
+                <label for="n_repetitions" class="survey-label">How many times was each statement presented?</label>
+                <input type="number" id="n_repetitions" name="n_repetitions"><br>
+
+                <label for="n_statements" class="survey-label">How many statements were presented?</label>
+                <input type="number" id="n_statements" name="n_statements"><br>
+
+                <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
+                <input type="number" id="time_pressure" name="time_pressure" min="0" max="1"><br>
+
+                <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
+                <input type="number" id="truth_instructions" name="truth_instructions" min="0" max="1"><br>
+
+                <label for="repetition_instructions" class="survey-label">Were the participants instructed that some of the statements may be repeated?</label>
+                <input type="number" id="repetition_instructions" name="repetition_instructions" min="0" max="1"><br>
+
+                <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
+                <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
+
+                <label for="percent_repeated" class="survey-label">What percentage of the statements was repeated?</label>
+                <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
+
+                <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
+                <input type="text" id="presentation_type" name="presentation_type"><br>
+
+                <label for="secondary_task" class="survey-label">What secondary task were the participants instructed to complete (can be "none")?</label>
+                <input type="text" id="secondary_task" name="secondary_task"><br>
+
+                <button type="button" onclick="addRepetition()" class="survey-button">Add Repetition</button><br><br>
+
+                <label class="survey-label">List of Repetitions</label>
+                <ul id="repetitionsList"></ul>
+            </fieldset>
+
+
             <button type="submit" class="survey-button">Submit</button>
         </form>
     `;
@@ -123,6 +170,7 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     const within_condition_details = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? collectWithinConditions(): 0;
     const has_between_conditions = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? 1 : 0;
     const between_condition_details = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? collectBetweenConditions() : 0;
+    const repetition_info = collectRepetitions();
 
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {
@@ -131,6 +179,7 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
         within_condition_details: has_within_conditions == "1" ? within_condition_details : '',
         has_between_conditions: has_between_conditions,
         between_condition_details: has_between_conditions == "1" ? between_condition_details : '',
+        repetition_info: repetition_info,
     };
 
     // Optionally, display a confirmation message
@@ -180,6 +229,53 @@ function addBetweenCondition() {
         alert('Please enter both a condition name and an identifier.');
     }
 }
+function addRepetition() {
+    const repetitionTime = document.getElementById('repetition_time').value;
+    const repetitionLocation = document.getElementById('repetition_location').value;
+    const repetitionType = document.getElementById('repetition_type').value;
+    const nRepetitions = document.getElementById('n_repetitions').value;
+    const nStatements = document.getElementById('n_statements').value;
+    const timePressure = document.getElementById('time_pressure').value;
+    const truthInstructions = document.getElementById('truth_instructions').value;
+    const presentationTime = document.getElementById('presentation_time_s').value;
+    const percentRepeated = document.getElementById('percent_repeated').value;
+    const presentationType = document.getElementById('presentation_type').value;
+    const phase = document.getElementById('phase').value;
+    const secondaryTask = document.getElementById('secondary_task').value;
+    const repetitionInstructions = document.getElementById('repetition_instructions').value;
+
+    if (repetitionTime && repetitionLocation && repetitionType && nRepetitions && nStatements && timePressure !== '' && truthInstructions !== '' && presentationTime && percentRepeated && presentationType && phase && secondaryTask && repetitionInstructions !== '') {
+        const repetitionsList = document.getElementById('repetitionsList');
+
+        if (repetitionsList) {
+            // Create a new list item for the repetition
+            const listItem = document.createElement('li');
+            listItem.textContent = `Time: ${repetitionTime}, Location: ${repetitionLocation}, Type: ${repetitionType}, Repetitions: ${nRepetitions}, Statements: ${nStatements}, Time Pressure: ${timePressure}, Truth Instructions: ${truthInstructions}, Presentation Time: ${presentationTime}, Percent Repeated: ${percentRepeated}, Presentation Type: ${presentationType}, Phase: ${phase}, Secondary Task: ${secondaryTask}, Repetition Instructions: ${repetitionInstructions}`;
+
+            // Append the new list item to the repetitions list
+            repetitionsList.appendChild(listItem);
+
+            // Clear the input fields
+            document.getElementById('repetition_time').value = '';
+            document.getElementById('repetition_location').value = '';
+            document.getElementById('repetition_type').value = '';
+            document.getElementById('n_repetitions').value = '';
+            document.getElementById('n_statements').value = '';
+            document.getElementById('time_pressure').value = '';
+            document.getElementById('truth_instructions').value = '';
+            document.getElementById('presentation_time_s').value = '';
+            document.getElementById('percent_repeated').value = '';
+            document.getElementById('presentation_type').value = '';
+            document.getElementById('phase').value = '';
+            document.getElementById('secondary_task').value = '';
+            document.getElementById('repetition_instructions').value = '';
+        } else {
+            console.error('repetitionsList element not found');
+        }
+    } else {
+        alert('Please fill out all repetition fields.');
+    }
+}
 
 // Function to collect within conditions
 function collectWithinConditions() {
@@ -207,4 +303,43 @@ function collectBetweenConditions() {
         betweenConditions.push({ name: conditionName, identifier: conditionIdentifier });
     }
     return betweenConditions;
+}
+
+// Function to collect repetitions
+function collectRepetitions() {
+    var repetitions = [];
+    var listItems = document.getElementById("repetitionsList").getElementsByTagName("li");
+    for (var i = 0; i < listItems.length; i++) {
+        var repetitionText = listItems[i].childNodes[0].nodeValue;
+        var repetitionParts = repetitionText.split(", ");
+        var repetitionTime = repetitionParts[0].replace("Time: ", "").trim();
+        var repetitionLocation = repetitionParts[1].replace("Location: ", "").trim();
+        var repetitionType = repetitionParts[2].replace("Type: ", "").trim();
+        var nRepetitions = repetitionParts[3].replace("Repetitions: ", "").trim();
+        var nStatements = repetitionParts[4].replace("Statements: ", "").trim();
+        var timePressure = repetitionParts[5].replace("Time Pressure: ", "").trim();
+        var truthInstructions = repetitionParts[6].replace("Truth Instructions: ", "").trim();
+        var presentationTime = repetitionParts[7].replace("Presentation Time: ", "").trim();
+        var percentRepeated = repetitionParts[8].replace("Percent Repeated: ", "").trim();
+        var presentationType = repetitionParts[9].replace("Presentation Type: ", "").trim();
+        var phase = repetitionParts[10].replace("Phase: ", "").trim();
+        var secondaryTask = repetitionParts[11].replace("Secondary Task: ", "").trim();
+        var repetitionInstructions = repetitionParts[12].replace("Repetition Instructions: ", "").trim();
+        repetitions.push({
+            time: repetitionTime,
+            location: repetitionLocation,
+            type: repetitionType,
+            n_repetitions: nRepetitions,
+            n_statements: nStatements,
+            time_pressure: timePressure,
+            truth_instructions: truthInstructions,
+            presentation_time_s: presentationTime,
+            percent_repeated: percentRepeated,
+            presentation_type: presentationType,
+            phase: phase,
+            secondary_task: secondaryTask,
+            repetition_instructions: repetitionInstructions
+        });
+    }
+    return repetitions;
 }
