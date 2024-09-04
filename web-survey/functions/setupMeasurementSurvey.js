@@ -25,7 +25,8 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             li.textContent = measure;
 
             var removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
+            removeButton.innerHTML = '&times;'; // Red X
+            removeButton.classList.add('delete-button');
             removeButton.onclick = function() {
                 this.parentElement.remove();
             };
@@ -68,16 +69,7 @@ function addMeasureToList() {
         var li = document.createElement("li");
         li.textContent = measureInput;
 
-        // Create a remove button for each measure
-        var removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
-        removeButton.onclick = function() {
-            // Remove the measure from the list
-            this.parentElement.remove();
-        };
-
-        // Append the remove button to the list item
-        li.appendChild(removeButton);
+        add_delete_button_to_list_item(li);
 
         // Append the list item to the measures list
         document.getElementById("measuresList").appendChild(li);

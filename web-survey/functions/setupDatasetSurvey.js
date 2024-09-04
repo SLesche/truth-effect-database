@@ -115,13 +115,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             var li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
 
-            var removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
-            removeButton.onclick = function() {
-                this.parentElement.remove();
-            };
-
-            li.appendChild(removeButton);
+            add_delete_button_to_list_item(li);
             withinConditionsList.appendChild(li);
         });
     }
@@ -132,13 +126,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             var li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
 
-            var removeButton = document.createElement("button");
-            removeButton.textContent = "Remove";
-            removeButton.onclick = function() {
-                this.parentElement.remove();
-            };
+            add_delete_button_to_list_item(li);
 
-            li.appendChild(removeButton);
             betweenConditionsList.appendChild(li);
         });
     }
@@ -265,6 +254,8 @@ function addWithinCondition() {
         const listItem = document.createElement('li');
         listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
 
+        add_delete_button_to_list_item(listItem);
+
         // Append the new list item to the conditions list
         conditionsList.appendChild(listItem);
 
@@ -286,6 +277,8 @@ function addBetweenCondition() {
         // Create a new list item for the condition
         const listItem = document.createElement('li');
         listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
+
+        add_delete_button_to_list_item(listItem);
 
         // Append the new list item to the conditions list
         conditionsList.appendChild(listItem);
