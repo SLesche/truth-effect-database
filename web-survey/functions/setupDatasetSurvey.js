@@ -265,6 +265,79 @@ function collectRepetitions() {
     }
     return repetitions;
 }
+
+function addWithinCondition() {
+    const conditionName = document.getElementById('within_condition_name').value;
+    const conditionIdentifier = document.getElementById('within_condition_identifier').value;
+
+    if (conditionName && conditionIdentifier) {
+        const conditionsList = document.getElementById('withinConditionsList');
+
+        // Create a new list item for the condition
+        const listItem = document.createElement('li');
+        listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
+
+        // Append the new list item to the conditions list
+        conditionsList.appendChild(listItem);
+
+        // Clear the input fields
+        document.getElementById('within_condition_name').value = '';
+        document.getElementById('within_condition_identifier').value = '';
+    } else {
+        alert('Please enter both a condition name and an identifier.');
+    }
+}
+
+function addBetweenCondition() {
+    const conditionName = document.getElementById('between_condition_name').value;
+    const conditionIdentifier = document.getElementById('between_condition_identifier').value;
+
+    if (conditionName && conditionIdentifier) {
+        const conditionsList = document.getElementById('betweenConditionsList');
+
+        // Create a new list item for the condition
+        const listItem = document.createElement('li');
+        listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
+
+        // Append the new list item to the conditions list
+        conditionsList.appendChild(listItem);
+
+        // Clear the input fields
+        document.getElementById('between_condition_name').value = '';
+        document.getElementById('between_condition_identifier').value = '';
+    } else {
+        alert('Please enter both a condition name and an identifier.');
+    }
+}
+
+// Function to collect within conditions
+function collectWithinConditions() {
+    var withinConditions = [];
+    var listItems = document.getElementById("withinConditionsList").getElementsByTagName("li");
+    for (var i = 0; i < listItems.length; i++) {
+        var conditionText = listItems[i].childNodes[0].nodeValue;
+        var conditionParts = conditionText.split(", Identifier: ");
+        var conditionName = conditionParts[0].replace("Condition: ", "").trim();
+        var conditionIdentifier = conditionParts[1].trim();
+        withinConditions.push({ name: conditionName, identifier: conditionIdentifier });
+    }
+    return withinConditions;
+}
+
+// Function to collect between conditions
+function collectBetweenConditions() {
+    var betweenConditions = [];
+    var listItems = document.getElementById("betweenConditionsList").getElementsByTagName("li");
+    for (var i = 0; i < listItems.length; i++) {
+        var conditionText = listItems[i].childNodes[0].nodeValue;
+        var conditionParts = conditionText.split(", Identifier: ");
+        var conditionName = conditionParts[0].replace("Condition: ", "").trim();
+        var conditionIdentifier = conditionParts[1].trim();
+        betweenConditions.push({ name: conditionName, identifier: conditionIdentifier });
+    }
+    return betweenConditions;
+}
+
 function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     // Get values from the input fields
     const n_participants = document.getElementById('n_participants').value;
@@ -272,7 +345,9 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     const within_condition_details = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? collectWithinConditions() : [];
     const has_between_conditions = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? 1 : 0;
     const between_condition_details = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? collectBetweenConditions() : [];
-    const repetitions = collectRepetitions();
+    const repetitionsTable = document.getElementById('repetitionsTable');
+    const hasRows = repetitionsTable.getElementsByTagName('tr').length > 0;
+    const repetitions = hasRows ? collectRepetitions() : [];
 
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {
