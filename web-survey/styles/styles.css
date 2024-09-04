@@ -1,14 +1,53 @@
 body {
-    font-family: Arial, sans-serif;
     display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
+
 .sidebar {
     width: 300px;
     background-color: #f4f4f4;
     padding: 20px;
+    box-sizing: border-box;
     height: 100vh;
     overflow-y: auto;
+    transition: transform 0.3s ease;
 }
+
+.hidden {
+    transform: translateX(-100%);
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+}
+
+.expanded {
+    margin-left: 0;
+}
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    left: 310px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+
+.moved {
+    left: 10px;
+}
+
 ul {
     padding-left: 0;
 }
@@ -66,15 +105,6 @@ ul {
 }
 .active::before {
     content: '\25BC'; /* Down-pointing triangle */
-}
-/* Specific styling for top-level (publication) triangles
-#sidebarList > .collapsible::before {
-    font-size: 1.5em; /* Increase the size of the triangle 
-} */
- 
-.content {
-    padding: 20px;
-    flex-grow: 1;
 }
 .actions {
     display: none;

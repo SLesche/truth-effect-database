@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <div class="sidebar">
+    <button id="toggleSidebarButton" class="toggle-button">☰</button>
+
+    <div id="sidebar" class="sidebar">
         <div class="button-container">
             <button onclick="addPublication(control)" class="add-button">Add Publication</button>
             <button onclick="addStatementSet(control)" class="add-button">Add a set of Statements</button>
@@ -29,7 +31,7 @@
             <!-- Sidebar elements will be dynamically added here -->
         </ul>
     </div>
-    
+   
     <div class="content" id="content">
         <!-- Content will be dynamically updated here -->
         <h2>Welcome</h2>
@@ -42,7 +44,16 @@
             num_publications: 0,
             publication_info: {},
             statementset_info: {},
-        }
+        };
+
+        // Toggle sidebar visibility
+        document.getElementById('toggleSidebarButton').onclick = function() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('expanded');
+            this.classList.toggle('moved');
+        };
     </script>
 </body>
 </html>
