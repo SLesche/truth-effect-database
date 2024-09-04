@@ -111,3 +111,12 @@ input:disabled {
 fieldset:disabled {
     display: none;
 }
+
+.delete-button {
+    color: red;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 5px;
+}

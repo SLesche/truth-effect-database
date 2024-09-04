@@ -367,6 +367,23 @@ function displayRepetitionSummary(repetitions) {
     repetitions.forEach((_, index) => {
         const th = document.createElement('th');
         th.textContent = `Session ${index + 1}`;
+
+        // Add delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '&times;'; // Red X
+        deleteButton.classList.add('delete-button');
+        deleteButton.addEventListener('click', () => {
+            // Remove the column
+            for (let row of repetitionsTable.rows) {
+                row.deleteCell(index + 1);
+            }
+            // Optionally, update the repetitions array if needed
+            repetitions.splice(index, 1);
+            // Re-render the table to update the session numbers
+            displayRepetitionSummary(repetitions);
+        });
+        th.appendChild(deleteButton);
+
         headerRow.appendChild(th);
     });
     repetitionsTable.appendChild(headerRow);
