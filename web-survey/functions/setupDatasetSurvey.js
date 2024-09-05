@@ -3,8 +3,13 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
     const dataset_name = control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].dataset_name;
 
     document.getElementById("content").innerHTML = `
-        <h2>${dataset_name}</h2>
-        <p>Here we want to know more about the dataset you used in the study</p>
+    <div class="display-text">
+        <h1>${dataset_name}</h1>
+        <p>This section focuses on gathering detailed information about a specific dataset. Your answers here should pertain to the same sample of participants throughout, ensuring consistency in your responses.</p>
+        <p>We’ll also ask about any experimental manipulations you conducted within the dataset. This is important so you can provide context if anything unusual occurred during the study, helping others understand potential variations in the data.</p>
+        <p>Additionally, you’ll be asked about the measurement occasions and how you administered the statements to participants. This will help clarify the timing, format, and procedure used during data collection.</p>
+        <p>Lastly, we will guide you through the process of uploading your raw data, ensuring that your dataset is accurately and fully represented in our database. This step is crucial for allowing others to reanalyze or build upon your work.</p>
+        
         <form id="datasetSurvey" class="survey-form">
             <label for="n_participants" class="survey-label">How many participants are contained in this data?</label>
             <input type="number" id="n_participants" name="n_participants" value="${dataset_data.n_participants || ''}" required><br>
@@ -48,8 +53,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <ul id="betweenConditionsList"></ul>
             </fieldset>
 
-            <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="toggle-fieldset-button"><h3>Repetitions<h3></button>   
-            <p>Repetitions are multiple sessions of the same study. Please provide information about each repetition.</p>  
+            <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="toggle-fieldset-button"><h2>Measurement Sessions<h2></button>   
             <fieldset id="repetitionsFieldset">
                 <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
                 <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
@@ -113,9 +117,20 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                     </table>
                 </div>
             </fieldset>
+            <br>
 
-            <button type="button" onclick="toggleFieldset('rawDataFieldset')" class="toggle-fieldset-button"><h3>Raw Data<h3></button>   
-            <p>Here, please provide some information about raw data</p>
+            <button type="button" onclick="toggleFieldset('rawDataFieldset')" class="toggle-fieldset-button"><h2>Raw Data<h2></button>   
+            <p>Here, please provide information about your raw data by uploading it through the interface below. Your data should adhere to the following guidelines:</p>
+            <ul>
+                <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
+                <li>It is crucial that the columns you do include have the exact names we specified. This consistency is essential for accurate integration and analysis.</li>
+                <li>Make sure that your conditions are labeled exactly as indicated in the instructions above. This ensures that your data can be correctly interpreted in the context of the study.</li>
+            </ul>
+            
+            <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
+            <p><em>[DUMMY text for raw data example here (do not fill this out, ChatGPT)]</em></p>
+            
+            <p>Once you’ve prepared your data according to these specifications, you can upload it using the form provided below. Thank you for your cooperation!</p>
             <fieldset id="rawDataFieldset">
                 <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
                 <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
@@ -124,6 +139,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
+    </div>
     `;
 
     // Display previous submission if available
