@@ -1,0 +1,73 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+    transition: width transform 0.3s ease;
+}
+
+.sidebar.hidden {
+    width: 0;
+    transform: translateX(-100%);
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin-left: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.content.expanded {
+    margin-left: 0;
+}
+
+.moved {
+    left: 10px;
+}
+
+ul {
+    padding-left: 0;
+}
+.nested {
+    margin-left: 20px;
+    list-style-type: none;
+    display: none;
+}
+.collapsible {
+    cursor: pointer;
+    position: relative;
+    list-style-type: none;
+}
+.collapsible::before {
+    content: '\25B6'; /* Right-pointing triangle */
+    position: absolute;
+    left: -20px;
+    top: 0;
+}
+.active > .nested {
+    display: block;
+}
+.active::before {
+    content: '\25BC'; /* Down-pointing triangle */
+}
+.actions {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.collapsible:hover .actions {
+    display: inline-block;
+}
+
