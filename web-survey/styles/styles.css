@@ -11,10 +11,11 @@ body {
     box-sizing: border-box;
     height: 100vh;
     overflow-y: auto;
-    transition: transform 0.3s ease;
+    transition: width transform 0.3s ease;
 }
 
-.hidden {
+.sidebar.hidden {
+    width: 0;
     transform: translateX(-100%);
 }
 
@@ -23,17 +24,18 @@ body {
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
+    margin-left: 20px;
     transition: margin-left 0.3s ease;
 }
 
-.expanded {
+.content.expanded {
     margin-left: 0;
 }
 .toggle-button {
     position: absolute;
     top: 10px;
-    left: 310px;
-    background-color: #007bff;
+    left: 305px;
+    background-color: grey;
     color: white;
     border: none;
     padding: 10px;
@@ -42,7 +44,6 @@ body {
     z-index: 1000;
     transition: left 0.3s ease;
 }
-
 
 .moved {
     left: 10px;
