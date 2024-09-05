@@ -7,13 +7,14 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
         <form id="datasetSurvey" class="survey-form">
             <label for="n_participants" class="survey-label">How many participants are contained in this data?</label>
             <input type="number" id="n_participants" name="n_participants" value="${dataset_data.n_participants || ''}" required><br>
-
+            
             <label for="has_within_conditions" class="survey-label">Does this data contain any within conditions?</label>
             <div class="form-item">
                 <label><input type="radio" name="has_within_conditions" value="1" ${dataset_data.has_within_conditions == 1 ? 'checked' : ''}/>Yes</label>
                 <label><input type="radio" name="has_within_conditions" value="0" ${dataset_data.has_within_conditions == 0 ? 'checked' : ''}/>No</label>
             </div>
 
+            
             <fieldset id="withinConditionsFieldset" ${dataset_data.has_within_conditions == 1 ? '' : 'disabled'}>
                 <label for="within_condition_name" class="survey-label">Add a description of the condition:</label>
                 <input type="text" id="within_condition_name" name="within_condition_name"><br>
@@ -46,8 +47,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <ul id="betweenConditionsList"></ul>
             </fieldset>
 
-            <p>Repetitions</p>       
-            <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="survey-button">Toggle Repetitions</button>     
+            <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="toggle-fieldset-button"><h3>Repetitions<h3></button>   
+            <p>Repetitions are multiple sessions of the same study. Please provide information about each repetition.</p>  
             <fieldset id="repetitionsFieldset">
                 <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
                 <input type="number" id="repetition_time" name="repetition_time" step="1"><br>

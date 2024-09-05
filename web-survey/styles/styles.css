@@ -31,19 +31,6 @@ body {
 .content.expanded {
     margin-left: 0;
 }
-.toggle-button {
-    position: absolute;
-    top: 10px;
-    left: 305px;
-    background-color: grey;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 4px;
-    z-index: 1000;
-    transition: left 0.3s ease;
-}
 
 .moved {
     left: 10px;
@@ -64,6 +51,29 @@ ul {
     color: green;
     text-decoration: underline;
 }
+
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    left: 305px;
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+.toggle-fieldset-button {
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
 
 .button-container {
     display: flex;
