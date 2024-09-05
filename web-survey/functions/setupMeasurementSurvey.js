@@ -4,6 +4,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
     document.getElementById("content").innerHTML = `
         <h2>${measurement_name}</h2>
+        <p> here we want to know what additional variables you measured in the study</p>
         <form id="measurementSurvey">
             <label for="measureInput" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measureInput" name="measureInput"><br>

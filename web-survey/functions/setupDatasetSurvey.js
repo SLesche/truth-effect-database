@@ -4,6 +4,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
     document.getElementById("content").innerHTML = `
         <h2>${dataset_name}</h2>
+        <p>Here we want to know more about the dataset you used in the study</p>
         <form id="datasetSurvey" class="survey-form">
             <label for="n_participants" class="survey-label">How many participants are contained in this data?</label>
             <input type="number" id="n_participants" name="n_participants" value="${dataset_data.n_participants || ''}" required><br>

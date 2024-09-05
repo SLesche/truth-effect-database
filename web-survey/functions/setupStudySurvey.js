@@ -4,6 +4,7 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
         <h2>${studyName}</h2>
+        <p>Fill out the following survey to provide information about the study. A study is ...</p>
         <form id="studySurvey" class="survey-form">
         <label for="truth_rating_scale" class="survey-label">With what scale did you measure the truth rating of a statement?</label>
         <div class="radio-buttons">

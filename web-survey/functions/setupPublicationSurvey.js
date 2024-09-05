@@ -3,13 +3,14 @@ function initializePublicationSurvey(control, publication_idx) {
     const publication_name = control.publication_info[publication_idx].publication_name;
     document.getElementById("content").innerHTML = `
         <h2>${publication_name}</h2>
-        <p>How many studies are part of this publication? (Add studies)</p>
-        <p>Provide the additional measures you collected in this study.</p>
-        <p>Checklist:</p>
+        <p>Hier kommt ein bisschen generischer Text zum Ausfüllen hin</p>
+        <p>Checklist: (hier dann Progress-Update über die Dinge geben</p>
         <ul>
-            <li>Dataset provided and checked</li>
-            <li>Additional measures provided</li>
+            <li>Numbers update: Wie viele Studien / Datensätze sind schon drin?</li>
+            <li>Statementset updates</li>
+            <li>Checklist for raw data / Studien</li>
         </ul>
+        
         <form id="publicationSurvey" class = "survey-form">
         <label for="authors" class = "survey-label">Who are the authors of the publication?</label>
         <input type="text" id="authors" name="authors" value="${publication.authors || ''}" required><br>

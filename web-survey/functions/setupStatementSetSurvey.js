@@ -4,13 +4,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 
     document.getElementById("content").innerHTML = `
     <h2>${statementset_name}</h2>
-    <p>How many studies are part of this publication? (Add studies)</p>
-    <p>Provide the additional measures you collected in this study.</p>
-    <p>Checklist:</p>
-    <ul>
-        <li>Dataset provided and checked</li>
-        <li>Additional measures provided</li>
-    </ul>
+    <p>Here some information about the statements that you used</p>
     <form id="statementSetSurvey" class="survey-form">
         <label for="statement_publication_file" class="survey-label">Please upload a .csv file where the statements you used are listed.</label>
         <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
