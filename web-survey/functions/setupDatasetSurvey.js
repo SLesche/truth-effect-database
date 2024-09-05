@@ -67,20 +67,20 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
                 <div class="radio-buttons">
-                    <label><input type="radio" name="time_pressure" value="1" required/>Yes</label>
-                    <label><input type="radio" name="time_pressure" value="0" required/>No</label>
+                    <label><input type="radio" name="time_pressure" value="1"/>Yes</label>
+                    <label><input type="radio" name="time_pressure" value="0"/>No</label>
                 </div>
 
                 <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
                 <div class="radio-buttons">
-                    <label><input type="radio" name="truth_instructions" value="1" required/>Yes</label>
-                    <label><input type="radio" name="truth_instructions" value="0" required/>No</label>
+                    <label><input type="radio" name="truth_instructions" value="1"/>Yes</label>
+                    <label><input type="radio" name="truth_instructions" value="0"/>No</label>
                 </div>
 
                 <label for="repetition_instructions" class="survey-label">Were the participants instructed that some of the statements may be repeated?</label>
                 <div class="radio-buttons">
-                    <label><input type="radio" name="repetition_instructions" value="1" required/>Yes</label>
-                    <label><input type="radio" name="repetition_instructions" value="0" required/>No</label>
+                    <label><input type="radio" name="repetition_instructions" value="1"/>Yes</label>
+                    <label><input type="radio" name="repetition_instructions" value="0"/>No</label>
                 </div>
 
                 <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
@@ -148,6 +148,11 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
     document.getElementById('datasetSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
+        const hasRows = repetitionsTable.getElementsByTagName('tr').length > 0;
+        if (!hasRows) {
+            alert("Submit at least one repetition.");
+            return; 
+        }
         updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx);
     });
 
@@ -163,7 +168,38 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
         });
     });
 }
+
+function validateRepetitionFields() {
+    const fields = [
+        document.getElementById('repetition_time').value,
+        document.getElementById('repetition_location').value,
+        document.getElementById('repetition_type').value,
+        document.getElementById('n_repetitions').value,
+        document.getElementById('n_statements').value,
+        document.querySelector('input[name="time_pressure"]:checked'),
+        document.querySelector('input[name="truth_instructions"]:checked'),
+        document.getElementById('presentation_time_s').value,
+        document.getElementById('percent_repeated').value,
+        document.getElementById('presentation_type').value,
+        document.getElementById('phase').value,
+        document.getElementById('secondary_task').value,
+        document.querySelector('input[name="repetition_instructions"]:checked')
+    ];
+
+    // Check if any field is empty or not selected
+    for (const field of fields) {
+        if (!field || field === '') {
+            return false;
+        }
+    }
+    return true;
+}
+
 function addRepetition() {
+    if (!validateRepetitionFields()) {
+        alert('Please fill out all fields before submitting.');
+        return;
+    }
     const repetitionTime = document.getElementById('repetition_time').value;
     const repetitionLocation = document.getElementById('repetition_location').value;
     const repetitionType = document.getElementById('repetition_type').value;
@@ -337,7 +373,7 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     const between_condition_details = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? collectBetweenConditions() : [];
     const repetitionsTable = document.getElementById('repetitionsTable');
     const hasRows = repetitionsTable.getElementsByTagName('tr').length > 0;
-    const repetitions = hasRows ? collectRepetitions() : [];
+    const repetitions = hasRows ? collectRepetitions() : alert("Submit at least one repetition.");
 
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {
