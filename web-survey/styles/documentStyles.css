@@ -76,3 +76,6 @@ ul {
     display: inline-block;
 }
 
+.display-text {
+    width: min(90%, 800px);
+}
