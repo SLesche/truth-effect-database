@@ -359,23 +359,6 @@ function displayRepetitionSummary(repetitions) {
 
     if (repetitions.length === 0) return;
 
-    // Define a mapping of keys to row names
-    const rowNames = {
-        repetition_time: 'Session Time',
-        repetition_location: 'Location',
-        repetition_type: 'Repetition Type',
-        n_repetitions: 'N Repetitions',
-        n_statements: 'N Statements',
-        time_pressure: 'Time Pressure?',
-        truth_instructions: 'Truth Instructions?',
-        presentation_time_s: 'Presentation Time (s)',
-        percent_repeated: 'Percent Repeated',
-        presentation_type: 'Presentation Type',
-        phase: 'Phase',
-        secondary_task: 'Secondary Task',
-        repetition_instructions: 'Repetition Instructions?'
-    };
-
     // Get the keys from the first repetition object
     const keys = Object.keys(repetitions[0]);
 
@@ -401,26 +384,23 @@ function displayRepetitionSummary(repetitions) {
             // Re-render the table to update the session numbers
             displayRepetitionSummary(repetitions);
         });
-
         th.appendChild(deleteButton);
+
         headerRow.appendChild(th);
     });
     repetitionsTable.appendChild(headerRow);
 
-    // Create a row for each key using the rowNames mapping
+    // Create rows for each key
     keys.forEach(key => {
         const row = document.createElement('tr');
-        const headerCell = document.createElement('th');
-        headerCell.textContent = rowNames[key] || key; // Use the row name or the key if no mapping exists
-        row.appendChild(headerCell);
-
-        // Create a cell for each repetition
+        const th = document.createElement('th');
+        th.textContent = key;
+        row.appendChild(th);
         repetitions.forEach(repetition => {
             const td = document.createElement('td');
             td.textContent = repetition[key];
             row.appendChild(td);
         });
-
         repetitionsTable.appendChild(row);
     });
 }
