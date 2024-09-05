@@ -7,7 +7,7 @@ function addStatementSet(control) {
 
     // Create a new list item for the dataset
     const listItem = document.createElement("li");
-    listItem.className = "collapsible";
+    listItem.className = "collapsible collapsible-nocontent";
 
     // Create a span for the dataset name
     const span = document.createElement("span");
@@ -39,23 +39,12 @@ function addStatementSet(control) {
 
     // Create a nested list for raw data
     const nestedList = document.createElement("ul");
-    nestedList.className = "nested";
 
     // Append the nested list to the dataset item
     listItem.appendChild(nestedList);
 
     // Append the new list item to the sidebar
     document.getElementById("sidebarList").appendChild(listItem);
-
-    // Add collapsible functionality
-    listItem.addEventListener("click", function(event) {
-        if (event.target === this) {
-            this.classList.toggle("active");
-        }
-    });
-
-    // Toggle the collapsible on by default
-    listItem.classList.add("active");
 
     // Update content area
     span.addEventListener("click", function(event) {

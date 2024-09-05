@@ -55,6 +55,11 @@ ul {
     left: -20px;
     top: 0;
 }
+
+.collapsible-nocontent::before {
+    content: ''; /* Bullet point */
+}
+
 .active > .nested {
     display: block;
 }
