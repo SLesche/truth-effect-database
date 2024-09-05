@@ -46,6 +46,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <ul id="betweenConditionsList"></ul>
             </fieldset>
 
+            <p>Repetitions</p>       
+            <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="survey-button">Toggle Repetitions</button>     
             <fieldset id="repetitionsFieldset">
                 <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
                 <input type="number" id="repetition_time" name="repetition_time" step="1"><br>

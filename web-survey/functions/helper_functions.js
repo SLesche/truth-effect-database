@@ -10,3 +10,14 @@ add_delete_button_to_list_item = function(listItem) {
 
     return(listItem)
 }
+
+function toggleFieldset(fieldsetId) {
+    const fieldset = document.getElementById(fieldsetId);
+    if (fieldset.disabled) {
+        fieldset.disabled = false;
+        fieldset.style.display = 'block';
+    } else {
+        fieldset.disabled = true;
+        fieldset.style.display = 'none';
+    }
+}
