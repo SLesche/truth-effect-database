@@ -17,13 +17,6 @@ function addDataset(parentElement, control, publication_idx, study_idx) {
     // Create action buttons
     const actions = document.createElement("div");
     actions.className = "actions";
-    const renameButton = document.createElement("button");
-    renameButton.textContent = "Rename";
-    renameButton.onclick = function(event) {
-        event.stopPropagation();
-        renameItem(span, publication_idx);
-    };
-    actions.appendChild(renameButton);
 
     const removeButton = document.createElement("button");
     removeButton.innerHTML = '&times;'; // Red X
