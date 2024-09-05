@@ -113,8 +113,13 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 </div>
             </fieldset>
 
-            <label for="raw_data" class="survey-label">Question</label>
-            <input type="text" id="raw_data" name="raw_data"><br>
+            <button type="button" onclick="toggleFieldset('rawDataFieldset')" class="toggle-fieldset-button"><h3>Raw Data<h3></button>   
+            <p>Here, please provide some information about raw data</p>
+            <fieldset id="rawDataFieldset">
+                <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
+                <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
+                <span id="file-name-display">${dataset_data.raw_data_file ? `File: ${dataset_data.raw_data_file.name}` : ''}</span><br>
+            </fieldset>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
@@ -131,6 +136,16 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             withinConditionsList.appendChild(li);
         });
     }
+
+    // Add event listener to the file input to display the selected file name
+    document.getElementById('raw_data_file').addEventListener('change', function(event) {
+        const fileNameDisplay = document.getElementById('file-name-display');
+        if (event.target.files.length > 0) {
+            fileNameDisplay.textContent = `File: ${event.target.files[0].name}`;
+        } else {
+            fileNameDisplay.textContent = '';
+        }
+    });
 
     if (dataset_data && dataset_data.has_between_conditions == 1) {
         var betweenConditionsList = document.getElementById("betweenConditionsList");
@@ -378,6 +393,10 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     const hasRows = repetitionsTable.getElementsByTagName('tr').length > 0;
     const repetitions = hasRows ? collectRepetitions() : alert("Submit at least one repetition.");
 
+    // Get values from the input fields
+    const rawDataFile = document.getElementById('raw_data_file').files[0];
+
+
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {
         n_participants: n_participants,
@@ -386,7 +405,16 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
         has_between_conditions: has_between_conditions,
         between_condition_details: has_between_conditions ? between_condition_details : [],
         repetitions: repetitions,
+        raw_data_file: rawDataFile
     };
+
+    // Display the updated file name in the submission box
+    const fileNameDisplay = document.getElementById('file-name-display');
+    if (rawDataFile) {
+        fileNameDisplay.textContent = `File: ${rawDataFile.name}`;
+    } else {
+        fileNameDisplay.textContent = '';
+    }
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
