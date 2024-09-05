@@ -52,9 +52,10 @@
         document.getElementById('toggleSidebarButton').onclick = function() {
             const sidebar = document.getElementById('sidebar');
             const content = document.getElementById('content');
+            const toggleButton = document.getElementById('toggleSidebarButton');
             sidebar.classList.toggle('hidden');
             content.classList.toggle('expanded');
-            this.classList.toggle('moved');
+            toggleButton.classList.toggle('moved');
         };
     </script>
 </body>

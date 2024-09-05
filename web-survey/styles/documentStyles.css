@@ -11,7 +11,7 @@ body {
     box-sizing: border-box;
     height: 100vh;
     overflow-y: auto;
-    transition: width transform 0.3s ease;
+    transition: width 0.3s ease;
 }
 
 .sidebar.hidden {

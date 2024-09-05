@@ -29,6 +29,10 @@
     transition: left 0.3s ease;
 }
 
+.toggle-button.moved {
+    left: 10px;
+}
+
 .toggle-fieldset-button {
     color: black;
     border: none;
