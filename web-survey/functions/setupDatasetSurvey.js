@@ -354,11 +354,12 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
 }
 
 function displayRepetitionSummary(repetitions) {
+    //repetitions = modifyRepetitions(repetitions);
     const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
     repetitionsTable.innerHTML = ''; // Clear existing entries
 
     if (repetitions.length === 0) return;
-
+    
     // Get the keys from the first repetition object
     const keys = Object.keys(repetitions[0]);
 
@@ -403,4 +404,32 @@ function displayRepetitionSummary(repetitions) {
         });
         repetitionsTable.appendChild(row);
     });
+}
+
+function modifyRepetitions(repetitions) {
+    const rowNames = {
+        repetition_time: 'Session Time',
+        repetition_location: 'Location',
+        repetition_type: 'Repetition Type',
+        n_repetitions: 'N Repetitions',
+        n_statements: 'N Statements',
+        time_pressure: 'Time Pressure?',
+        truth_instructions: 'Truth Instructions?',
+        presentation_time_s: 'Presentation Time (s)',
+        percent_repeated: 'Percent Repeated',
+        presentation_type: 'Presentation Type',
+        phase: 'Phase',
+        secondary_task: 'Secondary Task',
+        repetition_instructions: 'Repetition Instructions?'
+    };
+
+    const modifiedRepetitions = repetitions.map(repetition => {
+        const modifiedRepetition = {};
+        Object.keys(rowNames).forEach(key => {
+            modifiedRepetition[rowNames[key]] = repetition[key];
+        });
+        return modifiedRepetition;
+    });
+
+    return modifiedRepetitions;
 }
