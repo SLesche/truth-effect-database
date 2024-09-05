@@ -66,13 +66,22 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <input type="number" id="n_statements" name="n_statements"><br>
 
                 <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
-                <input type="number" id="time_pressure" name="time_pressure" min="0" max="1"><br>
+                <div class="radio-buttons">
+                    <label><input type="radio" name="time_pressure" value="1" required/>Yes</label>
+                    <label><input type="radio" name="time_pressure" value="0" required/>No</label>
+                </div>
 
                 <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
-                <input type="number" id="truth_instructions" name="truth_instructions" min="0" max="1"><br>
+                <div class="radio-buttons">
+                    <label><input type="radio" name="truth_instructions" value="1" required/>Yes</label>
+                    <label><input type="radio" name="truth_instructions" value="0" required/>No</label>
+                </div>
 
                 <label for="repetition_instructions" class="survey-label">Were the participants instructed that some of the statements may be repeated?</label>
-                <input type="number" id="repetition_instructions" name="repetition_instructions" min="0" max="1"><br>
+                <div class="radio-buttons">
+                    <label><input type="radio" name="repetition_instructions" value="1" required/>Yes</label>
+                    <label><input type="radio" name="repetition_instructions" value="0" required/>No</label>
+                </div>
 
                 <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
                 <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
@@ -160,14 +169,14 @@ function addRepetition() {
     const repetitionType = document.getElementById('repetition_type').value;
     const nRepetitions = document.getElementById('n_repetitions').value;
     const nStatements = document.getElementById('n_statements').value;
-    const timePressure = document.getElementById('time_pressure').value;
-    const truthInstructions = document.getElementById('truth_instructions').value;
+    const timePressure = document.querySelector('input[name="time_pressure"]:checked').value === "1" ? 1 : 0;;
+    const truthInstructions = document.querySelector('input[name="truth_instructions"]:checked').value === "1" ? 1 : 0;
     const presentationTime = document.getElementById('presentation_time_s').value;
     const percentRepeated = document.getElementById('percent_repeated').value;
     const presentationType = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
     const secondaryTask = document.getElementById('secondary_task').value;
-    const repetitionInstructions = document.getElementById('repetition_instructions').value;
+    const repetitionInstructions = document.querySelector('input[name="repetition_instructions"]:checked').value === "1" ? 1 : 0;
 
     if (repetitionTime && repetitionLocation && repetitionType && nRepetitions && nStatements && timePressure !== '' && truthInstructions !== '' && presentationTime && percentRepeated && presentationType && phase && secondaryTask && repetitionInstructions !== '') {
         const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
@@ -198,14 +207,14 @@ function addRepetition() {
         document.getElementById('repetition_type').value = '';
         document.getElementById('n_repetitions').value = '';
         document.getElementById('n_statements').value = '';
-        document.getElementById('time_pressure').value = '';
-        document.getElementById('truth_instructions').value = '';
+        document.querySelector('input[name="time_pressure"]:checked').checked = false;
+        document.querySelector('input[name="truth_instructions"]:checked').checked = false;
         document.getElementById('presentation_time_s').value = '';
         document.getElementById('percent_repeated').value = '';
         document.getElementById('presentation_type').value = '';
         document.getElementById('phase').value = '';
         document.getElementById('secondary_task').value = '';
-        document.getElementById('repetition_instructions').value = '';
+        document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
 
         // Display the updated summary
         displayRepetitionSummary(repetitions);
