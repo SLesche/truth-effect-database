@@ -24,7 +24,7 @@ function initializePublicationSurvey(control, publication_idx) {
             <label for="country" class = "survey-label">In what country was the study conducted?</label>
             <input type="text" id="country" name="country" value="${publication.country || ''}" required><br>
 
-            <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
+            <label for="keywords" class = "survey-label">What are the keywords associated with the publication? Separate the keywords by commas.</label>
             <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}" required><br>
             
             <label for="contact" class = "survey-label">Provide contact information for further questions.</label>
@@ -38,11 +38,13 @@ function initializePublicationSurvey(control, publication_idx) {
     // Add event listener to the form's submit button
     document.getElementById('publicationSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        updatePublicationSurvey(control, publication_idx);
+        if (validatePublicationData(collectPublicationData())) {
+            updatePublicationSurvey(control, publication_idx);
+        }
     });
 }
 
-function updatePublicationSurvey(control, publication_idx) {
+function collectPublicationData(){
     // Get values from the input fields
     const authors = document.getElementById('authors').value;
     const apa_reference = document.getElementById('apa_reference').value;
@@ -52,7 +54,7 @@ function updatePublicationSurvey(control, publication_idx) {
     const contact = document.getElementById('contact').value;
 
     // Store the values in the control object
-    control.publication_info[publication_idx].data = {
+    const publication_data = {
         authors: authors,
         apa_reference: apa_reference,
         conducted: conducted,
@@ -60,6 +62,31 @@ function updatePublicationSurvey(control, publication_idx) {
         keywords: keywords,
         contact: contact,
     }
+
+    return publication_data;
+}
+
+function validatePublicationData(publication_data){
+    // Check if any of the fields are empty
+    for (const key in publication_data) {
+        if (!publication_data[key]) {
+            alert('Please fill out all fields before submitting the form.');
+            return false;
+        }
+    }
+
+    if (publication_data.conducted < 1900 || publication_data.conducted > new Date().getFullYear()) {
+        alert('Please enter a valid year for the study.');
+        return false;
+    }
+
+    return true;
+}
+
+function updatePublicationSurvey(control, publication_idx) {
+    // Store the values in the control object
+    const publication_data = collectPublicationData();
+    control.publication_info[publication_idx].data = publication_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
