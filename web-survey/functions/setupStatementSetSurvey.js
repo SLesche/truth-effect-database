@@ -45,23 +45,22 @@ function initializeStatementSetSurvey(control, statementset_idx) {
     // Add event listener to the form's submit button
     document.getElementById('statementSetSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        updateStatementSetSurvey(control, statementset_idx);
+        if (validateStatementSetData(collectStatementSetData())) {
+            updateStatementSetSurvey(control, statementset_idx);
+        }
     });
 
 }
 
-function updateStatementSetSurvey(control, statementset_idx) {
-    // Get values from the input fields
+function collectStatementSetData(){
     const statementPublicationFile = document.getElementById('statement_publication_file').files[0];
     const statementPublication = document.getElementById('statement_publication').value;
 
-    console.log(statementPublicationFile);
-    // Update the control object with the new data
-    // Store the values in the control object
-    control.statementset_info[statementset_idx].data = {
-        statement_publication_file: statementPublicationFile,
-        statement_publication: statementPublication,
-    }    
+
+    const statementset_data = {
+        statementPublicationFile: statementPublicationFile,
+        statementPublication: statementPublication,
+    }
 
     // Display the updated file name in the submission box
     const fileNameDisplay = document.getElementById('file-name-display');
@@ -70,6 +69,24 @@ function updateStatementSetSurvey(control, statementset_idx) {
     } else {
         fileNameDisplay.textContent = '';
     }
+
+    return statementset_data;
+}
+
+function validateStatementSetData(statementset_data){
+    if (!statementset_data.statementPublicationFile) {
+        alert('Please upload a file containing the statements used in your study.');
+        return false;
+    }
+
+    return true;
+}
+
+function updateStatementSetSurvey(control, statementset_idx) {
+    const statementset_data = collectStatementSetData();
+
+    control.statementset_info[statementset_idx].data = statementset_data;
+
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
 }

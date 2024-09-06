@@ -44,22 +44,41 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     // Add event listener to the form's submit button
     document.getElementById('measurementSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        updateMeasurementSurvey(control, publication_idx, study_idx);
+        if (validateMeasurementData(collectMeasurementData())) {
+            updateMeasurementSurvey(control, publication_idx, study_idx);
+        }
     });
 }
 
-function updateMeasurementSurvey(control, publication_idx, study_idx){
-    // Collect all measures
-    var measures = [];
+function collectMeasurementData(){
+    // Get the measure list items
     var listItems = document.getElementById("measuresList").getElementsByTagName("li");
+    var measures = [];
     for (var i = 0; i < listItems.length; i++) {
         measures.push(listItems[i].childNodes[0].nodeValue);
     }
 
-    // Store the values in the control object
-    control.publication_info[publication_idx].study_info[study_idx].measurement_info.data = {
+    const measurement_data = {
         measures: measures,
+    };
+
+    return measurement_data
+}
+
+function validateMeasurementData(measurement_data){
+    // Check if the list of measures is empty
+    if (measurement_data.measures.length === 0) {
+        alert('Please add at least one measure.');
+        return false;
     }
+
+    return true;
+}
+
+function updateMeasurementSurvey(control, publication_idx, study_idx){
+    const measurement_data = collectMeasurementData();
+    // Store the values in the control object
+    control.publication_info[publication_idx].study_info[study_idx].measurement_info.data = measurement_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');

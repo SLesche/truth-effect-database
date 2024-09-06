@@ -183,12 +183,9 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
     document.getElementById('datasetSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        const hasRows = repetitionsTable.getElementsByTagName('tr').length > 0;
-        if (!hasRows) {
-            alert("Submit at least one repetition.");
-            return; 
+        if (validateDataSetData(collectDataSetData())){
+            updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx);
         }
-        updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx);
     });
 
     document.querySelectorAll('input[name="has_within_conditions"]').forEach(radio => {
@@ -399,7 +396,7 @@ function collectBetweenConditions() {
     return betweenConditions;
 }
 
-function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
+function collectDataSetData() {
     // Get values from the input fields
     const n_participants = document.getElementById('n_participants').value;
     const has_within_conditions = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? 1 : 0;
@@ -415,7 +412,7 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
 
 
     // Store the values in the control object
-    control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = {
+    dataset_data = {
         n_participants: n_participants,
         has_within_conditions: has_within_conditions,
         within_condition_details: has_within_conditions ? within_condition_details : [],
@@ -432,6 +429,42 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     } else {
         fileNameDisplay.textContent = '';
     }
+
+    return dataset_data;
+}
+
+function validateDataSetData(dataset_data) {
+    // if has_within_conditions is true, check if there are any conditions
+    if (dataset_data.has_within_conditions == 1 && dataset_data.within_condition_details.length < 2) {
+        alert('Please add at least one two within conditions.');
+        return false;
+    }
+    //same for between conditions
+    if (dataset_data.has_between_conditions == 1 && dataset_data.between_condition_details.length < 2) {
+        alert('Please add at least one two between conditions.');
+        return false;
+    }
+
+    // repetitions table has at least one entry
+    if (dataset_data.repetitions.length === 0) {
+        alert('Please add at least one repetition.');
+        return false;
+    }
+
+    if (!dataset_data.raw_data_file) {
+        alert('Please upload a file containing the raw data.');
+        return false;
+    }
+
+    return true;
+}
+
+function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
+    dataset_data = collectDataSetData();
+
+
+    // Store the values in the control object
+    control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data = dataset_data
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');

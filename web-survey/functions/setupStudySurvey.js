@@ -107,11 +107,13 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
     // Add event listener to the form's submit button
     document.getElementById('studySurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        updateStudySurvey(control, publication_idx, study_idx);
+        if (validateStudyData(collectStudyData())){
+            updateStudySurvey(control, publication_idx, study_idx);
+        }
     });
 }
 
-function updateStudySurvey(control, publication_idx, study_idx) {
+function collectStudyData() {
     // Get values from the input fields
     const truth_rating_scale = document.querySelector('input[name="truth_rating_scale"]:checked').value;
     const truth_rating_scale_details = document.getElementById('truth_rating_scale_details').value;
@@ -131,7 +133,7 @@ function updateStudySurvey(control, publication_idx, study_idx) {
     const statement_set_select = document.getElementById('statement_set_select').value;
 
     // Store the values in the control object
-    control.publication_info[publication_idx].study_info[study_idx].data = {
+    const study_data = {
         truth_rating_scale: truth_rating_scale,
         truth_rating_scale_details: truth_rating_scale_details,
         truth_rating_steps: truth_rating_steps,
@@ -149,6 +151,25 @@ function updateStudySurvey(control, publication_idx, study_idx) {
         study_comment: study_comment,
         statement_set_name: statement_set_select,
     }
+
+    return study_data;
+}
+
+function validateStudyData(study_data) {
+    // Check if any of the fields are empty
+    for (const key in study_data) {
+        if (!study_data[key]) {
+            alert('Please fill out all fields before submitting the form.');
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function updateStudySurvey(control, publication_idx, study_idx) {
+    study_data = collectStudyData();
+    control.publication_info[publication_idx].study_info[study_idx].data = study_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
