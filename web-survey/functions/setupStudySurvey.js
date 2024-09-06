@@ -150,6 +150,8 @@ function collectStudyData() {
         osf: osf,
         study_comment: study_comment,
         statement_set_name: statement_set_select,
+        // So we can have updates on validation status
+        validated: true,
     }
 
     return study_data;

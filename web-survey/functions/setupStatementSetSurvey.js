@@ -60,6 +60,8 @@ function collectStatementSetData(){
     const statementset_data = {
         statementPublicationFile: statementPublicationFile,
         statementPublication: statementPublication,
+        // So we can have updates on validation status
+        validated: true,
     }
 
     // Display the updated file name in the submission box

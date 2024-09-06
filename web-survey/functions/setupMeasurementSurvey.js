@@ -60,6 +60,8 @@ function collectMeasurementData(){
 
     const measurement_data = {
         measures: measures,
+        // So we can have updates on validation status
+        validated: true,
     };
 
     return measurement_data

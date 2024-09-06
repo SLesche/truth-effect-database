@@ -419,7 +419,9 @@ function collectDataSetData() {
         has_between_conditions: has_between_conditions,
         between_condition_details: has_between_conditions ? between_condition_details : [],
         repetitions: repetitions,
-        raw_data_file: rawDataFile
+        raw_data_file: rawDataFile,
+        // So we can have updates on validation status
+        validated: true,
     };
 
     // Display the updated file name in the submission box

@@ -61,6 +61,8 @@ function collectPublicationData(){
         country: country,
         keywords: keywords,
         contact: contact,
+        // So we can have updates on validation status
+        validated: true,
     }
 
     return publication_data;
