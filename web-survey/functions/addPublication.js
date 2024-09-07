@@ -9,6 +9,7 @@ function addPublication(control) {
     // Create a new list item for the publication
     const listItem = document.createElement("li");
     listItem.className = "collapsible";
+    listItem.dataset.index = "publication-" + publication_idx;
 
     // Create a span for the publication name
     const span = document.createElement("span");

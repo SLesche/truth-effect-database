@@ -92,4 +92,14 @@ function updatePublicationSurvey(control, publication_idx) {
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
+
+    // Add a checkmark to the currently selected sidebar item
+    const sidebarItem = document.querySelector(`#sidebarList .list-item[data-name="Publication ${publication_idx + 1}"]`);
+    console.log(sidebarItem);
+    if (sidebarItem) {
+        const checkmarkButton = sidebarItem.querySelector('.checkmark-toggle');
+        if (checkmarkButton) {
+            checkmarkButton.classList.add('checked');
+        }
+    }
 }

@@ -6,6 +6,8 @@ function addStudy(parentElement, control, publication_idx) {
     // Create a new list item for the study
     const listItem = document.createElement("li");
     listItem.className = "collapsible";
+    listItem.dataset.index = "study-" + publication_idx + "-" + study_idx;
+
 
     // Create a span for the study name
     const span = document.createElement("span");

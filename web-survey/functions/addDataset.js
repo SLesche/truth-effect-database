@@ -9,6 +9,8 @@ function addDataset(parentElement, control, publication_idx, study_idx) {
     // Create a new list item for the dataset
     const listItem = document.createElement("li");
     listItem.className = "collapsible collapsible-nocontent";
+    listItem.dataset.index = "dataset-" + publication_idx + "-" + study_idx + "-" + dataset_idx;
+
 
     // Create a span for the dataset name
     const span = document.createElement("span");
