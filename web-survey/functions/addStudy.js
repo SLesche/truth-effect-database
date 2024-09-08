@@ -1,5 +1,5 @@
 function addStudy(parentElement, control, publication_idx) {
-    const study_idx = Object.keys(control.publication_info[publication_idx].study_info).length;
+    const study_idx = getNewId(control.publication_info[publication_idx].study_info);
     const studyName = "Study " + (study_idx + 1);
     control.publication_info[publication_idx].study_info[study_idx] = setupStudyInfo(studyName);
 
@@ -22,7 +22,7 @@ function addStudy(parentElement, control, publication_idx) {
     removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
-        removeItem(listItem);
+        removeItem(listItem, control);
     };
     actions.appendChild(removeButton);
 

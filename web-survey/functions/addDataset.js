@@ -1,7 +1,7 @@
 function addDataset(parentElement, control, publication_idx, study_idx) {
     const dataset_info = control.publication_info[publication_idx].study_info[study_idx].dataset_info;
     // Determine the number of entries in dataset_info
-    const dataset_idx = Object.keys(dataset_info).length;
+    const dataset_idx = getNewId(dataset_info);
     const dataset_name = "Dataset " + (dataset_idx + 1);
 
     control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx] = setupDatasetInfo(dataset_name);
@@ -25,7 +25,7 @@ function addDataset(parentElement, control, publication_idx, study_idx) {
     removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
-        removeItem(listItem);
+        removeItem(listItem, control);
     };
     actions.appendChild(removeButton);
 

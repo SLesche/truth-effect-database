@@ -1,6 +1,6 @@
 function addStatementSet(control) {
     // Determine the number of entries in dataset_info
-    const statementset_idx = Object.keys(control.statementset_info).length;
+    const statementset_idx = getNewId(control.statementset_info);
     const statementset_name = "Statementset " + (statementset_idx + 1);
 
     control.statementset_info[statementset_idx] = setupStatementSetInfo(statementset_name);
@@ -24,7 +24,7 @@ function addStatementSet(control) {
     removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
-        removeItem(listItem);
+        removeItem(listItem, control);
     };
     actions.appendChild(removeButton);
 

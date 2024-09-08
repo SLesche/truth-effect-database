@@ -39,6 +39,9 @@ function generateOverviewPage(control) {
             <h2>Progress Report</h2>
             ${printProgressReport(getNumberOfSubmissions(control))}
 
+            <h2>Submission</h2>
+            <button onclick="submitData(control)">Submit</button>
+
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>
                 <a href="mailto:sven.lesche@psychologie.uni-heidelberg.de">sven.lesche@psychologie.uni-heidelberg.de</a><br>
@@ -67,12 +70,12 @@ function getNumberOfSubmissions(control) {
     }
 
     // Iterate over publications
-    for (let publication_idx = 0; publication_idx < num_total_publications; publication_idx++) {
+    for (let publication_idx in control.publication_info) {
         const current_num_studies = Object.keys(control.publication_info[publication_idx].study_info).length;
         num_total_studies += current_num_studies;
 
         // Iterate over studies within the publication
-        for (let study_idx = 0; study_idx < current_num_studies; study_idx++) {
+        for (let study_idx in control.publication_info[publication_idx].study_info) {
             const current_num_datasets = Object.keys(control.publication_info[publication_idx].study_info[study_idx].dataset_info).length;
             num_total_datasets += current_num_datasets;
 
@@ -82,7 +85,8 @@ function getNumberOfSubmissions(control) {
             }
 
             // Iterate over datasets within the study
-            for (let dataset_idx = 0; dataset_idx < current_num_datasets; dataset_idx++) {
+            // Iterate over datasets within the study
+            for (let dataset_idx in control.publication_info[publication_idx].study_info[study_idx].dataset_info) {
                 if (control.publication_info[publication_idx].study_info[study_idx].dataset_info[dataset_idx].data.validated) {
                     num_datasets_validated += 1;
                 }
@@ -128,6 +132,7 @@ function printProgressReport(progress_report){
             <p>Publications Validated: ${progress_report.num_publications_validated}</p>
             <p>Studies Validated: ${progress_report.num_studies_validated}</p>
             <p>Datasets Validated: ${progress_report.num_datasets_validated}</p>
+            <p>Statement Sets Validated: ${progress_report.num_statement_sets_validated}</p>
             <p>Percentage of Statement Sets Validated: ${progress_report.percent_statement_sets_validated}%</p>
             <p>Percentage of Publications Validated: ${progress_report.percent_publication_validated}%</p>
             <p>Percentage of Studies Validated: ${progress_report.percent_studies_validated}%</p>
@@ -136,4 +141,9 @@ function printProgressReport(progress_report){
     `;
 
     return html;
+}
+
+function submitData(control){
+    console.log(control);
+    alert("Data submitted successfully!");
 }

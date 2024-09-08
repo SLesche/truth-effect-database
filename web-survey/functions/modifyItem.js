@@ -23,8 +23,24 @@ function renameItem(span, oldName) {
     }
 }
 
-function removeItem(listItem) {
+function removeItem(listItem, control) {
     if (confirm("Are you sure you want to remove this item?")) {
+        const item_id = listItem.dataset.index;
+        const type = item_id.split("-")[0];
+        const num_idx = item_id.split("-").slice(1).map(Number);
+    
+        if (type === "publication") {
+            delete control.publication_info[num_idx[0]];
+        } else if (type === "study") {
+            delete control.publication_info[num_idx[0]].study_info[num_idx[1]];
+        } else if (type === "dataset") {
+            delete control.publication_info[num_idx[0]].study_info[num_idx[1]].dataset_info[num_idx[2]];
+        } else if (type === "measures") {
+            delete control.publication_info[num_idx[0]].study_info[num_idx[1]].measurement_info
+        } else if (type === "statementset") {
+            delete control.statementset_info[num_idx[0]];
+        }
+
         listItem.remove();
         // Clear content area if the removed item was displayed
         const content = document.getElementById("content");
@@ -34,5 +50,7 @@ function removeItem(listItem) {
                 <p>Select an item from the sidebar to see details.</p>
             `;
         }
+
+        console.log(control);
     }
 }

@@ -21,3 +21,8 @@ function toggleFieldset(fieldsetId) {
         fieldset.style.display = 'none';
     }
 }
+
+function getNewId(info_object){
+    const id = Object.keys(info_object).length > 0 ? Math.max(...Object.keys(info_object).map(key => parseInt(key))) + 1 : 0;
+    return id
+}

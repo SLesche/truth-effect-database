@@ -1,6 +1,6 @@
 function addPublication(control) {
     // Determine the number of entries in dataset_info
-    const publication_idx = Object.keys(control.publication_info).length;
+    const publication_idx = getNewId(control.publication_info);
     const publication_name = "Publication " + (publication_idx + 1);
 
     control.publication_info[publication_idx] = setupPublicationInfo(publication_name);
@@ -24,7 +24,7 @@ function addPublication(control) {
     removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
-        removeItem(listItem);
+        removeItem(listItem, control);
     };
     actions.appendChild(removeButton);
 

@@ -22,7 +22,7 @@ function addMeasurement(parentElement, control, publication_idx, study_idx) {
     removeButton.classList.add('delete-button');
     removeButton.onclick = function(event) {
         event.stopPropagation();
-        removeItem(listItem);
+        removeItem(listItem, control);
     };
     actions.appendChild(removeButton);
     
