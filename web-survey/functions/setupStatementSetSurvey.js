@@ -91,4 +91,8 @@ function updateStatementSetSurvey(control, statementset_idx) {
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
+
+    // Add a checkmark to the currently selected sidebar item
+    const item_id =  "statementset-" + statementset_idx;
+    addGreenCheckmarkById(item_id);
 }

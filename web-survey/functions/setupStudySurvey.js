@@ -175,6 +175,10 @@ function updateStudySurvey(control, publication_idx, study_idx) {
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
+
+    // Add a checkmark to the currently selected sidebar item
+    const item_id =  "study-" + publication_idx + "-" + study_idx;
+    addGreenCheckmarkById(item_id);
 }
 
 function populateStatementSets(control) {

@@ -470,6 +470,10 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
+
+    // Add a checkmark to the currently selected sidebar item
+    const item_id =  "dataset-" + publication_idx + "-" + study_idx + "-" + dataset_idx;;
+    addGreenCheckmarkById(item_id);
 }
 
 function displayRepetitionSummary(repetitions) {

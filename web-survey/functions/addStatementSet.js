@@ -9,6 +9,7 @@ function addStatementSet(control) {
     const listItem = document.createElement("li");
     listItem.className = "collapsible collapsible-nocontent";
     listItem.dataset.index = "statementset-" + statementset_idx;
+    listItem.id = "statementset-" + statementset_idx;
 
 
     // Create a span for the dataset name
