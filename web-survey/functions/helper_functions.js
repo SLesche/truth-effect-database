@@ -41,11 +41,17 @@ function addGreenCheckmarkById(sidebarItemId) {
         console.error(`No span element found within the sidebar item with ID ${sidebarItemId}.`);
         return;
     }
-
     // Create a new span element for the checkmark
     const checkmark = document.createElement('span');
     checkmark.textContent = ' ✔'; // Unicode checkmark character
     checkmark.classList.add('green-checkmark');
+
+    // Check if the textSpan already has a checkmark
+    const existingCheckmark = textSpan.querySelector('.green-checkmark');
+    if (existingCheckmark) {
+        console.log('Checkmark already exists.');
+        return;
+    }
 
     // Append the checkmark to the existing span
     textSpan.appendChild(checkmark);
