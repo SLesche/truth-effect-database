@@ -160,9 +160,11 @@ function collectStudyData() {
 function validateStudyData(study_data) {
     // Check if any of the fields are empty
     for (const key in study_data) {
-        if (!study_data[key]) {
-            alert('Please fill out all fields before submitting the form.');
-            return false;
+        if (key != "study_comment" && key != "truth_rating_scale_details"){
+            if (!study_data[key]) {
+                alert('Please fill out all fields before submitting the form.');
+                return false;
+            }
         }
     }
 
