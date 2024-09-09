@@ -79,3 +79,39 @@ ul {
 .display-text {
     width: min(90%, 900px);
 }
+
+
+/* Container for the scrollable table */
+.table-container {
+    max-height: 400px;  /* Adjust the height as needed */
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #ccc; /* Optional: Add a border around the table */
+    margin: 20px 0;
+}
+
+/* Basic table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Optional: Style the table rows */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

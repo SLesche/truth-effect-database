@@ -56,3 +56,60 @@ function addGreenCheckmarkById(sidebarItemId) {
     // Append the checkmark to the existing span
     textSpan.appendChild(checkmark);
 }
+
+function csvFileToObject(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const csvData = event.target.result;
+            try {
+                const jsonObject = Papa.parse(csvData, {
+                    header: true,
+                    dynamicTyping: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        resolve(results.data);
+                    },
+                    error: function(error) {
+                        reject(new Error('Error parsing CSV: ' + error.message));
+                    }
+                });
+            } catch (error) {
+                reject(new Error('Error parsing CSV: ' + error.message));
+            }
+        };
+
+        reader.onerror = function() {
+            reject(new Error('Error reading file: ' + reader.error));
+        };
+
+        reader.readAsText(file);
+    });
+}
+
+function createTableFromCSV(csvObject, n_rows) {
+    // Create table element
+    let table = '<table><thead><tr>';
+
+    // Extract table headers
+    const headers = Object.keys(csvObject[0]);
+    headers.forEach(header => {
+        table += `<th>${header}</th>`;
+    });
+    table += '</tr></thead><tbody>';
+
+    // Populate table rows with CSV data
+    csvObject.slice(0, n_rows).forEach(row => {
+        table += '<tr>';
+        headers.forEach(header => {
+            table += `<td>${row[header] !== undefined ? row[header] : ''}</td>`;
+        });
+        table += '</tr>';
+    });
+    table += '</tbody></table>';
+    console.log(table);
+
+    // Inject table into the table container
+    document.getElementById('tableContainer').innerHTML = table;
+}

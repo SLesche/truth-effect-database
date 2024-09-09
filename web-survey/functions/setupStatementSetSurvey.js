@@ -24,6 +24,10 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
             <span id="file-name-display">${statementset_data.statement_publication_file ? `File: ${statementset_data.statement_publication_file.name}` : ''}</span><br>
 
+            <p> This is a preview of the first 6 rows of the file you uploaded:</p>
+            <div id="tableContainer", class = "table-container">
+            </div>
+
             <label for="statement_publication" class="survey-label">If available, provide the original publication where this set of statements originates from.</label>
             <input type="text" id="statement_publication" name="statement_publication" value="${statementset_data.statement_publication || ''}"><br>
 
@@ -43,49 +47,61 @@ function initializeStatementSetSurvey(control, statementset_idx) {
     });
 
     // Add event listener to the form's submit button
-    document.getElementById('statementSetSurvey').addEventListener('submit', function(event) {
+    document.getElementById('statementSetSurvey').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validateStatementSetData(collectStatementSetData())) {
+        // Await statement set data
+        const statement_data_cur = await collectStatementSetData();
+        if (validateStatementSetData(statement_data_cur)) {
             updateStatementSetSurvey(control, statementset_idx);
         }
     });
 
 }
 
-function collectStatementSetData(){
+async function collectStatementSetData() {
     const statementPublicationFile = document.getElementById('statement_publication_file').files[0];
     const statementPublication = document.getElementById('statement_publication').value;
 
-
-    const statementset_data = {
-        statementPublicationFile: statementPublicationFile,
-        statementPublication: statementPublication,
-        // So we can have updates on validation status
-        validated: true,
-    }
-
-    // Display the updated file name in the submission box
-    const fileNameDisplay = document.getElementById('file-name-display');
     if (statementPublicationFile) {
-        fileNameDisplay.textContent = `File: ${statementPublicationFile.name}`;
-    } else {
-        fileNameDisplay.textContent = '';
+        try {
+            const statementPublicationData = await csvFileToObject(statementPublicationFile);
+            const statementset_data = {
+                statementPublicationFile: statementPublicationFile,
+                statementPublicationData: statementPublicationData,
+                statementPublication: statementPublication,
+                // So we can have updates on validation status
+                validated: true,
+            };
+        
+            console.log(statementset_data)
+        
+            // Display the updated file name in the submission box
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (statementPublicationFile) {
+                fileNameDisplay.textContent = `File: ${statementPublicationFile.name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        
+            return statementset_data;
+        } catch (error) {
+            console.error('Error parsing CSV file:', error);
+            // Handle error appropriately, e.g., show an error message to the user
+        }
     }
-
-    return statementset_data;
 }
 
 function validateStatementSetData(statementset_data){
-    if (!statementset_data.statementPublicationFile) {
-        alert('Please upload a file containing the statements used in your study.');
-        return false;
-    }
+    // if (!statementset_data.statementPublicationFile) {
+    //     alert('Please upload a file containing the statements used in your study.');
+    //     return false;
+    // }
 
     return true;
 }
 
-function updateStatementSetSurvey(control, statementset_idx) {
-    const statementset_data = collectStatementSetData();
+async function updateStatementSetSurvey(control, statementset_idx) {
+    const statementset_data = await collectStatementSetData();
 
     control.statementset_info[statementset_idx].data = statementset_data;
 
@@ -95,4 +111,7 @@ function updateStatementSetSurvey(control, statementset_idx) {
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "statementset-" + statementset_idx;
     addGreenCheckmarkById(item_id);
+
+    const rows_to_display = 6;
+    createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
 }
