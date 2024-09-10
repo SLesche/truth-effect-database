@@ -62,23 +62,10 @@
         // setup publication
         addPublication(control);
 
-        // Create a list item for the "Add Statement" button
-        const addStatementListItem = document.createElement("li");
-        addStatementListItem.className = "collapsible collapsible-nocontent";
-
-        const addStatementButton = document.createElement("button");
-        addStatementButton.className = "menu-button statementset-button";
-        addStatementButton.textContent = "+ Add Statementset";
-        addStatementButton.onclick = function() {
-            addStatementSet(control);
-        };
-        addStatementListItem.appendChild(addStatementButton);
-
-        // Append the new list item to the sidebar list
-        document.getElementById("sidebarList").appendChild(addStatementListItem);
-
         //setup statement set
+        addStatementOverview(control);
 
+        // Load the overview page
         generateOverviewPage(control);
     </script>
 </body>
