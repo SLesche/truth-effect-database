@@ -135,6 +135,10 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
                 <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
                 <span id="file-name-display">${dataset_data.raw_data_file ? `File: ${dataset_data.raw_data_file.name}` : ''}</span><br>
+
+                <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
+                <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
+                </div>
             </fieldset>
 
             <button type="submit" class="survey-button">Submit</button>
@@ -152,6 +156,16 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             add_delete_button_to_list_item(li);
             withinConditionsList.appendChild(li);
         });
+    }
+
+    if (dataset_data && dataset_data.raw_data) {
+        const rows_to_display = 6;
+        const html_table = createTableFromCSV(dataset_data.raw_data, rows_to_display);
+    
+        // Inject table into the table container
+        document.getElementById('tableContainerUploaded').innerHTML = html_table;
+        document.getElementById('tableContainerUploaded').style.display = 'block';
+        document.getElementById('textUploadPreview').style.display = 'block';
     }
 
     // Add event listener to the file input to display the selected file name
@@ -182,9 +196,10 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
         document.getElementById('listOfRepetitions').style.display = 'block';
     }
 
-    document.getElementById('datasetSurvey').addEventListener('submit', function(event) {
+    document.getElementById('datasetSurvey').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validateDataSetData(collectDataSetData())){
+        const collected_data = await collectDataSetData();
+        if (validateDataSetData(collected_data)){
             updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx);
         }
     });
@@ -398,7 +413,7 @@ function collectBetweenConditions() {
     return betweenConditions;
 }
 
-function collectDataSetData() {
+async function collectDataSetData() {
     // Get values from the input fields
     const n_participants = document.getElementById('n_participants').value;
     const has_within_conditions = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? 1 : 0;
@@ -412,29 +427,38 @@ function collectDataSetData() {
     // Get values from the input fields
     const rawDataFile = document.getElementById('raw_data_file').files[0];
 
-
-    // Store the values in the control object
-    dataset_data = {
-        n_participants: n_participants,
-        has_within_conditions: has_within_conditions,
-        within_condition_details: has_within_conditions ? within_condition_details : [],
-        has_between_conditions: has_between_conditions,
-        between_condition_details: has_between_conditions ? between_condition_details : [],
-        repetitions: repetitions,
-        raw_data_file: rawDataFile,
-        // So we can have updates on validation status
-        validated: true,
-    };
-
-    // Display the updated file name in the submission box
-    const fileNameDisplay = document.getElementById('file-name-display');
     if (rawDataFile) {
-        fileNameDisplay.textContent = `File: ${rawDataFile.name}`;
-    } else {
-        fileNameDisplay.textContent = '';
-    }
+        try {
+            const raw_data = await csvFileToObject(rawDataFile);
+             // Store the values in the control object
+            dataset_data = {
+                n_participants: n_participants,
+                has_within_conditions: has_within_conditions,
+                within_condition_details: has_within_conditions ? within_condition_details : [],
+                has_between_conditions: has_between_conditions,
+                between_condition_details: has_between_conditions ? between_condition_details : [],
+                repetitions: repetitions,
+                raw_data_file: rawDataFile,
+                raw_data: raw_data,
+                // So we can have updates on validation status
+                validated: true,
+            };
 
-    return dataset_data;
+            // Display the updated file name in the submission box
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (rawDataFile) {
+                fileNameDisplay.textContent = `File: ${rawDataFile.name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+
+        
+            return dataset_data;
+        } catch (error) {
+            console.error('Error parsing CSV file:', error);
+            // Handle error appropriately, e.g., show an error message to the user
+        }
+    }
 }
 
 function validateDataSetData(dataset_data) {
@@ -463,8 +487,8 @@ function validateDataSetData(dataset_data) {
     return true;
 }
 
-function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
-    dataset_data = collectDataSetData();
+async function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
+    dataset_data = await collectDataSetData();
 
 
     // Store the values in the control object
@@ -476,6 +500,14 @@ function updateDatasetSurvey(control, publication_idx, study_idx, dataset_idx) {
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "dataset-" + publication_idx + "-" + study_idx + "-" + dataset_idx;;
     addGreenCheckmarkById(item_id);
+
+    const rows_to_display = 6;
+    const html_table = createTableFromCSV(dataset_data.raw_data, rows_to_display);
+    
+    // Inject table into the table container
+    document.getElementById('tableContainerUploaded').innerHTML = html_table;
+    document.getElementById('tableContainerUploaded').style.display = 'block';
+    document.getElementById('textUploadPreview').style.display = 'block';
 }
 
 function displayRepetitionSummary(repetitions) {
