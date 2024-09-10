@@ -60,3 +60,7 @@ fieldset {
     border: 1px solid #ccc; /* Optional: Add a border for better appearance */
     background-color: var(--fieldset-background-color);
 }
+
+.list-of-entries {
+    padding-left: 30px;
+}

@@ -30,8 +30,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <button type="button" onclick="addWithinCondition()" class="add-button">Add Condition</button><br><br>
 
-                <label class="survey-label">List of Conditions</label>
-                <ul id="withinConditionsList"></ul>
+                <label class="survey-label">List of Conditions:</label>
+                <ul id="withinConditionsList" class = "list-of-entries"></ul>
             </fieldset>
 
             <label for="has_between_conditions" class="survey-label">Does this data contain any between conditions?</label>
@@ -49,8 +49,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <button type="button" onclick="addBetweenCondition()" class="add-button">Add Condition</button><br><br>
 
-                <label class="survey-label">List of Conditions</label>
-                <ul id="betweenConditionsList"></ul>
+                <label class="survey-label">List of Conditions:</label>
+                <ul id="betweenConditionsList" class = "list-of-entries"></ul>
             </fieldset>
 
             <button type="button" onclick="toggleFieldset('repetitionsFieldset')" class="toggle-fieldset-button"><h2>Measurement Sessions<h2></button>   

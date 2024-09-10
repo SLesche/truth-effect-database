@@ -15,7 +15,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
             <label class="survey-label">List of Measures:</label>
-            <ul id="measuresList"></ul>
+            <ul id="measuresList" class = "list-of-entries"></ul>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
