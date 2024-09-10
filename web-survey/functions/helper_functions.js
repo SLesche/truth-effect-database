@@ -108,8 +108,6 @@ function createTableFromCSV(csvObject, n_rows) {
         table += '</tr>';
     });
     table += '</tbody></table>';
-    console.log(table);
 
-    // Inject table into the table container
-    document.getElementById('tableContainer').innerHTML = table;
+    return table
 }

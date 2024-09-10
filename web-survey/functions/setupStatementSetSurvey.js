@@ -24,8 +24,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
             <span id="file-name-display">${statementset_data.statement_publication_file ? `File: ${statementset_data.statement_publication_file.name}` : ''}</span><br>
 
-            <p> This is a preview of the first 6 rows of the file you uploaded:</p>
-            <div id="tableContainer", class = "table-container">
+            <div id="tableContainer" class = "table-container" style = "display: none;">
             </div>
 
             <label for="statement_publication" class="survey-label">If available, provide the original publication where this set of statements originates from.</label>
@@ -35,6 +34,12 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         </form>
     </div>
     `;
+
+    if (statementset_data && statementset_data.statementPublicationData) {
+        const rows_to_display = 6;
+        createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+        document.getElementById('tableContainer').style.display = 'block';
+    }
 
     // Add event listener to the file input to display the selected file name
     document.getElementById('statement_publication_file').addEventListener('change', function(event) {
@@ -72,9 +77,7 @@ async function collectStatementSetData() {
                 // So we can have updates on validation status
                 validated: true,
             };
-        
-            console.log(statementset_data)
-        
+                
             // Display the updated file name in the submission box
             const fileNameDisplay = document.getElementById('file-name-display');
             if (statementPublicationFile) {
@@ -113,5 +116,9 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     addGreenCheckmarkById(item_id);
 
     const rows_to_display = 6;
-    createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+    const html_table = createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+    
+    // Inject table into the table container
+    document.getElementById('tableContainer').innerHTML = html_table;
+    document.getElementById('tableContainer').style.display = 'block';
 }
