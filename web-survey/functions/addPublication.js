@@ -3,6 +3,9 @@ function addPublication(control) {
     const publication_idx = getNewId(control.publication_info);
     const publication_name = "Publication " + (publication_idx + 1);
 
+    // For now, where only one publication is allowed, we will remove the previous publication
+    const publication_text = "Publication";
+
     control.publication_info[publication_idx] = setupPublicationInfo(publication_name);
     
     if (!publication_name) return;
@@ -14,24 +17,24 @@ function addPublication(control) {
 
     // Create a span for the publication name
     const span = document.createElement("span");
-    span.textContent = publication_name;
+    span.textContent = publication_text;
 
-    // Create action buttons
-    const actions = document.createElement("div");
-    actions.className = "actions";
+    // // Create action buttons
+    // const actions = document.createElement("div");
+    // actions.className = "actions";
 
-    const removeButton = document.createElement("button");
-    removeButton.innerHTML = '&times;'; // Red X
-    removeButton.classList.add('delete-button');
-    removeButton.onclick = function(event) {
-        event.stopPropagation();
-        removeItem(listItem, control);
-    };
-    actions.appendChild(removeButton);
+    // const removeButton = document.createElement("button");
+    // removeButton.innerHTML = '&times;'; // Red X
+    // removeButton.classList.add('delete-button');
+    // removeButton.onclick = function(event) {
+    //     event.stopPropagation();
+    //     removeItem(listItem, control);
+    // };
+    // actions.appendChild(removeButton);
 
     // Append the span and actions to the list item
     listItem.appendChild(span);
-    listItem.appendChild(actions);
+    // listItem.appendChild(actions);
 
     // Create a nested list for studies
     const nestedList = document.createElement("ul");
