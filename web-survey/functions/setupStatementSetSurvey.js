@@ -168,5 +168,4 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     document.getElementById('tableContainerUploaded').innerHTML = html_table;
     document.getElementById('tableContainerUploaded').style.display = 'block';
     document.getElementById('textUploadPreview').style.display = 'block';
-
 }
