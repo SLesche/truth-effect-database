@@ -1,17 +1,17 @@
 :root {
     --default-background-color: #f7fcfc;
     --text-background-color:#f7fcfc;
-    --sidebar-background-color: #83B4FF;
+    --sidebar-background-color: skyblue;
     --form-background-color: #f7fcfc;
     --fieldset-background-color: #f7fcfc;
     --menu-button-color: #180bd1da;
-    --menu-button-background: #83B4FF;
+    --menu-button-background: skyblue;
     --add-button-color: black;
-    --add-button-background: #40b665;
+    --add-button-background: forestgreen;
     --submit-button-color: black;
-    --submit-button-background: #1fc052;
+    --submit-button-background: forestgreen;
     --text-color: black;
-    --table-header-background-color: #83B4FF;
-    --table-even-background-color: #d1dada;
+    --table-header-background-color: skyblue;
+    --table-even-background-color: #eaeeee;
   }
   
