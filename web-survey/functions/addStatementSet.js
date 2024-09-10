@@ -94,12 +94,6 @@ function addStatementOverview(control) {
     // Toggle the collapsible on by default
     listItem.classList.add("active");
 
-    // Update content area
-    span.addEventListener("click", function(event) {
-        event.stopPropagation(); // Prevent the collapsible toggle
-        initializeStatementSetSurvey(control);
-    });
-
     // Open one new Statement
     addStatementSet(nestedList, control);
 }
