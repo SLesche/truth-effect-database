@@ -104,19 +104,18 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <input type="text" id="secondary_task" name="secondary_task"><br>
 
                 <button type="button" onclick="addRepetition()" class="survey-button">Add Repetition</button><br><br>
-
-                <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
-                <div id="repetitionTableContainer" class = "table-container" style = "display: none; max-width: 800px;">
-                    <table id="repetitionsTable">
-                        <thead>
-                            <!-- Header will be populated by JavaScript -->
-                        </thead>
-                        <tbody>
-                            <!-- Body will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
             </fieldset>
+            <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
+            <div id="repetitionTableContainer" class = "table-container" style = "display: none;">
+                <table id="repetitionsTable">
+                    <thead>
+                        <!-- Header will be populated by JavaScript -->
+                    </thead>
+                    <tbody>
+                        <!-- Body will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
             <br>
 
             <button type="button" onclick="toggleFieldset('rawDataFieldset')" class="toggle-fieldset-button"><h2>Raw Data<h2></button>   
@@ -128,18 +127,75 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
             </ul>
             
             <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
-            <p><em>[DUMMY text for raw data example here (do not fill this out, ChatGPT)]</em></p>
+            <div class = "table-container" id = "tableContainerExample">
+                <table>
+                    <tr>
+                        <th>subject</th>
+                        <th>trial</th>
+                        <th>within_identifier</th>
+                        <th>between_identifier</th>
+                        <th>statement_identifier</th>
+                        <th>rt</th>
+                        <th>response</th>
+                        <th>repeated</th>
+                        <th>certainty</th>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>0.64</th>
+                        <th>3</th>
+                        <th>0</th>
+                        <th>2</th>
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>0.75</th>
+                        <th>7</th>
+                        <th>1</th>
+                        <th>7</th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>1</th>
+                        <th>0.75</th>
+                        <th>1</th>
+                        <th>1</th>
+                        <th>3</th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>2</th>
+                        <th>0.76</th>
+                        <th>5</th>
+                        <th>1</th>
+                        <th>6</th>
+                    </tr>
+                </table>
+            </div>
             
             <p>Once you’ve prepared your data according to these specifications, you can upload it using the form provided below. Thank you for your cooperation!</p>
             <fieldset id="rawDataFieldset">
                 <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
                 <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
                 <span id="file-name-display">${dataset_data.raw_data_file ? `File: ${dataset_data.raw_data_file.name}` : ''}</span><br>
-
-                <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
-                <div id="tableContainerUploaded" class = "table-container" style = "display: none; max-width: 800px;">
-                </div>
             </fieldset>
+            <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
+            <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
+            </div>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
