@@ -137,7 +137,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <span id="file-name-display">${dataset_data.raw_data_file ? `File: ${dataset_data.raw_data_file.name}` : ''}</span><br>
 
                 <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
-                <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
+                <div id="tableContainerUploaded" class = "table-container" style = "display: none; max-width: 800px;">
                 </div>
             </fieldset>
 

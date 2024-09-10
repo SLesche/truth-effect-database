@@ -80,7 +80,6 @@ ul {
     width: min(90%, 900px);
 }
 
-
 /* Container for the scrollable table */
 .table-container {
     max-height: 400px;  /* Adjust the height as needed */
@@ -89,6 +88,8 @@ ul {
     overflow-y: auto;
     border: 1px solid #ccc; /* Optional: Add a border around the table */
     margin: 20px 0;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
 }
 
 /* Basic table styling */

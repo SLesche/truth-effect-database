@@ -23,6 +23,7 @@ input[type="text"], input[type="number"], input[type="date"] {
     padding: 0px;
     background-color: #f9f9f9;
     border-radius: 15px;
+    max-width: 95%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -49,4 +50,12 @@ input:disabled {
 
 fieldset:disabled {
     display: none;
+}
+
+/* Ensure the fieldset takes the full width of its container */
+fieldset {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    padding: 10px; /* Optional: Add padding for better appearance */
+    border: 1px solid #ccc; /* Optional: Add a border for better appearance */
 }
