@@ -105,8 +105,8 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
 
                 <button type="button" onclick="addRepetition()" class="survey-button">Add Repetition</button><br><br>
 
-                <label class="survey-label">List of Repetitions</label>
-                <div id="repetitionTableContainer" style = "display: none;">
+                <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
+                <div id="repetitionTableContainer" class = "table-container" style = "display: none; max-width: 800px;">
                     <table id="repetitionsTable">
                         <thead>
                             <!-- Header will be populated by JavaScript -->
@@ -179,6 +179,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
     if (dataset_data && dataset_data.repetitions) {
         displayRepetitionSummary(dataset_data.repetitions);
         document.getElementById('repetitionTableContainer').style.display = 'block';
+        document.getElementById('listOfRepetitions').style.display = 'block';
     }
 
     document.getElementById('datasetSurvey').addEventListener('submit', function(event) {
@@ -289,6 +290,7 @@ function addRepetition() {
 
         // Show the table if it's hidden
         document.getElementById('repetitionTableContainer').style.display = 'block';
+        document.getElementById('listOfRepetitions').style.display = 'block';
     } else {
         alert('Please fill out all repetition fields.');
     }

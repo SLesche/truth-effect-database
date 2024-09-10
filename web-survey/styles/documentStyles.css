@@ -102,6 +102,10 @@ th, td {
     padding: 8px 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    /* max-width: 200px; Adjust the max-width as needed */
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; Prevent text from wrapping */
 }
 
 th {
