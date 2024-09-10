@@ -21,7 +21,7 @@ input[type="text"], input[type="number"], input[type="date"] {
 .survey-form {
     margin: auto auto;
     padding: 0px;
-    background-color: #f9f9f9;
+    background-color: var(--form-background-color);
     border-radius: 15px;
     max-width: 95%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,8 +30,8 @@ input[type="text"], input[type="number"], input[type="date"] {
 /* Style for the submit button */
 .survey-button {
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--submit-button-background);
+    color: var(--submit-button-color);
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -58,4 +58,5 @@ fieldset {
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     padding: 10px; /* Optional: Add padding for better appearance */
     border: 1px solid #ccc; /* Optional: Add a border for better appearance */
+    background-color: var(--fieldset-background-color);
 }

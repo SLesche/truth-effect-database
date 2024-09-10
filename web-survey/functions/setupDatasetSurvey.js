@@ -28,7 +28,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <label for="within_condition_identifier" class="survey-label">How is that condition identified in the raw data?</label>
                 <input type="text" id="within_condition_identifier" name="within_condition_identifier"><br>
 
-                <button type="button" onclick="addWithinCondition()" class="survey-button">Add Condition</button><br><br>
+                <button type="button" onclick="addWithinCondition()" class="add-button">Add Condition</button><br><br>
 
                 <label class="survey-label">List of Conditions</label>
                 <ul id="withinConditionsList"></ul>
@@ -47,7 +47,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <label for="between_condition_identifier" class="survey-label">How is that condition identified in the raw data?</label>
                 <input type="text" id="between_condition_identifier" name="between_condition_identifier"><br>
 
-                <button type="button" onclick="addBetweenCondition()" class="survey-button">Add Condition</button><br><br>
+                <button type="button" onclick="addBetweenCondition()" class="add-button">Add Condition</button><br><br>
 
                 <label class="survey-label">List of Conditions</label>
                 <ul id="betweenConditionsList"></ul>
@@ -103,7 +103,7 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                 <label for="secondary_task" class="survey-label">What secondary task were the participants instructed to complete (can be "none")?</label>
                 <input type="text" id="secondary_task" name="secondary_task"><br>
 
-                <button type="button" onclick="addRepetition()" class="survey-button">Add Repetition</button><br><br>
+                <button type="button" onclick="addRepetition()" class="add-button">Add Repetition</button><br><br>
             </fieldset>
             <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
             <div id="repetitionTableContainer" class = "table-container" style = "display: none;">

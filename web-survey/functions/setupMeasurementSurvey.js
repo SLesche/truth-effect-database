@@ -12,7 +12,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <label for="measureInput" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measureInput" name="measureInput"><br>
 
-            <button type="button" onclick="addMeasureToList()" class="survey-button">Add Measure</button><br><br>
+            <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
             <label class="survey-label">List of Measures:</label>
             <ul id="measuresList"></ul>

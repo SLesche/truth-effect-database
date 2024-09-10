@@ -2,11 +2,14 @@ body {
     display: flex;
     margin: 0;
     font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--default-background-color);
 }
 
 .sidebar {
     width: 300px;
-    background-color: #f4f4f4;
+    background-color: var(--sidebar-background-color);
     padding: 20px;
     position: fixed;
     box-sizing: border-box;
@@ -23,6 +26,7 @@ body {
 .content {
     flex: 1;
     padding: 20px;
+    background-color: var(--default-background-color);
     box-sizing: border-box;
     overflow-y: auto;
     margin-left: 320px;
@@ -79,6 +83,7 @@ ul {
 
 .display-text {
     width: min(90%, 900px);
+    background-color: var(--text-background-color);
 }
 
 /* Container for the scrollable table */
@@ -111,7 +116,7 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: var(--table-odd-background-color);
     position: sticky;
     top: 0;
     z-index: 1;
@@ -119,5 +124,5 @@ th {
 
 /* Optional: Style the table rows */
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: var(--table-even-background-color);
 }

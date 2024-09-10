@@ -8,10 +8,10 @@
 }
 
 .menu-button {
-    background: none;
+    background: var(--menu-button-background);
     border: none;
     cursor: pointer;
-    color: green;
+    color: var(--menu-button-color);
     text-decoration: underline;
 }
 
@@ -55,8 +55,8 @@
 }
 
 .add-button {
-    background-color: green;
-    color: black;
+    background-color: var(--add-button-background);
+    color: var(--add-button-color);
     border: none;
     padding: 10px 20px;
     text-align: center;

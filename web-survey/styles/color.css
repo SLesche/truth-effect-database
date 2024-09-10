@@ -1,0 +1,17 @@
+:root {
+    --default-background-color: #3498db;
+    --text-background-color: #3498db;
+    --sidebar-background-color: #2ecc71;
+    --form-background-color: #f9f9f9;
+    --fieldset-background-color: #f4f4f4;
+    --menu-button-color: #3498db;
+    --menu-button-background: red;
+    --add-button-color: red;
+    --add-button-background: red;
+    --submit-button-color: #e74c3c;
+    --submit-button-background: red;
+    --text-color: red;
+    --table-odd-background-color: #3498db;
+    --table-even-background-color: #2ecc71;
+  }
+  
