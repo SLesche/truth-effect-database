@@ -196,11 +196,10 @@ function populateStatementSets(control) {
     statementSetSelect.appendChild(defaultOption);
 
     // Populate the drop-down with statement sets
-    num_statement_sets = Object.keys(control.statementset_info).length;
-    for (let i = 0; i < num_statement_sets; i++) {
+    for (const key in control.statementset_info) {
         const option = document.createElement('option');
-        option.value = control.statementset_info[i].statementset_name;
-        option.textContent = control.statementset_info[i].statementset_name;
+        option.value = control.statementset_info[key].statementset_name;
+        option.textContent = control.statementset_info[key].statementset_name;
         statementSetSelect.appendChild(option);
     }
 }

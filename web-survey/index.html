@@ -28,8 +28,8 @@
 
     <div id="sidebar" class="sidebar">
         <div class="button-container">
-            <button onclick="addPublication(control)" class="add-button">Add Publication</button>
-            <button onclick="addStatementSet(control)" class="add-button">Add a set of Statements</button>
+            <button onclick="generateOverviewPage(control)" class="add-button">Overview</button>
+            <!-- <button onclick="addStatementSet(control)" class="add-button">Add a set of Statements</button> -->
         </div>
         <ul id="sidebarList">
             <!-- Sidebar elements will be dynamically added here -->
@@ -45,7 +45,6 @@
     <script>
         // Initialize control object
         var control = {
-            num_publications: 0,
             publication_info: {},
             statementset_info: {},
         };
@@ -60,7 +59,26 @@
             toggleButton.classList.toggle('moved');
         };
 
-        addOverview(control);
+        // setup publication
+        addPublication(control);
+
+        // Create a list item for the "Add Statement" button
+        const addStatementListItem = document.createElement("li");
+        addStatementListItem.className = "collapsible collapsible-nocontent";
+
+        const addStatementButton = document.createElement("button");
+        addStatementButton.className = "menu-button";
+        addStatementButton.textContent = "+ Add Statementset";
+        addStatementButton.onclick = function() {
+            addStatementSet(control);
+        };
+        addStatementListItem.appendChild(addStatementButton);
+
+        // Append the new list item to the sidebar list
+        document.getElementById("sidebarList").appendChild(addStatementListItem);
+
+        //setup statement set
+
         generateOverviewPage(control);
     </script>
 </body>
