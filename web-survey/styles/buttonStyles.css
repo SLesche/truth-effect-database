@@ -15,6 +15,12 @@
     text-decoration: underline;
 }
 
+.statementset-button {
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 .toggle-button {
     position: absolute;
     top: 10px;

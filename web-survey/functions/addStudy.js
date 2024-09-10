@@ -70,4 +70,8 @@ function addStudy(parentElement, control, publication_idx) {
 
     // Add measurement survey
     addMeasurement(nestedList, control, publication_idx, study_idx);
+
+    // add one dataset
+    addDataset(nestedList, control, publication_idx, study_idx);
+
 }

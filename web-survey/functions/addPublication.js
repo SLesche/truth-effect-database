@@ -69,4 +69,7 @@ function addPublication(control) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializePublicationSurvey(control, publication_idx);
     });
+
+    // Open one new study
+    addStudy(nestedList, control, publication_idx);
 }
