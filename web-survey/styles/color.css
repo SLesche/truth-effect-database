@@ -1,17 +1,17 @@
 :root {
-    --default-background-color: #3498db;
-    --text-background-color: #3498db;
-    --sidebar-background-color: #2ecc71;
-    --form-background-color: #f9f9f9;
-    --fieldset-background-color: #f4f4f4;
-    --menu-button-color: #3498db;
-    --menu-button-background: red;
-    --add-button-color: red;
-    --add-button-background: red;
-    --submit-button-color: #e74c3c;
-    --submit-button-background: red;
-    --text-color: red;
-    --table-odd-background-color: #3498db;
-    --table-even-background-color: #2ecc71;
+    --default-background-color: #f7fcfc;
+    --text-background-color:#f7fcfc;
+    --sidebar-background-color: #83B4FF;
+    --form-background-color: #f7fcfc;
+    --fieldset-background-color: #f7fcfc;
+    --menu-button-color: #180bd1da;
+    --menu-button-background: #83B4FF;
+    --add-button-color: black;
+    --add-button-background: #40b665;
+    --submit-button-color: black;
+    --submit-button-background: #1fc052;
+    --text-color: black;
+    --table-header-background-color: #83B4FF;
+    --table-even-background-color: #d1dada;
   }
   

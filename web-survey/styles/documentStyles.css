@@ -116,7 +116,7 @@ th, td {
 }
 
 th {
-    background-color: var(--table-odd-background-color);
+    background-color: var(--table-header-background-color);
     position: sticky;
     top: 0;
     z-index: 1;

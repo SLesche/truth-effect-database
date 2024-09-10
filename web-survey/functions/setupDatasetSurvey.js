@@ -141,48 +141,48 @@ function initializeDatasetSurvey(control, publication_idx, study_idx, dataset_id
                         <th>certainty</th>
                     </tr>
                     <tr>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>0.64</th>
-                        <th>3</th>
-                        <th>0</th>
-                        <th>2</th>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>0.64</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>2</td>
                     </tr>
                     <tr>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>2</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>0.75</th>
-                        <th>7</th>
-                        <th>1</th>
-                        <th>7</th>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0.75</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>7</td>
                     </tr>
                     <tr>
-                        <th>2</th>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>2</th>
-                        <th>1</th>
-                        <th>0.75</th>
-                        <th>1</th>
-                        <th>1</th>
-                        <th>3</th>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0.75</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>3</td>
                     </tr>
                     <tr>
-                        <th>2</th>
-                        <th>2</th>
-                        <th>2</th>
-                        <th>2</th>
-                        <th>2</th>
-                        <th>0.76</th>
-                        <th>5</th>
-                        <th>1</th>
-                        <th>6</th>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0.76</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>6</td>
                     </tr>
                 </table>
             </div>
