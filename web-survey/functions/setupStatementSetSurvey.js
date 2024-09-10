@@ -15,7 +15,48 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <li><strong>statement_category:</strong> The category or type of the statement, if applicable.</li>
             <li><strong>proportion of people who rated it as true:</strong> The percentage of participants who rated the statement as true.</li>
         </ul>
-        <p><i> HERE SHOULD GO AN EXAMPLE OF A CSV FILE</i></p>
+
+        <p>The file you upload below should look similar to this:</p>
+        <div class = "table-container" id = "tableContainerExample">
+            <table>
+                <tr>
+                    <th>statement_id</th>
+                    <th>statement_text</th>
+                    <th>statement_accuracy</th>
+                    <th>statement_category</th>
+                    <th>proportion_rated_true</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>This is a sample statement</td>
+                    <td>1</td>
+                    <td>category</td>
+                    <td>0.6</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>This is a sample statement</td>
+                    <td>0</td>
+                    <td>category</td>
+                    <td>0.53</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>This is a sample statement</td>
+                    <td>1</td>
+                    <td>category</td>
+                    <td>0.46</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>This is a sample statement</td>
+                    <td>1</td>
+                    <td>category</td>
+                    <td>0.35</td>
+                </tr>
+            </table>
+        </div>
+
         <p>Including these details will enhance the reproducibility of your study and provide valuable context for those analyzing your data.</p>
         <p>Once you have prepared your statement file according to these specifications, you can upload it using the form provided below. Thank you for your contribution!</p>
 
@@ -24,7 +65,8 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
             <span id="file-name-display">${statementset_data.statement_publication_file ? `File: ${statementset_data.statement_publication_file.name}` : ''}</span><br>
 
-            <div id="tableContainer" class = "table-container" style = "display: none;">
+            <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
+            <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
             </div>
 
             <label for="statement_publication" class="survey-label">If available, provide the original publication where this set of statements originates from.</label>
@@ -37,8 +79,12 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 
     if (statementset_data && statementset_data.statementPublicationData) {
         const rows_to_display = 6;
-        createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
-        document.getElementById('tableContainer').style.display = 'block';
+        const html_table = createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+    
+        // Inject table into the table container
+        document.getElementById('tableContainerUploaded').innerHTML = html_table;
+        document.getElementById('tableContainerUploaded').style.display = 'block';
+        document.getElementById('textUploadPreview').style.display = 'block';
     }
 
     // Add event listener to the file input to display the selected file name
@@ -119,6 +165,8 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     const html_table = createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
     
     // Inject table into the table container
-    document.getElementById('tableContainer').innerHTML = html_table;
-    document.getElementById('tableContainer').style.display = 'block';
+    document.getElementById('tableContainerUploaded').innerHTML = html_table;
+    document.getElementById('tableContainerUploaded').style.display = 'block';
+    document.getElementById('textUploadPreview').style.display = 'block';
+
 }
