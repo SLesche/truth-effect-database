@@ -1,0 +1,81 @@
+.delete-button {
+    color: red;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.menu-button {
+    background: var(--menu-button-background);
+    border: none;
+    cursor: pointer;
+    color: var(--menu-button-color);
+    text-decoration: underline;
+}
+
+.statementset-button {
+    font-size: 1em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.toggle-button {
+    position: absolute;
+    top: 10px;
+    left: 305px;
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+.toggle-button.moved {
+    left: 10px;
+}
+
+.toggle-fieldset-button {
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.add-button {
+    background-color: var(--add-button-background);
+    color: var(--add-button-color);
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.add-button:last-child {
+    margin-right: 0;
+}
+
+.green-checkmark {
+    color: green;
+    margin-left: 8px; /* Adjust as needed */
+    font-weight: bold;
+}

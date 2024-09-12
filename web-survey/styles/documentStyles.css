@@ -1,0 +1,128 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--default-background-color);
+}
+
+.sidebar {
+    width: 300px;
+    background-color: var(--sidebar-background-color);
+    padding: 20px;
+    position: fixed;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+    transition: width 0.3s ease;
+}
+
+.sidebar.hidden {
+    width: 0;
+    transform: translateX(-100%);
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--default-background-color);
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin-left: 320px;
+    transition: margin-left 0.4s ease;
+}
+
+.content.expanded {
+    margin-left: 0;
+}
+
+.moved {
+    left: 10px;
+}
+
+ul {
+    padding-left: 0;
+}
+.nested {
+    margin-left: 20px;
+    list-style-type: none;
+    display: none;
+}
+.collapsible {
+    cursor: pointer;
+    position: relative;
+    list-style-type: none;
+}
+.collapsible::before {
+    content: '\25B6'; /* Right-pointing triangle */
+    position: absolute;
+    left: -20px;
+    top: 0;
+}
+
+.collapsible-nocontent::before {
+    content: ''; /* Bullet point */
+}
+
+.active > .nested {
+    display: block;
+}
+.active::before {
+    content: '\25BC'; /* Down-pointing triangle */
+}
+.actions {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.collapsible:hover .actions {
+    display: inline-block;
+}
+
+.display-text {
+    width: min(90%, 900px);
+    background-color: var(--text-background-color);
+}
+
+/* Container for the scrollable table */
+.table-container {
+    max-height: 400px;  /* Adjust the height as needed */
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #ccc; /* Optional: Add a border around the table */
+    margin: 20px 0;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+}
+
+/* Basic table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    /* max-width: 200px; Adjust the max-width as needed */
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; Prevent text from wrapping */
+}
+
+th {
+    background-color: var(--table-header-background-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Optional: Style the table rows */
+tr:nth-child(even) {
+    background-color: var(--table-even-background-color);
+}
