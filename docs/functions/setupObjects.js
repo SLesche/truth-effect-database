@@ -3,7 +3,9 @@ function setupStudyInfo(study_name){
         study_name: study_name,
         data: {},
         measurement_info: {},
-        dataset_info: {},
+        raw_data: {},
+        condition_data: {},
+        repetition_data: {},
     };
     return study_info
 }
@@ -22,14 +24,6 @@ function setupMeasurementInfo(){
         data: {},
     };
     return measurement_info
-}
-
-function setupDatasetInfo(dataset_name){
-    dataset_info = {
-        dataset_name: dataset_name,
-        data: {},
-    };
-    return dataset_info
 }
 
 function setupStatementSetInfo(statementset_name){
