@@ -240,15 +240,15 @@ function addRepetitionEntry() {
     const repetition_type = document.getElementById('repetition_type').value;
     const max_n_repetitions = document.getElementById('max_n_repetitions').value;
     const n_statements = document.getElementById('n_statements').value;
-    const truth_instructions = document.querySelector('input[name="truth_instructions"]:checked').value === "1" ? 1 : 0;
+    const truth_instructions = getRadioButtonSelection('truth_instructions') == 1 ? 1 : 0;
     const presentation_time = document.getElementById('presentation_time_s').value;
-    const presented_until_response = document.querySelector('input[name="presented_until_response"]:checked').value === "1" ? 1 : 0;
-    const response_deadline = document.querySelector('input[name="response_deadline"]:checked').value === "1" ? 1 : 0;
+    const presented_until_response = getRadioButtonSelection('presented_until_response') == 1 ? 1 : 0;
+    const response_deadline = getRadioButtonSelection('response_deadline') == 1 ? 1 : 0;
     const response_deadline_s = document.getElementById('response_deadline_s').value;
     const percent_repeated = document.getElementById('percent_repeated').value;
     const presentation_type = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
-    const repetition_instructions = document.querySelector('input[name="repetition_instructions"]:checked').value === "1" ? 1 : 0;
+    const repetition_instructions = getRadioButtonSelection('repetition_instructions') == 1 ? 1 : 0;
 
     const repetitions_table = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
 
@@ -288,6 +288,10 @@ function addRepetitionEntry() {
     document.getElementById('presentation_type').value = '';
     document.getElementById('phase').value = '';
     document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
+
+    // hide the fieldsets
+    document.getElementById('presentationTimeFieldset').disabled = true;
+    document.getElementById('responseDeadlineFieldset').disabled = true;
 
     // Display the updated summary
     displayRepetitionSummary(repetitions);
