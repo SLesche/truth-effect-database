@@ -77,6 +77,9 @@ function addStudy(parentElement, control, publication_idx) {
     // Add repetition survey
     addRepetition(nestedList, control, publication_idx, study_idx);
 
+    // Add raw data survey
+    addRawData(nestedList, control, publication_idx, study_idx);
+
 }
 
 function initializeStudySurvey(control, publication_idx, study_idx) {
