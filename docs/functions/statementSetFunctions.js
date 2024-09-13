@@ -99,7 +99,7 @@ function addStatementOverview(control) {
 }
 
 function initializeStatementSetSurvey(control, statementset_idx) {
-    const statementset_data = control.statementset_info[statementset_idx].data;
+    const statementset_data = control.statementset_info[statementset_idx].statementset_data;
     const statementset_name = control.statementset_info[statementset_idx].statementset_name;
 
     document.getElementById("content").innerHTML = `
@@ -220,8 +220,6 @@ async function collectStatementSetData() {
                 statementPublicationFile: statementPublicationFile,
                 statementPublicationData: statementPublicationData,
                 statementPublication: statementPublication,
-                // So we can have updates on validation status
-                validated: true,
             };
                 
             // Display the updated file name in the submission box
@@ -252,7 +250,8 @@ function validateStatementSetData(statementset_data){
 async function updateStatementSetSurvey(control, statementset_idx) {
     const statementset_data = await collectStatementSetData();
 
-    control.statementset_info[statementset_idx].data = statementset_data;
+    statementset_data.validated = true;
+    control.statementset_info[statementset_idx].statementset_data = statementset_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');

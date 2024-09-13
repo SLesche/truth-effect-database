@@ -78,7 +78,7 @@ function addPublication(control) {
 }
 
 function initializePublicationSurvey(control, publication_idx) {
-    const publication = control.publication_info[publication_idx].data;
+    const publication = control.publication_info[publication_idx].publication_data;
     const publication_name = control.publication_info[publication_idx].publication_name;
     document.getElementById("content").innerHTML = `
     <div class = "display-text">
@@ -140,8 +140,6 @@ function collectPublicationData(){
         country: country,
         keywords: keywords,
         contact: contact,
-        // So we can have updates on validation status
-        validated: true,
     }
 
     return publication_data;
@@ -167,12 +165,13 @@ function validatePublicationData(publication_data){
 function updatePublicationSurvey(control, publication_idx) {
     // Store the values in the control object
     const publication_data = collectPublicationData();
-    control.publication_info[publication_idx].data = publication_data;
+    publication_data.validated = true;
+    control.publication_info[publication_idx].publication_data = publication_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
 
     // Add a checkmark to the currently selected sidebar item
-    const item_id = "publication-" +publication_idx;
+    const item_id = "publication-" + publication_idx;
     addGreenCheckmarkById(item_id);
 }

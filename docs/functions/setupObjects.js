@@ -1,8 +1,8 @@
 function setupStudyInfo(study_name){
     study_info = {
         study_name: study_name,
-        data: {},
-        measurement_info: {},
+        study_data: {},
+        measurement_data: {},
         raw_data: {},
         condition_data: {},
         repetition_data: {},
@@ -14,22 +14,15 @@ function setupPublicationInfo(publication_name){
     publication_info = {
         publication_name: publication_name,
         study_info: {},
-        data: {},
+        publication_data: {},
     };
     return publication_info
-}
-
-function setupMeasurementInfo(){
-    measurement_info = {
-        data: {},
-    };
-    return measurement_info
 }
 
 function setupStatementSetInfo(statementset_name){
     statementset_info = {
         statementset_name: statementset_name,
-        data: {},
+        statementset_data: {},
     };
     return statementset_info
 }

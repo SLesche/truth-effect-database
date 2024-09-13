@@ -83,7 +83,7 @@ function addStudy(parentElement, control, publication_idx) {
 }
 
 function initializeStudySurvey(control, publication_idx, study_idx) {
-    study_data = control.publication_info[publication_idx].study_info[study_idx].data;
+    study_data = control.publication_info[publication_idx].study_info[study_idx].study_data;
     studyName = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
@@ -256,8 +256,9 @@ function validateStudyData(study_data) {
 }
 
 function updateStudySurvey(control, publication_idx, study_idx) {
-    study_data = collectStudyData();
-    control.publication_info[publication_idx].study_info[study_idx].data = study_data;
+    const study_data = collectStudyData();
+    study_data.validated = true;
+    control.publication_info[publication_idx].study_info[study_idx].study_data = study_data;
 
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');

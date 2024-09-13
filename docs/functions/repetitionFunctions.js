@@ -155,8 +155,6 @@ function validateRepetitionSubmission() {
         document.querySelector('input[name="repetition_instructions"]:checked')
     ];
 
-    console.log(fields);
-
     // Check if any field is empty or not selected
     for (const field of fields) {
         if (!field || field === '') {
@@ -167,8 +165,6 @@ function validateRepetitionSubmission() {
     return true;
 }
 function validateRepetitionData(repetition_data) {
-    //c
-    console.log(repetition_data);
     return true
 }
 
