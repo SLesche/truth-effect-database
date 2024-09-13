@@ -1,52 +1,3 @@
-function addStatementOverview(control) {
-    // Create a new list item for the publication
-    const listItem = document.createElement("li");
-    listItem.className = "collapsible";
-    listItem.dataset.index = "statementset-overview";
-    listItem.id = "statementset-overview";
-
-    // Create a span for the publication name
-    const span = document.createElement("span");
-    span.textContent = "Sets of Statements";
-
-    // Append the span and actions to the list item
-    listItem.appendChild(span);
-
-    // Create a nested list for studies
-    const nestedList = document.createElement("ul");
-    nestedList.className = "nested";
-
-    // Create a list item for the "Add Statement" button
-    const addStatementListItem = document.createElement("li");
-    const addStatementButton = document.createElement("button");
-    addStatementButton.className = "menu-button";
-    addStatementButton.textContent = "+ Add Statement Set";
-    addStatementButton.onclick = function() {
-        addStatementSet(nestedList, control);
-    };
-    addStatementListItem.appendChild(addStatementButton);
-    nestedList.appendChild(addStatementListItem);
-
-    // Append the nested list to the publication item
-    listItem.appendChild(nestedList);
-
-    // Append the new list item to the sidebar list
-    document.getElementById("sidebarList").appendChild(listItem);
-
-    // Add collapsible functionality
-    listItem.addEventListener("click", function(event) {
-        if (event.target === this) {
-            this.classList.toggle("active");
-        }
-    });
-
-    // Toggle the collapsible on by default
-    listItem.classList.add("active");
-
-    // Open one new Statement
-    addStatementSet(nestedList, control);
-}
-
 function addStatementSet(parentElement, control) {
     // Determine the number of entries in dataset_info
     const statementset_idx = getNewId(control.statementset_info);
@@ -95,8 +46,56 @@ function addStatementSet(parentElement, control) {
     span.addEventListener("click", function(event) {
         event.stopPropagation(); // Prevent the collapsible toggle
         initializeStatementSetSurvey(control, statementset_idx);
-        createNoStatementInfoButton(control, statementset_idx);
     });
+}
+
+function addStatementOverview(control) {
+    // Create a new list item for the publication
+    const listItem = document.createElement("li");
+    listItem.className = "collapsible";
+    listItem.dataset.index = "statementset-overview";
+    listItem.id = "statementset-overview";
+
+    // Create a span for the publication name
+    const span = document.createElement("span");
+    span.textContent = "Sets of Statements";
+
+    // Append the span and actions to the list item
+    listItem.appendChild(span);
+
+    // Create a nested list for studies
+    const nestedList = document.createElement("ul");
+    nestedList.className = "nested";
+
+    // Create a list item for the "Add Statement" button
+    const addStatementListItem = document.createElement("li");
+    const addStatementButton = document.createElement("button");
+    addStatementButton.className = "menu-button";
+    addStatementButton.textContent = "+ Add Statement Set";
+    addStatementButton.onclick = function() {
+        addStatementSet(nestedList, control);
+    };
+    addStatementListItem.appendChild(addStatementButton);
+    nestedList.appendChild(addStatementListItem);
+
+    // Append the nested list to the publication item
+    listItem.appendChild(nestedList);
+
+    // Append the new list item to the sidebar list
+    document.getElementById("sidebarList").appendChild(listItem);
+
+    // Add collapsible functionality
+    listItem.addEventListener("click", function(event) {
+        if (event.target === this) {
+            this.classList.toggle("active");
+        }
+    });
+
+    // Toggle the collapsible on by default
+    listItem.classList.add("active");
+
+    // Open one new Statement
+    addStatementSet(nestedList, control);
 }
 
 function initializeStatementSetSurvey(control, statementset_idx) {
@@ -161,8 +160,6 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         <p>Including these details will enhance the reproducibility of your study and provide valuable context for those analyzing your data.</p>
         <p>Once you have prepared your statement file according to these specifications, you can upload it using the form provided below. Thank you for your contribution!</p>
 
-        <div id="noinfo-container"></div>
-
         <form id="statementSetSurvey" class="survey-form">
             <label for="statement_publication_file" class="survey-label">Please upload a .csv file where the statements you used are listed.</label>
             <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
@@ -177,7 +174,6 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
-
     </div>
     `;
 
@@ -222,41 +218,6 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 
 }
 
-function createNoStatementInfoButton(control, statementset_idx) {
-    const statementset_data = control.statementset_info[statementset_idx].statementset_data;
-    // Create button element
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'noinfo-button';
-    button.textContent = 'We do not have access to statement-level information.';
-    
-    // Set initial state
-    let isActive = false;
-
-    // If the user selects that they do not have access to statement-level information, activate the button
-    if (statementset_data.validated == 1 && statementset_data.statement_publication_data == null) {
-        console.log("Set to active")
-        isActive = true;
-        button.classList.add('active');
-    }
-
-
-    // Set onclick handler
-    button.onclick = function() {
-        isActive = !isActive;
-        button.classList.toggle('active', isActive);
-        noStatementSetInfo(control, statementset_idx);
-    };
-
-    // Append button to the desired container
-    const container = document.getElementById('noinfo-container'); // Replace with the actual container ID
-    if (container) {
-        container.appendChild(button);
-    } else {
-        console.error('Container element not found.');
-    }
-}
-
 async function collectStatementSetData() {
     const statement_publication_file = document.getElementById('statement_publication_file').files[0];
     const statement_publication = document.getElementById('statement_publication').value;
@@ -291,26 +252,6 @@ function validateStatementSetData(statementset_data){
     
     var alert_message = 'This field does not match validation criteria.';
 
-    // Check if the user selected the "No statement-level information" option
-    if (document.querySelector('.noinfo-button.active')) {
-        alert_message = "Please provide statement-level information or select the 'No statement-level information' option.";
-        displayValidationError('statement_publication_file', alert_message);
-    
-        return false;
-    }
-
-    var required_columns = ['statement_id', 'statement_text', 'statement_accuracy'];
-
-    // Check if the uploaded csv object contains these columns
-    var csv_columns = Object.keys(statementset_data.statement_publication_data[0]);
-    for (var i = 0; i < required_columns.length; i++) {
-        if (!csv_columns.includes(required_columns[i])) {
-            alert_message = 'The uploaded file is missing the required column: ' + required_columns[i];
-            displayValidationError('statement_publication_file', alert_message);
-            return false;
-        }
-    }
-
     return true;
 }
 
@@ -334,22 +275,4 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     document.getElementById('tableContainerUploaded').innerHTML = html_table;
     document.getElementById('tableContainerUploaded').style.display = 'block';
     document.getElementById('textUploadPreview').style.display = 'block';
-}
-
-function noStatementSetInfo(control, statementset_idx){
-    const statementset_data = {
-        validated: true,
-        statement_publication_file: null,
-        statement_publication_data: null,
-        statement_publication: null,
-    };
-
-    control.statementset_info[statementset_idx].statementset_data = statementset_data;
-    
-    // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
-
-    // Add a checkmark to the currently selected sidebar item
-    const item_id =  "statementset-" + statementset_idx;
-    addGreenCheckmarkById(item_id);
 }

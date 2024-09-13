@@ -42,7 +42,6 @@ function addMeasurement(parentElement, control, publication_idx, study_idx) {
     listItem.addEventListener("click", function(event) {
         event.stopPropagation(); // Prevent any default action
         initializeMeasurementSurvey(control, publication_idx, study_idx);
-        createNoMeasuresButton(control, publication_idx, study_idx);
     });
 }
 
@@ -57,8 +56,6 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires. This ensures that others can quickly find relevant data based on common constructs rather than being limited by specific measurement tools.</p>
         <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
 
-        <div id="noinfo-container"></div>
-
         <form id="measurementSurvey">                    
             <label for="measure_input_details" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measure_input_details" name="measure_input_details"><br>
@@ -67,6 +64,12 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <label for="measure_input_construct" class="survey-label">Add the name of the construct:</label>
             <input type="text" id="measure_input_construct" name="measure_input_construct"><br>
             <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
+
+            <label for="no_additional_measures" class="survey-label">We did not collect any additional measures.</label>
+            <div class="radio-buttons" id = "no_additional_measures">
+                <label><input type="radio" name="no_additional_measures" value="1" ${measurement_data.no_additional_measures == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="no_additional_measures" value="0" ${measurement_data.no_additional_measures == 0 ? 'checked' : ''}/>No</label>
+            </div>
 
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
@@ -107,42 +110,6 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     });
 }
 
-
-function createNoMeasuresButton(control, publication_idx, study_idx) {
-    const measurement_data = control.publication_info[publication_idx].study_info[study_idx].measurement_data;
-
-    // Create button element
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'noinfo-button';
-    button.textContent = 'We do not have access to statement-level information.';
-    
-    // Set initial state
-    let isActive = false;
-
-    // If the user selects that they do not have access to statement-level information, activate the button
-    if (measurement_data.validated == 1 && measurement_data.measures == 0) {
-        console.log("Set to active")
-        isActive = true;
-        button.classList.add('active');
-    }
-
-    // Set onclick handler
-    button.onclick = function() {
-        isActive = !isActive;
-        button.classList.toggle('active', isActive);
-        noMeasures(control, publication_idx, study_idx);
-    };
-
-    // Append button to the desired container
-    const container = document.getElementById('noinfo-container'); // Replace with the actual container ID
-    if (container) {
-        container.appendChild(button);
-    } else {
-        console.error('Container element not found.');
-    }
-}
-
 function collectMeasurementData(){
     var measures = [];
     // Get the measure list items
@@ -161,34 +128,6 @@ function collectMeasurementData(){
     };
 
     return measurement_data
-}
-
-
-function addMeasureToList() {
-    // Get the measure input value
-    var measureInputDetails = document.getElementById("measure_input_details").value;
-    var measureInputConstruct = document.getElementById("measure_input_construct").value;
-
-    if (measureInputDetails !== "" && measureInputConstruct !== "") {
-        // Create a new list item
-        var li = document.createElement("li");
-        li.textContent = `Construct: ${measureInputConstruct}, Details: ${measureInputDetails}`;
-
-        add_delete_button_to_list_item(li);
-
-        // Append the list item to the measures list
-        document.getElementById("measuresList").appendChild(li);
-
-        // Clear the input field after adding the measure
-        document.getElementById("measure_input_construct").value = "";
-        document.getElementById("measure_input_details").value = "";
-
-        document.getElementById("measures_list").style.display = "block";
-
-    } else {
-        alert("Please enter a measure.");
-    }
-
 }
 
 function validateMeasurementData(measurement_data){
@@ -232,19 +171,29 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
     addGreenCheckmarkById(item_id);
 }
 
-function noMeasures(control, publication_idx, study_idx){
-    const measurement_data = {
-        measures: '',
-        validated: true,
-    };
+function addMeasureToList() {
+    // Get the measure input value
+    var measureInputDetails = document.getElementById("measure_input_details").value;
+    var measureInputConstruct = document.getElementById("measure_input_construct").value;
 
-    // Store the values in the control object
-    control.publication_info[publication_idx].study_info[study_idx].measurement_data = measurement_data;
+    if (measureInputDetails !== "" && measureInputConstruct !== "") {
+        // Create a new list item
+        var li = document.createElement("li");
+        li.textContent = `Construct: ${measureInputConstruct}, Details: ${measureInputDetails}`;
 
-    // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+        add_delete_button_to_list_item(li);
 
-    // Add a checkmark to the currently selected sidebar item
-    const item_id =  "measures-" + publication_idx + "-" + study_idx;
-    addGreenCheckmarkById(item_id);
+        // Append the list item to the measures list
+        document.getElementById("measuresList").appendChild(li);
+
+        // Clear the input field after adding the measure
+        document.getElementById("measure_input_construct").value = "";
+        document.getElementById("measure_input_details").value = "";
+
+        document.getElementById("measures_list").style.display = "block";
+
+    } else {
+        alert("Please enter a measure.");
+    }
+
 }
