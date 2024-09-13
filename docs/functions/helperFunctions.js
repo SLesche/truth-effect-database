@@ -155,3 +155,13 @@ function clearValidationMessages() {
         element.style.borderColor = ''; // Reset to default border color
     });
 }
+
+function getRadioButtonSelection(radioGroupName) {
+    const radioGroup = document.getElementsByName(radioGroupName);
+    for (let i = 0; i < radioGroup.length; i++) {
+        if (radioGroup[i].checked) {
+            return radioGroup[i].value;
+        }
+    }
+    return null;
+}
