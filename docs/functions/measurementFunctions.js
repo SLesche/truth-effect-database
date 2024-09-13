@@ -57,12 +57,12 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
 
         <label for="additional_measures" class="survey-label" id = "additional_measures">Did you collect any additional measures?</label>
-        <div class="radio-buttons" id = "additional_measures">
+        <form class="radio-buttons" id = "additional_measures">
             <label for="additional_measures_yes"><input type="radio" id="additional_measures_yes" name="additional_measures" value="1" ${measurement_data.additional_measures == 1 ? 'checked' : ''}>Yes</label>
             <label for="additional_measures_no"><input type="radio" id="additional_measures_no" name="additional_measures"value="0" ${measurement_data.additional_measures == 0 ? 'checked' : ''}>No</label>
-        </div>
+        </form>
 
-        <div id="measures_form" style="display: none;">
+        <form id="measures_form" class = "survey-form" style="display: none;">
             <label for="measure_input_details" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measure_input_details" name="measure_input_details"><br>
             <p class="survey-label-additional-info">This can be detailed and may include the scale used to measure the variable: "APM Performance" or "BFI-2-XS".</p>
@@ -75,7 +75,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
             <label class="survey-label" id="measures_list" style="display: none;">List of Measures:</label>
             <ul id="measuresList" class="list-of-entries"></ul>
-        </div>
+        </form>
 
         <button type="submit" class="survey-button" id="submit-button">Submit</button>
     </div>
