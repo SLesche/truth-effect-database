@@ -86,23 +86,27 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="repetition_instructions" value="0"/>No</label>
             </div>
 
-            <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
-            <div class="radio-buttons">
-                <label><input type="radio" name="time_pressure" value="1"/>Yes</label>
-                <label><input type="radio" name="time_pressure" value="0"/>No</label>
-            </div>
-
             <label for="presented_until_response" class="survey-label">Were the statements presented until response?</label>
             <div class="radio-buttons">
                 <label><input type="radio" name="presented_until_response" value="1"/>Yes</label>
                 <label><input type="radio" name="presented_until_response" value="0"/>No</label>
             </div>
 
-            <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented? Enter "0", if they were presented until response.</label>
-            <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
+            <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 1 ? '' : 'disabled'}>
+                <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
+                <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
+            </fieldset>
 
-            <label for="response_deadline_s" class="survey-label">How long did participants have to respond? Enter "99" if there was no response deadline.</label>
-            <input type="number" id="response_deadline_s" name="response_deadline_s" step="0.5"><br>
+            <label for="response_deadline" class="survey-label">Was there a response deadline?</label>
+            <div class="radio-buttons">
+                <label><input type="radio" name="response_deadline" value="1"/>Yes</label>
+                <label><input type="radio" name="response_deadline" value="0"/>No</label>
+            </div>
+
+            <fieldset id="responseDeadlineFieldset" ${repetition_data.response_deadline == 1 ? '' : 'disabled'}>
+                <label for="response_deadline_s" class="survey-label">How long did participants have to respond?</label>
+                <input type="number" id="response_deadline_s" name="response_deadline_s" step="0.5"><br>
+            </fieldset>
 
             <label for="percent_repeated" class="survey-label">What percentage of the statements was repeated?</label>
             <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
@@ -135,6 +139,18 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         document.getElementById('listOfRepetitions').style.display = 'block';
     }
 
+    document.querySelectorAll('input[name="presented_until_response"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('presentationTimeFieldset').disabled = this.value == '0';
+        });
+    });
+
+    document.querySelectorAll('input[name="response_deadline"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('responseDeadlineFieldset').disabled = this.value == '0';
+        });
+    });
+
     document.getElementById('repetitionSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
         const collected_data = collectRepetitionData();
@@ -145,26 +161,32 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 }
 
 function validateRepetitionSubmission() {
-    const fields = [
-        document.getElementById('repetition_time').value,
-        document.getElementById('repetition_location').value,
-        document.getElementById('repetition_type').value,
-        document.getElementById('max_n_repetitions').value,
-        document.getElementById('n_statements').value,
-        document.querySelector('input[name="time_pressure"]:checked'),
-        document.querySelector('input[name="truth_instructions"]:checked'),
-        document.querySelector('input[name="presented_until_response"]:checked').value,
-        document.getElementById('presentation_time_s').value,
-        document.getElementById('response_deadline_s').value,
-        document.getElementById('percent_repeated').value,
-        document.getElementById('presentation_type').value,
-        document.getElementById('phase').value,
-        document.querySelector('input[name="repetition_instructions"]:checked')
-    ];
+    const fields = {
+        repetition_time: document.getElementById('repetition_time').value,
+        repetition_location: document.getElementById('repetition_location').value,
+        repetition_type: document.getElementById('repetition_type').value,
+        max_n_repetitions: document.getElementById('max_n_repetitions').value,
+        n_statements: document.getElementById('n_statements').value,
+        truth_instructions: document.querySelector('input[name="truth_instructions"]:checked').value,
+        presented_until_response: document.querySelector('input[name="presented_until_response"]:checked').value,
+        presentation_time_s: document.getElementById('presentation_time_s').value,
+        response_deadline: document.querySelector('input[name="response_deadline"]:checked').value,
+        response_deadline_s: document.getElementById('response_deadline_s').value,
+        percent_repeated: document.getElementById('percent_repeated').value,
+        presentation_type: document.getElementById('presentation_type').value,
+        phase: document.getElementById('phase').value,
+        repetition_instructions: document.querySelector('input[name="repetition_instructions"]:checked').value
+    };
 
     // Check if any field is empty or not selected
-    for (const field of fields) {
-        if (!field || field === '') {
+    for (const field in fields) {
+        if (!fields[field] || fields[field] === '') {
+            if (field === 'response_deadline_s' && fields['response_deadline'] === '0') {
+                continue; // Skip response deadline if it's not enabled
+            }
+            if (field === 'presentation_time_s' && fields['presented_until_response'] === '0') {
+                continue; // Skip presentation time if it's not enabled
+            }
             console.log('Invalid field:', field);
             return false;
         }
@@ -185,65 +207,62 @@ function addRepetitionEntry() {
     const repetitionType = document.getElementById('repetition_type').value;
     const maxNRepetitions = document.getElementById('max_n_repetitions').value;
     const nStatements = document.getElementById('n_statements').value;
-    const timePressure = document.querySelector('input[name="time_pressure"]:checked').value === "1" ? 1 : 0;;
     const truthInstructions = document.querySelector('input[name="truth_instructions"]:checked').value === "1" ? 1 : 0;
     const presentationTime = document.getElementById('presentation_time_s').value;
     const presentedUntilResponse = document.querySelector('input[name="presented_until_response"]:checked').value === "1" ? 1 : 0;
-    const responseDeadline = document.getElementById('response_deadline_s').value;
+    const responseDeadline = document.querySelector('input[name="response_deadline"]:checked').value === "1" ? 1 : 0;
+    const responseDeadlineS = document.getElementById('response_deadline_s').value;
     const percentRepeated = document.getElementById('percent_repeated').value;
     const presentationType = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
     const repetitionInstructions = document.querySelector('input[name="repetition_instructions"]:checked').value === "1" ? 1 : 0;
 
-    if (repetitionTime && repetitionLocation && repetitionType && maxNRepetitions && nStatements && timePressure !== '' && truthInstructions !== '' && presentationTime && percentRepeated && responseDeadline && presentedUntilResponse && presentationType && phase && repetitionInstructions !== '') {
-        const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
+    const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
 
-        // Collect existing repetitions
-        const repetitions = collectRepetitionData();
+    // Collect existing repetitions
+    const repetitions = collectRepetitionData();
 
-        // Add the new repetition
-        repetitions.push({
-            repetition_time: repetitionTime,
-            repetition_location: repetitionLocation,
-            repetition_type: repetitionType,
-            max_n_repetitions: maxNRepetitions,
-            n_statements: nStatements,
-            time_pressure: timePressure,
-            truth_instructions: truthInstructions,
-            presentation_time_s: presentationTime,
-            presented_until_response: presentedUntilResponse,
-            response_deadline_s: responseDeadline,
-            percent_repeated: percentRepeated,
-            presentation_type: presentationType,
-            phase: phase,
-            repetition_instructions: repetitionInstructions
-        });
+    // Add the new repetition
+    repetitions.push({
+        repetition_time: repetitionTime,
+        repetition_location: repetitionLocation,
+        repetition_type: repetitionType,
+        max_n_repetitions: maxNRepetitions,
+        n_statements: nStatements,
+        truth_instructions: truthInstructions,
+        presentation_time_s: presentationTime,
+        presented_until_response: presentedUntilResponse,
+        response_deadline: responseDeadline,
+        response_deadline_s: responseDeadlineS,
+        percent_repeated: percentRepeated,
+        presentation_type: presentationType,
+        phase: phase,
+        repetition_instructions: repetitionInstructions
+    });
 
-        // Clear the input fields
-        document.getElementById('repetition_time').value = '';
-        document.getElementById('repetition_location').value = '';
-        document.getElementById('repetition_type').value = '';
-        document.getElementById('max_n_repetitions').value = '';
-        document.getElementById('n_statements').value = '';
-        document.querySelector('input[name="time_pressure"]:checked').checked = false;
-        document.querySelector('input[name="truth_instructions"]:checked').checked = false;
-        document.getElementById('presentation_time_s').value = '';
-        document.querySelector('input[name="presented_until_response"]:checked').checked = false;
-        document.getElementById('response_deadline_s').value = '';
-        document.getElementById('percent_repeated').value = '';
-        document.getElementById('presentation_type').value = '';
-        document.getElementById('phase').value = '';
-        document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
+    // Clear the input fields
+    document.getElementById('repetition_time').value = '';
+    document.getElementById('repetition_location').value = '';
+    document.getElementById('repetition_type').value = '';
+    document.getElementById('max_n_repetitions').value = '';
+    document.getElementById('n_statements').value = '';
+    document.querySelector('input[name="response_deadline"]:checked').checked = false;
+    document.querySelector('input[name="truth_instructions"]:checked').checked = false;
+    document.getElementById('presentation_time_s').value = '';
+    document.querySelector('input[name="presented_until_response"]:checked').checked = false;
+    document.getElementById('response_deadline_s').value = '';
+    document.getElementById('percent_repeated').value = '';
+    document.getElementById('presentation_type').value = '';
+    document.getElementById('phase').value = '';
+    document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
 
-        // Display the updated summary
-        displayRepetitionSummary(repetitions);
+    // Display the updated summary
+    displayRepetitionSummary(repetitions);
 
-        // Show the table if it's hidden
-        document.getElementById('repetitionTableContainer').style.display = 'block';
-        document.getElementById('listOfRepetitions').style.display = 'block';
-    } else {
-        alert('Please fill out all repetition fields.');
-    }
+    // Show the table if it's hidden
+    document.getElementById('repetitionTableContainer').style.display = 'block';
+    document.getElementById('listOfRepetitions').style.display = 'block';
+
 }
 
 function collectRepetitionData() {
