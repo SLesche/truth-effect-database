@@ -11,7 +11,7 @@
 input[type="text"], input[type="number"], input[type="date"] {
     width: 95%;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     border: 1px solid #ccc;
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
@@ -43,7 +43,7 @@ input[type="text"], input[type="number"], input[type="date"] {
     font-style: italic;
     font-size: 0.9em; /* Adjust size as needed */
     display: block;
-    margin-top: -15px;
+    margin-top: 3px;
     margin-left: 10px;
     margin-bottom: 10px;
 }

@@ -146,8 +146,9 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <label for="secondary_task_type" class="survey-label">What type of secondary task did the participants complete (verbal/numeric/figural)?</label>
                 <input type="text" id="secondary_task_type" name="secondary_task_type" value="${study_data.secondary_task_type || ''}"><br>
 
-                <label for="secondary_task_name" class="survey-label">What was the name of the secondary task employed? If you employed multiple secondary tasks, list the names separated by commas.</label>
+                <label for="secondary_task_name" class="survey-label">What was the name of the secondary task employed?</label>
                 <input type="text" id="secondary_task_name" name="secondary_task_name" value="${study_data.secondary_task_name || ''}"><br>
+                <p class="survey-label-additional-info">If you employed multiple secondary tasks, list the names separated by commas, i.e. "Stroop Task, Simon Task"</p>
             </fieldset>
 
             <label for="physiological_measures" class="survey-label">Did you collect any physiological data?</label>
