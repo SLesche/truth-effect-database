@@ -57,12 +57,12 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
 
         <form id="measurementSurvey">                    
-            <label for="measureInputDetails" class="survey-label">Add any additional variables you measured in the study:</label>
-            <input type="text" id="measureInputDetails" name="measureInputDetails"><br>
+            <label for="measure_input_details" class="survey-label">Add any additional variables you measured in the study:</label>
+            <input type="text" id="measure_input_details" name="measure_input_details"><br>
             <p class="survey-label-additional-info">This can be detailed and may include the scale used to measure the variable: "APM Performance" or "BFI-2-XS".</p>
 
-            <label for="measureInputConstruct" class="survey-label">Add the name of the construct:</label>
-            <input type="text" id="measureInputConstruct" name="measureInputConstruct"><br>
+            <label for="measure_input_construct" class="survey-label">Add the name of the construct:</label>
+            <input type="text" id="measure_input_construct" name="measure_input_construct"><br>
             <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
 
 
@@ -150,8 +150,8 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
 
 function addMeasureToList() {
     // Get the measure input value
-    var measureInputDetails = document.getElementById("measureInputDetails").value;
-    var measureInputConstruct = document.getElementById("measureInputConstruct").value;
+    var measureInputDetails = document.getElementById("measure_input_details").value;
+    var measureInputConstruct = document.getElementById("measure_input_construct").value;
 
     if (measureInputDetails !== "" && measureInputConstruct !== "") {
         // Create a new list item
@@ -164,8 +164,8 @@ function addMeasureToList() {
         document.getElementById("measuresList").appendChild(li);
 
         // Clear the input field after adding the measure
-        document.getElementById("measureInputConstruct").value = "";
-        document.getElementById("measureInputDetails").value = "";
+        document.getElementById("measure_input_construct").value = "";
+        document.getElementById("measure_input_details").value = "";
     } else {
         alert("Please enter a measure.");
     }

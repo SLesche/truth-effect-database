@@ -177,9 +177,9 @@ function initializeStatementSetSurvey(control, statementset_idx) {
     </div>
     `;
 
-    if (statementset_data && statementset_data.statementPublicationData) {
+    if (statementset_data && statementset_data.statement_publication_data) {
         const rows_to_display = 6;
-        const html_table = createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+        const html_table = createTableFromCSV(statementset_data.statement_publication_data, rows_to_display);
     
         // Inject table into the table container
         document.getElementById('tableContainerUploaded').innerHTML = html_table;
@@ -210,22 +210,22 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 }
 
 async function collectStatementSetData() {
-    const statementPublicationFile = document.getElementById('statement_publication_file').files[0];
-    const statementPublication = document.getElementById('statement_publication').value;
+    const statement_publication_file = document.getElementById('statement_publication_file').files[0];
+    const statement_publication = document.getElementById('statement_publication').value;
 
-    if (statementPublicationFile) {
+    if (statement_publication_file) {
         try {
-            const statementPublicationData = await csvFileToObject(statementPublicationFile);
+            const statement_publication_data = await csvFileToObject(statement_publication_file);
             const statementset_data = {
-                statementPublicationFile: statementPublicationFile,
-                statementPublicationData: statementPublicationData,
-                statementPublication: statementPublication,
+                statement_publication_file: statement_publication_file,
+                statement_publication_data: statement_publication_data,
+                statement_publication: statement_publication,
             };
                 
             // Display the updated file name in the submission box
             const fileNameDisplay = document.getElementById('file-name-display');
-            if (statementPublicationFile) {
-                fileNameDisplay.textContent = `File: ${statementPublicationFile.name}`;
+            if (statement_publication_file) {
+                fileNameDisplay.textContent = `File: ${statement_publication_file.name}`;
             } else {
                 fileNameDisplay.textContent = '';
             }
@@ -261,7 +261,7 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     addGreenCheckmarkById(item_id);
 
     const rows_to_display = 6;
-    const html_table = createTableFromCSV(statementset_data.statementPublicationData, rows_to_display);
+    const html_table = createTableFromCSV(statementset_data.statement_publication_data, rows_to_display);
     
     // Inject table into the table container
     document.getElementById('tableContainerUploaded').innerHTML = html_table;

@@ -167,21 +167,21 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
 
 async function collectRawData() {
     // Get values from the input fields
-    const rawDataFile = document.getElementById('raw_data_file').files[0];
+    const raw_data_file = document.getElementById('raw_data_file').files[0];
 
-    if (rawDataFile) {
+    if (raw_data_file) {
         try {
-            const csv_data = await csvFileToObject(rawDataFile);
+            const csv_data = await csvFileToObject(raw_data_file);
 
             raw_data = {
-                raw_data_file: rawDataFile,
+                raw_data_file: raw_data_file,
                 data: csv_data,
             };
 
             // Display the updated file name in the submission box
             const fileNameDisplay = document.getElementById('file-name-display');
-            if (rawDataFile) {
-                fileNameDisplay.textContent = `File: ${rawDataFile.name}`;
+            if (raw_data_file) {
+                fileNameDisplay.textContent = `File: ${raw_data_file.name}`;
             } else {
                 fileNameDisplay.textContent = '';
             }

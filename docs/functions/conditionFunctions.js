@@ -146,15 +146,15 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
 
 
 function addWithinCondition() {
-    const conditionName = document.getElementById('within_condition_name').value;
-    const conditionIdentifier = document.getElementById('within_condition_identifier').value;
+    const condition_name = document.getElementById('within_condition_name').value;
+    const condition_identifier = document.getElementById('within_condition_identifier').value;
 
-    if (conditionName && conditionIdentifier) {
+    if (condition_name && condition_identifier) {
         const conditionsList = document.getElementById('withinConditionsList');
 
         // Create a new list item for the condition
         const listItem = document.createElement('li');
-        listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
+        listItem.textContent = `Condition: ${condition_name}, Identifier: ${condition_identifier}`;
 
         add_delete_button_to_list_item(listItem);
 
@@ -170,15 +170,15 @@ function addWithinCondition() {
 }
 
 function addBetweenCondition() {
-    const conditionName = document.getElementById('between_condition_name').value;
-    const conditionIdentifier = document.getElementById('between_condition_identifier').value;
+    const condition_name = document.getElementById('between_condition_name').value;
+    const condition_identifier = document.getElementById('between_condition_identifier').value;
 
-    if (conditionName && conditionIdentifier) {
+    if (condition_name && condition_identifier) {
         const conditionsList = document.getElementById('betweenConditionsList');
 
         // Create a new list item for the condition
         const listItem = document.createElement('li');
-        listItem.textContent = `Condition: ${conditionName}, Identifier: ${conditionIdentifier}`;
+        listItem.textContent = `Condition: ${condition_name}, Identifier: ${condition_identifier}`;
 
         add_delete_button_to_list_item(listItem);
 
