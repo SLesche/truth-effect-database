@@ -84,42 +84,42 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
         <form id="studySurvey" class="survey-form">
             <label for="truth_rating_scale" class="survey-label">With what scale did you measure the truth rating of a statement?</label>
             <div class="radio-buttons">
-                <input type="radio" id="dichotomous" name="truth_rating_scale" value="dichotomous" ${study_data.truth_rating_scale === 'dichotomous' ? 'checked' : ''} required>
+                <input type="radio" id="dichotomous" name="truth_rating_scale" value="dichotomous" ${study_data.truth_rating_scale === 'dichotomous' ? 'checked' : ''}>
                 <label for="dichotomous">Dichotomous</label>
-                <input type="radio" id="likert" name="truth_rating_scale" value="likert" ${study_data.truth_rating_scale === 'likert' ? 'checked' : ''} required>
+                <input type="radio" id="likert" name="truth_rating_scale" value="likert" ${study_data.truth_rating_scale === 'likert' ? 'checked' : ''}>
                 <label for="likert">Likert</label>
-                <input type="radio" id="range" name="truth_rating_scale" value="range" ${study_data.truth_rating_scale === 'range' ? 'checked' : ''} required>
+                <input type="radio" id="range" name="truth_rating_scale" value="range" ${study_data.truth_rating_scale === 'range' ? 'checked' : ''}>
                 <label for="range">Range</label>
-                <input type="radio" id="other" name="truth_rating_scale" value="other" ${study_data.truth_rating_scale === 'other' ? 'checked' : ''} required>
+                <input type="radio" id="other" name="truth_rating_scale" value="other" ${study_data.truth_rating_scale === 'other' ? 'checked' : ''}>
                 <label for="other">Other</label><br>
             </div>
             <fieldset id="other_rating_scale_fieldset" ${study_data.truth_rating_scale === 'other' ? '' : 'disabled'}>
                 <div class="form-item">
                     <label for="truth_rating_scale_details" class="survey-label">Please provide further details:</label>
-                    <input type="text" id="truth_rating_scale_details" name="truth_rating_scale_details" value="${study_data.truth_rating_scale_details || ''}" required/>
+                    <input type="text" id="truth_rating_scale_details" name="truth_rating_scale_details" value="${study_data.truth_rating_scale_details || ''}"/>
                 </div>
             </fieldset>
 
             <label for="truth_rating_steps" class="survey-label">How many steps did your rating scale have?</label>
-            <input type="number" id="truth_rating_steps" name="truth_rating_steps" value="${study_data.truth_rating_steps || ''}" required><br>
+            <input type="number" id="truth_rating_steps" name="truth_rating_steps" value="${study_data.truth_rating_steps || ''}"><br>
             <p class="survey-label-additional-info">For example, a 7-point Likert Scale would have 7 steps.</p>
 
             <label for="statement_set_select" class="survey-label">Select the statement set used:</label>
-            <select id="statement_set_select" name="statement_set_select" required>
+            <select id="statement_set_select" name="statement_set_select">
                 <option value="">Select a statement set</option>
                 <!-- Options will be populated dynamically -->
             </select><br>
 
             <label for="subjective_certainty" class="survey-label">Was subjective certainty measured?</label>
             <div class="radio-buttons">
-                <label><input type="radio" name="subjective_certainty" value="1" ${study_data.subjective_certainty == 1 ? 'checked' : ''} required/>Yes</label>
-                <label><input type="radio" name="subjective_certainty" value="0" ${study_data.subjective_certainty == 0 ? 'checked' : ''} required/>No</label>
+                <label><input type="radio" name="subjective_certainty" value="1" ${study_data.subjective_certainty == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="subjective_certainty" value="0" ${study_data.subjective_certainty == 0 ? 'checked' : ''}/>No</label>
             </div>
 
             <label for="rt_measured" class="survey-label">Did you measure response time?</label>
             <div class="radio-buttons">
-                <label><input type="radio" name="rt_measured" value="1" ${study_data.rt_measured == 1 ? 'checked' : ''} required/>Yes</label>
-                <label><input type="radio" name="rt_measured" value="0" ${study_data.rt_measured == 0 ? 'checked' : ''} required/>No</label>
+                <label><input type="radio" name="rt_measured" value="1" ${study_data.rt_measured == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="rt_measured" value="0" ${study_data.rt_measured == 0 ? 'checked' : ''}/>No</label>
             </div>
 
             <fieldset id="rtMeasuredFieldset" ${study_data.rt_measured == 1 ? '' : 'disabled'}>
@@ -128,18 +128,18 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             </fieldset>
 
             <label for="n_groups" class="survey-label">How many between conditions did you have in the study?</label>
-            <input type="number" id="n_groups" name="n_groups" value="${study_data.n_groups || ''}" required><br>
+            <input type="number" id="n_groups" name="n_groups" value="${study_data.n_groups || ''}"><br>
 
             <label for="participant_age" class="survey-label">Was was the average age of your participants?</label>
-            <input type="number" step="0.01" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}" required><br>
+            <input type="number" step="0.01" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}"><br>
 
             <label for="percentage_female" class="survey-label">Which percentage of your participants was female?</label>
-            <input type="number" step="0.01" id="percentage_female" name="percentage_female" value="${study_data.percentage_female || ''}" required><br>
+            <input type="number" step="0.01" id="percentage_female" name="percentage_female" value="${study_data.percentage_female || ''}"><br>
 
             <label for "secondary_tasks" class="survey-label">Did your participants complete any secondary (distracting) tasks between exposure and test sessions?</label>
             <div class="radio-buttons">
-                <label><input type="radio" name="secondary_tasks" value="1" ${study_data.has_secondary_tasks == 1 ? 'checked' : ''} required/>Yes</label>
-                <label><input type="radio" name="secondary_tasks" value="0" ${study_data.has_secondary_tasks == 0 ? 'checked' : ''} required/>No</label>
+                <label><input type="radio" name="secondary_tasks" value="1" ${study_data.has_secondary_tasks == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="secondary_tasks" value="0" ${study_data.has_secondary_tasks == 0 ? 'checked' : ''}/>No</label>
             </div>
 
             <fieldset id="secondaryTaskFieldset" ${study_data.has_secondary_tasks == 1 ? '' : 'disabled'}>
@@ -153,18 +153,18 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
             <label for="physiological_measures" class="survey-label">Did you collect any physiological data?</label>
             <div class="radio-buttons">
-                <label><input type="radio" name="physiological_measures" value="1" ${study_data.physiological_measures == 1 ? 'checked' : ''} required/>Yes</label>
-                <label><input type="radio" name="physiological_measures" value="0" ${study_data.physiological_measures == 0 ? 'checked' : ''} required/>No</label>
+                <label><input type="radio" name="physiological_measures" value="1" ${study_data.physiological_measures == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="physiological_measures" value="0" ${study_data.physiological_measures == 0 ? 'checked' : ''}/>No</label>
             </div>
 
             <label for="cognitive_models" class="survey-label">Did you employ any cognitive models in your analysis?</label>
             <div class="radio-buttons">
-                <label><input type="radio" name="cognitive_models" value="1" ${study_data.cognitive_models == 1 ? 'checked' : ''} required/>Yes</label>
-                <label><input type="radio" name="cognitive_models" value="0" ${study_data.cognitive_models == 0 ? 'checked' : ''} required/>No</label>
+                <label><input type="radio" name="cognitive_models" value="1" ${study_data.cognitive_models == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="cognitive_models" value="0" ${study_data.cognitive_models == 0 ? 'checked' : ''}/>No</label>
             </div>
 
             <label for="open_data_link" class="survey-label">If available, provide the link to the data on an open access resource sharing platform.</label>
-            <input type="text" id="open_data_link" name="open_data_link" value="${study_data.open_data_link || ''}" required><br>
+            <input type="text" id="open_data_link" name="open_data_link" value="${study_data.open_data_link || ''}"><br>
 
             <label for="study_comment" class="survey-label">Would you like to provide any additional information?</label>
             <textarea id="study_comment" name="study_comment" rows="4" cols="50">${study_data.study_comment || ''}</textarea><br>
@@ -246,7 +246,7 @@ function collectStudyData() {
         open_data_link: open_data_link,
         study_comment: study_comment,
         statement_set_name: statement_set_select,
-        has_secondary_tasks: secondary_tasks,
+        secondary_tasks: secondary_tasks,
         secondary_task_type: secondary_task_type,
         secondary_task_name: secondary_task_name,
     }
@@ -255,6 +255,34 @@ function collectStudyData() {
 }
 
 function validateStudyData(study_data) {
+    clearValidationMessages();
+
+    var alert_message = 'This field does not match validation criteria.';
+    // Check if any of the fields are empty
+
+    var required_keys = [
+        'truth_rating_scale', 'truth_rating_steps', 'subjective_certainty', 'rt_measured', 'n_groups', 'participant_age',
+        'percentage_female', 'physiological_measures', 'cognitive_models', 'statement_set_name', 'secondary_tasks',
+    ];
+
+    if (study_data.secondary_tasks) {
+        required_keys.push('secondary_task_type', 'secondary_task_name');
+    }
+    if (study_data.truth_rating_scale === 'other') {
+        required_keys.push('truth_rating_scale_details');
+    }
+    if (study_data.rt_measured == 1) {
+        required_keys.push('rt_onset');
+    }
+
+    for (const key of required_keys) {
+        if (!study_data[key]) {
+            alert_message = 'This field is required.';
+            displayValidationError(key, alert_message);
+            return false;
+        }
+    }
+
     return true;
 }
 
