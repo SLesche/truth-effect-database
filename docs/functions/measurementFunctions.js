@@ -51,12 +51,18 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
     document.getElementById("content").innerHTML = `
     <div class="display-text">
-        <h1>${study_name}: Additional Measurments</h1> 
+        <h1>${study_name}: Additional Measurements</h1> 
         <p>In this section, we want to know if you collected any additional measurements beyond the primary variables of your study. This information is valuable for helping others identify datasets that include external variables they may be interested in.</p>
         <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires. This ensures that others can quickly find relevant data based on common constructs rather than being limited by specific measurement tools.</p>
         <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
 
-        <form id="measurementSurvey">                    
+        <label for="additional_measures" class="survey-label" id = "additional_measures">Did you collect any additional measures?</label>
+        <div class="radio-buttons" id = "additional_measures">
+            <label for="additional_measures_yes"><input type="radio" id="additional_measures_yes" name="additional_measures" value="1" ${measurement_data.additional_measures == 1 ? 'checked' : ''}>Yes</label>
+            <label for="additional_measures_no"><input type="radio" id="additional_measures_no" name="additional_measures"value="0" ${measurement_data.additional_measures == 0 ? 'checked' : ''}>No</label>
+        </div>
+
+        <div id="measures_form" style="display: none;">
             <label for="measure_input_details" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measure_input_details" name="measure_input_details"><br>
             <p class="survey-label-additional-info">This can be detailed and may include the scale used to measure the variable: "APM Performance" or "BFI-2-XS".</p>
@@ -65,23 +71,33 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <input type="text" id="measure_input_construct" name="measure_input_construct"><br>
             <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
 
-            <label for="no_additional_measures" class="survey-label">We did not collect any additional measures.</label>
-            <div class="radio-buttons" id = "no_additional_measures">
-                <label><input type="radio" name="no_additional_measures" value="1" ${measurement_data.no_additional_measures == 1 ? 'checked' : ''}/>Yes</label>
-                <label><input type="radio" name="no_additional_measures" value="0" ${measurement_data.no_additional_measures == 0 ? 'checked' : ''}/>No</label>
-            </div>
-
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
-            <label class="survey-label" id = "measures_list" style = "display: none;">List of Measures:</label>
-            <ul id="measuresList" class = "list-of-entries"></ul>
-            <button type="submit" class="survey-button">Submit</button>
-        </form>
+            <label class="survey-label" id="measures_list" style="display: none;">List of Measures:</label>
+            <ul id="measuresList" class="list-of-entries"></ul>
+        </div>
+
+        <button type="submit" class="survey-button" id="submit-button">Submit</button>
     </div>
     `;
 
-    // Display previous submission if available
-    if (measurement_data && measurement_data.measures) {
+    // Function to toggle the measures form
+    document.querySelectorAll('input[name="additional_measures"]').forEach((elem) => {
+        elem.addEventListener('change', function() {
+            const measuresForm = document.getElementById('measures_form');
+            if (this.value == 1) {
+                measuresForm.style.display = 'block';
+            } else {
+                measuresForm.style.display = 'none';
+            }
+        });
+    });
+
+    // Display the measures list if previously selected that additional measures were collected
+    if (measurement_data.additional_measures == 0) {
+        document.getElementById("measures_list").style.display = "none";
+    } else if (measurement_data.validated == 1 && measurement_data.measures.length > 0) {
+        document.getElementById("measures_form").style.display = "block";
         document.getElementById("measures_list").style.display = "block";
 
         var measuresList = document.getElementById("measuresList");
@@ -102,7 +118,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     }
 
     // Add event listener to the form's submit button
-    document.getElementById('measurementSurvey').addEventListener('submit', function(event) {
+    document.getElementById('submit-button').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent default form submission
         if (validateMeasurementData(collectMeasurementData()) || control.testing) {
             updateMeasurementSurvey(control, publication_idx, study_idx);
@@ -125,6 +141,7 @@ function collectMeasurementData(){
 
     const measurement_data = {
         measures: measures,
+        additional_measures: getRadioButtonSelection("additional_measures")
     };
 
     return measurement_data
@@ -134,11 +151,20 @@ function validateMeasurementData(measurement_data){
     clearValidationMessages();
     var alert_message = 'This field does not match validation criteria.';
 
+    // Check if the user selected whether they collected additional measures
+    if (measurement_data.additional_measures === null) {
+        alert_message = 'Please select whether you collected any additional measures.';
+        displayValidationError("additional_measures", alert_message);
+        return false;
+    }
 
-    if (getRadioButtonSelection("no_additional_measures") == 1) {
+    if (measurement_data.additional_measures == 0) {
         // Check if the list of measures is empty
         if (measurement_data.measures.length != 0) {
             alert_message = 'Remove all measures if you did not collect any additional measures.'
+
+            document.getElementById("measures_form").style.display = "block";
+            document.getElementById("measures_list").style.display = "block";
             displayValidationError("measuresList", alert_message);
             return false;
         }
