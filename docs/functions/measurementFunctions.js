@@ -65,10 +65,15 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <input type="text" id="measure_input_construct" name="measure_input_construct"><br>
             <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
 
+            <label for="no_additional_measures" class="survey-label">We did not collect any additional measures.</label>
+            <div class="radio-buttons" id = "no_additional_measures">
+                <label><input type="radio" name="no_additional_measures" value="1" ${measurement_data.no_additional_measures == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="no_additional_measures" value="0" ${measurement_data.no_additional_measures == 0 ? 'checked' : ''}/>No</label>
+            </div>
 
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
-            <label class="survey-label">List of Measures:</label>
+            <label class="survey-label" id = "measures_list" style = "display: none;">List of Measures:</label>
             <ul id="measuresList" class = "list-of-entries"></ul>
             <button type="submit" class="survey-button">Submit</button>
         </form>
@@ -77,6 +82,8 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
     // Display previous submission if available
     if (measurement_data && measurement_data.measures) {
+        document.getElementById("measures_list").style.display = "block";
+
         var measuresList = document.getElementById("measuresList");
         measurement_data.measures.forEach(function(measure) {
             var li = document.createElement("li");
@@ -124,9 +131,25 @@ function collectMeasurementData(){
 }
 
 function validateMeasurementData(measurement_data){
+    clearValidationMessages();
+    var alert_message = 'This field does not match validation criteria.';
+
+
+    if (getRadioButtonSelection("no_additional_measures") == 1) {
+        // Check if the list of measures is empty
+        if (measurement_data.measures.length != 0) {
+            alert_message = 'Remove all measures if you did not collect any additional measures.'
+            displayValidationError("measuresList", alert_message);
+            return false;
+        }
+        return true
+    }
+
     // Check if the list of measures is empty
     if (measurement_data.measures.length === 0) {
-        alert('Please add at least one measure.');
+        alert_message = 'Please add at least one measure.'
+        displayValidationError("measure_input_details", alert_message);
+        displayValidationError("measure_input_construct", alert_message);
         return false;
     }
 
@@ -166,7 +189,11 @@ function addMeasureToList() {
         // Clear the input field after adding the measure
         document.getElementById("measure_input_construct").value = "";
         document.getElementById("measure_input_details").value = "";
+
+        document.getElementById("measures_list").style.display = "block";
+
     } else {
         alert("Please enter a measure.");
     }
+
 }
