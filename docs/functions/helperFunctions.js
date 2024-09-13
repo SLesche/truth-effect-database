@@ -111,3 +111,47 @@ function createTableFromCSV(csvObject, n_rows) {
 
     return table
 }
+
+function displayValidationError(questionId, message) {
+    // Select the question element using its ID
+    const questionElement = document.getElementById(questionId);
+    if (!questionElement) {
+        console.error(`Element with ID ${questionId} not found.`);
+        return;
+    }
+
+    // Scroll to the question element
+    questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    // Change the border color of the question element
+    questionElement.style.borderColor = 'red';
+
+    // Create a message element
+    let messageElement = document.getElementById(`${questionId}-message`);
+    if (!messageElement) {
+        messageElement = document.createElement('div');
+        messageElement.id = `${questionId}-message`;
+        questionElement.parentNode.insertBefore(messageElement, questionElement.nextSibling);
+    }
+
+    // Set the message text and color
+    messageElement.textContent = message;
+    messageElement.style.color = 'red';
+    messageElement.style.marginTop = '5px'; // Optional: Add some margin for better appearance
+}
+
+function clearValidationMessages() {
+    // Select all elements with an ID ending in '-message'
+    const messageElements = document.querySelectorAll('[id$="-message"]');
+    
+    messageElements.forEach(element => {
+        // Remove the message element from the DOM
+        element.parentNode.removeChild(element);
+    });
+
+    // Reset the border color of all input elements
+    const inputElements = document.querySelectorAll('input, textarea, select');
+    inputElements.forEach(element => {
+        element.style.borderColor = ''; // Reset to default border color
+    });
+}
