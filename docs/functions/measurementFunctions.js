@@ -56,15 +56,17 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires. This ensures that others can quickly find relevant data based on common constructs rather than being limited by specific measurement tools.</p>
         <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
 
-        <form id="measurementSurvey">
-            <label for="measureInput" class="survey-label">Add any additional variables you measured in the study:</label>
-            <input type="text" id="measureInput" name="measureInput"><br>
+        <form id="measurementSurvey">                    
+            <label for="measureInputDetails" class="survey-label">Add any additional variables you measured in the study:</label>
+            <input type="text" id="measureInputDetails" name="measureInputDetails"><br>
+
+            <label for="measureInputConstruct" class="survey-label">Add the name of the construct</label>
+            <input type="text" id="measureInputConstruct" name="measureInputConstruct"><br>
 
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 
             <label class="survey-label">List of Measures:</label>
             <ul id="measuresList" class = "list-of-entries"></ul>
-
             <button type="submit" class="survey-button">Submit</button>
         </form>
     </div>
@@ -75,7 +77,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         var measuresList = document.getElementById("measuresList");
         measurement_data.measures.forEach(function(measure) {
             var li = document.createElement("li");
-            li.textContent = measure;
+            li.textContent = `Construct: ${measure.construct}, Details: ${measure.details}`;
 
             var removeButton = document.createElement("button");
             removeButton.innerHTML = '&times;'; // Red X
@@ -99,11 +101,16 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 }
 
 function collectMeasurementData(){
+    var measures = [];
     // Get the measure list items
     var listItems = document.getElementById("measuresList").getElementsByTagName("li");
     var measures = [];
     for (var i = 0; i < listItems.length; i++) {
-        measures.push(listItems[i].childNodes[0].nodeValue);
+        var measureText = listItems[i].childNodes[0].nodeValue;
+        var measureParts = measureText.split(", Details: ");
+        var measureConstruct = measureParts[0].replace("Construct: ", "").trim();
+        var measureDetails = measureParts[1].trim();
+        measures.push({ construct: measureConstruct, details: measureDetails });
     }
 
     const measurement_data = {
@@ -140,12 +147,13 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
 
 function addMeasureToList() {
     // Get the measure input value
-    var measureInput = document.getElementById("measureInput").value;
+    var measureInputDetails = document.getElementById("measureInputDetails").value;
+    var measureInputConstruct = document.getElementById("measureInputConstruct").value;
 
-    if (measureInput !== "") {
+    if (measureInputDetails !== "" && measureInputConstruct !== "") {
         // Create a new list item
         var li = document.createElement("li");
-        li.textContent = measureInput;
+        li.textContent = `Construct: ${measureInputConstruct}, Details: ${measureInputDetails}`;
 
         add_delete_button_to_list_item(li);
 
@@ -153,7 +161,8 @@ function addMeasureToList() {
         document.getElementById("measuresList").appendChild(li);
 
         // Clear the input field after adding the measure
-        document.getElementById("measureInput").value = "";
+        document.getElementById("measureInputConstruct").value = "";
+        document.getElementById("measureInputDetails").value = "";
     } else {
         alert("Please enter a measure.");
     }
