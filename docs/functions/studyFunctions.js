@@ -121,8 +121,10 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="rt_measured" value="0" ${study_data.rt_measured == 0 ? 'checked' : ''} required/>No</label>
             </div>
 
-            <label for="rt_onset" class="survey-label">What event marked the onset of response time measurement?</label>
-            <input type="text" id="rt_onset" name="rt_onset" value="${study_data.rt_onset || ''}" required><br>
+            <fieldset id="rtMeasuredFieldset" ${study_data.rt_measured == 1 ? '' : 'disabled'}>
+                <label for="rt_onset" class="survey-label">What event marked the onset of response time measurement?</label>
+                <input type="text" id="rt_onset" name="rt_onset" value="${study_data.rt_onset || ''}"><br>
+            </fieldset>
 
             <label for="n_groups" class="survey-label">How many between conditions did you have in the study?</label>
             <input type="number" id="n_groups" name="n_groups" value="${study_data.n_groups || ''}" required><br>
@@ -181,6 +183,12 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             } else {
                 fieldset.disabled = true;
             }
+        });
+    });
+
+    document.querySelectorAll('input[name="rt_measured"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('rtMeasuredFieldset').disabled = this.value == '0';
         });
     });
 
@@ -247,16 +255,6 @@ function collectStudyData() {
 }
 
 function validateStudyData(study_data) {
-    // Check if any of the fields are empty
-    for (const key in study_data) {
-        if (key != "study_comment" && key != "truth_rating_scale_details"){
-            if (!study_data[key]) {
-                alert('Please fill out all fields before submitting the form.');
-                return false;
-            }
-        }
-    }
-
     return true;
 }
 
