@@ -14,22 +14,22 @@ function addMeasurement(parentElement, control, publication_idx, study_idx) {
     const span = document.createElement("span");
     span.textContent = measurement_name;
 
-    // Create action buttons
-    const actions = document.createElement("div");
-    actions.className = "actions";
+    // // Create action buttons
+    // const actions = document.createElement("div");
+    // actions.className = "actions";
 
-    const removeButton = document.createElement("button");
-    removeButton.innerHTML = '&times;'; // Red X
-    removeButton.classList.add('delete-button');
-    removeButton.onclick = function(event) {
-        event.stopPropagation();
-        removeItem(listItem, control);
-    };
-    actions.appendChild(removeButton);
+    // const removeButton = document.createElement("button");
+    // removeButton.innerHTML = '&times;'; // Red X
+    // removeButton.classList.add('delete-button');
+    // removeButton.onclick = function(event) {
+    //     event.stopPropagation();
+    //     removeItem(listItem, control);
+    // };
+    // actions.appendChild(removeButton);
     
     // Append the span and actions to the list item
     listItem.appendChild(span);
-    listItem.appendChild(actions);
+    // listItem.appendChild(actions);
     
     // Create a nested list for raw data
     const nestedList = document.createElement("ul");
