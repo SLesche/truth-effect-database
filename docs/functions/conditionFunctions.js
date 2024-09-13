@@ -138,7 +138,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
 
     document.getElementById('conditionSurvey').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validateConditionData(collectConditionData())){
+        if (validateConditionData(collectConditionData()) || control.testing){
             updateConditionSurvey(control, publication_idx, study_idx);
         }
     });

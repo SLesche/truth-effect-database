@@ -202,7 +202,7 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
     // Add event listener to the form's submit button
     document.getElementById('studySurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validateStudyData(collectStudyData())){
+        if (validateStudyData(collectStudyData()) || control.testing){
             updateStudySurvey(control, publication_idx, study_idx);
         }
     });

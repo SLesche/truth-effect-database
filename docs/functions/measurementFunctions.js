@@ -97,7 +97,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     // Add event listener to the form's submit button
     document.getElementById('measurementSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validateMeasurementData(collectMeasurementData())) {
+        if (validateMeasurementData(collectMeasurementData()) || control.testing) {
             updateMeasurementSurvey(control, publication_idx, study_idx);
         }
     });

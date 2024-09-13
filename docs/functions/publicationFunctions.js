@@ -119,7 +119,7 @@ function initializePublicationSurvey(control, publication_idx) {
     // Add event listener to the form's submit button
     document.getElementById('publicationSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
-        if (validatePublicationData(collectPublicationData())) {
+        if (validatePublicationData(collectPublicationData()) || control.testing) {
             updatePublicationSurvey(control, publication_idx);
         }
     });

@@ -158,7 +158,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
         const allow_submission = checkOtherSubmissions(control, publication_idx, study_idx);
         if (allow_submission) {
             const collected_data = await collectRawData();
-            if (validateRawData(collected_data)){
+            if (validateRawData(collected_data) || control.testing){
                 updateRawDataSurvey(control, publication_idx, study_idx);
             }
         }

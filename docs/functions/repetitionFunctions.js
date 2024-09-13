@@ -155,7 +155,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     document.getElementById('repetitionSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
         const collected_data = collectRepetitionData();
-        if (validateRepetitionData(collected_data)){
+        if (validateRepetitionData(collected_data) || control.testing){
             updateRepetitionSurvey(control, publication_idx, study_idx);
         }
     });

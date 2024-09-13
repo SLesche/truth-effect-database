@@ -202,7 +202,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         event.preventDefault(); // Prevent default form submission
         // Await statement set data
         const statement_data_cur = await collectStatementSetData();
-        if (validateStatementSetData(statement_data_cur)) {
+        if (validateStatementSetData(statement_data_cur) || control.testing) {
             updateStatementSetSurvey(control, statementset_idx);
         }
     });
