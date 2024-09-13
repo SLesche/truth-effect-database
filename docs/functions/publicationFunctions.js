@@ -92,24 +92,31 @@ function initializePublicationSurvey(control, publication_idx) {
         
         <form id="publicationSurvey" class = "survey-form">
             <label for="authors" class = "survey-label">Who are the authors of the publication?</label>
-            <input type="text" id="authors" name="authors" value="${publication.authors || ''}" required><br>
+            <input type="text" id="authors" name="authors" value="${publication.authors || ''}"><br>
             <p class="survey-label-additional-info">Please list only the surnames of the authors separated by comma, i.e. "Smith, Müller, Garcia".</p>
 
+            <label for="first_author" class = "survey-label">Who was the first author of this publication?</label>
+            <input type="text" id="first_author" name="first_author" value="${publication.first_author || ''}"><br>
+            <p class="survey-label-additional-info">Please list only the surname of the first author. If there were multiple first authors, list the surnames separated by commas.</p>
+
+            <label for="title" class = "survey-label">What was the title of this publication?</label>
+            <input type="text" id="title" name="title" value="${publication.title || ''}"><br>
+
             <label for="apa_reference" class = "survey-label">Please provide an APA7 style reference for the publication:</label>
-            <input type="text" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}" required><br>
+            <input type="text" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}"><br>
 
             <label for="conducted" class = "survey-label">In what year was the study conducted?</label>
-            <input type="number" id="conducted" name="conducted" value="${publication.conducted || ''}" required><br>
+            <input type="number" id="conducted" name="conducted" value="${publication.conducted || ''}"><br>
 
             <label for="country" class = "survey-label">In what country was the study conducted?</label>
-            <input type="text" id="country" name="country" value="${publication.country || ''}" required><br>
+            <input type="text" id="country" name="country" value="${publication.country || ''}"><br>
 
             <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
-            <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}" required><br>
+            <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}"><br>
             <p class="survey-label-additional-info">Separate the keywords by commas: "keyword 1, keyword 2, keyword 3</p>
             
-            <label for="contact" class = "survey-label">Provide contact information for further questions.</label>
-            <input type="text" id="contact" name="contact" value="${publication.contact || ''}" required><br>
+            <label for="contact" class = "survey-label">Provide contact information for further questions:</label>
+            <input type="text" id="contact" name="contact" value="${publication.contact || ''}"><br>
 
             <button type="submit" class = "survey-button">Submit</button>
         </form>
@@ -128,6 +135,8 @@ function initializePublicationSurvey(control, publication_idx) {
 function collectPublicationData(){
     // Get values from the input fields
     const authors = document.getElementById('authors').value;
+    const first_author = document.getElementById('first_author').value;
+    const title = document.getElementById('title').value;
     const apa_reference = document.getElementById('apa_reference').value;
     const conducted = document.getElementById('conducted').value;
     const country = document.getElementById('country').value;
@@ -137,6 +146,8 @@ function collectPublicationData(){
     // Store the values in the control object
     const publication_data = {
         authors: authors,
+        first_author: first_author,
+        title: title,
         apa_reference: apa_reference,
         conducted: conducted,
         country: country,
@@ -148,16 +159,30 @@ function collectPublicationData(){
 }
 
 function validatePublicationData(publication_data){
+    clearValidationMessages();
+
+    var alert_message = 'This field does not match validation criteria.';
     // Check if any of the fields are empty
-    for (const key in publication_data) {
+
+    const required_keys = ['authors', 'first_author', 'title', 'apa_reference', 'conducted', 'country', 'keywords', 'contact'];
+    for (const key of required_keys) {
         if (!publication_data[key]) {
-            alert('Please fill out all fields before submitting the form.');
+            alert_message = 'This field is required.';
+            displayValidationError(key, alert_message);
             return false;
         }
     }
 
+    if (publication_data.authors.includes(".")) {
+        alert_message = 'Authors field should not contain periods. Only list the surnames separated by commas.';
+        displayValidationError("authors", alert_message);
+        return false;
+    }
+
     if (publication_data.conducted < 1900 || publication_data.conducted > new Date().getFullYear()) {
-        alert('Please enter a valid year for the study.');
+        alert_message = 'Please enter a valid year for the study.';
+        displayValidationError("conducted", alert_message);
+
         return false;
     }
 
@@ -167,6 +192,7 @@ function validatePublicationData(publication_data){
 function updatePublicationSurvey(control, publication_idx) {
     // Store the values in the control object
     const publication_data = collectPublicationData();
+
     publication_data.validated = true;
     control.publication_info[publication_idx].publication_data = publication_data;
 
