@@ -35,18 +35,6 @@ function addStudy(parentElement, control, publication_idx) {
     const nestedList = document.createElement("ul");
     nestedList.className = "nested";
 
-    // Create a list item for the "Add Dataset" button
-    const addDatasetListItem = document.createElement("li");
-    const addDatasetButton = document.createElement("button");
-    addDatasetButton.className = "menu-button";
-    addDatasetButton.textContent = "+ Add Dataset";
-    addDatasetButton.onclick = function() {
-        addDataset(nestedList, control, publication_idx, study_idx);
-    };
-    addDatasetListItem.appendChild(addDatasetButton);
-    
-    nestedList.appendChild(addDatasetListItem);
-
     // Append the nested list to the study item
     listItem.appendChild(nestedList);
 

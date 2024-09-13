@@ -62,7 +62,7 @@ function getNumberOfSubmissions(control) {
 
     // Iterate over statement sets
     for (let statementset_idx = 0; statementset_idx < num_statement_sets; statementset_idx++) {
-        if (control.statementset_info[statementset_idx].data.validated) {
+        if (control.statementset_info[statementset_idx].statementset_data.validated) {
             num_statement_sets_validated += 1;
         }
     }
@@ -81,7 +81,7 @@ function getNumberOfSubmissions(control) {
         }
 
         // Check if the publication is validated
-        if (control.publication_info[publication_idx].data.validated) {
+        if (control.publication_info[publication_idx].publication_data.validated) {
             num_publications_validated += 1;
         }
     }
