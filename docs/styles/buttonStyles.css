@@ -79,3 +79,21 @@
     margin-left: 8px; /* Adjust as needed */
     font-weight: bold;
 }
+
+.noinfo-button {
+    background-color: darkorange;
+    color: black
+}
+
+.noinfo-button.active {
+    background-color: orangered;
+    color: #fff;
+    border-color: red;
+}
+
+.noinfo-button.active::before {
+    content: ''; 
+}
+.noinfo-button.active::after {
+    content: '✔'; /* Checkmark */
+}
