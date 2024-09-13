@@ -144,13 +144,22 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
     }
 
     // Add event listener to the file input to display the selected file name
-    document.getElementById('raw_data_file').addEventListener('change', function(event) {
+    document.getElementById('raw_data_file').addEventListener('change', async function(event) {
         const fileNameDisplay = document.getElementById('file-name-display');
         if (event.target.files.length > 0) {
             fileNameDisplay.textContent = `File: ${event.target.files[0].name}`;
         } else {
             fileNameDisplay.textContent = '';
         }
+
+        const raw_data = await collectRawData();
+        const rows_to_display = 6;
+        const html_table = createTableFromCSV(raw_data.data, rows_to_display);
+        
+        // Inject table into the table container
+        document.getElementById('tableContainerUploaded').innerHTML = html_table;
+        document.getElementById('tableContainerUploaded').style.display = 'block';
+        document.getElementById('textUploadPreview').style.display = 'block';
     });
 
     document.getElementById('rawDataSurvey').addEventListener('submit', async function(event) {

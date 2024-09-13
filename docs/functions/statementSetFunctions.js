@@ -188,13 +188,22 @@ function initializeStatementSetSurvey(control, statementset_idx) {
     }
 
     // Add event listener to the file input to display the selected file name
-    document.getElementById('statement_publication_file').addEventListener('change', function(event) {
+    document.getElementById('statement_publication_file').addEventListener('change', async function(event) {
         const fileNameDisplay = document.getElementById('file-name-display');
         if (event.target.files.length > 0) {
             fileNameDisplay.textContent = `File: ${event.target.files[0].name}`;
         } else {
             fileNameDisplay.textContent = '';
         }
+
+        const statementset_data = await collectStatementSetData();
+        const rows_to_display = 6;
+        const html_table = createTableFromCSV(statementset_data.statement_publication_data, rows_to_display);
+        
+        // Inject table into the table container
+        document.getElementById('tableContainerUploaded').innerHTML = html_table;
+        document.getElementById('tableContainerUploaded').style.display = 'block';
+        document.getElementById('textUploadPreview').style.display = 'block';
     });
 
     // Add event listener to the form's submit button
@@ -239,10 +248,9 @@ async function collectStatementSetData() {
 }
 
 function validateStatementSetData(statementset_data){
-    // if (!statementset_data.statementPublicationFile) {
-    //     alert('Please upload a file containing the statements used in your study.');
-    //     return false;
-    // }
+    clearValidationMessages();
+    
+    var alert_message = 'This field does not match validation criteria.';
 
     return true;
 }
