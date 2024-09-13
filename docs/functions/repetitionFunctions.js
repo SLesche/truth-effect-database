@@ -162,45 +162,77 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 }
 
 function validateRepetitionSubmission() {
+    clearValidationMessages();
+
     const fields = {
         repetition_time: document.getElementById('repetition_time').value,
         repetition_location: document.getElementById('repetition_location').value,
         repetition_type: document.getElementById('repetition_type').value,
         max_n_repetitions: document.getElementById('max_n_repetitions').value,
         n_statements: document.getElementById('n_statements').value,
-        truth_instructions: document.querySelector('input[name="truth_instructions"]:checked').value,
-        presented_until_response: document.querySelector('input[name="presented_until_response"]:checked').value,
+        truth_instructions: getRadioButtonSelection('truth_instructions'),
+        presented_until_response: getRadioButtonSelection('presented_until_response'),
         presentation_time_s: document.getElementById('presentation_time_s').value,
-        response_deadline: document.querySelector('input[name="response_deadline"]:checked').value,
+        response_deadline: getRadioButtonSelection('response_deadline'),
         response_deadline_s: document.getElementById('response_deadline_s').value,
         percent_repeated: document.getElementById('percent_repeated').value,
         presentation_type: document.getElementById('presentation_type').value,
         phase: document.getElementById('phase').value,
-        repetition_instructions: document.querySelector('input[name="repetition_instructions"]:checked').value
+        repetition_instructions: getRadioButtonSelection('repetition_instructions')
     };
 
-    // Check if any field is empty or not selected
-    for (const field in fields) {
-        if (!fields[field] || fields[field] === '') {
-            if (field === 'response_deadline_s' && fields['response_deadline'] === '0') {
-                continue; // Skip response deadline if it's not enabled
-            }
-            if (field === 'presentation_time_s' && fields['presented_until_response'] === '0') {
-                continue; // Skip presentation time if it's not enabled
-            }
-            console.log('Invalid field:', field);
+    var required_fields = ['repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
+    
+    if (fields.presented_until_response == 1) {
+        required_fields.push('presentation_time_s');
+    }
+    
+    if (fields.response_deadline == 1) {
+        required_fields.push('response_deadline_s');
+    }
+
+    for (const field of required_fields) {
+        if (!fields[field]) {
+            displayValidationError(field, 'This field is required.');
             return false;
         }
     }
+
     return true;
 }
 function validateRepetitionData(repetition_data) {
+    clearValidationMessages();
+
+    var alert_message = 'This field does not match validation criteria.';
+    // Make sure it has at least one entry
+    if (repetition_data.length === 0) {
+        alert_message = 'Please add at least one repetition.';
+        displayValidationError('listOfRepetitions', alert_message);
+        document.getElementById('listOfRepetitions').style.display = 'block';
+
+        return false;
+    }
+
+    // Check that the first entry of repetition time is 0
+    if (parseInt(repetition_data[0].repetition_time) !== 0) {
+        alert_message = 'The first repetition time must be 0.';
+        displayValidationError('listOfRepetitions', alert_message);
+        return false;
+    }
+
+    // Check that the repetition time increases steadily over sessions
+    for (let i = 1; i < repetition_data.length; i++) {
+        if (parseInt(repetition_data[i].repetition_time) <= parseInt(repetition_data[i - 1].repetition_time)) {
+            alert_message = 'Repetition times must increase over sessions.';
+            displayValidationError('listOfRepetitions', alert_message);
+            return false;
+        }
+    }
     return true
 }
 
 function addRepetitionEntry() {
     if (!validateRepetitionSubmission()) {
-        alert('Please fill out all fields before submitting.');
         return;
     }
     const repetition_time = document.getElementById('repetition_time').value;
