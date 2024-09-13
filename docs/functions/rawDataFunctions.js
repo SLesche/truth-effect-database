@@ -155,9 +155,12 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
 
     document.getElementById('rawDataSurvey').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
-        const collected_data = await collectRawData();
-        if (validateRawData(collected_data)){
-            updateRawDataSurvey(control, publication_idx, study_idx);
+        const allow_submission = checkOtherSubmissions(control, publication_idx, study_idx);
+        if (allow_submission) {
+            const collected_data = await collectRawData();
+            if (validateRawData(collected_data)){
+                updateRawDataSurvey(control, publication_idx, study_idx);
+            }
         }
     });
 }
@@ -200,6 +203,15 @@ function validateRawData(raw_data) {
     return true;
 }
 
+function checkOtherSubmissions(control, publication_idx, study_idx) {
+    const study_info = control.publication_info[publication_idx].study_info[study_idx];
+    if (!study_info.condition_data.validated || !study_info.repetition_data.validated) {
+        alert('Please enter information about the experimental conditions and repetitions before submitting the raw data.');
+        return false;
+    }
+
+    return true;
+}
 async function updateRawDataSurvey(control, publication_idx, study_idx) {
     raw_data = await collectRawData();
 
