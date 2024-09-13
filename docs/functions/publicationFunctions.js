@@ -93,6 +93,7 @@ function initializePublicationSurvey(control, publication_idx) {
         <form id="publicationSurvey" class = "survey-form">
             <label for="authors" class = "survey-label">Who are the authors of the publication?</label>
             <input type="text" id="authors" name="authors" value="${publication.authors || ''}" required><br>
+            <p class="survey-label-additional-info">Please list only the surnames of the authors separated by comma, i.e. "Smith, Müller, Garcia".</p>
 
             <label for="apa_reference" class = "survey-label">Please provide an APA7 style reference for the publication:</label>
             <input type="text" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}" required><br>
@@ -103,8 +104,9 @@ function initializePublicationSurvey(control, publication_idx) {
             <label for="country" class = "survey-label">In what country was the study conducted?</label>
             <input type="text" id="country" name="country" value="${publication.country || ''}" required><br>
 
-            <label for="keywords" class = "survey-label">What are the keywords associated with the publication? Separate the keywords by commas.</label>
+            <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
             <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}" required><br>
+            <p class="survey-label-additional-info">Separate the keywords by commas: "keyword 1, keyword 2, keyword 3</p>
             
             <label for="contact" class = "survey-label">Provide contact information for further questions.</label>
             <input type="text" id="contact" name="contact" value="${publication.contact || ''}" required><br>

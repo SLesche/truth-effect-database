@@ -56,8 +56,9 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         <p>Lastly, we will guide you through the process of uploading your raw data, ensuring that your dataset is accurately and fully represented in our database. This step is crucial for allowing others to reanalyze or build upon your work.</p>
         
         <form id="repetitionSurvey" class="survey-form">
-            <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session. (0 if it is the first session)</label>
+            <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session.</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
+            <p class="survey-label-additional-info">This should be "0", if it is the first session. It would be "60", if the session was conducted one hour after the first session.</p>
 
             <label for="repetition_location" class="survey-label">Where was this session conducted? (Lab / Online)</label>
             <input type="text" id="repetition_location" name="repetition_location"><br>
@@ -104,7 +105,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             </div>
 
             <fieldset id="responseDeadlineFieldset" ${repetition_data.response_deadline == 1 ? '' : 'disabled'}>
-                <label for="response_deadline_s" class="survey-label">How long did participants have to respond?</label>
+                <label for="response_deadline_s" class="survey-label">How long (in seconds) did participants have to respond?</label>
                 <input type="number" id="response_deadline_s" name="response_deadline_s" step="0.5"><br>
             </fieldset>
 

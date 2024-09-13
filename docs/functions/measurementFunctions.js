@@ -59,9 +59,12 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
         <form id="measurementSurvey">                    
             <label for="measureInputDetails" class="survey-label">Add any additional variables you measured in the study:</label>
             <input type="text" id="measureInputDetails" name="measureInputDetails"><br>
+            <p class="survey-label-additional-info">This can be detailed and may include the scale used to measure the variable: "APM Performance" or "BFI-2-XS".</p>
 
-            <label for="measureInputConstruct" class="survey-label">Add the name of the construct</label>
+            <label for="measureInputConstruct" class="survey-label">Add the name of the construct:</label>
             <input type="text" id="measureInputConstruct" name="measureInputConstruct"><br>
+            <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
+
 
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
 

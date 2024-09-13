@@ -102,7 +102,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
             <label for="truth_rating_steps" class="survey-label">How many steps did your rating scale have?</label>
             <input type="number" id="truth_rating_steps" name="truth_rating_steps" value="${study_data.truth_rating_steps || ''}" required><br>
-            
+            <p class="survey-label-additional-info">For example, a 7-point Likert Scale would have 7 steps.</p>
+
             <label for="statement_set_select" class="survey-label">Select the statement set used:</label>
             <select id="statement_set_select" name="statement_set_select" required>
                 <option value="">Select a statement set</option>
@@ -247,8 +248,6 @@ function collectStudyData() {
         has_secondary_tasks: secondary_tasks,
         secondary_task_type: secondary_task_type,
         secondary_task_name: secondary_task_name,
-        // So we can have updates on validation status
-        validated: true,
     }
 
     return study_data;
