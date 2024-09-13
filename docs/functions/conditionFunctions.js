@@ -57,7 +57,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
         
         <form id="conditionSurvey" class="survey-form">
             <label for="has_within_conditions" class="survey-label">Does this data contain any within conditions?</label>
-            <div class="form-item">
+            <div class="form-item" id = "has_within_conditions">
                 <label><input type="radio" name="has_within_conditions" value="1" ${condition_data.has_within_conditions == 1 ? 'checked' : ''}/>Yes</label>
                 <label><input type="radio" name="has_within_conditions" value="0" ${condition_data.has_within_conditions == 0 ? 'checked' : ''}/>No</label>
             </div>
@@ -72,12 +72,12 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
 
                 <button type="button" onclick="addWithinCondition()" class="add-button">Add Condition</button><br><br>
 
-                <label class="survey-label">List of Conditions:</label>
+                <label class="survey-label" id = "within_conditions_list" style = "display: none;">List of within conditions:</label>
                 <ul id="withinConditionsList" class = "list-of-entries"></ul>
             </fieldset>
 
             <label for="has_between_conditions" class="survey-label">Does this data contain any between conditions?</label>
-            <div class="form-item">
+            <div class="form-item" id = "has_between_conditions">
                 <label><input type="radio" name="has_between_conditions" value="1" ${condition_data.has_between_conditions == 1 ? 'checked' : ''}/>Yes</label>
                 <label><input type="radio" name="has_between_conditions" value="0" ${condition_data.has_between_conditions == 0 ? 'checked' : ''}/>No</label>
             </div>
@@ -91,7 +91,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
 
                 <button type="button" onclick="addBetweenCondition()" class="add-button">Add Condition</button><br><br>
 
-                <label class="survey-label">List of Conditions:</label>
+                <label class="survey-label" id = "between_conditions_list" style = "display: none;">List of between conditions:</label>
                 <ul id="betweenConditionsList" class = "list-of-entries"></ul>
             </fieldset>
             <button type="submit" class="survey-button">Submit</button>
@@ -101,6 +101,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
 
     // Display previous submission if available
     if (condition_data && condition_data.has_within_conditions == 1) {
+        document.getElementById("within_conditions_list").style.display = "block";
         var withinConditionsList = document.getElementById("withinConditionsList");
         condition_data.within_condition_details.forEach(function(condition) {
             var li = document.createElement("li");
@@ -112,6 +113,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     }
 
     if (condition_data && condition_data.has_between_conditions == 1) {
+        document.getElementById("between_conditions_list").style.display = "block";
         var betweenConditionsList = document.getElementById("betweenConditionsList");
         condition_data.between_condition_details.forEach(function(condition) {
             var li = document.createElement("li");
@@ -164,8 +166,16 @@ function addWithinCondition() {
         // Clear the input fields
         document.getElementById('within_condition_name').value = '';
         document.getElementById('within_condition_identifier').value = '';
+        document.getElementById("within_conditions_list").style.display = "block";
+
     } else {
-        alert('Please enter both a condition name and an identifier.');
+        if (!condition_name) {
+            var alert_message = 'Please enter a condition name.';
+            displayValidationError("within_condition_name", alert_message);
+        } else {
+            var alert_message = 'Please enter an identifier for the condition.';
+            displayValidationError("within_condition_identifier", alert_message);
+        }   
     }
 }
 
@@ -188,8 +198,16 @@ function addBetweenCondition() {
         // Clear the input fields
         document.getElementById('between_condition_name').value = '';
         document.getElementById('between_condition_identifier').value = '';
+        document.getElementById("between_conditions_list").style.display = "block";
+
     } else {
-        alert('Please enter both a condition name and an identifier.');
+        if (!condition_name) {
+            var alert_message = 'Please enter a condition name.';
+            displayValidationError("between_condition_name", alert_message);
+        } else {
+            var alert_message = 'Please enter an identifier for the condition.';
+            displayValidationError("between_condition_identifier", alert_message);
+        }   
     }
 }
 
@@ -223,32 +241,69 @@ function collectBetweenConditions() {
 
 function collectConditionData() {
     // Get values from the input fields
-    const has_within_conditions = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? 1 : 0;
-    const within_condition_details = document.querySelector('input[name="has_within_conditions"]:checked').value === "1" ? collectWithinConditions() : [];
-    const has_between_conditions = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? 1 : 0;
-    const between_condition_details = document.querySelector('input[name="has_between_conditions"]:checked').value === "1" ? collectBetweenConditions() : [];
+    const has_within_conditions = getRadioButtonSelection("has_within_conditions");
+    const within_condition_details = has_within_conditions == 1 ? collectWithinConditions() : '';
+    const has_between_conditions = getRadioButtonSelection("has_between_conditions");
+    const between_condition_details = has_between_conditions == 1 ? collectBetweenConditions() : '';
    
     // Store the values in the control object
     condition_data = {
         has_within_conditions: has_within_conditions,
-        within_condition_details: has_within_conditions ? within_condition_details : [],
+        within_condition_details: within_condition_details,
         has_between_conditions: has_between_conditions,
-        between_condition_details: has_between_conditions ? between_condition_details : [],
+        between_condition_details: between_condition_details,
     };
 
     return condition_data
 }
 
 function validateConditionData(condition_data){
+    clearValidationMessages();
+    
+    var alert_message = 'This field does not match validation criteria.';
+
+    if (condition_data.has_within_conditions == null) {
+        alert_message = 'Please select whether the data contains within conditions.';
+        displayValidationError("has_within_conditions", alert_message);
+        return false;
+    }
+
+    if (condition_data.has_between_conditions == null) {
+        alert_message = 'Please select whether the data contains between conditions.';
+        displayValidationError("has_between_conditions", alert_message);
+        return false;
+    }
+
     // if has_within_conditions is true, check if there are any conditions
     if (condition_data.has_within_conditions == 1 && condition_data.within_condition_details.length < 2) {
-        alert('Please add at least one two within conditions.');
+        alert_message = 'Please add at least one two within conditions.';
+        displayValidationError("withinConditionsList", alert_message);
         return false;
     }
     //same for between conditions
     if (condition_data.has_between_conditions == 1 && condition_data.between_condition_details.length < 2) {
-        alert('Please add at least one two between conditions.');
+        alert_message = 'Please add at least one two between conditions.';
+        displayValidationError("betweenConditionsList", alert_message);
         return false;
+    }
+
+    // Check if identifiers are unique
+    if (condition_data.has_within_conditions == 1) {
+        const identifiers = condition_data.within_condition_details.map(condition => condition.identifier);
+        if (new Set(identifiers).size !== identifiers.length) {
+            alert_message = 'Identifiers for within conditions must be unique.';
+            displayValidationError("withinConditionsList", alert_message);
+            return false;
+        }
+    }
+
+    if (condition_data.has_between_conditions == 1) {
+        const identifiers = condition_data.between_condition_details.map(condition => condition.identifier);
+        if (new Set(identifiers).size !== identifiers.length) {
+            alert_message = 'Identifiers for between conditions must be unique.';
+            displayValidationError("betweenConditionsList", alert_message);
+            return false;
+        }
     }
 
     return true
