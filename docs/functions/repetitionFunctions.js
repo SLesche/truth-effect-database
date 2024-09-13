@@ -56,7 +56,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         <p>Lastly, we will guide you through the process of uploading your raw data, ensuring that your dataset is accurately and fully represented in our database. This step is crucial for allowing others to reanalyze or build upon your work.</p>
         
         <form id="repetitionSurvey" class="survey-form">
-            <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of hours since the first session. (0 if it is the first session)</label>
+            <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session. (0 if it is the first session)</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
 
             <label for="repetition_location" class="survey-label">Where was this session conducted? (Lab / Online)</label>
@@ -68,17 +68,11 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <label for="repetition_type" class="survey-label">What type was the repetition (exact / semantic)?</label>
             <input type="text" id="repetition_type" name="repetition_type"><br>
 
-            <label for="n_repetitions" class="survey-label">How many times was each statement presented?</label>
-            <input type="number" id="n_repetitions" name="n_repetitions"><br>
+            <label for="max_n_repetitions" class="survey-label">What was the maximum number of times a statement was presented during this session? Enter 1, if statements were only presented once.</label>
+            <input type="number" id="max_n_repetitions" name="max_n_repetitions"><br>
 
             <label for="n_statements" class="survey-label">How many statements were presented?</label>
             <input type="number" id="n_statements" name="n_statements"><br>
-
-            <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
-            <div class="radio-buttons">
-                <label><input type="radio" name="time_pressure" value="1"/>Yes</label>
-                <label><input type="radio" name="time_pressure" value="0"/>No</label>
-            </div>
 
             <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
             <div class="radio-buttons">
@@ -92,17 +86,29 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="repetition_instructions" value="0"/>No</label>
             </div>
 
-            <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
+            <label for="time_pressure" class="survey-label">Did the the truth judgement occur under time pressure?</label>
+            <div class="radio-buttons">
+                <label><input type="radio" name="time_pressure" value="1"/>Yes</label>
+                <label><input type="radio" name="time_pressure" value="0"/>No</label>
+            </div>
+
+            <label for="presented_until_response" class="survey-label">Were the statements presented until response?</label>
+            <div class="radio-buttons">
+                <label><input type="radio" name="presented_until_response" value="1"/>Yes</label>
+                <label><input type="radio" name="presented_until_response" value="0"/>No</label>
+            </div>
+
+            <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented? Enter "0", if they were presented until response.</label>
             <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
+
+            <label for="response_deadline_s" class="survey-label">How long did participants have to respond? Enter "99" if there was no response deadline.</label>
+            <input type="number" id="response_deadline_s" name="response_deadline_s" step="0.5"><br>
 
             <label for="percent_repeated" class="survey-label">What percentage of the statements was repeated?</label>
             <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
 
             <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
             <input type="text" id="presentation_type" name="presentation_type"><br>
-
-            <label for="secondary_task" class="survey-label">What secondary task were the participants instructed to complete (can be "none")?</label>
-            <input type="text" id="secondary_task" name="secondary_task"><br>
 
             <button type="button" onclick="addRepetitionEntry()" class="add-button">Add Repetition</button><br><br>
             <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
@@ -143,15 +149,16 @@ function validateRepetitionSubmission() {
         document.getElementById('repetition_time').value,
         document.getElementById('repetition_location').value,
         document.getElementById('repetition_type').value,
-        document.getElementById('n_repetitions').value,
+        document.getElementById('max_n_repetitions').value,
         document.getElementById('n_statements').value,
         document.querySelector('input[name="time_pressure"]:checked'),
         document.querySelector('input[name="truth_instructions"]:checked'),
+        document.querySelector('input[name="presented_until_response"]:checked').value,
         document.getElementById('presentation_time_s').value,
+        document.getElementById('response_deadline_s').value,
         document.getElementById('percent_repeated').value,
         document.getElementById('presentation_type').value,
         document.getElementById('phase').value,
-        document.getElementById('secondary_task').value,
         document.querySelector('input[name="repetition_instructions"]:checked')
     ];
 
@@ -176,18 +183,19 @@ function addRepetitionEntry() {
     const repetitionTime = document.getElementById('repetition_time').value;
     const repetitionLocation = document.getElementById('repetition_location').value;
     const repetitionType = document.getElementById('repetition_type').value;
-    const nRepetitions = document.getElementById('n_repetitions').value;
+    const maxNRepetitions = document.getElementById('max_n_repetitions').value;
     const nStatements = document.getElementById('n_statements').value;
     const timePressure = document.querySelector('input[name="time_pressure"]:checked').value === "1" ? 1 : 0;;
     const truthInstructions = document.querySelector('input[name="truth_instructions"]:checked').value === "1" ? 1 : 0;
     const presentationTime = document.getElementById('presentation_time_s').value;
+    const presentedUntilResponse = document.querySelector('input[name="presented_until_response"]:checked').value === "1" ? 1 : 0;
+    const responseDeadline = document.getElementById('response_deadline_s').value;
     const percentRepeated = document.getElementById('percent_repeated').value;
     const presentationType = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
-    const secondaryTask = document.getElementById('secondary_task').value;
     const repetitionInstructions = document.querySelector('input[name="repetition_instructions"]:checked').value === "1" ? 1 : 0;
 
-    if (repetitionTime && repetitionLocation && repetitionType && nRepetitions && nStatements && timePressure !== '' && truthInstructions !== '' && presentationTime && percentRepeated && presentationType && phase && secondaryTask && repetitionInstructions !== '') {
+    if (repetitionTime && repetitionLocation && repetitionType && maxNRepetitions && nStatements && timePressure !== '' && truthInstructions !== '' && presentationTime && percentRepeated && responseDeadline && presentedUntilResponse && presentationType && phase && repetitionInstructions !== '') {
         const repetitionsTable = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
 
         // Collect existing repetitions
@@ -198,15 +206,16 @@ function addRepetitionEntry() {
             repetition_time: repetitionTime,
             repetition_location: repetitionLocation,
             repetition_type: repetitionType,
-            n_repetitions: nRepetitions,
+            max_n_repetitions: maxNRepetitions,
             n_statements: nStatements,
             time_pressure: timePressure,
             truth_instructions: truthInstructions,
             presentation_time_s: presentationTime,
+            presented_until_response: presentedUntilResponse,
+            response_deadline_s: responseDeadline,
             percent_repeated: percentRepeated,
             presentation_type: presentationType,
             phase: phase,
-            secondary_task: secondaryTask,
             repetition_instructions: repetitionInstructions
         });
 
@@ -214,15 +223,16 @@ function addRepetitionEntry() {
         document.getElementById('repetition_time').value = '';
         document.getElementById('repetition_location').value = '';
         document.getElementById('repetition_type').value = '';
-        document.getElementById('n_repetitions').value = '';
+        document.getElementById('max_n_repetitions').value = '';
         document.getElementById('n_statements').value = '';
         document.querySelector('input[name="time_pressure"]:checked').checked = false;
         document.querySelector('input[name="truth_instructions"]:checked').checked = false;
         document.getElementById('presentation_time_s').value = '';
+        document.querySelector('input[name="presented_until_response"]:checked').checked = false;
+        document.getElementById('response_deadline_s').value = '';
         document.getElementById('percent_repeated').value = '';
         document.getElementById('presentation_type').value = '';
         document.getElementById('phase').value = '';
-        document.getElementById('secondary_task').value = '';
         document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
 
         // Display the updated summary
@@ -335,7 +345,7 @@ function modifyRepetitions(repetitions) {
         repetition_time: 'Session Time',
         repetition_location: 'Location',
         repetition_type: 'Repetition Type',
-        n_repetitions: 'N Repetitions',
+        max_n_repetitions: 'N Repetitions',
         n_statements: 'N Statements',
         time_pressure: 'Time Pressure?',
         truth_instructions: 'Truth Instructions?',
@@ -343,7 +353,6 @@ function modifyRepetitions(repetitions) {
         percent_repeated: 'Percent Repeated',
         presentation_type: 'Presentation Type',
         phase: 'Phase',
-        secondary_task: 'Secondary Task',
         repetition_instructions: 'Repetition Instructions?'
     };
 

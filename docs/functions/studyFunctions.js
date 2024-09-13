@@ -133,8 +133,19 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             <label for="percentage_female" class="survey-label">Which percentage of your participants was female?</label>
             <input type="number" step="0.01" id="percentage_female" name="percentage_female" value="${study_data.percentage_female || ''}" required><br>
 
-            <label for="external_vars" class="survey-label">Please list any external variables you measured.</label>
-            <input type="text" id="external_vars" name="external_vars" value ="${study_data.external_vars || ''}" required><br>
+            <label for "secondary_tasks" class="survey-label">Did your participants complete any secondary (distracting) tasks between exposure and test sessions?</label>
+            <div class="radio-buttons">
+                <label><input type="radio" name="secondary_tasks" value="1" ${study_data.has_secondary_tasks == 1 ? 'checked' : ''} required/>Yes</label>
+                <label><input type="radio" name="secondary_tasks" value="0" ${study_data.has_secondary_tasks == 0 ? 'checked' : ''} required/>No</label>
+            </div>
+
+            <fieldset id="secondaryTaskFieldset" ${study_data.has_secondary_tasks == 1 ? '' : 'disabled'}>
+                <label for="secondary_task_type" class="survey-label">What type of secondary task did the participants complete (verbal/numeric/figural)?</label>
+                <input type="text" id="secondary_task_type" name="secondary_task_type" value="${study_data.secondary_task_type || ''}"><br>
+
+                <label for="secondary_task_name" class="survey-label">What was the name of the secondary task employed? If you employed multiple secondary tasks, list the names separated by commas.</label>
+                <input type="text" id="secondary_task_name" name="secondary_task_name" value="${study_data.secondary_task_name || ''}"><br>
+            </fieldset>
 
             <label for="physiological_measures" class="survey-label">Did you collect any physiological data?</label>
             <div class="radio-buttons">
@@ -148,11 +159,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="cognitive_models" value="0" ${study_data.cognitive_models == 0 ? 'checked' : ''} required/>No</label>
             </div>
 
-            <label for="github" class="survey-label">If available, provide the link to the data on GitHub.</label>
-            <input type="text" id="github" name="github" value="${study_data.github || ''}" required><br>
-
-            <label for="osf" class="survey-label">If available, provide the link to the data on OSF.</label>
-            <input type="text" id="osf" name="osf" value="${study_data.osf || ''}" required><br>
+            <label for="open_data_link" class="survey-label">If available, provide the link to the data on an open access resource sharing platform.</label>
+            <input type="text" id="open_data_link" name="open_data_link" value="${study_data.open_data_link || ''}" required><br>
 
             <label for="study_comment" class="survey-label">Would you like to provide any additional information?</label>
             <textarea id="study_comment" name="study_comment" rows="4" cols="50">${study_data.study_comment || ''}</textarea><br>
@@ -176,6 +184,12 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
         });
     });
 
+    document.querySelectorAll('input[name="secondary_tasks"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('secondaryTaskFieldset').disabled = this.value == '0';
+        });
+    });
+
     // Add event listener to the form's submit button
     document.getElementById('studySurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
@@ -196,13 +210,15 @@ function collectStudyData() {
     const n_groups = document.getElementById('n_groups').value;
     const participant_age = document.getElementById('participant_age').value;
     const percentage_female = document.getElementById('percentage_female').value;
-    const external_vars = document.getElementById('external_vars').value;
     const physiological_measures = document.querySelector('input[name="physiological_measures"]:checked').value === "1" ? 1 : 0;
     const cognitive_models = document.querySelector('input[name="cognitive_models"]:checked').value === "1" ? 1 : 0;
-    const github = document.getElementById('github').value;
-    const osf = document.getElementById('osf').value;
+    const open_data_link = document.getElementById('open_data_link').value;
     const study_comment = document.getElementById('study_comment').value;
     const statement_set_select = document.getElementById('statement_set_select').value;
+
+    const secondary_tasks = document.querySelector('input[name="secondary_tasks"]:checked').value === "1" ? 1 : 0;
+    const secondary_task_type = secondary_tasks ? document.getElementById('secondary_task_type').value : '';
+    const secondary_task_name = secondary_tasks ? document.getElementById('secondary_task_name').value : '';
 
     // Store the values in the control object
     const study_data = {
@@ -215,13 +231,14 @@ function collectStudyData() {
         n_groups: n_groups,
         participant_age: participant_age,
         percentage_female: percentage_female,
-        external_vars: external_vars,
         physiological_measures: physiological_measures,
         cognitive_models: cognitive_models,
-        github: github,
-        osf: osf,
+        open_data_link: open_data_link,
         study_comment: study_comment,
         statement_set_name: statement_set_select,
+        has_secondary_tasks: secondary_tasks,
+        secondary_task_type: secondary_task_type,
+        secondary_task_name: secondary_task_name,
         // So we can have updates on validation status
         validated: true,
     }
