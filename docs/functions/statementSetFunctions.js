@@ -252,6 +252,53 @@ function validateStatementSetData(statementset_data){
     
     var alert_message = 'This field does not match validation criteria.';
 
+    // Check that the data contains the required columns
+    const required_columns = ['statement_id', 'statement_text', 'statement_accuracy'];
+    const data_columns = Object.keys(statementset_data.statement_publication_data[0]);
+    const missing_columns = required_columns.filter(column => !data_columns.includes(column));
+    if (missing_columns.length > 0) {
+        alert_message = `The uploaded file is missing the following required columns: ${missing_columns.join(', ')}`;
+        displayValidationError("statement_publication_file", alert_message);
+
+        return false;
+    }
+
+    // Check that the statement_accuracy column contains only 0s and 1s
+    const accuracy_values = statementset_data.statement_publication_data.map(row => row.statement_accuracy);
+    const invalid_accuracy_values = accuracy_values.filter(value => ![0, 1].includes(value));
+    if (invalid_accuracy_values.length > 0) {
+        alert_message = 'The statement_accuracy column should contain only 0s and 1s.';
+        displayValidationError("statement_publication_file", alert_message);
+
+        return false;
+    }
+
+    // Check that the statement ids are unique
+    const statement_ids = statementset_data.statement_publication_data.map(row => row.statement_id);
+    const unique_statement_ids = [...new Set(statement_ids)];
+    if (statement_ids.length !== unique_statement_ids.length) {
+        alert_message = 'The statement_id column should contain unique values.';
+        displayValidationError("statement_publication_file", alert_message);
+
+        return false;
+    }
+
+    // create a warning if statement_category and proportion_rated_true are missing
+    const optional_columns = ['statement_category', 'proportion_rated_true'];
+    const missing_optional_columns = optional_columns.filter(column => !data_columns.includes(column));
+    if (missing_optional_columns.length > 0) {
+        alert_message = `The uploaded file is missing the following optional columns: ${missing_optional_columns.join(', ')}`;
+        displayWarningMessage("statement_publication_file", alert_message);
+    }
+
+    // create a warning if there are any columns in the data that are not required or optional
+    const unknown_columns = data_columns.filter(column => ![...required_columns, ...optional_columns].includes(column));
+    if (unknown_columns.length > 0) {
+        alert_message = `The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`;
+        displayWarningMessage("statement_publication_file", alert_message);
+    }
+
+
     return true;
 }
 
