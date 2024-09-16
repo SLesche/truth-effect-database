@@ -211,9 +211,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         displayValidationError('raw_data_file', alert_message);
         return false;
     }
-
-    const headers = Object.keys(raw_data.data[0]);
-   
+ 
     var required_headers = ['subject', 'trial', 'response', 'repeated'];
 
     // if there were experimental conditions, add those to required headers
@@ -354,23 +352,20 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
     const statementset_name = study_info.study_data.statementset_name;
 
-    if (statementset_name === "No information") {
-        var statementset_validated = true;
-    }
+    // Example usage:
+    const statementset_index = getStatementSetIndex(statementset_name);
 
-    // Extract the number from the statementset_name
-    const match = statementset_name.match(/\d+/);
-    if (!match) {
+    // if index is null, return false
+    if (statementset_index === null) {
         var statementset_validated = false;
+    } else {
+        var statementset_validated = control.statementset_info[statementset_index].statementset_data.validated;
     }
-
-    const statementset_index = parseInt(match[0], 10) - 1;
-    var statementset_validated = control.statementset_info[statementset_index].statementset_data.validated;
     
     if (!statementset_validated || !study_info.condition_data.validated || !study_info.repetition_data.validated || !study_info.study_data.validated) {
         // Display which sections are missing
-        if (!statementset_validated) {
-            alert('Please enter information about the statement set before submitting the raw data.');
+        if (!study_info.study_data.validated) {
+            alert('Please enter information about the overall study before submitting the raw data.')
             return false;
         }
         if (!study_info.condition_data.validated) {
@@ -381,8 +376,8 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
             alert('Please enter information about the measurement sessions before submitting the raw data.')
             return false;
         }
-        if (!study_info.study_data.validated) {
-            alert('Please enter information about the overall study before submitting the raw data.')
+        if (!statementset_validated) {
+            alert('Please enter information about the statement set before submitting the raw data.');
             return false;
         }
     }

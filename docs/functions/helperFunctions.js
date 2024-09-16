@@ -193,3 +193,27 @@ function getRadioButtonSelection(radioGroupName) {
     }
     return null;
 }
+
+// Find the statementset with the given name, give null if name is "No information"
+function getStatementSetIndex(statementset_name) {
+    if (statementset_name === "No information") {
+        return null;
+    }
+
+    // Ensure statementset_name is defined and is a string
+    if (typeof statementset_name !== 'string') {
+        console.error(`Invalid statementset_name: ${statementset_name}`);
+        return null;
+    }
+
+    // Extract the number from the statementset_name
+    const match = statementset_name.match(/\d+/);
+    if (!match) {
+        console.error(`No number found in statementset_name: ${statementset_name}`);
+        return null;
+    }
+
+    const index = parseInt(match[0], 10) - 1;
+
+    return index;
+}
