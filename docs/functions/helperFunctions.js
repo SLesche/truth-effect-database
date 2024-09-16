@@ -196,7 +196,7 @@ function getRadioButtonSelection(radioGroupName) {
 
 // Find the statementset with the given name, give null if name is "No information"
 function getStatementSetIndex(statementset_name) {
-    if (statementset_name === "No information") {
+    if (statementset_name === "no information") {
         return null;
     }
 

@@ -218,25 +218,25 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
 
     if (study_info.condition_data.has_within_conditions) {
-        required_headers = required_headers.push('within_identifier');
+        required_headers.push('within_identifier');
     }
     if (study_info.condition_data.has_between_conditions) {
-        required_headers = required_headers.push('between_identifier');
+        required_headers.push('between_identifier');
     }
 
     // If there is information on statements, add that identifier to the required headers
     if (study_info.study_data.statementset_name !== "No information") {
-        required_headers = required_headers.push('statement_identifier');
+        required_headers.push('statement_identifier');
     }
 
     // If there was response time collected, add that to required headers
     if (study_info.study_data.rt_measured) {
-        required_headers = required_headers.push('rt');
+        required_headers.push('rt');
     }
 
     // if certainty measured, add that
     if (study_info.study_data.subjective_certainty) {
-        required_headers = required_headers.push('certainty');
+        required_headers.push('certainty');
     }
 
     // Check if all required headers are present
@@ -356,8 +356,10 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
     const statementset_index = getStatementSetIndex(statementset_name);
 
     // if index is null, return false
-    if (statementset_index === null) {
+    if (statementset_index === null && statementset_name !== "no information") {
         var statementset_validated = false;
+    } else if (statementset_name === "no information") {
+        var statementset_validated = true;
     } else {
         var statementset_validated = control.statementset_info[statementset_index].statementset_data.validated;
     }
