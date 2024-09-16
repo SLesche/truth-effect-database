@@ -50,11 +50,8 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     document.getElementById("content").innerHTML = `
     <div class="display-text">
         <h1>${study_name}: Measurement Sessions</h1>
-        <p>This section focuses on gathering detailed information about a specific dataset. Your answers here should pertain to the same sample of participants throughout, ensuring consistency in your responses.</p>
-        <p>We’ll also ask about any experimental manipulations you conducted within the dataset. This is important so you can provide context if anything unusual occurred during the study, helping others understand potential variations in the data.</p>
-        <p>Additionally, you’ll be asked about the measurement occasions and how you administered the statements to participants. This will help clarify the timing, format, and procedure used during data collection.</p>
-        <p>Lastly, we will guide you through the process of uploading your raw data, ensuring that your dataset is accurately and fully represented in our database. This step is crucial for allowing others to reanalyze or build upon your work.</p>
-        
+        <p>This section focuses on gathering detailed information about the separate times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
+        <p>Throughout this section, it’s important that your answers remain consistent and refer to the same sample of participants for all sessions. You’ll be asked to provide details on the timing, context, and procedures used during each session to help clarify how data was collected.</p>
         <form id="repetitionSurvey" class="survey-form">
             <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session.</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
@@ -63,10 +60,10 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <label for="repetition_location" class="survey-label">Where was this session conducted? (Lab / Online)</label>
             <input type="text" id="repetition_location" name="repetition_location"><br>
 
-            <label for="phase" class="survey-label">What phase was this repetition (i.e. exposure / test)?</label>
+            <label for="phase" class="survey-label">What phase was this session (i.e. exposure / test)?</label>
             <input type="text" id="phase" name="phase"><br>
 
-            <label for="repetition_type" class="survey-label">What type was the repetition (exact / semantic)?</label>
+            <label for="repetition_type" class="survey-label">What type was the session (exact / semantic)?</label>
             <input type="text" id="repetition_type" name="repetition_type"><br>
 
             <label for="max_n_repetitions" class="survey-label">What was the maximum number of times a statement was presented during this session? Enter 1, if statements were only presented once.</label>
@@ -115,8 +112,8 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
             <input type="text" id="presentation_type" name="presentation_type"><br>
 
-            <button type="button" onclick="addRepetitionEntry()" class="add-button">Add Repetition</button><br><br>
-            <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Repetitions</label>
+            <button type="button" onclick="addRepetitionEntry()" class="add-button">Add Session</button><br><br>
+            <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Sessions</label>
             <div id="repetitionTableContainer" class = "table-container" style = "display: none;">
                 <table id="repetitionsTable">
                     <thead>
@@ -206,7 +203,7 @@ function validateRepetitionData(repetition_data) {
     var alert_message = 'This field does not match validation criteria.';
     // Make sure it has at least one entry
     if (repetition_data.length === 0) {
-        alert_message = 'Please add at least one repetition.';
+        alert_message = 'Please add at least one session.';
         displayValidationError('listOfRepetitions', alert_message);
         document.getElementById('listOfRepetitions').style.display = 'block';
 
@@ -215,7 +212,7 @@ function validateRepetitionData(repetition_data) {
 
     // Check that the first entry of repetition time is 0
     if (parseInt(repetition_data[0].repetition_time) !== 0) {
-        alert_message = 'The first repetition time must be 0.';
+        alert_message = 'The first session time must be 0.';
         displayValidationError('listOfRepetitions', alert_message);
         return false;
     }
@@ -223,7 +220,7 @@ function validateRepetitionData(repetition_data) {
     // Check that the repetition time increases steadily over sessions
     for (let i = 1; i < repetition_data.length; i++) {
         if (parseInt(repetition_data[i].repetition_time) <= parseInt(repetition_data[i - 1].repetition_time)) {
-            alert_message = 'Repetition times must increase over sessions.';
+            alert_message = 'Session times must increase over sessions.';
             displayValidationError('listOfRepetitions', alert_message);
             return false;
         }

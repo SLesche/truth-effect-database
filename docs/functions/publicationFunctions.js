@@ -86,9 +86,8 @@ function initializePublicationSurvey(control, publication_idx) {
         <p>Before you begin entering your data, please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
         <p>In this section, you'll be asked to provide key information about the publication, such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
         <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
-        <p>Within each study, you can further break down your data by adding multiple datasets. This allows you to organize your data effectively, especially if your study contains several experiments or data collections.</p>
         <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
-        <p>Feel free to add as many studies and datasets as needed.</p>        
+        <p>Feel free to add as many studies as needed.</p>        
         
         <form id="publicationSurvey" class = "survey-form">
             <label for="authors" class = "survey-label">Who are the authors of the publication?</label>

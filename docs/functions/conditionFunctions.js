@@ -48,13 +48,10 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
-    <div class="display-text">
-        <h1>${study_name}: Experimental Conditions</h1>
-        <p>This section focuses on gathering detailed information about a specific dataset. Your answers here should pertain to the same sample of participants throughout, ensuring consistency in your responses.</p>
-        <p>We’ll also ask about any experimental manipulations you conducted within the dataset. This is important so you can provide context if anything unusual occurred during the study, helping others understand potential variations in the data.</p>
-        <p>Additionally, you’ll be asked about the measurement occasions and how you administered the statements to participants. This will help clarify the timing, format, and procedure used during data collection.</p>
-        <p>Lastly, we will guide you through the process of uploading your raw data, ensuring that your dataset is accurately and fully represented in our database. This step is crucial for allowing others to reanalyze or build upon your work.</p>
-        
+    <div class="display-text">      
+    <h1>${study_name}: Experimental Conditions</h1>
+    <p>This section is designed to collect detailed information about the experimental conditions of your study. Please ensure that your responses are consistent throughout, referring to the same sample of participants.</p>
+    <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
         <form id="conditionSurvey" class="survey-form">
             <label for="has_within_conditions" class="survey-label">Does this data contain any within conditions?</label>
             <div class="form-item" id = "has_within_conditions">
