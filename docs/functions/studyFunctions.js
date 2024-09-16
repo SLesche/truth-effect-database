@@ -109,6 +109,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <option value="">Select a statement set</option>
                 <!-- Options will be populated dynamically -->
             </select><br>
+            <p class="survey-label-additional-info">Navigate to "Sets of Statements" in the side-panel and add a statement set if you do not see your statement set here.</p>
+
 
             <label for="subjective_certainty" class="survey-label">Was subjective certainty measured?</label>
             <div class="radio-buttons" id = "subjective_certainty">
@@ -312,6 +314,12 @@ function populateStatementSets(control, publication_idx, study_idx) {
     defaultOption.value = '';
     defaultOption.textContent = 'Select a statement set';
     statementSetSelect.appendChild(defaultOption);
+
+    // Add the option that they do not have a statement set	
+    const noStatementSetOption = document.createElement('option');
+    noStatementSetOption.value = 'no information';
+    noStatementSetOption.textContent = 'No available information on the statements.';
+    statementSetSelect.appendChild(noStatementSetOption);
 
     // Populate the drop-down with statement sets
     for (const key in control.statementset_info) {

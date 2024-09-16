@@ -95,7 +95,7 @@ function addStatementOverview(control) {
     listItem.classList.add("active");
 
     // Open one new Statement
-    addStatementSet(nestedList, control);
+    //addStatementSet(nestedList, control);
 }
 
 function initializeStatementSetSurvey(control, statementset_idx) {
