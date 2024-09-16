@@ -104,8 +104,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             <input type="number" id="truth_rating_steps" name="truth_rating_steps" value="${study_data.truth_rating_steps || ''}"><br>
             <p class="survey-label-additional-info">For example, a 7-point Likert Scale would have 7 steps.</p>
 
-            <label for="statement_set_name" class="survey-label">Select the statement set used:</label>
-            <select id="statement_set_name" name="statement_set_name">
+            <label for="statementset_name" class="survey-label">Select the statement set used:</label>
+            <select id="statementset_name" name="statementset_name">
                 <option value="">Select a statement set</option>
                 <!-- Options will be populated dynamically -->
             </select><br>
@@ -226,7 +226,7 @@ function collectStudyData() {
     const cognitive_models = getRadioButtonSelection('cognitive_models');
     const open_data_link = document.getElementById('open_data_link').value;
     const study_comment = document.getElementById('study_comment').value;
-    const statement_set_name = document.getElementById('statement_set_name').value;
+    const statementset_name = document.getElementById('statementset_name').value;
 
     const secondary_tasks = getRadioButtonSelection('secondary_tasks');
     const secondary_task_type = secondary_tasks == 1 ? document.getElementById('secondary_task_type').value : '';
@@ -247,7 +247,7 @@ function collectStudyData() {
         cognitive_models: cognitive_models,
         open_data_link: open_data_link,
         study_comment: study_comment,
-        statement_set_name: statement_set_name,
+        statementset_name: statementset_name,
         secondary_tasks: secondary_tasks,
         secondary_task_type: secondary_task_type,
         secondary_task_name: secondary_task_name,
@@ -264,7 +264,7 @@ function validateStudyData(study_data) {
 
     var required_keys = [
         'truth_rating_scale', 'truth_rating_steps', 'subjective_certainty', 'rt_measured', 'n_groups', 'participant_age',
-        'percentage_female', 'physiological_measures', 'cognitive_models', 'statement_set_name', 'secondary_tasks',
+        'percentage_female', 'physiological_measures', 'cognitive_models', 'statementset_name', 'secondary_tasks',
     ];
 
     if (study_data.secondary_tasks == 1) {
@@ -302,7 +302,7 @@ function updateStudySurvey(control, publication_idx, study_idx) {
 }
 
 function populateStatementSets(control, publication_idx, study_idx) {
-    const statementSetSelect = document.getElementById('statement_set_name');
+    const statementSetSelect = document.getElementById('statementset_name');
     
     const study_data = control.publication_info[publication_idx].study_info[study_idx].study_data;
 
@@ -330,8 +330,8 @@ function populateStatementSets(control, publication_idx, study_idx) {
     }
 
     // Set the default value
-    if (study_data.statement_set_name) {
-        statementSetSelect.value = study_data.statement_set_name;
+    if (study_data.statementset_name) {
+        statementSetSelect.value = study_data.statementset_name;
     } else {
         statementSetSelect.value = ''; // Default to "Select a statement set" option
     }

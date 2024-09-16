@@ -214,9 +214,39 @@ function validateRawData(raw_data) {
 
 function checkOtherSubmissions(control, publication_idx, study_idx) {
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
-    if (!study_info.condition_data.validated || !study_info.repetition_data.validated) {
-        alert('Please enter information about the experimental conditions and repetitions before submitting the raw data.');
-        return false;
+    const statementset_name = study_info.study_data.statementset_name;
+
+    if (statementset_name === "No information") {
+        var statementset_validated = true;
+    }
+
+    // Extract the number from the statementset_name
+    const match = statementset_name.match(/\d+/);
+    if (!match) {
+        var statementset_validated = false;
+    }
+
+    const statementset_index = parseInt(match[0], 10) - 1;
+    var statementset_validated = control.statementset_info[statementset_index].statementset_data.validated;
+    
+    if (!statementset_validated || !study_info.condition_data.validated || !study_info.repetition_data.validated || !study_info.study_data.validated) {
+        // Display which sections are missing
+        if (!statementset_validated) {
+            alert('Please enter information about the statement set before submitting the raw data.');
+            return false;
+        }
+        if (!study_info.condition_data.validated) {
+            alert('Please enter information about the experimental conditions before submitting the raw data.');
+            return false;
+        }
+        if (!study_info.repetition_data.validated) {
+            alert('Please enter information about the measurement sessions before submitting the raw data.')
+            return false;
+        }
+        if (!study_info.study_data.validated) {
+            alert('Please enter information about the overall study before submitting the raw data.')
+            return false;
+        }
     }
 
     return true;
