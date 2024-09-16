@@ -54,7 +54,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
             <ul>
                 <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
                 <li>It is crucial that the columns you do include have the exact names we specified. This consistency is essential for accurate integration and analysis.</li>
-                <li>Make sure that your conditions are labeled exactly as indicated in the instructions above. This ensures that your data can be correctly interpreted in the context of the study.</li>
+                <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Experimental Conditions" survey. This ensures that your data can be correctly interpreted in the context of the study.</li>
             </ul>
             
             <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
@@ -62,6 +62,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <table>
                     <tr>
                         <th>subject</th>
+                        <th>session</th>
                         <th>trial</th>
                         <th>within_identifier</th>
                         <th>between_identifier</th>
@@ -77,6 +78,55 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                         <td>1</td>
                         <td>1</td>
                         <td>1</td>
+                        <td>1</td>
+                        <td>0.64</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>0.75</td>
+                        <td>7</td>
+                        <td>1</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0.75</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>0.76</td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
                         <td>0.64</td>
                         <td>3</td>
                         <td>0</td>
@@ -86,6 +136,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                         <td>1</td>
                         <td>2</td>
                         <td>2</td>
+                        <td>2</td>
                         <td>1</td>
                         <td>2</td>
                         <td>0.75</td>
@@ -94,6 +145,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                         <td>7</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>2</td>
                         <td>1</td>
                         <td>1</td>
@@ -105,6 +157,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                         <td>3</td>
                     </tr>
                     <tr>
+                        <td>2</td>
                         <td>2</td>
                         <td>2</td>
                         <td>2</td>
@@ -212,7 +265,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         return false;
     }
  
-    var required_headers = ['subject', 'trial', 'response', 'repeated'];
+    var required_headers = ['subject', 'session', 'trial', 'response', 'repeated'];
 
     // if there were experimental conditions, add those to required headers
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
@@ -254,6 +307,15 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     if (unknown_columns.length > 0) {
         alert_message = `The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`;
         displayWarningMessage('raw_data_file', alert_message);
+    }
+
+    // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
+    const unique_sessions = [...new Set(raw_data.data.map(row => row.session))];
+    const num_expected_sessions = study_info.repetition_data.length;
+    if (unique_sessions.length !== num_expected_sessions) {
+        alert_message = `The number of unique sessions in the uploaded file (${unique_sessions.length}) does not match the number of sessions specified in the measurement sessions (${num_expected_sessions}).`;
+        displayValidationError('raw_data_file', alert_message);
+        return false;
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
