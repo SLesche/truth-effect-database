@@ -123,7 +123,20 @@ function printProgressReport(progress_report){
     return html;
 }
 
-function submitData(control){
+function submitData(control) {
     console.log(control);
+    // Write the data into a json file
+    const submission_data = JSON.stringify(control);
+
+    // Download the data locally
+    const blob = new Blob([submission_data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "submission.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
     alert("Data submitted successfully!");
 }
