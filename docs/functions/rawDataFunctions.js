@@ -167,7 +167,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
         const allow_submission = checkOtherSubmissions(control, publication_idx, study_idx);
         if (allow_submission) {
             const collected_data = await collectRawData();
-            if (validateRawData(collected_data) || control.testing){
+            if (validateRawData(collected_data, control, publication_idx, study_idx) || control.testing){
                 updateRawDataSurvey(control, publication_idx, study_idx);
             }
         }
@@ -203,11 +203,149 @@ async function collectRawData() {
     }
 }
 
-function validateRawData(raw_data) {
+function validateRawData(raw_data, control, publication_idx, study_idx) {
+    var alert_message = '';
+
     if (!raw_data.raw_data_file) {
-        alert('Please upload a file containing the raw data.');
+        alert_message = 'Please upload a file containing the raw data.';
+        displayValidationError('raw_data_file', alert_message);
         return false;
     }
+
+    const headers = Object.keys(raw_data.data[0]);
+   
+    var required_headers = ['subject', 'trial', 'response', 'repeated'];
+
+    // if there were experimental conditions, add those to required headers
+    const study_info = control.publication_info[publication_idx].study_info[study_idx];
+
+    if (study_info.condition_data.has_within_conditions) {
+        required_headers = required_headers.push('within_identifier');
+    }
+    if (study_info.condition_data.has_between_conditions) {
+        required_headers = required_headers.push('between_identifier');
+    }
+
+    // If there is information on statements, add that identifier to the required headers
+    if (study_info.study_data.statementset_name !== "No information") {
+        required_headers = required_headers.push('statement_identifier');
+    }
+
+    // If there was response time collected, add that to required headers
+    if (study_info.study_data.rt_measured) {
+        required_headers = required_headers.push('rt');
+    }
+
+    // if certainty measured, add that
+    if (study_info.study_data.subjective_certainty) {
+        required_headers = required_headers.push('certainty');
+    }
+
+    // Check if all required headers are present
+    const data_columns = Object.keys(raw_data.data[0]);
+
+    const missing_headers = required_headers.filter(header => !data_columns.includes(header));
+    if (missing_headers.length > 0) {
+        alert_message = `The following columns are missing from the uploaded file: ${missing_headers.join(', ')}.`;
+        displayValidationError('raw_data_file', alert_message);
+        return false;
+    }
+
+    // check for unknown columns
+    const unknown_columns = data_columns.filter(header => !required_headers.includes(header));
+    if (unknown_columns.length > 0) {
+        alert_message = `The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`;
+        displayWarningMessage('raw_data_file', alert_message);
+    }
+
+    // if there were experimental conditions, check that all identifiers are present in the experimental conditions
+    if (study_info.condition_data.has_within_conditions) {
+        const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))];
+
+        // Check for missing within-subject condition identifiers
+        const missing_within_identifiers = study_info.condition_data.within_conditions.filter(identifier => !within_identifiers.includes(identifier));
+        
+        // Check for extra within-subject condition identifiers
+        const extra_within_identifiers = within_identifiers.filter(identifier => !study_info.condition_data.within_conditions.includes(identifier));
+
+        let alert_messages = [];
+
+        if (missing_within_identifiers.length > 0) {
+            alert_messages.push(`The following within-subject condition identifiers are missing from the uploaded file: ${missing_within_identifiers.join(', ')}.`);
+        }
+
+        if (extra_within_identifiers.length > 0) {
+            alert_messages.push(`The following within-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_within_identifiers.join(', ')}.`);
+        }
+
+        if (alert_messages.length > 0) {
+            displayValidationError('raw_data_file', alert_messages.join(' '));
+            return false;
+        }
+    }
+
+    if (study_info.condition_data.has_between_conditions) {
+        const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier))];
+
+        // Check for missing between-subject condition identifiers
+        const missing_between_identifiers = study_info.condition_data.between_conditions.filter(identifier => !between_identifiers.includes(identifier));
+        
+        // Check for extra between-subject condition identifiers
+        const extra_between_identifiers = between_identifiers.filter(identifier => !study_info.condition_data.between_conditions.includes(identifier));
+
+        let alert_messages = [];
+
+        if (missing_between_identifiers.length > 0) {
+            alert_messages.push(`The following between-subject condition identifiers are missing from the uploaded file: ${missing_between_identifiers.join(', ')}.`);
+        }
+
+        if (extra_between_identifiers.length > 0) {
+            alert_messages.push(`The following between-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_between_identifiers.join(', ')}.`);
+        }
+
+        if (alert_messages.length > 0) {
+            displayValidationError('raw_data_file', alert_messages.join(' '));
+            return false;
+        }
+    }
+
+    // If there is information on the statement, same thing with statement identifiers
+    if (study_info.study_data.statementset_name !== "No information") {
+        const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))];
+
+        // Check for missing statement identifiers
+        const missing_statement_identifiers = study_info.statement_data.statement_identifiers.filter(identifier => !statement_identifiers.includes(identifier));
+        
+        // Check for extra statement identifiers
+        const extra_statement_identifiers = statement_identifiers.filter(identifier => !study_info.statement_data.statement_identifiers.includes(identifier));
+
+        let alert_messages = [];
+
+        if (missing_statement_identifiers.length > 0) {
+            alert_messages.push(`The following statement identifiers are missing from the uploaded file: ${missing_statement_identifiers.join(', ')}.`);
+        }
+
+        if (extra_statement_identifiers.length > 0) {
+            alert_messages.push(`The following statement identifiers in the uploaded file were not previously added to the statements: ${extra_statement_identifiers.join(', ')}.`);
+        }
+
+        if (alert_messages.length > 0) {
+            displayValidationError('raw_data_file', alert_messages.join(' '));
+            return false;
+        }
+    }
+
+    // if rt is present, check that the average value is below 100, otherwise say that it is likely that the data is not in seconds
+    if (study_info.study_data.rt_measured) {
+        const rts = raw_data.data.map(row => row.rt);
+        const average_rt = rts.reduce((a, b) => a + b) / rts.length;
+
+        if (average_rt > 100) {
+            alert_message = 'The average response time in the uploaded file is above 100. Please check if the data is in seconds.';
+            displayWarningMessage('raw_data_file', alert_message);
+        }
+    }
+
 
     return true;
 }
