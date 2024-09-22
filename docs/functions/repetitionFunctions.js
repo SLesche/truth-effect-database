@@ -90,7 +90,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="presented_until_response" value="0"/>No</label>
             </div>
 
-            <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 1 ? '' : 'disabled'}>
+            <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 0 ? '' : 'disabled'}>
                 <label for="presentation_time_s" class="survey-label">For how long (in seconds) was each statement presented?</label>
                 <input type="number" id="presentation_time_s" name="presentation_time_s" step="0.5"><br>
             </fieldset>
@@ -139,7 +139,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 
     document.querySelectorAll('input[name="presented_until_response"]').forEach(radio => {
         radio.addEventListener('change', function() {
-            document.getElementById('presentationTimeFieldset').disabled = this.value == '0';
+            document.getElementById('presentationTimeFieldset').disabled = this.value == '1';
         });
     });
 
@@ -180,7 +180,7 @@ function validateRepetitionSubmission() {
 
     var required_fields = ['repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
     
-    if (fields.presented_until_response == 1) {
+    if (fields.presented_until_response == 0) {
         required_fields.push('presentation_time_s');
     }
     
