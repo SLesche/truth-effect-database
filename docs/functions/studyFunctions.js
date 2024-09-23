@@ -56,18 +56,17 @@ function addStudy(parentElement, control, publication_idx) {
         initializeStudySurvey(control, publication_idx, study_idx);
     });
 
-    // Add measurement survey
-    addMeasurement(nestedList, control, publication_idx, study_idx);
+    // Add repetition survey
+    addRepetition(nestedList, control, publication_idx, study_idx);
 
     // Add condition survey
     addConditions(nestedList, control, publication_idx, study_idx);
 
-    // Add repetition survey
-    addRepetition(nestedList, control, publication_idx, study_idx);
-
     // Add raw data survey
     addRawData(nestedList, control, publication_idx, study_idx);
-
+    
+    // Add measurement survey
+    addMeasurement(nestedList, control, publication_idx, study_idx);
 }
 
 function initializeStudySurvey(control, publication_idx, study_idx) {

@@ -52,6 +52,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         <h1>${study_name}: Measurement Sessions</h1>
         <p>This section focuses on gathering detailed information about the times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
         <p>Importantly, this is also where you have to enter multiple sessions if they <b>differed</b> between or within participants. If you had two sessions for all participants - an exposure and a test session - but manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct sessions. One common exposure session with identical settings for all participants and two different test sessions encoding the two experimental groups.</p>
+        <p>If you manipulated any part of the experiment (between or within participants) and cannot endoce this through different sessions because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Experimental Conditions" tab.</p>
         
         <h2>Session Information:</h2>
         <form id="repetitionSurvey" class="survey-form">

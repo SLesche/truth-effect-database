@@ -50,10 +50,10 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     document.getElementById("content").innerHTML = `
     <div class="display-text">      
     <h1>${study_name}: Experimental Conditions</h1>
-    <p>This section is designed to collect detailed information about the experimental conditions of your study. Please ensure that your responses are consistent throughout, referring to the same sample of participants.</p>
+    <p>This section is designed to collect detailed information about the experimental conditions of your study. Importantly, this should only pertain to manipulations not already encoded through other parts of the questionnaire. For example, the within condition "repeated vs. new statement" should be encoded in its own column in the raw data and not here. Similarly, manipulations of the measurement sessions should be endoced through different measurement sessions in the questionnaire "Measurement Sessions" and then be encoded in the column "session". Only those manipulations that cannot be adequately captured by those parts of the questionnaire should be added here. For example, a between condition of "old vs. young" participants should be coded here.</p>
     <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
         <form id="conditionSurvey" class="survey-form">
-            <label for="has_within_conditions" class="survey-label">Does this data contain any within conditions?</label>
+            <label for="has_within_conditions" class="survey-label">Does this data contain any additional within conditions?</label>
             <div class="form-item" id = "has_within_conditions">
                 <label><input type="radio" name="has_within_conditions" value="1" ${condition_data.has_within_conditions == 1 ? 'checked' : ''}/>Yes</label>
                 <label><input type="radio" name="has_within_conditions" value="0" ${condition_data.has_within_conditions == 0 ? 'checked' : ''}/>No</label>
@@ -73,7 +73,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
                 <ul id="withinConditionsList" class = "list-of-entries"></ul>
             </fieldset>
 
-            <label for="has_between_conditions" class="survey-label">Does this data contain any between conditions?</label>
+            <label for="has_between_conditions" class="survey-label">Does this data contain any additional between conditions?</label>
             <div class="form-item" id = "has_between_conditions">
                 <label><input type="radio" name="has_between_conditions" value="1" ${condition_data.has_between_conditions == 1 ? 'checked' : ''}/>Yes</label>
                 <label><input type="radio" name="has_between_conditions" value="0" ${condition_data.has_between_conditions == 0 ? 'checked' : ''}/>No</label>
