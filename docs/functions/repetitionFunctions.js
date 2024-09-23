@@ -50,11 +50,14 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     document.getElementById("content").innerHTML = `
     <div class="display-text">
         <h1>${study_name}: Measurement Sessions</h1>
-        <p>This section focuses on gathering detailed information about the separate times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
-        <p>Throughout this section, it’s important that your answers remain consistent and refer to the same sample of participants for all sessions. You’ll be asked to provide details on the timing, context, and procedures used during each session to help clarify how data was collected.</p>
+        <p>This section focuses on gathering detailed information about the times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
+        <p>Importantly, this is also where you have to enter multiple sessions if they <b>differed</b> between or within participants. If you had two sessions for all participants - an exposure and a test session - but manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct sessions. One common exposure session with identical settings for all participants and two different test sessions encoding the two experimental groups.</p>
+        
+        <h2>Session Information:</h2>
         <form id="repetitionSurvey" class="survey-form">
             <label for="repetition_identifier" class="survey-label">How is this session information identified in the raw data?</label>
             <input type="text" id="repetition_identifier" name="repetition_identifier"><br>
+            <p class="survey-label-additional-info">This identifier <b>must</b> be identical to the value of the column "session" in the raw data. This encodes information about different session settings, cause either by repeated measurements or experimental manipulations of the settings entered below.</p>
 
             <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session.</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
