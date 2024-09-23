@@ -51,9 +51,9 @@ data_exp_1_clean <- data_exp_1 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    session = 2,
+    session = paste0("warning_", warning_or_no_warning),
     within_identifier = 1,
-    between_identifier = warning_or_no_warning
+    between_identifier = 1
   ) %>% 
   group_by(subject) %>% 
   mutate(trial = row_number()) %>% 
@@ -108,9 +108,9 @@ data_exp_2_clean <- data_exp_2 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    session = 2,
+    session = paste0("warning_", warning_condition),
     within_identifier = 1,
-    between_identifier = warning_condition
+    between_identifier = 1
   ) %>% 
   group_by(subject) %>% 
   mutate(trial = row_number()) %>% 
@@ -164,8 +164,8 @@ data_exp_3_clean <- data_exp_3 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    between_identifier = paste0(some_or_half_warning, "_", warning),
-    session = 2,
+    session = paste0(some_or_half_warning, "_", warning),
+    between_identifier = 1,
     within_identifier = 1,
   ) %>% 
   group_by(subject) %>% 
