@@ -128,9 +128,6 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <input type="text" id="rt_onset" name="rt_onset" value="${study_data.rt_onset || ''}"><br>
             </fieldset>
 
-            <label for="n_groups" class="survey-label">How many between conditions did you have in the study?</label>
-            <input type="number" id="n_groups" name="n_groups" value="${study_data.n_groups || ''}"><br>
-
             <label for="participant_age" class="survey-label">Was was the average age of your participants?</label>
             <input type="number" step="0.01" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}"><br>
 
@@ -218,7 +215,6 @@ function collectStudyData() {
     const subjective_certainty = getRadioButtonSelection('subjective_certainty');
     const rt_measured = getRadioButtonSelection('rt_measured');
     const rt_onset = rt_measured == 1 ? document.getElementById('rt_onset').value: '';
-    const n_groups = document.getElementById('n_groups').value;
     const participant_age = document.getElementById('participant_age').value;
     const percentage_female = document.getElementById('percentage_female').value;
     const physiological_measures = getRadioButtonSelection('physiological_measures');
@@ -239,7 +235,6 @@ function collectStudyData() {
         subjective_certainty: subjective_certainty,
         rt_measured: rt_measured,
         rt_onset: rt_onset,
-        n_groups: n_groups,
         participant_age: participant_age,
         percentage_female: percentage_female,
         physiological_measures: physiological_measures,
@@ -262,7 +257,7 @@ function validateStudyData(study_data) {
     // Check if any of the fields are empty
 
     var required_keys = [
-        'truth_rating_scale', 'truth_rating_steps', 'subjective_certainty', 'rt_measured', 'n_groups', 'participant_age',
+        'truth_rating_scale', 'truth_rating_steps', 'subjective_certainty', 'rt_measured', 'participant_age',
         'percentage_female', 'physiological_measures', 'cognitive_models', 'statementset_name', 'secondary_tasks',
     ];
 

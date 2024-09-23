@@ -109,7 +109,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         <p>It is important that the statement IDs in this file match exactly with those used in your raw data. This consistency ensures that the statements can be correctly linked to the corresponding data points in your dataset.</p>
         <p>If available, please include columns with the following information:</p>
         <ul>
-            <li><strong>statement_id:</strong> A unique identifier for each statement.</li>
+            <li><strong>statement_identifier:</strong> A unique identifier for each statement.</li>
             <li><strong>statement_text:</strong> The text of the statement as it was presented to participants.</li>
             <li><strong>statement_accuracy:</strong> The accuracy of the statement, indicating whether it is true or false.</li>
             <li><strong>statement_category:</strong> The category or type of the statement, if applicable.</li>
@@ -120,7 +120,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
         <div class = "table-container" id = "tableContainerExample">
             <table>
                 <tr>
-                    <th>statement_id</th>
+                    <th>statement_identifier</th>
                     <th>statement_text</th>
                     <th>statement_accuracy</th>
                     <th>statement_category</th>
@@ -253,7 +253,7 @@ function validateStatementSetData(statementset_data){
     var alert_message = 'This field does not match validation criteria.';
 
     // Check that the data contains the required columns
-    const required_columns = ['statement_id', 'statement_text', 'statement_accuracy'];
+    const required_columns = ['statement_identifier', 'statement_text', 'statement_accuracy'];
     const data_columns = Object.keys(statementset_data.statement_publication_data[0]);
     const missing_columns = required_columns.filter(column => !data_columns.includes(column));
     if (missing_columns.length > 0) {
@@ -274,7 +274,7 @@ function validateStatementSetData(statementset_data){
     }
 
     // Check that the statement ids are unique
-    const statement_ids = statementset_data.statement_publication_data.map(row => row.statement_id);
+    const statement_ids = statementset_data.statement_publication_data.map(row => row.statement_identifier);
     const unique_statement_ids = [...new Set(statement_ids)];
     if (statement_ids.length !== unique_statement_ids.length) {
         alert_message = 'The statement_id column should contain unique values.';

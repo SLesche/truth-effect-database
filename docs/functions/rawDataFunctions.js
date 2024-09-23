@@ -270,10 +270,10 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // if there were experimental conditions, add those to required headers
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
 
-    if (study_info.condition_data.has_within_conditions) {
+    if (study_info.condition_data.has_within_conditions == 1) {
         required_headers.push('within_identifier');
     }
-    if (study_info.condition_data.has_between_conditions) {
+    if (study_info.condition_data.has_between_conditions == 1) {
         required_headers.push('between_identifier');
     }
 
@@ -283,12 +283,12 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // If there was response time collected, add that to required headers
-    if (study_info.study_data.rt_measured) {
+    if (study_info.study_data.rt_measured == 1) {
         required_headers.push('rt');
     }
 
     // if certainty measured, add that
-    if (study_info.study_data.subjective_certainty) {
+    if (study_info.study_data.subjective_certainty == 1) {
         required_headers.push('certainty');
     }
 
@@ -343,7 +343,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
-    if (study_info.condition_data.has_within_conditions) {
+    if (study_info.condition_data.has_within_conditions == 1) {
         const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))];
 
         // Check for missing within-subject condition identifiers
@@ -368,7 +368,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         }
     }
 
-    if (study_info.condition_data.has_between_conditions) {
+    if (study_info.condition_data.has_between_conditions == 1) {
         const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier))];
 
         // Check for missing between-subject condition identifiers
@@ -397,11 +397,16 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     if (study_info.study_data.statementset_name !== "No information") {
         const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))];
 
+        const statementset_name = study_info.study_data.statementset_name;
+        const statementset_index = getStatementSetIndex(statementset_name);
+        const statementset_data = control.statementset_info[statementset_index].statementset_data;
+
         // Check for missing statement identifiers
-        const missing_statement_identifiers = study_info.statement_data.statement_identifiers.filter(identifier => !statement_identifiers.includes(identifier));
+        const reported_statement_identifiers = statementset_data.statement_publication_data.map(row => row.statement_identifier);
+        const missing_statement_identifiers = reported_statement_identifiers.filter(identifier => !statement_identifiers.includes(identifier));
         
         // Check for extra statement identifiers
-        const extra_statement_identifiers = statement_identifiers.filter(identifier => !study_info.statement_data.statement_identifiers.includes(identifier));
+        const extra_statement_identifiers = statement_identifiers.filter(identifier => !reported_statement_identifiers.includes(identifier));
 
         let alert_messages = [];
 
@@ -420,7 +425,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // if rt is present, check that the average value is below 100, otherwise say that it is likely that the data is not in seconds
-    if (study_info.study_data.rt_measured) {
+    if (study_info.study_data.rt_measured == 1) {
         const rts = raw_data.data.map(row => row.rt);
         const average_rt = rts.reduce((a, b) => a + b) / rts.length;
 
