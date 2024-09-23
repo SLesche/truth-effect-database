@@ -318,6 +318,30 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         return false;
     }
 
+    // Extract repetition identifiers from repetition_data
+    const repetition_identifiers = study_info.repetition_data.map(data => data.repetition_identifier);
+
+    // Check for missing session identifiers
+    const missing_session_identifiers = repetition_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+
+    // Check for extra session identifiers
+    const extra_session_identifiers = unique_sessions.filter(identifier => !repetition_identifiers.includes(identifier));
+
+    let alert_messages = [];
+
+    if (missing_session_identifiers.length > 0) {
+        alert_messages.push(`The following session identifiers are missing from the uploaded file: ${missing_session_identifiers.join(', ')}.`);
+    }
+
+    if (extra_session_identifiers.length > 0) {
+        alert_messages.push(`The following session identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_session_identifiers.join(', ')}.`);
+    }
+
+    if (alert_messages.length > 0) {
+        displayValidationError('raw_data_file', alert_messages.join(' '));
+        return false;
+    }
+
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
     if (study_info.condition_data.has_within_conditions) {
         const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))];
