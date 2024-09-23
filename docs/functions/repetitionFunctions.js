@@ -53,6 +53,9 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         <p>This section focuses on gathering detailed information about the separate times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
         <p>Throughout this section, it’s important that your answers remain consistent and refer to the same sample of participants for all sessions. You’ll be asked to provide details on the timing, context, and procedures used during each session to help clarify how data was collected.</p>
         <form id="repetitionSurvey" class="survey-form">
+            <label for="repetition_identifier" class="survey-label">How is this session information identified in the raw data?</label>
+            <input type="text" id="repetition_identifier" name="repetition_identifier"><br>
+
             <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session.</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
             <p class="survey-label-additional-info">This should be "0", if it is the first session. It would be "60", if the session was conducted one hour after the first session.</p>
@@ -162,6 +165,7 @@ function validateRepetitionSubmission() {
     clearValidationMessages();
 
     const fields = {
+        repetition_identifier: document.getElementById('repetition_identifier').value,
         repetition_time: document.getElementById('repetition_time').value,
         repetition_location: document.getElementById('repetition_location').value,
         repetition_type: document.getElementById('repetition_type').value,
@@ -178,7 +182,7 @@ function validateRepetitionSubmission() {
         repetition_instructions: getRadioButtonSelection('repetition_instructions')
     };
 
-    var required_fields = ['repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
+    var required_fields = ['repetition_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
     
     if (fields.presented_until_response == 0) {
         required_fields.push('presentation_time_s');
@@ -210,21 +214,15 @@ function validateRepetitionData(repetition_data) {
         return false;
     }
 
-    // Check that the first entry of repetition time is 0
-    if (parseInt(repetition_data[0].repetition_time) !== 0) {
-        alert_message = 'The first session time must be 0.';
-        displayValidationError('listOfRepetitions', alert_message);
+
+    const identifiers = repetition_data.map(sessions => sessions.repetition_identifier);
+    if (new Set(identifiers).size !== identifiers.length) {
+        alert_message = 'Identifiers for sessions must be unique.';
+        displayValidationError("listOfRepetitions", alert_message);
         return false;
     }
 
-    // Check that the repetition time increases steadily over sessions
-    for (let i = 1; i < repetition_data.length; i++) {
-        if (parseInt(repetition_data[i].repetition_time) <= parseInt(repetition_data[i - 1].repetition_time)) {
-            alert_message = 'Session times must increase over sessions.';
-            displayValidationError('listOfRepetitions', alert_message);
-            return false;
-        }
-    }
+
     return true
 }
 
@@ -232,6 +230,7 @@ function addRepetitionEntry() {
     if (!validateRepetitionSubmission()) {
         return;
     }
+    const repetition_identifier = document.getElementById('repetition_identifier').value;
     const repetition_time = document.getElementById('repetition_time').value;
     const repetition_location = document.getElementById('repetition_location').value;
     const repetition_type = document.getElementById('repetition_type').value;
@@ -254,6 +253,7 @@ function addRepetitionEntry() {
 
     // Add the new repetition
     repetitions.push({
+        repetition_identifier,
         repetition_time,
         repetition_location,
         repetition_type,
@@ -271,6 +271,7 @@ function addRepetitionEntry() {
     });
 
     // Clear the input fields
+    document.getElementById('repetition_identifier').value = '';
     document.getElementById('repetition_time').value = '';
     document.getElementById('repetition_location').value = '';
     document.getElementById('repetition_type').value = '';
@@ -354,9 +355,10 @@ function displayRepetitionSummary(repetitions) {
     const headerRow = document.createElement('tr');
     const emptyHeaderCell = document.createElement('th');
     headerRow.appendChild(emptyHeaderCell); // Empty cell for the corner
-    repetitions.forEach((_, index) => {
+    repetitions.forEach((session, index) => {
         const th = document.createElement('th');
-        th.textContent = `Session ${index + 1}`;
+
+        th.textContent = `Session: ${session.repetition_identifier}`;
 
         // Add delete button
         const deleteButton = document.createElement('button');
