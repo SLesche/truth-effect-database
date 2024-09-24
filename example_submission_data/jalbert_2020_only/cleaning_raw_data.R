@@ -164,8 +164,8 @@ data_exp_3_clean <- data_exp_3 %>%
     truth_rating = maximum_normalize(truth_rating)
   ) %>% 
   mutate(
-    session = paste0(some_or_half_warning, "_", warning),
-    between_identifier = 1,
+    session = paste0("warning_", warning),
+    between_identifier = some_or_half_warning,
     within_identifier = 1,
   ) %>% 
   group_by(subject) %>% 
