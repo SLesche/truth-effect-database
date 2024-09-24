@@ -310,7 +310,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
-    const unique_sessions = [...new Set(raw_data.data.map(row => row.session))];
+    const unique_sessions = [...new Set(raw_data.data.map(row => row.session))].map(String);
     const num_expected_sessions = study_info.repetition_data.length;
     if (unique_sessions.length !== num_expected_sessions) {
         alert_message = `The number of unique sessions in the uploaded file (${unique_sessions.length}) does not match the number of sessions specified in the measurement sessions (${num_expected_sessions}).`;
@@ -344,13 +344,14 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
     if (study_info.condition_data.has_within_conditions == 1) {
-        const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))];
+        const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))].map(String);
 
         // Check for missing within-subject condition identifiers
-        const missing_within_identifiers = study_info.condition_data.within_conditions.filter(identifier => !within_identifiers.includes(identifier));
+        const reported_within_identifiers = study_info.condition_data.within_condition_details.map(detail => detail.identifier);
+        const missing_within_identifiers = reported_within_identifiers.filter(identifier => !within_identifiers.includes(identifier));
         
         // Check for extra within-subject condition identifiers
-        const extra_within_identifiers = within_identifiers.filter(identifier => !study_info.condition_data.within_conditions.includes(identifier));
+        const extra_within_identifiers = within_identifiers.filter(identifier => !reported_within_identifiers.includes(identifier));
 
         let alert_messages = [];
 
@@ -369,13 +370,14 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     if (study_info.condition_data.has_between_conditions == 1) {
-        const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier))];
+        const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier))].map(String);
 
         // Check for missing between-subject condition identifiers
-        const missing_between_identifiers = study_info.condition_data.between_conditions.filter(identifier => !between_identifiers.includes(identifier));
-        
+        const reported_between_identifiers = study_info.condition_data.between_condition_details.map(detail => detail.identifier);
+        const missing_between_identifiers = reported_between_identifiers.filter(identifier => !between_identifiers.includes(identifier));
+
         // Check for extra between-subject condition identifiers
-        const extra_between_identifiers = between_identifiers.filter(identifier => !study_info.condition_data.between_conditions.includes(identifier));
+        const extra_between_identifiers = between_identifiers.filter(identifier => !repetition_identifiers.includes(identifier));
 
         let alert_messages = [];
 
@@ -395,14 +397,14 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // If there is information on the statement, same thing with statement identifiers
     if (study_info.study_data.statementset_name !== "No information") {
-        const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))];
+        const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))].map(String);
 
         const statementset_name = study_info.study_data.statementset_name;
         const statementset_index = getStatementSetIndex(statementset_name);
         const statementset_data = control.statementset_info[statementset_index].statementset_data;
 
         // Check for missing statement identifiers
-        const reported_statement_identifiers = statementset_data.statement_publication_data.map(row => row.statement_identifier);
+        const reported_statement_identifiers = statementset_data.statement_publication_data.map(row => row.statement_identifier).map(String);
         const missing_statement_identifiers = reported_statement_identifiers.filter(identifier => !statement_identifiers.includes(identifier));
         
         // Check for extra statement identifiers
