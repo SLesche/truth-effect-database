@@ -6,7 +6,7 @@ prep_submission_data <- function(submission_obj, db_path){
   n_statementsets = length(submission_obj$statementset_info)
   if (n_statementsets > 0){
     for (istatementset in 1:n_statementsets){
-      submission_obj$statementset_info[[istatementset]] = prep_statementset_data(submission_obj$statementset_info[[istatementset]]$statementset_data, overview_table)
+      submission_obj$statementset_info[[istatementset]]$statementset_data = prep_statementset_data(submission_obj$statementset_info[[istatementset]]$statementset_data, overview_table)
     }
   }
   
