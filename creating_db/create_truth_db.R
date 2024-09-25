@@ -136,7 +136,7 @@ create_truth_db <- function(file_path){
     FOREIGN KEY (within_id) REFERENCES within_table(within_id),
     FOREIGN KEY (repetition_id) REFERENCES repetition_table(repetition_id),
     FOREIGN KEY (statement_id) REFERENCES statement_table(statement_id),
-    UNIQUE (dataset_id, subject, trial, within_id, repetition_id, statement_id)
+    UNIQUE (study_id, subject, trial, within_id, between_id, repetition_id, statement_id)
     );"
   )
 }
