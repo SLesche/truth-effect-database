@@ -6,3 +6,4 @@ path <- "example_submission_data/"
 file <- paste0(path, "submission_test.json")
 
 submission_obj <- extract_from_submission_json(file)
+
