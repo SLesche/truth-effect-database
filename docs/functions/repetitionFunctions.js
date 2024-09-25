@@ -241,7 +241,7 @@ function addRepetitionEntry() {
     const max_n_repetitions = document.getElementById('max_n_repetitions').value;
     const n_statements = document.getElementById('n_statements').value;
     const truth_instructions = getRadioButtonSelection('truth_instructions') == 1 ? 1 : 0;
-    const presentation_time = document.getElementById('presentation_time_s').value;
+    const presentation_time_s = document.getElementById('presentation_time_s').value;
     const presented_until_response = getRadioButtonSelection('presented_until_response') == 1 ? 1 : 0;
     const response_deadline = getRadioButtonSelection('response_deadline') == 1 ? 1 : 0;
     const response_deadline_s = document.getElementById('response_deadline_s').value;
@@ -264,7 +264,7 @@ function addRepetitionEntry() {
         max_n_repetitions,
         n_statements,
         truth_instructions,
-        presentation_time,
+        presentation_time_s,
         presented_until_response,
         response_deadline,
         response_deadline_s,
