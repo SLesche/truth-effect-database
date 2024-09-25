@@ -4,7 +4,7 @@ prep_repetition_data <- function(repetition_data, db_overview){
     dplyr::filter(data_type %in% c("BOOLEAN", "INTEGER", "FLOAT")) |>
     dplyr::pull(column_name)
   
-  repetition_data = dplyr::mutate(
+  clean_repetition_data = dplyr::mutate(
     repetition_data, 
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
