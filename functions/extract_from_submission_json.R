@@ -6,16 +6,21 @@ extract_from_submission_json <- function(json_path){
   submission_list$publication_data = as.data.frame(json_obj$publication_data)
   
   n_statementsets = length(json_obj$statementset_info)
+  submission_list$statementset_info = vector(mode = "list", length = n_statementsets)
   
   if (n_statementsets > 0) {
     for (istatementset in 1:n_statementsets){
       submission_list$statementset_info[[istatementset]]$publication = json_obj$statementset_info[[istatementset]]$statementset_data$statement_publication
       submission_list$statementset_info[[istatementset]]$statementset_data = data.table::rbindlist(json_obj$statementset_info[[istatementset]]$statementset_data)
+      
+      columns_to_extract = c("statement_identifier", "statement_text", "statement_accuracy", "statement_category", "proportion_true")
+      submission_list$statementset_info[[istatementset]]$statementset_data = dplyr::select(submission_list$statementset_info[[istatementset]]$statementset_data, dplyr::any_of(columns_to_extract))
     }
   }
   
   n_studies = length(json_obj$study_info)
   
+  submission_list$study_info = vector(mode = "list", length = n_studies)
   for (istudy in 1:n_studies){
     submission_list$study_info[[istudy]]$study_data = as.data.frame(json_obj$study_info[[istudy]]$study_data)
     submission_list$study_info[[istudy]]$repetition_data = data.table::rbindlist(json_obj$study_info[[istudy]]$repetition_data)
@@ -50,9 +55,6 @@ extract_from_submission_json <- function(json_path){
     }
     
     submission_list$study_info[[istudy]]$raw_data = as.data.frame(submission_list$study_info[[istudy]]$raw_data)[, columns_to_extract]
-    
-    # Maximum-normalize the response column
-    submission_list$study_info[[istudy]]$raw_data$response = maximum_normalize(submission_list$study_info[[istudy]]$raw_data$response)
     
     # Deal with submitted additional measures
     if (json_obj$study_info[[istudy]]$measurement_data$additional_measures == "1"){
