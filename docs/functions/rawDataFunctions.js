@@ -377,7 +377,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         const missing_between_identifiers = reported_between_identifiers.filter(identifier => !between_identifiers.includes(identifier));
 
         // Check for extra between-subject condition identifiers
-        const extra_between_identifiers = between_identifiers.filter(identifier => !repetition_identifiers.includes(identifier));
+        const extra_between_identifiers = between_identifiers.filter(identifier => !reported_between_identifiers.includes(identifier));
 
         let alert_messages = [];
 
@@ -396,7 +396,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // If there is information on the statement, same thing with statement identifiers
-    if (study_info.study_data.statementset_name !== "No information") {
+    if (study_info.study_data.statementset_name !== "no information") {
         const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))].map(String);
 
         const statementset_name = study_info.study_data.statementset_name;
