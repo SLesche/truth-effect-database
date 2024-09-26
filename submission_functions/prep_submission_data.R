@@ -22,6 +22,7 @@ prep_submission_data <- function(submission_obj, db_path){
     }
     submission_obj$study_info[[istudy]]$repetition_data = prep_repetition_data(submission_obj$study_info[[istudy]]$repetition_data, overview_table)
     submission_obj$study_info[[istudy]]$raw_data = prep_raw_data(submission_obj$study_info[[istudy]]$raw_data, overview_table)
+    submission_obj$study_info[[istudy]]$measurement_data = prep_measurement_data(submission_obj$study_info[[istudy]]$measurement_data, overview_table)
   }
   
   return(submission_obj)
