@@ -72,11 +72,11 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     has_between_conditions = 0
     has_within_conditions = 0
     
+    between_id = find_next_free_id(conn, "between_table")
     if ("between_data" %in% names(submission_obj$study_info[[istudy]])){
       has_between_conditions = 1
       
       # Between
-      between_id = find_next_free_id(conn, "between_table")
       between_info = submission_obj$study_info[[istudy]]$between_data
       
       between_info$between_id = between_id:(between_id + nrow(between_info) -1)
@@ -86,12 +86,20 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       between_keys = between_info[, c("between_id", "between_identifier")]
       
       add_data_to_table(conn, between_info, "between_table", db_overview)
+    } else {
+      between_info = data.frame(
+        between_id,
+        study_id,
+        between_description = "no manipulation"
+      )
+      add_data_to_table(conn, between_info, "between_table", db_overview)
+      
     }
     
+    within_id = find_next_free_id(conn, "within_table")
     if ("within_data" %in% names(submission_obj$study_info[[istudy]])){
       has_within_conditions = 1
       # Within
-      within_id = find_next_free_id(conn, "within_table")
       within_info = submission_obj$study_info[[istudy]]$within_tabe
       within_info$within_id = within_id:(within_id + nrow(within_info) -1)
       within_info$study_id = study_id
@@ -99,6 +107,14 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       within_keys = within_info[, c("within_id", "within_identifier")]
       
       add_data_to_table(conn, within_info, "within_table", db_overview)
+    } else {
+      within_info = data.frame(
+        within_id,
+        study_id,
+        within_description = "no manipulation"
+      )
+      add_data_to_table(conn, within_info, "within_table", db_overview)
+      
     }
     
     
@@ -123,9 +139,13 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     
     if (has_within_conditions){
       observation_table = replace_id_keys_in_data(observation_table, within_keys, "within", "_identifier")
+    } else {
+      observation_table$within_id = within_id
     }
     if (has_between_conditions){
       observation_table = replace_id_keys_in_data(observation_table, between_keys, "between", "_identifier")
+    } else {
+      observation_table$between_id = between_id
     }
     
     add_data_to_table(conn, as.data.frame(observation_table), "observation_table", db_overview)
