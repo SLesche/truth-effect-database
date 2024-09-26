@@ -1,4 +1,6 @@
 add_submission_to_db <- function(conn, submission_obj, db_path){
+  db_overview = generate_db_overview_table(db_path)
+  
   pub_code = submission_obj$publication_data$publication_code
   if (does_publication_code_exist(conn, pub_code) == TRUE){
     stop("This publication code already exists. Please use the append_db function to add to a specific publication.")
@@ -10,11 +12,13 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
   pub_info = submission_obj$publication_data
   
   # Then add that to db
-  add_data_to_table(conn, pub_info, "publication_table")
+  add_data_to_table(conn, pub_info, "publication_table", db_overview)
   
   n_statementsets = length(submission_obj$statementset_info)
   
   if (n_statementsets > 0){
+    statement_keys_list = vector(mode = "list", length = n_statementsets)
+    
     statementset_keys = data.frame(
       statementset_index = 1:n_statementsets
     )
@@ -23,28 +27,33 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       statementset_publication = submission_obj$statementset_info[[istatementset]]$publication
       # For statementset
       if (does_statement_publication_exist(conn, statementset_publication) == TRUE){
-        statementset_id
+        sql_query = paste0(
+          "SELECT statementset_id FROM statementset_table WHERE statementset_table.statementset_publication = '",
+          statementset_publication, 
+          "'"
+        )
+        statementset_id = DBI::dbGetQuery(conn, sql_query)
       } else {
         statementset_id = find_next_free_id(conn, "statementset_table")
-        
       }
+      
       statementset_info = data.frame(statementset_publication = statementset_publication)
       
       statementset_info$statementset_id = statementset_id
       
       statementset_keys[istatementset, "statementset_id"] = statementset_id
       
-      add_data_to_table(conn, statementset_info, "statementset_table")
+      add_data_to_table(conn, statementset_info, "statementset_table", db_overview)
       
       # For statements
       statement_id = find_next_free_id(conn, "statement_table")
-      statement_info = object[[ientry]]$statements_table
-      statement_info$statement_id = statement_info$statement_num + statement_id - 1
-      statement_info = statement_info %>% 
-        replace_id_keys_in_data(., statementset_keys, "statementset", suffix = "_num")
+      statement_info = submission_obj$statementset_info[[istatementset]]$statementset_data
       
-      statement_keys = obtain_keys(statement_info, "statement")
-      add_table(conn, statement_info, "statement_table")
+      statement_info$statementset_id = statementset_id
+      statement_info$statement_id = statement_id:(statement_id + nrow(statement_info) - 1)
+      
+      statement_keys_list[[istatementset]] = statement_info[, c("statement_id", "statement_identifier")]
+      add_data_to_table(conn, statement_info, "statement_table", db_overview)
     }
   }
   
@@ -53,57 +62,81 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
   for (istudy in 1:n_studies){
     # For study
     study_id = find_next_free_id(conn, "study_table")
-    study_info = object[[ientry]]$study_table
+    study_info = submission_obj$study_info[[istudy]]$study_data
     study_info$publication_id = pub_id
-    study_info$study_id = study_info$study_num + study_id - 1
-    study_keys = obtain_keys(study_info, "study")
-    add_table(conn, study_info, "study_table")
+    study_info$study_id = study_id
     
-    # For measure
-    measure_id = find_next_free_id(conn, "measure_table")
-    measure_info = object[[ientry]]$measure_table
-    measure_info$measure_id = measure_info$measure_num + measure_id - 1
-    add_table(conn, measure_info, "measure_table")
+    add_data_to_table(conn, study_info, "study_table", db_overview)
     
-    # For dataset
-    dataset_id = find_next_free_id(conn, "dataset_table")
-    dataset_info = object[[ientry]]$dataset_table
-    dataset_info$dataset_id = dataset_info$dataset_num + dataset_id - 1
-    dataset_info = dataset_info %>% 
-      replace_id_keys_in_data(., study_keys, "study", suffix = "_num") %>% 
-      replace_id_keys_in_data(., statementset_keys, "statementset", suffix = "_num")
+    has_between_conditions = 0
+    has_within_conditions = 0
     
-    dataset_keys = obtain_keys(dataset_info, "dataset")
-    add_table(conn, dataset_info, "dataset_table")
+    if ("between_data" %in% names(submission_obj$study_info[[istudy]])){
+      has_between_conditions = 1
+      
+      # Between
+      between_id = find_next_free_id(conn, "between_table")
+      between_info = submission_obj$study_info[[istudy]]$between_data
+      
+      between_info$between_id = between_id:(between_id + nrow(between_info) -1)
+      
+      between_info$study_id = study_id
+      
+      between_keys = between_info[, c("between_id", "between_identifier")]
+      
+      add_data_to_table(conn, between_info, "between_table", db_overview)
+    }
+    
+    if ("within_data" %in% names(submission_obj$study_info[[istudy]])){
+      has_within_conditions = 1
+      # Within
+      within_id = find_next_free_id(conn, "within_table")
+      within_info = submission_obj$study_info[[istudy]]$within_tabe
+      within_info$within_id = within_id:(within_id + nrow(within_info) -1)
+      within_info$study_id = study_id
+      
+      within_keys = within_info[, c("within_id", "within_identifier")]
+      
+      add_data_to_table(conn, within_info, "within_table", db_overview)
+    }
+    
     
     # Repetition
     repetition_id = find_next_free_id(conn, "repetition_table")
-    repetition_info = object[[ientry]]$repetition_table
-    repetition_info$repetition_id = repetition_info$repetition_num + repetition_id - 1
-    repetition_info = repetition_info %>% 
-      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num")
+    repetition_info = submission_obj$study_info[[istudy]]$repetition_data
     
-    repetition_keys = obtain_keys(repetition_info, "repetition")
-    add_table(conn, repetition_info, "repetition_table")
+    repetition_info$repetition_id = repetition_id:(repetition_id + nrow(repetition_info) - 1)
     
-    # Within
-    within_id = find_next_free_id(conn, "within_table")
-    within_info = object[[ientry]]$within_table
-    within_info$within_id = within_info$within_num + within_id - 1
-    within_info = within_info %>% 
-      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num")
+    repetition_info$study_id = study_id
     
-    within_keys = obtain_keys(within_info, "within")
-    add_table(conn, within_info, "within_table")
+    repetition_keys = repetition_info[, c("repetition_id", "repetition_identifier")]
+    
+    add_data_to_table(conn, repetition_info, "repetition_table", db_overview)
+    
     
     # Observation
-    observation_table = object[[ientry]]$data
-    observation_table = observation_table %>% 
-      replace_id_keys_in_data(., dataset_keys, "dataset", suffix = "_num") %>% 
-      replace_id_keys_in_data(., within_keys, "within", suffix = "_num") %>% 
-      replace_id_keys_in_data(., repetition_keys, "repetition", suffix = "_num") %>% 
-      replace_id_keys_in_data(., statement_keys, "statement", suffix = "_num")
-    add_table(conn, as.data.frame(observation_table), "observation_table")
+    observation_table = submission_obj$study_info[[istudy]]$raw_data
+    
+    observation_table = replace_id_keys_in_data(observation_table, repetition_keys, "repetition", "_identifier")
+    observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
+    
+    if (has_within_conditions){
+      observation_table = replace_id_keys_in_data(observation_table, within_keys, "within", "_identifier")
+    }
+    if (has_between_conditions){
+      observation_table = replace_id_keys_in_data(observation_table, between_keys, "between", "_identifier")
+    }
+    
+    add_data_to_table(conn, as.data.frame(observation_table), "observation_table", db_overview)
+    
+    # For measure
+    if ("measurement_data" %in% names(submission_obj$study_info[[istudy]])){
+      measure_id = find_next_free_id(conn, "measure_table")
+      measure_info = submission_obj$study_info[[istudy]]$measurement_data
+      measure_info$study_id = study_id
+      measure_info$measure_id = measure_id:(measure_id + nrow(measure_info) - 1)
+      
+      add_data_to_table(conn, measure_info, "measure_table", db_overview) 
+    }
   }
-  
 }
