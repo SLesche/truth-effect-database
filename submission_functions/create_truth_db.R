@@ -120,7 +120,6 @@ create_truth_db <- function(file_path){
     conn,
     "CREATE TABLE observation_table (
     observation_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    study_id INTEGER,
     between_id INTEGER,
     within_id INTEGER,
     repetition_id INTEGER,
@@ -131,12 +130,11 @@ create_truth_db <- function(file_path){
     response FLOAT,
     repeated INTEGER,
     certainty FLOAT,
-    FOREIGN KEY (study_id) REFERENCES study_table(study_id),
     FOREIGN KEY (between_id) REFERENCES between_table(between_id),
     FOREIGN KEY (within_id) REFERENCES within_table(within_id),
     FOREIGN KEY (repetition_id) REFERENCES repetition_table(repetition_id),
     FOREIGN KEY (statement_id) REFERENCES statement_table(statement_id),
-    UNIQUE (study_id, subject, trial, within_id, between_id, repetition_id, statement_id)
+    UNIQUE (subject, trial, within_id, between_id, repetition_id, statement_id)
     );"
   )
 }

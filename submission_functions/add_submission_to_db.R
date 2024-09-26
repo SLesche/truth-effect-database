@@ -65,6 +65,7 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     study_info = submission_obj$study_info[[istudy]]$study_data
     study_info$publication_id = pub_id
     study_info$study_id = study_id
+    study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
     
     add_data_to_table(conn, study_info, "study_table", db_overview)
     

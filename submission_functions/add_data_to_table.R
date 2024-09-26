@@ -6,7 +6,7 @@ add_data_to_table <- function(conn, data, table_name, db_overview){
   insert = data |>
     dplyr::select(dplyr::any_of(possible_cols))
   
-  dbWriteTable(
+  DBI::dbWriteTable(
     conn = conn,
     name = table_name,
     value = insert,
