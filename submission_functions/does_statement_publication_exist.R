@@ -4,8 +4,8 @@ does_statement_publication_exist <- function(conn, publication){
     publication, 
     "'"
   )
-  pub_id = DBI::dbGetQuery(conn, sql_query)
-  length = nrow(pub_id)
+  statementset_id = DBI::dbGetQuery(conn, sql_query)
+  length = nrow(statementset_id)
   if (length == 0){
     return(FALSE)
   } else if (length == 1){
