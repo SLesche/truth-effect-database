@@ -51,7 +51,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
     <div class="display-text">
         <h1>${study_name}: Raw Data</h1> 
             <p>Here, please provide information about your raw data by uploading it through the interface below. Your data should adhere to the following guidelines:</p>
-            <ul>
+            <ul class = "list-of-entries">
                 <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
                 <li>It is crucial that the columns you do include have the exact names we specified. This consistency is essential for accurate integration and analysis.</li>
                 <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Experimental Conditions" survey. This ensures that your data can be correctly interpreted in the context of the study.</li>

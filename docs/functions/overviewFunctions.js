@@ -36,7 +36,6 @@ function generateOverviewPage(control) {
             <p>After submission, our team will review your data and add it to the database as soon as possible.</p>
             <p>Here, you will see a progress report on your submission once it's been submitted.</p>
 
-            <h2>Progress Report</h2>
             ${printProgressReport(getNumberOfSubmissions(control))}
 
             <h2>Submission</h2>

@@ -131,8 +131,9 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             <label for="participant_age" class="survey-label">Was was the average age of your participants?</label>
             <input type="number" step="0.01" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}"><br>
 
-            <label for="percentage_female" class="survey-label">Which percentage of your participants was female?</label>
-            <input type="number" step="0.01" id="percentage_female" name="percentage_female" value="${study_data.percentage_female || ''}"><br>
+            <label for="percentage_female" class="survey-label">What percentage of your participants was female?</label>
+            <input type="number" step="1" id="percentage_female" name="percentage_female" value="${study_data.percentage_female || ''}"><br>
+            <p class="survey-label-additional-info">If 50% of your participants was female, enter "50".</p>
 
             <label for "secondary_tasks" class="survey-label">Did your participants complete any secondary (distracting) tasks between exposure and test sessions?</label>
             <div class="radio-buttons" id = "secondary_tasks">
