@@ -15,5 +15,12 @@ prep_study_data <- function(study_data, db_overview){
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
   
+  study_data = dplyr::rename(
+    study_data,
+    "filler_task_yesno" = "secondary_tasks",
+    "filler_task_type" = "secondary_task_type",
+    "filler_task_name" = "secondary_task_name"
+  )
+  
   return (study_data)
 }
