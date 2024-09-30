@@ -283,8 +283,8 @@ function validateStatementSetData(statementset_data){
         return false;
     }
 
-    // create a warning if statement_category and proportion_rated_true are missing
-    const optional_columns = ['statement_category', 'proportion_rated_true'];
+    // create a warning if statement_category and proportion_true are missing
+    const optional_columns = ['statement_category', 'proportion_true'];
     const missing_optional_columns = optional_columns.filter(column => !data_columns.includes(column));
     if (missing_optional_columns.length > 0) {
         alert_message = `The uploaded file is missing the following optional columns: ${missing_optional_columns.join(', ')}`;
