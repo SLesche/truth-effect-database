@@ -49,6 +49,9 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     const measurement_data = control.publication_info[publication_idx].study_info[study_idx].measurement_data;
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
+    // Example constructs array
+    const constructs = ["intelligence", "extraversion", "anxiety", "memory", "creativity"];
+
     document.getElementById("content").innerHTML = `
     <div class="display-text">
         <h1>${study_name}: Additional Measurements</h1> 
@@ -68,7 +71,12 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             <p class="survey-label-additional-info">This can be detailed and may include the scale used to measure the variable: "APM Performance" or "BFI-2-XS".</p>
 
             <label for="measure_input_construct" class="survey-label">Add the name of the construct:</label>
-            <input type="text" id="measure_input_construct" name="measure_input_construct"><br>
+            <select id="measure_select_construct" name="measure_select_construct">
+                <option value="">--Select a construct--</option>
+                ${constructs.map(construct => `<option value="${construct}">${construct}</option>`).join('')}
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="measure_input_construct" name="measure_input_construct" style="display: none;" placeholder="Enter construct"><br>
             <p class="survey-label-additional-info">This should be the broad constructs: "intelligence" or "extraversion".</p>
 
             <button type="button" onclick="addMeasureToList()" class="add-button">Add Measure</button><br><br>
@@ -91,6 +99,17 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
                 measuresForm.style.display = 'none';
             }
         });
+    });
+
+    // Event listener for the construct dropdown
+    document.getElementById('measure_select_construct').addEventListener('change', function() {
+        const measureInputConstruct = document.getElementById('measure_input_construct');
+        if (this.value === 'other') {
+            measureInputConstruct.style.display = 'inline';
+        } else {
+            measureInputConstruct.style.display = 'none';
+            measureInputConstruct.value = ''; // Clear the input field if not 'other'
+        }
     });
 
     // Display the measures list if previously selected that additional measures were collected
@@ -198,28 +217,35 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
 }
 
 function addMeasureToList() {
-    // Get the measure input value
-    var measureInputDetails = document.getElementById("measure_input_details").value;
-    var measureInputConstruct = document.getElementById("measure_input_construct").value;
+    const constructSelect = document.getElementById('measure_select_construct');
+    const constructInput = document.getElementById('measure_input_construct');
+    const detailsInput = document.getElementById('measure_input_details');
 
-    if (measureInputDetails !== "" && measureInputConstruct !== "") {
-        // Create a new list item
-        var li = document.createElement("li");
-        li.textContent = `Construct: ${measureInputConstruct}, Details: ${measureInputDetails}`;
-
-        add_delete_button_to_list_item(li);
-
-        // Append the list item to the measures list
-        document.getElementById("measuresList").appendChild(li);
-
-        // Clear the input field after adding the measure
-        document.getElementById("measure_input_construct").value = "";
-        document.getElementById("measure_input_details").value = "";
-
-        document.getElementById("measures_list").style.display = "block";
-
-    } else {
-        alert("Please enter a measure.");
+    let construct = constructSelect.value;
+    if (construct === 'other') {
+        construct = constructInput.value.trim();
     }
 
+    if (construct === "" || detailsInput.value.trim() === "") {
+        alert("Please fill in both the construct and details.");
+        return;
+    }
+
+    const li = document.createElement("li");
+    li.textContent = `Construct: ${construct}, Details: ${detailsInput.value}`;
+
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = '&times;'; // Red X
+    removeButton.classList.add('delete-button');
+    removeButton.onclick = function() {
+        this.parentElement.remove();
+    };
+
+    li.appendChild(removeButton);
+    document.getElementById("measuresList").appendChild(li);
+
+    // Clear the input fields
+    constructSelect.value = "";
+    constructInput.value = "";
+    detailsInput.value = "";
 }
