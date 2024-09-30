@@ -54,10 +54,23 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
             <ul class = "list-of-entries">
                 <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
                 <li>It is crucial that the columns you do include have the exact names we specified. This consistency is essential for accurate integration and analysis.</li>
-                <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Experimental Conditions" survey. This ensures that your data can be correctly interpreted in the context of the study.</li>
+                <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Experimental Conditions" and "Statementset" surveys. This ensures that your data can be correctly interpreted in the context of the study.</li>
+                <li>For any missing values, please encode them as <i>NA</i>. For example, accuracy can only take the values "0", "1" or "<i>NA</i>". If you chose any other encodings to mark missing or incomplete values, please recode these to <i>NA</i>.</li>
             </ul>
             
             <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
+            <ul class = "list-of-entries">
+                <li><strong>subject:</strong> A unique identifier for each subject.</li>
+                <li><strong>session:</strong> A unique identifier for each measurement session. This must be one of the identifiers encoded in "Measurement Sessions".</li>
+                <li><strong>trial:</strong> A unique identifier for each trial for a given subject.</li>
+                <li><strong>within_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
+                <li><strong>between_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
+                <li><strong>statement_identifier:</strong> A unique identifier for each statement used. This must be one of the identifiers encoded in the "Statementset" data you uploaded.</li>
+                <li><strong>response:</strong> The value of the truth rating. Higher values must indicate more truth.</li>
+                <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0".</li>
+                <li><strong>certainty:</strong> (if measured) The value indicating the subjective certainty with which a participant gave their truth rating.</li>
+                <li><strong>rt:</strong> (if measured) The value indicating the response time.</li>
+            </ul>
             <div class = "table-container" id = "tableContainerExample">
                 <table>
                     <tr>
@@ -80,7 +93,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                         <td>1</td>
                         <td>1</td>
                         <td>0.64</td>
-                        <td>3</td>
+                        <td><i>NA</i></td>
                         <td>0</td>
                         <td>2</td>
                     </tr>
@@ -310,7 +323,8 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
-    const unique_sessions = [...new Set(raw_data.data.map(row => row.session))].map(String);
+    const unique_sessions = [...new Set(raw_data.data.map(row => row.session).filter(session => session !== 'NA'))].map(String);
+
     const num_expected_sessions = study_info.repetition_data.length;
     if (unique_sessions.length !== num_expected_sessions) {
         alert_message = `The number of unique sessions in the uploaded file (${unique_sessions.length}) does not match the number of sessions specified in the measurement sessions (${num_expected_sessions}).`;
@@ -344,7 +358,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
     if (study_info.condition_data.has_within_conditions == 1) {
-        const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier))].map(String);
+        const within_identifiers = [...new Set(raw_data.data.map(row => row.within_identifier).filter(identifier => identifier !== 'NA'))].map(String);
 
         // Check for missing within-subject condition identifiers
         const reported_within_identifiers = study_info.condition_data.within_condition_details.map(detail => detail.identifier);
@@ -370,7 +384,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     if (study_info.condition_data.has_between_conditions == 1) {
-        const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier))].map(String);
+        const between_identifiers = [...new Set(raw_data.data.map(row => row.between_identifier).filter(identifier => identifier !== 'NA'))].map(String);
 
         // Check for missing between-subject condition identifiers
         const reported_between_identifiers = study_info.condition_data.between_condition_details.map(detail => detail.identifier);
@@ -397,7 +411,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // If there is information on the statement, same thing with statement identifiers
     if (study_info.study_data.statementset_name !== "no information") {
-        const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier))].map(String);
+        const statement_identifiers = [...new Set(raw_data.data.map(row => row.statement_identifier).filter(identifier => identifier !== 'NA'))].map(String);
 
         const statementset_name = study_info.study_data.statementset_name;
         const statementset_index = getStatementSetIndex(statementset_name);
@@ -428,7 +442,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // if rt is present, check that the average value is below 100, otherwise say that it is likely that the data is not in seconds
     if (study_info.study_data.rt_measured == 1) {
-        const rts = raw_data.data.map(row => row.rt);
+        const rts = raw_data.data.map(row => row.rt).filter(rt => rt !== 'NA');
         const average_rt = rts.reduce((a, b) => a + b) / rts.length;
 
         if (average_rt > 100) {
@@ -437,6 +451,41 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         }
     }
 
+    // Check that accuracy is only 0, 1 or NA
+    const repeated_vals = raw_data.data.map(row => row.repeated);
+    const invalid_repeated_vals = repeated_vals.filter(val => val !== '0' && val !== '1' && val !== 'NA');
+    if (invalid_repeated_vals.length > 0) {
+        alert_message = `The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "0", "1", or "NA".`;
+        displayValidationError('raw_data_file', alert_message);
+        return false;
+    }
+
+    // Check that response has a value maximum to that of the steps indicated by the study question and minimum of 0 or Na
+    const response_vals = raw_data.data.map(row => row.response);
+    const scale_steps = study_info.study_data.truth_rating_steps;
+    const invalid_response_vals = response_vals.filter(val => val !== 'NA' && (val < 0 || val > scale_steps));
+    if (invalid_response_vals.length > 0) {
+        alert_message = `The "response" column contains invalid values: ${invalid_response_vals.slice(0, 5).join(', ')}. It should only contain values between 0 and ${scale_steps}, or "NA".`;
+        displayValidationError('raw_data_file', alert_message);
+        return false;
+    }
+
+    // Now, check the mean response value for repeated statements vs. non-repeated statements. 
+    // repeated statements should have higher mean response, otherwise display warning that no truth effect present
+    const repeated_responses = raw_data.data
+        .filter(row => row.repeated === '1' && row.response !== 'NA')
+        .map(row => parseFloat(row.response));
+    const non_repeated_responses = raw_data.data
+        .filter(row => row.repeated === '0' && row.response !== 'NA')
+        .map(row => parseFloat(row.response));
+
+    const meanRepeatedResponse = repeated_responses.reduce((a, b) => a + b, 0) / repeated_responses.length;
+    const meanNonRepeatedResponse = non_repeated_responses.reduce((a, b) => a + b, 0) / non_repeated_responses.length;
+
+    if (meanRepeatedResponse <= meanNonRepeatedResponse) {
+        alert_message = 'The mean response value for repeated statements is not higher than for non-repeated statements. This suggests that there may be no truth effect present.';
+        displayWarningMessage('raw_data_file', alert_message);
+    }
 
     return true;
 }
