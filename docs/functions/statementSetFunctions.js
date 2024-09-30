@@ -169,7 +169,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
             </div>
 
-            <label for="statement_publication" class="survey-label">If available, provide the original publication where this set of statements originates from.</label>
+            <label for="statement_publication" class="survey-label">If available, provide an APA-style reference to the publication where this set of statements originates from.</label>
             <input type="text" id="statement_publication" name="statement_publication" value="${statementset_data.statement_publication || ''}"><br>
 
             <button type="submit" class="survey-button">Submit</button>

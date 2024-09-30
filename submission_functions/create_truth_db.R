@@ -25,6 +25,7 @@ create_truth_db <- function(file_path){
     publication_id INTEGER,
     study_comment VARCHAR(10000),
     raw_data_link VARCHAR(255),
+    n_participants INTEGER,
     participant_age FLOAT,
     percentage_female FLOAT,
     rt_measured INTEGER,
