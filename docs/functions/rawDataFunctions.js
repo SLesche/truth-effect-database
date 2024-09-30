@@ -453,7 +453,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // Check that accuracy is only 0, 1 or NA
     const repeated_vals = raw_data.data.map(row => row.repeated);
-    const invalid_repeated_vals = repeated_vals.filter(val => val !== '0' && val !== '1' && val !== 'NA');
+    const invalid_repeated_vals = repeated_vals.filter(val => val != '0' && val != '1' && val !== 'NA');
     if (invalid_repeated_vals.length > 0) {
         alert_message = `The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "0", "1", or "NA".`;
         displayValidationError('raw_data_file', alert_message);
@@ -473,10 +473,10 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // Now, check the mean response value for repeated statements vs. non-repeated statements. 
     // repeated statements should have higher mean response, otherwise display warning that no truth effect present
     const repeated_responses = raw_data.data
-        .filter(row => row.repeated === '1' && row.response !== 'NA')
+        .filter(row => row.repeated == '1' && row.response !== 'NA')
         .map(row => parseFloat(row.response));
     const non_repeated_responses = raw_data.data
-        .filter(row => row.repeated === '0' && row.response !== 'NA')
+        .filter(row => row.repeated == '0' && row.response !== 'NA')
         .map(row => parseFloat(row.response));
 
     const meanRepeatedResponse = repeated_responses.reduce((a, b) => a + b, 0) / repeated_responses.length;
