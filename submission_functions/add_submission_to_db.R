@@ -79,6 +79,9 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       # Between
       between_info = submission_obj$study_info[[istudy]]$between_data
       
+      between_info$between_identifier = as.character(between_info$identifier)
+      between_info$between_description = between_info$name
+      
       between_info$between_id = between_id:(between_id + nrow(between_info) -1)
       
       between_info$study_id = study_id
@@ -103,6 +106,9 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       within_info = submission_obj$study_info[[istudy]]$within_tabe
       within_info$within_id = within_id:(within_id + nrow(within_info) -1)
       within_info$study_id = study_id
+      
+      within_info$within_identifier = as.character(within_info$identifier)
+      within_info$within_description = within_info$name
       
       within_keys = within_info[, c("within_id", "within_identifier")]
       
