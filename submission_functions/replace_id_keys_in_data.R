@@ -18,7 +18,10 @@ replace_id_keys_in_data <- function(data, keys, method, suffix = NULL){
   } else {
     colname_key_var = paste0(method, suffix)
   }
-
+  
+  data[, colname_key_var] = as.character(data[, colname_key_var])
+  keys[, colname_key_var] = as.character(keys[, colname_key_var])
+  
   data = dplyr::left_join(data, keys) 
     
   return(data)
