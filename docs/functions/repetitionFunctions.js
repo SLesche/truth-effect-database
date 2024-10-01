@@ -114,7 +114,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             </fieldset>
 
             <label for="percent_repeated" class="survey-label">What percentage of the statements was repeated?</label>
-            <input type="number" id="percent_repeated" name="percent_repeated" step="1"><br>
+            <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
             <p class="survey-label-additional-info">If 50% of your statements was repeated, enter "50".</p>
 
             <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>

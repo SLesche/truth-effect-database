@@ -325,13 +325,6 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
     const unique_sessions = [...new Set(raw_data.data.map(row => row.session).filter(session => session !== 'NA'))].map(String);
 
-    const num_expected_sessions = study_info.repetition_data.length;
-    if (unique_sessions.length !== num_expected_sessions) {
-        alert_message = `The number of unique sessions in the uploaded file (${unique_sessions.length}) does not match the number of sessions specified in the measurement sessions (${num_expected_sessions}).`;
-        displayValidationError('raw_data_file', alert_message);
-        return false;
-    }
-
     // Extract repetition identifiers from repetition_data
     const repetition_identifiers = study_info.repetition_data.map(data => data.repetition_identifier);
 
@@ -341,19 +334,16 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // Check for extra session identifiers
     const extra_session_identifiers = unique_sessions.filter(identifier => !repetition_identifiers.includes(identifier));
 
-    let alert_messages = [];
+    var alert_message = '';
 
     if (missing_session_identifiers.length > 0) {
-        alert_messages.push(`The following session identifiers are missing from the uploaded file: ${missing_session_identifiers.join(', ')}.`);
+        alert_message = `The following session identifiers are missing from the uploaded file: ${missing_session_identifiers.join(', ')}.`;
+        displayValidationError('raw_data_file', alert_message)
     }
 
     if (extra_session_identifiers.length > 0) {
-        alert_messages.push(`The following session identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_session_identifiers.join(', ')}.`);
-    }
-
-    if (alert_messages.length > 0) {
-        displayValidationError('raw_data_file', alert_messages.join(' '));
-        return false;
+        alert_message = `The following session identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_session_identifiers.join(', ')}.`;
+        displayValidationError('raw_data_file', alert_message)
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
