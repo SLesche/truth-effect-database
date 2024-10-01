@@ -85,11 +85,29 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
                 <label><input type="radio" name="truth_instructions" value="0"/>No</label>
             </div>
 
+            <fieldset id="truthInstructionsFieldset" ${repetition_data.truth_instructions == 1 ? '' : 'disabled'}>
+                <label for="truth_instruction_timing" class="survey-label">When were the participants instructed that some of these statements may be false?</label>
+                <div class="radio-buttons">
+                    <label><input type="radio" name="truth_instruction_timing" value="exposure"/>Before the exposure session</label>
+                    <label><input type="radio" name="truth_instruction_timing" value="test"/>Before the test session</label>
+                    <label><input type="radio" name="truth_instruction_timing" value="both"/>Before both the exposure and the test session</label>
+                </div>
+            </fieldset>
+
             <label for="repetition_instructions" class="survey-label">Were the participants instructed that some of the statements may be repeated?</label>
             <div class="radio-buttons">
                 <label><input type="radio" name="repetition_instructions" value="1"/>Yes</label>
                 <label><input type="radio" name="repetition_instructions" value="0"/>No</label>
             </div>
+
+            <fieldset id="repetitionInstructionsFieldset" ${repetition_data.repetition_instructions == 1 ? '' : 'disabled'}>
+                <label for="repetition_instruction_timing" class="survey-label">When were the participants instructed that some of these statements may be repeated?</label>
+                <div class="radio-buttons">
+                    <label><input type="radio" name="repetition_instruction_timing" value="exposure"/>Before the exposure session</label>
+                    <label><input type="radio" name="repetition_instruction_timing" value="test"/>Before the test session</label>
+                    <label><input type="radio" name="repetition_instruction_timing" value="both"/>Before both the exposure and the test session</label>
+                </div>
+            </fieldset>
 
             <label for="presented_until_response" class="survey-label">Were the statements presented until response?</label>
             <div class="radio-buttons">
@@ -157,6 +175,18 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         });
     });
 
+    document.querySelectorAll('input[name="truth_instructions"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('truthInstructionsFieldset').disabled = this.value == '0';
+        });
+    });
+
+    document.querySelectorAll('input[name="repetition_instructions"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('repetitionInstructionsFieldset').disabled = this.value == '0';
+        });
+    });
+
     document.getElementById('repetitionSurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
         const collected_data = collectRepetitionData();
@@ -177,6 +207,7 @@ function validateRepetitionSubmission() {
         max_n_repetitions: document.getElementById('max_n_repetitions').value,
         n_statements: document.getElementById('n_statements').value,
         truth_instructions: getRadioButtonSelection('truth_instructions'),
+        truth_instruction_timing: getRadioButtonSelection('truth_instruction_timing'),
         presented_until_response: getRadioButtonSelection('presented_until_response'),
         presentation_time_s: document.getElementById('presentation_time_s').value,
         response_deadline: getRadioButtonSelection('response_deadline'),
@@ -184,7 +215,8 @@ function validateRepetitionSubmission() {
         percent_repeated: document.getElementById('percent_repeated').value,
         presentation_type: document.getElementById('presentation_type').value,
         phase: document.getElementById('phase').value,
-        repetition_instructions: getRadioButtonSelection('repetition_instructions')
+        repetition_instructions: getRadioButtonSelection('repetition_instructions'),
+        repetition_instruction_timing: getRadioButtonSelection('repetition_instruction_timing')
     };
 
     var required_fields = ['repetition_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
@@ -195,6 +227,14 @@ function validateRepetitionSubmission() {
     
     if (fields.response_deadline == 1) {
         required_fields.push('response_deadline_s');
+    }
+
+    if (fields.truth_instructions == 1) {
+        required_fields.push('truth_instruction_timing');
+    }
+
+    if (fields.repetition_instructions == 1) {
+        required_fields.push('repetition_instruction_timing');
     }
 
     for (const field of required_fields) {
@@ -242,6 +282,7 @@ function addRepetitionEntry() {
     const max_n_repetitions = document.getElementById('max_n_repetitions').value;
     const n_statements = document.getElementById('n_statements').value;
     const truth_instructions = getRadioButtonSelection('truth_instructions') == 1 ? 1 : 0;
+    const truth_instruction_timing = truth_instructions == 1 ? getRadioButtonSelection('truth_instruction_timing'): '';
     const presentation_time_s = document.getElementById('presentation_time_s').value;
     const presented_until_response = getRadioButtonSelection('presented_until_response') == 1 ? 1 : 0;
     const response_deadline = getRadioButtonSelection('response_deadline') == 1 ? 1 : 0;
@@ -250,6 +291,7 @@ function addRepetitionEntry() {
     const presentation_type = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
     const repetition_instructions = getRadioButtonSelection('repetition_instructions') == 1 ? 1 : 0;
+    const repetition_instruction_timing = repetition_instructions == 1 ? getRadioButtonSelection('repetition_instruction_timing') : '';
 
     const repetitions_table = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
 
@@ -265,6 +307,7 @@ function addRepetitionEntry() {
         max_n_repetitions,
         n_statements,
         truth_instructions,
+        truth_instruction_timing,
         presentation_time_s,
         presented_until_response,
         response_deadline,
@@ -272,29 +315,35 @@ function addRepetitionEntry() {
         percent_repeated,
         presentation_type,
         phase,
-        repetition_instructions
+        repetition_instructions,
+        repetition_instruction_timing
     });
 
-    // Clear the input fields
-    document.getElementById('repetition_identifier').value = '';
-    document.getElementById('repetition_time').value = '';
-    document.getElementById('repetition_location').value = '';
-    document.getElementById('repetition_type').value = '';
-    document.getElementById('max_n_repetitions').value = '';
-    document.getElementById('n_statements').value = '';
-    document.querySelector('input[name="response_deadline"]:checked').checked = false;
-    document.querySelector('input[name="truth_instructions"]:checked').checked = false;
-    document.getElementById('presentation_time_s').value = '';
-    document.querySelector('input[name="presented_until_response"]:checked').checked = false;
-    document.getElementById('response_deadline_s').value = '';
-    document.getElementById('percent_repeated').value = '';
-    document.getElementById('presentation_type').value = '';
-    document.getElementById('phase').value = '';
-    document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
+    // // Clear the input fields
+    // document.getElementById('repetition_identifier').value = '';
+    // document.getElementById('repetition_time').value = '';
+    // document.getElementById('repetition_location').value = '';
+    // document.getElementById('repetition_type').value = '';
+    // document.getElementById('max_n_repetitions').value = '';
+    // document.getElementById('n_statements').value = '';
+    // document.querySelector('input[name="response_deadline"]:checked').checked = false;
+    // document.querySelector('input[name="truth_instructions"]:checked').checked = false;
+    // document.querySelector('input[name="truth_instruction_timing"]:checked').checked = false;
+    // document.getElementById('presentation_time_s').value = '';
+    // document.querySelector('input[name="presented_until_response"]:checked').checked = false;
+    // document.getElementById('response_deadline_s').value = '';
+    // document.getElementById('percent_repeated').value = '';
+    // document.getElementById('presentation_type').value = '';
+    // document.getElementById('phase').value = '';
+    // document.querySelector('input[name="repetition_instructions"]:checked').checked = false;
+    // document.querySelector('input[name="repetition_instruction_timing"]:checked').checked = false;
 
-    // hide the fieldsets
-    document.getElementById('presentationTimeFieldset').disabled = true;
-    document.getElementById('responseDeadlineFieldset').disabled = true;
+
+    // // hide the fieldsets
+    // document.getElementById('presentationTimeFieldset').disabled = true;
+    // document.getElementById('responseDeadlineFieldset').disabled = true;
+    // document.getElementById('truthInstructionsFieldset').disabled = true;
+    // document.getElementById('repetitionInstructionFieldset').disabled = true;
 
     // Display the updated summary
     displayRepetitionSummary(repetitions);

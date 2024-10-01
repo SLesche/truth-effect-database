@@ -105,6 +105,7 @@ create_truth_db <- function(file_path){
     max_n_repetitions INTEGER,
     n_statements INTEGER,
     truth_instructions INTEGER,
+    truth_instruction_timing VARCHAR(255),
     presented_until_response BOOLEAN,
     presentation_time_s FLOAT,
     response_deadline BOOLEAN,
@@ -113,6 +114,7 @@ create_truth_db <- function(file_path){
     presentation_type VARCHAR(255),
     phase VARCHAR(255),
     repetition_instructions INTEGER,
+    repetition_instruction_timing VARCHAR(255),
     FOREIGN KEY (study_id) REFERENCES study_table(study_id)
     );"
   )
