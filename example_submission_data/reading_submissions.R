@@ -2,10 +2,10 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "test5.db"
+db_path = "test_final.db"
 create_truth_db(db_path)
 
-file <- paste0(path, "submission_test.json")
+file <- paste0(path, "submission_test_final.json")
 
 submission_obj <- extract_from_submission_json(file)
 
@@ -24,21 +24,9 @@ library(tidyverse)
 arguments <- list() %>% 
   add_argument(
     conn,
-    "proportion_true",
+    "study_id",
     "greater",
-    "0.5"
-  ) %>% 
-  add_argument(
-    conn,
-    "subjective_certainty",
-    "equal",
     "0"
-  ) %>% 
-  add_argument(
-    conn,
-    "repetition_time",
-    "equal",
-    "20"
   )
 
 db_overview = generate_db_overview_table(db_path)
@@ -50,7 +38,7 @@ target_cols <- db_overview %>%
 
 result <- query_db(conn,
                    arguments,
-                   target_vars = target_cols,
-                   target_table = "observation_table")
+                   target_vars = "default",
+                   target_table = "between_table")
 
 result %>% distinct() %>% View()

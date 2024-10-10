@@ -17,6 +17,7 @@ prep_study_data <- function(study_data, db_overview){
   
   study_data = dplyr::rename(
     study_data,
+    "raw_data_link" = "open_data_link",
     "filler_task_yesno" = "secondary_tasks",
     "filler_task_type" = "secondary_task_type",
     "filler_task_name" = "secondary_task_name"
