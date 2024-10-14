@@ -31,10 +31,9 @@ function generateOverviewPage(control) {
         <div class = "display-text">
             <h1>Welcome to the Truth Effect Data Entry Page</h1>
             <p>Thank you for contributing to our growing database of truth effect research. By entering your data here, you help make research more accessible and reusable for everyone.</p>
-            <p>You can explore and use the dataset under this link: <a href="https://example.com/dataset" target="_blank">Dataset Link</a></p>
-            <p>On the side, you have the option to add publications. Within each publication, you can also add several studies.</p>
+            <p>You can explore and download the dataset under this link: <a href="https://example.com/dataset" target="_blank">Dataset Link</a></p>
+            <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as may studies in your publication as you wish.</p>
             <p>After submission, our team will review your data and add it to the database as soon as possible.</p>
-            <p>Here, you will see a progress report on your submission once it's been submitted.</p>
 
             ${printProgressReport(getNumberOfSubmissions(control))}
 
