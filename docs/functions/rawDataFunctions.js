@@ -66,10 +66,10 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>within_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
                 <li><strong>between_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
                 <li><strong>statement_identifier:</strong> A unique identifier for each statement used. This must be one of the identifiers encoded in the "Statementset" data you uploaded.</li>
-                <li><strong>response:</strong> The value of the truth rating. Higher values must indicate more truth.</li>
+                <li><strong>response:</strong> The value of the truth rating. <b>Larger values must indicate higher truth ratings.</b></li>
                 <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0".</li>
                 <li><strong>certainty:</strong> (if measured) The value indicating the subjective certainty with which a participant gave their truth rating.</li>
-                <li><strong>rt:</strong> (if measured) The value indicating the response time.</li>
+                <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
             <div class = "table-container" id = "tableContainerExample">
                 <table>
