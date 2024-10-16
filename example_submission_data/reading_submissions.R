@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "test_final.db"
+db_path = "truth_db.db"
 create_truth_db(db_path)
 
 file <- paste0(path, "submission_test_final.json")

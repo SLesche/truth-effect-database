@@ -1,7 +1,7 @@
 library(acdcquery)
 library(dplyr)
 
-conn <- acdcquery::connect_to_db("truth_db_test.db")
+conn <- acdcquery::connect_to_db("truth_db.db")
 
 arguments <- list() %>% 
   acdcquery::add_argument(
