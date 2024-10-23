@@ -61,7 +61,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
             <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
             <ul class = "list-of-entries">
                 <li><strong>subject:</strong> A unique identifier for each subject.</li>
-                <li><strong>session:</strong> A unique identifier for each measurement session. This must be one of the identifiers encoded in "Measurement Sessions".</li>
+                <li><strong>presentation_identifier:</strong> A unique identifier for each presentation condition. This must be one of the identifiers encoded in "Statement Presentations".</li>
                 <li><strong>trial:</strong> A unique identifier for each trial for a given subject.</li>
                 <li><strong>within_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
                 <li><strong>between_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
@@ -75,7 +75,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <table>
                     <tr>
                         <th>subject</th>
-                        <th>session</th>
+                        <th>presentation_identifier</th>
                         <th>trial</th>
                         <th>within_identifier</th>
                         <th>between_identifier</th>
@@ -278,7 +278,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         return false;
     }
  
-    var required_headers = ['subject', 'session', 'trial', 'response', 'repeated'];
+    var required_headers = ['subject', 'presentation_identifier', 'trial', 'response', 'repeated'];
 
     // if there were experimental conditions, add those to required headers
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
@@ -323,26 +323,26 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
-    const unique_sessions = [...new Set(raw_data.data.map(row => row.session).filter(session => session !== 'NA'))].map(String);
+    const unique_sessions = [...new Set(raw_data.data.map(row => row.presentation_identifier).filter(presentation_identifier => presentation_identifier !== 'NA'))].map(String);
 
     // Extract repetition identifiers from repetition_data
     const repetition_identifiers = study_info.repetition_data.map(data => data.repetition_identifier);
 
-    // Check for missing session identifiers
-    const missing_session_identifiers = repetition_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+    // Check for missing presentation_identifier identifiers
+    const missing_presentation_identifiers = repetition_identifiers.filter(identifier => !unique_sessions.includes(identifier));
 
-    // Check for extra session identifiers
-    const extra_session_identifiers = unique_sessions.filter(identifier => !repetition_identifiers.includes(identifier));
+    // Check for extra presentation identifiers
+    const extra_presentation_identifiers = unique_presentations.filter(identifier => !repetition_identifiers.includes(identifier));
 
     var alert_message = '';
 
-    if (missing_session_identifiers.length > 0) {
-        alert_message = `The following session identifiers are missing from the uploaded file: ${missing_session_identifiers.join(', ')}.`;
+    if (missing_presentation_identifiers.length > 0) {
+        alert_message = `The following presentation identifiers are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`;
         displayValidationError('raw_data_file', alert_message)
     }
 
-    if (extra_session_identifiers.length > 0) {
-        alert_message = `The following session identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_session_identifiers.join(', ')}.`;
+    if (extra_presentation_identifiers.length > 0) {
+        alert_message = `The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`;
         displayValidationError('raw_data_file', alert_message)
     }
 
@@ -507,7 +507,7 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
             return false;
         }
         if (!study_info.repetition_data.validated) {
-            alert('Please enter information about the measurement sessions before submitting the raw data.')
+            alert('Please enter information about the statement presentations before submitting the raw data.')
             return false;
         }
         if (!statementset_validated) {

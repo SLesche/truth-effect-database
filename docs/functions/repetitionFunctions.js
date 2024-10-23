@@ -8,7 +8,7 @@ function addRepetition(parentElement, control, publication_idx, study_idx) {
 
     // Create a span for the dataset name
     const span = document.createElement("span");
-    span.textContent = "Measurement Sessions";
+    span.textContent = "Statement Presentation";
 
     // // Create action buttons
     // const actions = document.createElement("div");
@@ -49,18 +49,18 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
     <div class="display-text">
-        <h1>${study_name}: Measurement Sessions</h1>
-        <p>This section focuses on gathering detailed information about the times statements were presented to participants, which we refer to as measurement sessions. A measurement session refers to any distinct occasion when participants were exposed to statements. For example, if participants had an exposure phase at 9:00 AM followed by a test phase at 9:30 AM, these would count as two separate measurement sessions.</p>
-        <p>Importantly, this is also where you have to enter multiple sessions if they <b>differed</b> between or within participants. If you had two sessions for all participants - an exposure and a test session - but manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct sessions. One common exposure session with identical settings for all participants and two different test sessions encoding the two experimental groups.</p>
-        <p>If you manipulated any part of the experiment (between or within participants) and cannot endoce this through different sessions because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Experimental Conditions" tab.</p>
+        <h1>${study_name}: Statement Presentation</h1>
+        <p>This section focuses on gathering detailed information about the times statements were presented to participants.</p>
+        <p>Importantly, this is also where you have to enter multiple conditions if settings of statement presentation <b>differed</b> between or within participants. If you had two sessions for all participants - an exposure and a test session - and manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct conditions of statement presentation. One common exposure condition with identical settings for all participants and two different test conditions encoding the two experimental groups.</p>
+        <p>If you manipulated any part of the experiment (between or within participants) and cannot encode this through different conditions here because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Experimental Conditions" tab.</p>
         
-        <h2>Session Information:</h2>
+        <h2>Presentation Information:</h2>
         <form id="repetitionSurvey" class="survey-form">
-            <label for="repetition_identifier" class="survey-label">How is this session information identified in the raw data?</label>
+            <label for="repetition_identifier" class="survey-label">How is this statement presentation condition identified in the raw data?</label>
             <input type="text" id="repetition_identifier" name="repetition_identifier"><br>
-            <p class="survey-label-additional-info">This identifier <b>must</b> be identical to the value of the column "session" in the raw data. This encodes information about different session settings, cause either by repeated measurements or experimental manipulations of the settings entered below.</p>
+            <p class="survey-label-additional-info">This identifier <b>must</b> be identical to the value of the column "presentation_identifier" in the raw data. This encodes information about different presentation settings, caused either by repeated measurements or experimental manipulations of the settings entered below.</p>
 
-            <label for="repetition_time" class="survey-label">When was this session conducted relative to the first sessions? Enter the amount of minutes since the first session.</label>
+            <label for="repetition_time" class="survey-label">When was this presentation session conducted relative to the first exposure to the statements? Enter the amount of minutes since the first session.</label>
             <input type="number" id="repetition_time" name="repetition_time" step="1"><br>
             <p class="survey-label-additional-info">This should be "0", if it is the first session. It would be "60", if the session was conducted one hour after the first session.</p>
 
@@ -70,13 +70,17 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <label for="phase" class="survey-label">What phase was this session (i.e. exposure / test)?</label>
             <input type="text" id="phase" name="phase"><br>
 
-            <label for="repetition_type" class="survey-label">What type was the session (exact / semantic)?</label>
+            <label for="repetition_type" class="survey-label">What type was the repetition of statements (exact / semantic)?</label>
             <input type="text" id="repetition_type" name="repetition_type"><br>
+            <p class="survey-label-additional-info">Even if none of the statements presented were repeated in this session, enter the type of repetition that will occur.</p>
+
+            <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
+            <input type="text" id="presentation_type" name="presentation_type"><br>
 
             <label for="max_n_repetitions" class="survey-label">What was the maximum number of times a statement was presented during this session? Enter 1, if statements were only presented once.</label>
             <input type="number" id="max_n_repetitions" name="max_n_repetitions"><br>
 
-            <label for="n_statements" class="survey-label">How many statements were presented?</label>
+            <label for="n_statements" class="survey-label">How many statements were presented to each participant?</label>
             <input type="number" id="n_statements" name="n_statements"><br>
 
             <label for="truth_instructions" class="survey-label">Were the participants instructed that some of these statements may be false?</label>
@@ -135,11 +139,8 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <input type="number" id="percent_repeated" name="percent_repeated" step="0.01"><br>
             <p class="survey-label-additional-info">If 50% of your statements was repeated, enter "50".</p>
 
-            <label for="presentation_type" class="survey-label">How were the statements presented (visual / auditory)?</label>
-            <input type="text" id="presentation_type" name="presentation_type"><br>
-
-            <button type="button" onclick="addRepetitionEntry()" class="add-button">Add Session</button><br><br>
-            <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Sessions</label>
+            <button type="button" onclick="addRepetitionEntry()" class="add-button">Add Presentation Condition</button><br><br>
+            <label class="survey-label" id = "listOfRepetitions" style = "display: none;">List of Conditions</label>
             <div id="repetitionTableContainer" class = "table-container" style = "display: none;">
                 <table id="repetitionsTable">
                     <thead>
