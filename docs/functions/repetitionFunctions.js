@@ -56,8 +56,8 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
         
         <h2>Presentation Information:</h2>
         <form id="repetitionSurvey" class="survey-form">
-            <label for="repetition_identifier" class="survey-label">How is this statement presentation condition identified in the raw data?</label>
-            <input type="text" id="repetition_identifier" name="repetition_identifier"><br>
+            <label for="presentation_identifier" class="survey-label">How is this statement presentation condition identified in the raw data?</label>
+            <input type="text" id="presentation_identifier" name="presentation_identifier"><br>
             <p class="survey-label-additional-info">This identifier <b>must</b> be identical to the value of the column "presentation_identifier" in the raw data. This encodes information about different presentation settings, caused either by repeated measurements or experimental manipulations of the settings entered below.</p>
 
             <label for="repetition_time" class="survey-label">When was this presentation session conducted relative to the first exposure to the statements? Enter the amount of minutes since the first session.</label>
@@ -201,7 +201,7 @@ function validateRepetitionSubmission() {
     clearValidationMessages();
 
     const fields = {
-        repetition_identifier: document.getElementById('repetition_identifier').value,
+        presentation_identifier: document.getElementById('presentation_identifier').value,
         repetition_time: document.getElementById('repetition_time').value,
         repetition_location: document.getElementById('repetition_location').value,
         repetition_type: document.getElementById('repetition_type').value,
@@ -220,7 +220,7 @@ function validateRepetitionSubmission() {
         repetition_instruction_timing: getRadioButtonSelection('repetition_instruction_timing')
     };
 
-    var required_fields = ['repetition_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
+    var required_fields = ['presentation_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
     
     if (fields.presented_until_response == 0) {
         required_fields.push('presentation_time_s');
@@ -261,7 +261,7 @@ function validateRepetitionData(repetition_data) {
     }
 
 
-    const identifiers = repetition_data.map(sessions => sessions.repetition_identifier);
+    const identifiers = repetition_data.map(sessions => sessions.presentation_identifier);
     if (new Set(identifiers).size !== identifiers.length) {
         alert_message = 'Identifiers for sessions must be unique.';
         displayValidationError("listOfRepetitions", alert_message);
@@ -276,7 +276,7 @@ function addRepetitionEntry() {
     if (!validateRepetitionSubmission()) {
         return;
     }
-    const repetition_identifier = document.getElementById('repetition_identifier').value;
+    const presentation_identifier = document.getElementById('presentation_identifier').value;
     const repetition_time = document.getElementById('repetition_time').value;
     const repetition_location = document.getElementById('repetition_location').value;
     const repetition_type = document.getElementById('repetition_type').value;
@@ -301,7 +301,7 @@ function addRepetitionEntry() {
 
     // Add the new repetition
     repetitions.push({
-        repetition_identifier,
+        presentation_identifier,
         repetition_time,
         repetition_location,
         repetition_type,
@@ -321,7 +321,7 @@ function addRepetitionEntry() {
     });
 
     // // Clear the input fields
-    // document.getElementById('repetition_identifier').value = '';
+    // document.getElementById('presentation_identifier').value = '';
     // document.getElementById('repetition_time').value = '';
     // document.getElementById('repetition_location').value = '';
     // document.getElementById('repetition_type').value = '';
@@ -413,7 +413,7 @@ function displayRepetitionSummary(repetitions) {
     repetitions.forEach((session, index) => {
         const th = document.createElement('th');
 
-        th.textContent = `Session: ${session.repetition_identifier}`;
+        th.textContent = `Condition: ${session.presentation_identifier}`;
 
         // Add delete button
         const deleteButton = document.createElement('button');

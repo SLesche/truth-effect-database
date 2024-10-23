@@ -326,13 +326,13 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const unique_sessions = [...new Set(raw_data.data.map(row => row.presentation_identifier).filter(presentation_identifier => presentation_identifier !== 'NA'))].map(String);
 
     // Extract repetition identifiers from repetition_data
-    const repetition_identifiers = study_info.repetition_data.map(data => data.repetition_identifier);
+    const presentation_identifiers = study_info.repetition_data.map(data => data.presentation_identifier);
 
     // Check for missing presentation_identifier identifiers
-    const missing_presentation_identifiers = repetition_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+    const missing_presentation_identifiers = presentation_identifiers.filter(identifier => !unique_sessions.includes(identifier));
 
     // Check for extra presentation identifiers
-    const extra_presentation_identifiers = unique_presentations.filter(identifier => !repetition_identifiers.includes(identifier));
+    const extra_presentation_identifiers = unique_sessions.filter(identifier => !presentation_identifiers.includes(identifier));
 
     var alert_message = '';
 
