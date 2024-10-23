@@ -25,7 +25,7 @@ extract_from_submission_json <- function(json_path){
     submission_list$study_info[[istudy]]$study_data = as.data.frame(json_obj$study_info[[istudy]]$study_data)
     submission_list$study_info[[istudy]]$repetition_data = as.data.frame(data.table::rbindlist(json_obj$study_info[[istudy]]$repetition_data))
     
-    columns_to_extract = c("subject", "session", "trial", "response", "repeated")
+    columns_to_extract = c("subject", "presentation_identifier", "trial", "response", "repeated")
     
     # Here check if has conditions
     if (json_obj$study_info[[istudy]]$condition_data$has_within_conditions == "1"){

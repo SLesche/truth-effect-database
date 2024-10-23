@@ -65,7 +65,12 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     study_info = submission_obj$study_info[[istudy]]$study_data
     study_info$publication_id = pub_id
     study_info$study_id = study_id
-    study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
+    
+    if (n_statementsets > 0){
+      study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
+    } else {
+      study_info$statementset_id = NA
+    }
     
     add_data_to_table(conn, study_info, "study_table", db_overview)
     
@@ -124,24 +129,28 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     }
     
     
-    # Repetition
-    repetition_id = find_next_free_id(conn, "repetition_table")
-    repetition_info = submission_obj$study_info[[istudy]]$repetition_data
+    # presentation
+    presentation_id = find_next_free_id(conn, "presentation_table")
+    presentation_info = submission_obj$study_info[[istudy]]$presentation_data
     
-    repetition_info$repetition_id = repetition_id:(repetition_id + nrow(repetition_info) - 1)
+    presentation_info$presentation_id = presentation_id:(presentation_id + nrow(presentation_info) - 1)
     
-    repetition_info$study_id = study_id
+    presentation_info$study_id = study_id
     
-    repetition_keys = repetition_info[, c("repetition_id", "repetition_identifier")]
+    presentation_keys = presentation_info[, c("presentation_id", "presentation_identifier")]
     
-    add_data_to_table(conn, repetition_info, "repetition_table", db_overview)
+    add_data_to_table(conn, presentation_info, "presentation_table", db_overview)
     
     
     # Observation
     observation_table = submission_obj$study_info[[istudy]]$raw_data
     
-    observation_table = replace_id_keys_in_data(observation_table, repetition_keys, "repetition", "_identifier")
-    observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
+    observation_table = replace_id_keys_in_data(observation_table, presentation_keys, "presentation", "_identifier")
+    if (n_statementsets > 0){
+      observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
+    } else {
+      observation_table$statement_id = NA
+    }
     
     if (has_within_conditions){
       observation_table = replace_id_keys_in_data(observation_table, within_keys, "within", "_identifier")
