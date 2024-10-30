@@ -125,11 +125,16 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
             <fieldset id="rtMeasuredFieldset" ${study_data.rt_measured == 1 ? '' : 'disabled'}>
                 <label for="rt_onset" class="survey-label">What event marked the onset of response time measurement?</label>
-                <input type="text" id="rt_onset" name="rt_onset" value="${study_data.rt_onset || ''}"><br>
+                <select id="rt_onset" name="rt_onset">
+                    <option value="stimulus_onset" ${study_data.rt_onset === 'stimulus_onset' ? 'selected' : ''}>Stimulus Onset</option>
+                    <option value="probe_onset" ${study_data.rt_onset === 'probe_onset' ? 'selected' : ''}>Probe Onset</option>
+                    <option value="other" ${study_data.rt_onset === 'other' ? 'selected' : ''}>Other</option>
+                </select><br>
             </fieldset>
 
             <label for="n_participants" class="survey-label">How many participants took part in your study?</label>
             <input type="number" step="1" id="n_participants" name="n_participants" value="${study_data.n_participants || ''}"><br>
+            <p class="survey-label-additional-info">Enter the number of valid participants after exclusion of outliers and bad data.</p>
 
             <label for="participant_age" class="survey-label">Was was the average age of your participants?</label>
             <input type="number" step="0.01" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}"><br>
@@ -146,11 +151,17 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
 
             <fieldset id="secondaryTaskFieldset" ${study_data.secondary_tasks == 1 ? '' : 'disabled'}>
                 <label for="secondary_task_type" class="survey-label">What type of secondary task did the participants complete (verbal/numeric/figural)?</label>
-                <input type="text" id="secondary_task_type" name="secondary_task_type" value="${study_data.secondary_task_type || ''}"><br>
-
-                <label for="secondary_task_name" class="survey-label">What was the name of the secondary task employed?</label>
-                <input type="text" id="secondary_task_name" name="secondary_task_name" value="${study_data.secondary_task_name || ''}"><br>
-                <p class="survey-label-additional-info">If you employed multiple secondary tasks, list the names separated by commas, i.e. "Stroop Task, Simon Task"</p>
+                 <div class="radio-buttons" id = "secondary_task_type">
+                    <label><input type="radio" name="secondary_task_type" value="1" ${study_data.secondary_task_type == 1 ? 'checked' : ''}/>verbal</label>
+                    <label><input type="radio" name="secondary_task_type" value="0" ${study_data.secondary_task_type == 0 ? 'checked' : ''}/>non-verbal</label>
+                </div>
+                <p class="survey-label-additional-info">If you employed multiple secondary tasks, select "verbal" if any of them were verbal.</p>
+                
+                <fieldset id="secondaryTaskTypeFieldset" ${study_data.secondary_task_type == 1 ? '' : 'disabled'}>
+                    <label for="secondary_task_name" class="survey-label">What was the name of the secondary task employed?</label>
+                    <input type="text" id="secondary_task_name" name="secondary_task_name" value="${study_data.secondary_task_name || ''}"><br>
+                    <p class="survey-label-additional-info">If you employed multiple secondary tasks, list the names separated by commas, i.e. "Stroop Task, Simon Task"</p>
+                </fieldset>
             </fieldset>
 
             <label for="physiological_measures" class="survey-label">Did you collect any physiological data?</label>
@@ -202,6 +213,12 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
         });
     });
 
+    document.querySelectorAll('input[name="secondary_task_type"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('secondaryTaskTypeFieldset').disabled = this.value == '0';
+        });
+    });
+
     // Add event listener to the form's submit button
     document.getElementById('studySurvey').addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
@@ -218,7 +235,7 @@ function collectStudyData() {
     const truth_rating_steps = document.getElementById('truth_rating_steps').value;
     const subjective_certainty = getRadioButtonSelection('subjective_certainty');
     const rt_measured = getRadioButtonSelection('rt_measured');
-    const rt_onset = rt_measured == 1 ? document.getElementById('rt_onset').value: '';
+    const rt_onset = rt_measured == 1 ? document.getElementById('rt_onset').value : '';
     const n_participants = document.getElementById('n_participants').value;
     const participant_age = document.getElementById('participant_age').value;
     const percentage_female = document.getElementById('percentage_female').value;
@@ -229,7 +246,7 @@ function collectStudyData() {
     const statementset_name = document.getElementById('statementset_name').value;
 
     const secondary_tasks = getRadioButtonSelection('secondary_tasks');
-    const secondary_task_type = secondary_tasks == 1 ? document.getElementById('secondary_task_type').value : '';
+    const secondary_task_type = secondary_tasks == 1 ? getRadioButtonSelection('secondary_task_type') : '';
     const secondary_task_name = secondary_tasks == 1 ? document.getElementById('secondary_task_name').value : '';
 
     // Store the values in the control object
@@ -268,7 +285,10 @@ function validateStudyData(study_data) {
     ];
 
     if (study_data.secondary_tasks == 1) {
-        required_keys.push('secondary_task_type', 'secondary_task_name');
+        required_keys.push('secondary_task_type');
+        if (study_data.secondary_task_type == 1) {
+            required_keys.push('secondary_task_name');
+        }
     }
     if (study_data.truth_rating_scale === 'other') {
         required_keys.push('truth_rating_scale_details');

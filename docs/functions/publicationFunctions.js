@@ -163,7 +163,7 @@ function validatePublicationData(publication_data){
     var alert_message = 'This field does not match validation criteria.';
     // Check if any of the fields are empty
 
-    const required_keys = ['authors', 'first_author', 'title', 'apa_reference', 'conducted', 'country', 'keywords', 'contact'];
+    const required_keys = ['authors', 'first_author', 'title', 'apa_reference', 'conducted', 'country', 'contact'];
     for (const key of required_keys) {
         if (!publication_data[key]) {
             alert_message = 'This field is required.';
