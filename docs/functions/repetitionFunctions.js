@@ -8,7 +8,7 @@ function addRepetition(parentElement, control, publication_idx, study_idx) {
 
     // Create a span for the dataset name
     const span = document.createElement("span");
-    span.textContent = "Statement Presentation";
+    span.textContent = "Procedure";
 
     // // Create action buttons
     // const actions = document.createElement("div");
@@ -49,12 +49,12 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
     <div class="display-text">
-        <h1>${study_name}: Statement Presentation</h1>
+        <h1>${study_name}: Procedure</h1>
         <p>This section focuses on gathering detailed information about the times statements were presented to participants.</p>
         <p>Importantly, this is also where you have to enter multiple conditions if settings of statement presentation <b>differed</b> between or within participants. If you had two sessions for all participants - an exposure and a test session - and manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct conditions of statement presentation. One common exposure condition with identical settings for all participants and two different test conditions encoding the two experimental groups.</p>
         <p>If you manipulated any part of the experiment (between or within participants) and cannot encode this through different conditions here because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Experimental Conditions" tab.</p>
         
-        <h2>Presentation Information:</h2>
+        <h2>Procedure Information:</h2>
         <form id="repetitionSurvey" class="survey-form">
             <label for="presentation_identifier" class="survey-label">How is this statement presentation condition identified in the raw data?</label>
             <input type="text" id="presentation_identifier" name="presentation_identifier"><br>
