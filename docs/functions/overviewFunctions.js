@@ -40,12 +40,12 @@ function generateOverviewPage(control) {
 
             <h2>Save / Load progess</h2>
             <button onclick="saveProgress(control)">Save Progress</button>
-
-            <h2>Submission</h2>
             <button id="uploadProgressButton">Upload Progress</button>
             <input type="file" id="progressFileInput" accept=".json" style="display: none;">
 
-
+            <h2>Submission</h2>
+            <button onclick="submitData(control)">Submit Data</button>
+            
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>
                 <a href="mailto:sven.lesche@psychologie.uni-heidelberg.de">sven.lesche@psychologie.uni-heidelberg.de</a><br>
@@ -66,6 +66,7 @@ function generateOverviewPage(control) {
                 const progressData = JSON.parse(e.target.result);
                 uploadProgress(progressData);
             };
+            reader.readAsText(file); // Add this line to read the file's contents
         }
     });
 }

@@ -83,4 +83,54 @@ function saveProgress(control){
 function uploadProgress(progressData){
     console.log(progressData); 
     control = progressData;
+    addCheckmarksFromProgress(control);
+}
+
+function addCheckmarksFromProgress(control) {
+    const num_total_publications = Object.keys(control.publication_info).length;
+    const num_statement_sets = Object.keys(control.statementset_info).length;
+
+    for (let publication_idx in control.publication_info) {
+        let publication = control.publication_info[publication_idx];
+        if (publication.publication_data.validated) {
+            // Add a checkmark to the currently selected sidebar item
+            const item_id =  "publication-" + publication_idx;
+            addGreenCheckmarkById(item_id);
+        }
+
+        for (let study_idx in control.publication_info[publication_idx].study_info) {
+            let study = control.publication_info[publication_idx].study_info[study_idx];
+            
+            // Add checkmark for the study
+            if (study.study_data.validated) {
+                // Add a checkmark to the currently selected sidebar item
+                const item_id =  "study-" + publication_idx + "-" + study_idx;
+                addGreenCheckmarkById(item_id);
+            }
+
+            // Add checkmarks for repetition data
+            if (study.repetition_data.validated) {
+                addGreenCheckmarkById(`repetition-${publication_idx}-${study_idx}`);
+            }
+
+            if (study.measurement_data.validated) {
+                addGreenCheckmarkById(`measurement-${publication_idx}-${study_idx}`);
+            }
+
+            if (study.raw_data.validated) {
+                addGreenCheckmarkById(`rawdata-${publication_idx}-${study_idx}`);
+            }
+
+            if (study.condition_data.validated) {
+                addGreenCheckmarkById(`condition-${publication_idx}-${study_idx}`);
+            }
+        }
+    }
+
+    // Iterate over statement sets
+    for (let statementset_idx = 0; statementset_idx < num_statement_sets; statementset_idx++) {
+        if (control.statementset_info[statementset_idx].statementset_data.validated) {
+            addGreenCheckmarkById(`statementset-${statementset_idx}`);
+        }
+    }
 }
