@@ -38,8 +38,13 @@ function generateOverviewPage(control) {
 
             ${printProgressReport(getNumberOfSubmissions(control))}
 
+            <h2>Save / Load progess</h2>
+            <button onclick="saveProgress(control)">Save Progress</button>
+
             <h2>Submission</h2>
-            <button onclick="submitData(control)">Submit</button>
+            <button id="uploadProgressButton">Upload Progress</button>
+            <input type="file" id="progressFileInput" accept=".json" style="display: none;">
+
 
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>
@@ -48,6 +53,21 @@ function generateOverviewPage(control) {
             </p>
         </div>
     `;
+
+    document.getElementById('uploadProgressButton').addEventListener('click', function() {
+        document.getElementById('progressFileInput').click();
+    });
+
+    document.getElementById('progressFileInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const progressData = JSON.parse(e.target.result);
+                uploadProgress(progressData);
+            };
+        }
+    });
 }
 
 function getNumberOfSubmissions(control) {
