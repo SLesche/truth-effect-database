@@ -171,6 +171,7 @@ function initializeStatementSetSurvey(control, statementset_idx) {
 
             <label for="statement_publication" class="survey-label">If available, provide an APA-style reference to the publication where this set of statements originates from.</label>
             <input type="text" id="statement_publication" name="statement_publication" value="${statementset_data.statement_publication || ''}"><br>
+            <p class="additional-info">Please provide a link to the paper in which the set of statements is outlined, not a reference to the raw data repository.</p>
 
             <button type="submit" class="survey-button">Submit</button>
         </form>
