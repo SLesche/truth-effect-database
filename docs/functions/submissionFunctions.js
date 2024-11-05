@@ -80,12 +80,6 @@ function saveProgress(control){
     alert("Progress file downloaded successfully!");
 }
 
-function uploadProgress(progressData){
-    console.log(progressData); 
-    control = progressData;
-    addCheckmarksFromProgress(control);
-}
-
 function addCheckmarksFromProgress(control) {
     const num_total_publications = Object.keys(control.publication_info).length;
     const num_statement_sets = Object.keys(control.statementset_info).length;

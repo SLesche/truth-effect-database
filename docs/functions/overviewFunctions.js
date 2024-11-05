@@ -64,9 +64,13 @@ function generateOverviewPage(control) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const progressData = JSON.parse(e.target.result);
-                uploadProgress(progressData);
+                // Override the existing control object
+                Object.assign(control, progressData);
+                addCheckmarksFromProgress(control);
+                initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
+                console.log(control);
             };
-            reader.readAsText(file); // Add this line to read the file's contents
+            reader.readAsText(file);
         }
     });
 }
