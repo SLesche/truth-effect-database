@@ -64,6 +64,7 @@ function submitData(control) {
 }
 
 function saveProgress(control){
+    control.progress_file = true;
     // Write the data into a json file
     const submission_data = JSON.stringify(control);
 
@@ -104,11 +105,11 @@ function addCheckmarksFromProgress(control) {
 
             // Add checkmarks for repetition data
             if (study.repetition_data.validated) {
-                addGreenCheckmarkById(`repetition-${publication_idx}-${study_idx}`);
+                addGreenCheckmarkById(`repetitions-${publication_idx}-${study_idx}`);
             }
 
             if (study.measurement_data.validated) {
-                addGreenCheckmarkById(`measurement-${publication_idx}-${study_idx}`);
+                addGreenCheckmarkById(`measures-${publication_idx}-${study_idx}`);
             }
 
             if (study.raw_data.validated) {
@@ -116,7 +117,7 @@ function addCheckmarksFromProgress(control) {
             }
 
             if (study.condition_data.validated) {
-                addGreenCheckmarkById(`condition-${publication_idx}-${study_idx}`);
+                addGreenCheckmarkById(`conditions-${publication_idx}-${study_idx}`);
             }
         }
     }

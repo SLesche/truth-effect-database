@@ -64,11 +64,16 @@ function generateOverviewPage(control) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const progressData = JSON.parse(e.target.result);
-                // Override the existing control object
-                Object.assign(control, progressData);
-                addCheckmarksFromProgress(control);
-                initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
-                console.log(control);
+
+                if (progressData.progress_file) {
+                    // Override the existing control object
+                    Object.assign(control, progressData);
+                    addCheckmarksFromProgress(control);
+                    initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
+                    console.log(control);
+                } else {
+                    alert("Invalid progress file. Please upload a valid progress file.");
+                }
             };
             reader.readAsText(file);
         }
