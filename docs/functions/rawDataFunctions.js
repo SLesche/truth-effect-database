@@ -63,8 +63,8 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>subject:</strong> A unique identifier for each subject.</li>
                 <li><strong>presentation_identifier:</strong> A unique identifier for each presentation condition. This must be one of the identifiers encoded in "Statement Presentations".</li>
                 <li><strong>trial:</strong> A unique identifier for each trial for a given subject.</li>
-                <li><strong>within_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
-                <li><strong>between_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
+                <li><strong>within_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
+                <li><strong>between_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
                 <li><strong>statement_identifier:</strong> A unique identifier for each statement used. This must be one of the identifiers encoded in the "Statementset" data you uploaded.</li>
                 <li><strong>response:</strong> The value of the truth rating. <b>Larger values must indicate higher truth ratings.</b></li>
                 <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0".</li>
