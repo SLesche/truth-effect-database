@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_db_test.db"
+db_path = "truth_db_test2.db"
 create_truth_db(db_path)
 
 file <- paste0(path, "submission_fazio_2019_the.json")
@@ -24,7 +24,7 @@ library(tidyverse)
 arguments <- list() %>% 
   add_argument(
     conn,
-    "publication_id",
+    "study_id",
     "greater",
     "0"
   )
@@ -38,7 +38,7 @@ target_cols <- db_overview %>%
 
 result <- query_db(conn,
                    arguments,
-                   target_vars = c("default"),
-                   target_table = "study_table")
+                   target_vars = c("default", "publication_id"),
+                   target_table = "observation_table")
 
 result %>% distinct() %>% View()
