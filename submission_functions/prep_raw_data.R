@@ -8,5 +8,6 @@ prep_raw_data <- function(raw_data, db_overview){
     raw_data, 
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
+  
   return(clean_raw_data)
 }
