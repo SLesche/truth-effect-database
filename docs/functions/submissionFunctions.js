@@ -104,7 +104,7 @@ function addCheckmarksFromProgress(control) {
             }
 
             // Add checkmarks for repetition data
-            if (study.repetition_data.validated) {
+            if (study.repetition_validated) {
                 addGreenCheckmarkById(`repetitions-${publication_idx}-${study_idx}`);
             }
 

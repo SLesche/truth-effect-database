@@ -158,7 +158,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     `;
 
     // Display previous submission if available
-    if (repetition_data.validated) {
+    if (control.publication_info[publication_idx].study_info[study_idx].repetition_validated) {
         displayRepetitionSummary(repetition_data);
         document.getElementById('repetitionTableContainer').style.display = 'block';
         document.getElementById('listOfRepetitions').style.display = 'block';
@@ -384,10 +384,10 @@ function collectRepetitionData() {
 function updateRepetitionSurvey(control, publication_idx, study_idx) {
     const repetition_data = collectRepetitionData();
 
-    repetition_data.validated = true;
     // Store the values in the control object
     control.publication_info[publication_idx].study_info[study_idx].repetition_data = repetition_data
-
+    control.publication_info[publication_idx].study_info[study_idx].repetition_validated = true;
+    
     // Optionally, display a confirmation message
     alert('Survey submitted successfully!');
 
