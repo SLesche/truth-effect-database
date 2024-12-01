@@ -1,6 +1,8 @@
 extract_from_submission_json <- function(json_path){
   json_obj = jsonlite::read_json(json_path)
   
+  json_obj = replace_999_with_na(json_obj)
+  
   submission_list = list()
   
   submission_list$publication_data = as.data.frame(json_obj$publication_data)

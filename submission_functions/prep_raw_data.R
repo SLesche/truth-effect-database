@@ -9,5 +9,7 @@ prep_raw_data <- function(raw_data, db_overview){
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
   
+  clean_raw_data$rt = ifelse(clean_raw_data$rt > 20, clean_raw_data$rt / 1000, clean_raw_data$rt)
+  
   return(clean_raw_data)
 }
