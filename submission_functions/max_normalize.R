@@ -6,5 +6,5 @@ max_normalize <- function(vec) {
     return(rep(0, length(vec)))
   }
   # Perform maximum normalization
-  return((vec - min(vec)) / (max(vec) - min(vec)))
+  return((vec - min(vec, na.rm = TRUE)) / (max(vec, na.rm = TRUE) - min(vec, na.rm = TRUE)))
 }
