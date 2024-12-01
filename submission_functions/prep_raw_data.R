@@ -9,7 +9,12 @@ prep_raw_data <- function(raw_data, db_overview){
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
   
-  clean_raw_data$rt = ifelse(clean_raw_data$rt > 20, clean_raw_data$rt / 1000, clean_raw_data$rt)
+  if ("rt" %in% colnames(clean_raw_data)){
+    clean_raw_data$rt = ifelse(clean_raw_data$rt > 20, clean_raw_data$rt / 1000, clean_raw_data$rt)
+    
+    clean_raw_data$rt = ifelse(clean_raw_data$rt > 20, NA, clean_raw_data$rt)
+  }
   
+  clean_raw_data$response = max_normalize(clean_raw_data$response)
   return(clean_raw_data)
 }
