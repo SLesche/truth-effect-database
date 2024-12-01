@@ -143,7 +143,19 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     
     
     # Observation
+    # Find next free subject number
+    sql_query = paste0(
+      "SELECT max(subject) FROM observation_table"
+    )
+    
+    max_subject = DBI::dbGetQuery(conn, sql_query)[1, 1]
+    if (is.na(max_subject)){
+      max_subject = 0
+    }
+    
     observation_table = submission_obj$study_info[[istudy]]$raw_data
+    
+    observation_table$subject = dplyr::dense_rank(observation_table$subject) + max_subject
     
     observation_table = replace_id_keys_in_data(observation_table, presentation_keys, "presentation", "_identifier")
     if (n_statementsets > 0){

@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_db_test.db"
+db_path = "truth_db_test3.db"
 create_truth_db(db_path)
 
 files <- list.files(paste0(path, "complete_data/"), pattern = ".json$", full.names = TRUE)
@@ -38,7 +38,15 @@ target_cols <- db_overview %>%
 
 result <- query_db(conn,
                    arguments,
-                   target_vars = c("default", "publication_id"),
+                   target_vars = c("response", "repeated", "subject", "rt"),
                    target_table = "observation_table")
+test <- query_db(
+  conn,
+  arguments,
+  target_vars = "default",
+  target_table = "study_table"
+)
+
+sum(test$n_participants)
 
 result %>% distinct() %>% View()
