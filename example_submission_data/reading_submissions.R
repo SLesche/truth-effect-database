@@ -2,20 +2,20 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_db_test2.db"
+db_path = "truth_db_test.db"
 create_truth_db(db_path)
 
-file <- paste0(path, "submission_fazio_2019_the.json")
-
-submission_obj <- extract_from_submission_json(file)
-
-prepped_obj <- prep_submission_data(submission_obj, db_path)
-
-submission_obj = prepped_obj
-
+files <- list.files(paste0(path, "complete_data/"), pattern = ".json$", full.names = TRUE)
 
 conn <- acdcquery::connect_to_db(db_path)
-add_submission_to_db(conn, submission_obj, db_path)
+for (isubmission in seq_along(files)){
+  submission_obj <- extract_from_submission_json(files[isubmission])
+  
+  prepped_obj <- prep_submission_data(submission_obj, db_path)
+  
+  add_submission_to_db(conn, prepped_obj, db_path)
+  
+}
 
 
 library(acdcquery)
