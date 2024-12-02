@@ -1,14 +1,30 @@
 library(acdcquery)
 library(dplyr)
 
-conn <- acdcquery::connect_to_db("truth_db.db")
+conn <- acdcquery::connect_to_db("truth.db")
 
 arguments <- list() %>% 
-  acdcquery::add_argument(
+  add_argument(
     conn,
-    "participant_age",
+    "study_id",
     "greater",
-    30
+    "0"
   )
 
-results <- acdcquery::query_db(conn, arguments, c("study_id", "default", "statement_text","statement_accuracy"))
+result <- query_db(conn,
+                   arguments,
+                   target_vars = c("response", "repeated", "subject", "rt", "statement_text", "proportion_true"),
+                   target_table = "observation_table")
+
+data <- result %>% 
+  filter(!is.na(proportion_true))
+
+model <- lme4::lmer(response ~ repeated + proportion_true + (1| subject), data)
+
+summary(model)
+
+test <- query_db(conn,
+                   arguments,
+                   target_vars = c("default"),
+                   target_table = "statement_table") %>% 
+  distinct()
