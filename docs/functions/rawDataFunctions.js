@@ -506,7 +506,7 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
             alert('Please enter information about the experimental conditions before submitting the raw data.');
             return false;
         }
-        if (!study_info.repetition_data.validated) {
+        if (!study_info.repetition_validated) {
             alert('Please enter information about the statement presentations before submitting the raw data.')
             return false;
         }
