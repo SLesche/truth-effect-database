@@ -19,12 +19,45 @@ result <- query_db(conn,
 data <- result %>% 
   filter(!is.na(proportion_true))
 
-model <- lme4::lmer(response ~ repeated + proportion_true + (1| subject), data)
+model <- lme4::lmer(response ~ repeated + (1| subject), data)
 
 summary(model)
 
-test <- query_db(conn,
-                   arguments,
-                   target_vars = c("default"),
-                   target_table = "statement_table") %>% 
+statement_text <- query_db(conn,
+                           arguments,
+                           target_vars = c("default"),
+                           target_table = "statement_table") %>% 
   distinct()
+
+complex_filter <- list() %>% 
+  add_argument(
+    conn,
+    "n_participants",
+    "greater",
+    200
+  ) %>% 
+  add_argument(
+    conn,
+    "conducted",
+    "greater",
+    2017
+  ) %>% 
+  add_argument(
+    conn,
+    "proportion_true",
+    "between",
+    c(0.4, 0.6)
+  ) %>%
+  add_argument(
+    conn,
+    "rt",
+    "less",
+    1
+  )
+
+complex_results <- query_db(
+  conn,
+  complex_filter,
+  target_vars = c("publication_id", "authors", "conducted", "default", "statement_text", "proportion_true"),
+  target_table = "observation_table"
+)
