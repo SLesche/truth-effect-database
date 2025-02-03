@@ -1,9 +1,17 @@
 body {
-    display: flex;
+    /* display: flex; */
     margin: 0;
     font-family: Arial, sans-serif;
     font-size: 16px;
     color: var(--text-color);
+    background-color: var(--homepage-background-color);
+}
+
+.index-body {
+    background-color: var(--homepage-background-color);
+}
+
+.data-submission-body {
     background-color: var(--default-background-color);
 }
 
@@ -14,6 +22,7 @@ body {
     position: fixed;
     box-sizing: border-box;
     height: 100vh;
+    color: var(--light-text-color);
     overflow-y: auto;
     transition: width 0.3s ease;
 }
@@ -25,11 +34,11 @@ body {
 
 .content {
     flex: 1;
-    padding: 20px;
+    padding: 30px 50px;
     background-color: var(--default-background-color);
     box-sizing: border-box;
     overflow-y: auto;
-    margin-left: 320px;
+    margin-left: 300px;
     transition: margin-left 0.4s ease;
 }
 
@@ -125,4 +134,156 @@ th {
 /* Optional: Style the table rows */
 tr:nth-child(even) {
     background-color: var(--table-even-background-color);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--nav-background-color);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    padding: 8px 15px;
+    color: var(--light-text-color);
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: var(--dark-hover-color);
+}
+
+.submit-btn {
+    background-color: var(--special-button-color);
+    color: var(--light-text-color);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.submit-btn:hover {
+    background-color:var(--special-button-hover);
+}
+
+/* Section Styles */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 50px 20px;
+    margin-bottom: 20px;
+    background-color: var(--default-background-color);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.section h1, .section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Center the cards in the section */
+#publications {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 20px;
+}
+
+#publications h2 {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.card-container {
+    width: 90%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.title {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.author, .journal {
+    font-size: 0.9em;
+    color: #777;
+    margin: 5px 0;
+}
+
+.abstract {
+    font-size: 1em;
+    color: #555;
+    margin: 15px 0;
+}
+
+.read-more {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #0056b3;
 }
