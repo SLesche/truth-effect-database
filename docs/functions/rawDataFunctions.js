@@ -270,7 +270,10 @@ async function collectRawData() {
 }
 
 function validateRawData(raw_data, control, publication_idx, study_idx) {
-    var alert_message = '';
+    var warningMessages = [];
+    var errorMessages = [];
+
+    alert_message = '';
 
     if (!raw_data.raw_data_file) {
         alert_message = 'Please upload a file containing the raw data.';
@@ -310,21 +313,18 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     const missing_headers = required_headers.filter(header => !data_columns.includes(header));
     if (missing_headers.length > 0) {
-        alert_message = `The following columns are missing from the uploaded file: ${missing_headers.join(', ')}.`;
-        displayValidationError('raw_data_file', alert_message);
-        return false;
+        errorMessages.push(`The following columns are missing from the uploaded file: ${missing_headers.join(', ')}.`);
     }
 
     // check for unknown columns
     const unknown_columns = data_columns.filter(header => !required_headers.includes(header));
     if (unknown_columns.length > 0) {
-        alert_message = `The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`;
-        displayWarningMessage('raw_data_file', alert_message);
+        warningMessages.push(`The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`);
     }
 
     // Filter presentation_identifiers to exclude test phase
-    const test_presentation_identifiers = study_info.repetition_data
-        .filter(data => data.phase == "test")
+    const exposure_presentation_identifiers = study_info.repetition_data
+        .filter(data => data.phase == "exposure")
         .map(data => data.presentation_identifier);
 
     // Extract unique session identifiers from raw data, excluding 'NA'
@@ -343,30 +343,23 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // Check for extra presentation identifiers
     const extra_presentation_identifiers = unique_sessions.filter(identifier => !all_presentation_identifiers.includes(identifier));
 
-    var alert_message = '';
-
     if (missing_presentation_identifiers.length > 0) {
         // Determine if the missing identifiers belong to the "test" or "exposure" phase
-        const missing_test_identifiers = missing_presentation_identifiers.filter(identifier => test_presentation_identifiers.includes(identifier));
+        const missing_test_identifiers = missing_presentation_identifiers.filter(identifier => !exposure_presentation_identifiers.includes(identifier));
 
-        const missing_exposure_identifiers = missing_presentation_identifiers.filter(identifier => !test_presentation_identifiers.includes(identifier));
+        const missing_exposure_identifiers = missing_presentation_identifiers.filter(identifier => exposure_presentation_identifiers.includes(identifier));
 
         if (missing_exposure_identifiers.length > 0) {
-            alert_message = `⚠️ Warning: The following exposure session identifiers are missing from the uploaded file: ${missing_exposure_identifiers.join(', ')}.`;
-            displayWarningMessage('raw_data_file', alert_message);
+            warningMessages.push(`The following exposure session identifiers are missing from the uploaded file: ${missing_exposure_identifiers.join(', ')}.`);
         }
 
         if (missing_test_identifiers.length > 0) {
-            alert_message = `❌ Error: The following test session identifiers are missing from the uploaded file: ${missing_test_identifiers.join(', ')}.`;
-            displayValidationError('raw_data_file', alert_message);
-            return false;
+            errorMessages.push(`The following test session identifiers are missing from the uploaded file: ${missing_test_identifiers.join(', ')}.`);
         }
     }
 
     if (extra_presentation_identifiers.length > 0) {
-        alert_message = `❌ Error: The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`;
-        displayValidationError('raw_data_file', alert_message)
-        return false;
+        errorMessages.push(`The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`);
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
@@ -380,19 +373,12 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         // Check for extra within-subject condition identifiers
         const extra_within_identifiers = within_identifiers.filter(identifier => !reported_within_identifiers.includes(identifier));
 
-        let alert_messages = [];
-
         if (missing_within_identifiers.length > 0) {
-            alert_messages.push(`The following within-subject condition identifiers are missing from the uploaded file: ${missing_within_identifiers.join(', ')}.`);
+            errorMessages.push(`The following within-subject condition identifiers are missing from the uploaded file: ${missing_within_identifiers.join(', ')}.`);
         }
 
         if (extra_within_identifiers.length > 0) {
-            alert_messages.push(`The following within-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_within_identifiers.join(', ')}.`);
-        }
-
-        if (alert_messages.length > 0) {
-            displayValidationError('raw_data_file', alert_messages.join(' '));
-            return false;
+            errorMessages.push(`The following within-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_within_identifiers.join(', ')}.`);
         }
     }
 
@@ -406,19 +392,12 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         // Check for extra between-subject condition identifiers
         const extra_between_identifiers = between_identifiers.filter(identifier => !reported_between_identifiers.includes(identifier));
 
-        let alert_messages = [];
-
         if (missing_between_identifiers.length > 0) {
-            alert_messages.push(`The following between-subject condition identifiers are missing from the uploaded file: ${missing_between_identifiers.join(', ')}.`);
+            errorMessages.push(`The following between-subject condition identifiers are missing from the uploaded file: ${missing_between_identifiers.join(', ')}.`);
         }
 
         if (extra_between_identifiers.length > 0) {
-            alert_messages.push(`The following between-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_between_identifiers.join(', ')}.`);
-        }
-
-        if (alert_messages.length > 0) {
-            displayValidationError('raw_data_file', alert_messages.join(' '));
-            return false;
+            errorMessages.push(`The following between-subject condition identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_between_identifiers.join(', ')}.`);
         }
     }
 
@@ -437,19 +416,12 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         // Check for extra statement identifiers
         const extra_statement_identifiers = statement_identifiers.filter(identifier => !reported_statement_identifiers.includes(identifier));
 
-        let alert_messages = [];
-
         if (missing_statement_identifiers.length > 0) {
-            alert_messages.push(`The following statement identifiers are missing from the uploaded file: ${missing_statement_identifiers.join(', ')}.`);
+            errorMessages.push(`The following statement identifiers are missing from the uploaded file: ${missing_statement_identifiers.join(', ')}.`);
         }
 
         if (extra_statement_identifiers.length > 0) {
-            alert_messages.push(`The following statement identifiers in the uploaded file were not previously added to the statements: ${extra_statement_identifiers.join(', ')}.`);
-        }
-
-        if (alert_messages.length > 0) {
-            displayValidationError('raw_data_file', alert_messages.join(' '));
-            return false;
+            errorMessages.push(`The following statement identifiers in the uploaded file were not previously added to the statements: ${extra_statement_identifiers.join(', ')}.`);
         }
     }
 
@@ -459,8 +431,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         const average_rt = rts.reduce((a, b) => a + b) / rts.length;
 
         if (average_rt > 100) {
-            alert_message = 'The average response time in the uploaded file is above 100. Please check if the data is in seconds.';
-            displayWarningMessage('raw_data_file', alert_message);
+            warningMessages.push('The average response time in the uploaded file is above 100. Please check if the data is in seconds.');
         }
     }
 
@@ -468,9 +439,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const repeated_vals = raw_data.data.map(row => row.repeated);
     const invalid_repeated_vals = repeated_vals.filter(val => val != '0' && val != '1' && val !== 'NA');
     if (invalid_repeated_vals.length > 0) {
-        alert_message = `The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "0", "1", or "NA".`;
-        displayValidationError('raw_data_file', alert_message);
-        return false;
+        errorMessages.push(`The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "0", "1", or "NA".`);
     }
 
     // Check that response has a value maximum to that of the steps indicated by the study question and minimum of 0 or Na
@@ -478,9 +447,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const scale_steps = study_info.study_data.truth_rating_steps;
     const invalid_response_vals = response_vals.filter(val => val !== 'NA' && (val < 0 || val > scale_steps));
     if (invalid_response_vals.length > 0) {
-        alert_message = `The "response" column contains invalid values: ${invalid_response_vals.slice(0, 5).join(', ')}. It should only contain values between 0 and ${scale_steps}, or "NA".`;
-        displayValidationError('raw_data_file', alert_message);
-        return false;
+        errorMessages.push(`The "response" column contains invalid values: ${invalid_response_vals.slice(0, 5).join(', ')}. It should only contain values between 0 and ${scale_steps}, or "NA".`);
     }
 
     // Now, check the mean response value for repeated statements vs. non-repeated statements. 
@@ -496,10 +463,20 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const meanNonRepeatedResponse = non_repeated_responses.reduce((a, b) => a + b, 0) / non_repeated_responses.length;
 
     if (meanRepeatedResponse <= meanNonRepeatedResponse) {
-        alert_message = 'The mean response value for repeated statements is not higher than for non-repeated statements. This suggests that there may be no truth effect present.';
-        displayWarningMessage('raw_data_file', alert_message);
+        warningMessages.push('The mean response value for repeated statements is not higher than for non-repeated statements. This suggests that there may be no truth effect present.');
     }
 
+    // console.log(errorMessages)
+    // console.log(warningMessages)
+    if (errorMessages.length > 0) {
+        displayValidationError('raw_data_file', `❌ There were ${errorMessages.length} errors:<br>` + errorMessages.join('<br>'));
+        return false;
+    }
+    
+    if (warningMessages.length > 0) {
+        displayWarningMessage('raw_data_file', `⚠️ There were ${warningMessages.length} warnings:<br>` + warningMessages.join('<br>'));
+    }
+    
     return true;
 }
 
