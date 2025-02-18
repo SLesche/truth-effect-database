@@ -266,7 +266,7 @@ function validateStatementSetData(statementset_data){
 
     // Check that the statement_accuracy column contains only 0s and 1s
     const accuracy_values = statementset_data.statement_publication_data.map(row => row.statement_accuracy);
-    const invalid_accuracy_values = accuracy_values.filter(value => ![0, 1].includes(value));
+    const invalid_accuracy_values = accuracy_values.filter(value => ![0, 1, "NA"].includes(value));
     if (invalid_accuracy_values.length > 0) {
         alert_message = 'The statement_accuracy column should contain only 0s and 1s.';
         displayValidationError("statement_publication_file", alert_message);
