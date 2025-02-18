@@ -322,28 +322,51 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         displayWarningMessage('raw_data_file', alert_message);
     }
 
-    // Check that the number of unique sessions is equal to the number of sessions specified in the repetition data
-    const unique_sessions = [...new Set(raw_data.data.map(row => row.presentation_identifier).filter(presentation_identifier => presentation_identifier !== 'NA'))].map(String);
+    // Filter presentation_identifiers to exclude test phase
+    const test_presentation_identifiers = study_info.repetition_data
+        .filter(data => data.phase == "test")
+        .map(data => data.presentation_identifier);
+
+    // Extract unique session identifiers from raw data, excluding 'NA'
+    const unique_sessions = [...new Set(
+        raw_data.data
+            .map(row => row.presentation_identifier)
+            .filter(presentation_identifier => presentation_identifier !== 'NA')
+        )].map(String);
 
     // Extract repetition identifiers from repetition_data
-    const presentation_identifiers = study_info.repetition_data.map(data => data.presentation_identifier);
+    const all_presentation_identifiers = study_info.repetition_data.map(data => data.presentation_identifier);
 
-    // Check for missing presentation_identifier identifiers
-    const missing_presentation_identifiers = presentation_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+    // Check for missing identifiers
+    const missing_presentation_identifiers = all_presentation_identifiers.filter(identifier => !unique_sessions.includes(identifier));
 
     // Check for extra presentation identifiers
-    const extra_presentation_identifiers = unique_sessions.filter(identifier => !presentation_identifiers.includes(identifier));
+    const extra_presentation_identifiers = unique_sessions.filter(identifier => !all_presentation_identifiers.includes(identifier));
 
     var alert_message = '';
 
     if (missing_presentation_identifiers.length > 0) {
-        alert_message = `The following presentation identifiers are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`;
-        displayValidationError('raw_data_file', alert_message)
+        // Determine if the missing identifiers belong to the "test" or "exposure" phase
+        const missing_test_identifiers = missing_presentation_identifiers.filter(identifier => test_presentation_identifiers.includes(identifier));
+
+        const missing_exposure_identifiers = missing_presentation_identifiers.filter(identifier => !test_presentation_identifiers.includes(identifier));
+
+        if (missing_exposure_identifiers.length > 0) {
+            alert_message = `⚠️ Warning: The following exposure session identifiers are missing from the uploaded file: ${missing_exposure_identifiers.join(', ')}.`;
+            displayWarningMessage('raw_data_file', alert_message);
+        }
+
+        if (missing_test_identifiers.length > 0) {
+            alert_message = `❌ Error: The following test session identifiers are missing from the uploaded file: ${missing_test_identifiers.join(', ')}.`;
+            displayValidationError('raw_data_file', alert_message);
+            return false;
+        }
     }
 
     if (extra_presentation_identifiers.length > 0) {
-        alert_message = `The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`;
+        alert_message = `❌ Error: The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`;
         displayValidationError('raw_data_file', alert_message)
+        return false;
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
