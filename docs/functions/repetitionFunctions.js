@@ -70,6 +70,12 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <label for="phase" class="survey-label">What phase was this session (i.e. exposure / test)?</label>
             <input type="text" id="phase" name="phase"><br>
 
+            <label for="data_available" class="survey-label">Is raw data available for this session?</label>
+            <div class="radio-buttons">
+                <label><input type="radio" name="data_available" value="1"/>Yes</label>
+                <label><input type="radio" name="data_available" value="0"/>No</label>
+            </div>
+
             <label for="repetition_type" class="survey-label">What type was the repetition of statements (exact / semantic)?</label>
             <input type="text" id="repetition_type" name="repetition_type"><br>
             <p class="survey-label-additional-info">Even if none of the statements presented were repeated in this session, enter the type of repetition that will occur.</p>
@@ -216,11 +222,12 @@ function validateRepetitionSubmission() {
         percent_repeated: document.getElementById('percent_repeated').value,
         presentation_type: document.getElementById('presentation_type').value,
         phase: document.getElementById('phase').value,
+        data_available:getRadioButtonSelection('data_available'),
         repetition_instructions: getRadioButtonSelection('repetition_instructions'),
         repetition_instruction_timing: getRadioButtonSelection('repetition_instruction_timing')
     };
 
-    var required_fields = ['presentation_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
+    var required_fields = ['presentation_identifier', 'repetition_time', 'repetition_location', 'repetition_type', 'data_available', 'max_n_repetitions', 'n_statements', 'truth_instructions', 'presented_until_response', 'response_deadline', 'percent_repeated', 'presentation_type', 'phase', 'repetition_instructions'];
     
     if (fields.presented_until_response == 0) {
         required_fields.push('presentation_time_s');
@@ -291,10 +298,11 @@ function addRepetitionEntry() {
     const percent_repeated = document.getElementById('percent_repeated').value;
     const presentation_type = document.getElementById('presentation_type').value;
     const phase = document.getElementById('phase').value;
+    const data_available = getRadioButtonSelection('data_available') == 1 ? 1 : 0;
     const repetition_instructions = getRadioButtonSelection('repetition_instructions') == 1 ? 1 : 0;
     const repetition_instruction_timing = repetition_instructions == 1 ? getRadioButtonSelection('repetition_instruction_timing') : '';
 
-    const repetitions_table = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
+    // const repetitions_table = document.getElementById('repetitionsTable').getElementsByTagName('tbody')[0];
 
     // Collect existing repetitions
     const repetitions = collectRepetitionData();
@@ -316,6 +324,7 @@ function addRepetitionEntry() {
         percent_repeated,
         presentation_type,
         phase,
+        data_available,
         repetition_instructions,
         repetition_instruction_timing
     });

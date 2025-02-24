@@ -323,8 +323,8 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     }
 
     // Filter presentation_identifiers to exclude test phase
-    const exposure_presentation_identifiers = study_info.repetition_data
-        .filter(data => data.phase == "exposure")
+    const data_available_identifiers = study_info.repetition_data
+        .filter(data => data.data_available == 1)
         .map(data => data.presentation_identifier);
 
     // Extract unique session identifiers from raw data, excluding 'NA'
@@ -334,28 +334,14 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
             .filter(presentation_identifier => presentation_identifier !== 'NA')
         )].map(String);
 
-    // Extract repetition identifiers from repetition_data
-    const all_presentation_identifiers = study_info.repetition_data.map(data => data.presentation_identifier);
-
     // Check for missing identifiers
-    const missing_presentation_identifiers = all_presentation_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+    const missing_presentation_identifiers = data_available_identifiers.filter(identifier => !unique_sessions.includes(identifier));
 
     // Check for extra presentation identifiers
-    const extra_presentation_identifiers = unique_sessions.filter(identifier => !all_presentation_identifiers.includes(identifier));
+    const extra_presentation_identifiers = unique_sessions.filter(identifier => !data_available_identifiers.includes(identifier));
 
     if (missing_presentation_identifiers.length > 0) {
-        // Determine if the missing identifiers belong to the "test" or "exposure" phase
-        const missing_test_identifiers = missing_presentation_identifiers.filter(identifier => !exposure_presentation_identifiers.includes(identifier));
-
-        const missing_exposure_identifiers = missing_presentation_identifiers.filter(identifier => exposure_presentation_identifiers.includes(identifier));
-
-        if (missing_exposure_identifiers.length > 0) {
-            warningMessages.push(`The following exposure session identifiers are missing from the uploaded file: ${missing_exposure_identifiers.join(', ')}.`);
-        }
-
-        if (missing_test_identifiers.length > 0) {
-            errorMessages.push(`The following test session identifiers are missing from the uploaded file: ${missing_test_identifiers.join(', ')}.`);
-        }
+        errorMessages.push(`The following test session identifiers are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`);
     }
 
     if (extra_presentation_identifiers.length > 0) {
