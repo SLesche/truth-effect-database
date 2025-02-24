@@ -129,3 +129,32 @@ function addCheckmarksFromProgress(control) {
         }
     }
 }
+
+function initializeNavbarFromProgress(progress) {
+    const num_statement_sets = Object.keys(progress.statementset_info).length;
+
+    for (let publication_idx in progress.publication_info) {
+
+        for (let study_idx in progress.publication_info[publication_idx].study_info) {
+            // Create the study element if it doesn't exist
+            const studyItemId = "study-" + publication_idx + "-" + study_idx;
+            if (!document.getElementById(studyItemId)) {
+                const addStudyButton = document.getElementById("addStudyButton-" + publication_idx);
+                if (addStudyButton) {
+                    addStudyButton.click();
+                }
+            }
+        }
+    }
+
+    // Iterate over statement sets
+    for (let statementset_idx = 0; statementset_idx < num_statement_sets; statementset_idx++) {
+        const statementSetId = "statementset-" + statementset_idx;
+        if (!document.getElementById(statementSetId)) {
+            const addStatementButton = document.getElementById("addStatementButton");
+            if (addStatementButton) {
+                addStatementButton.click();
+            }
+        }
+    }
+}

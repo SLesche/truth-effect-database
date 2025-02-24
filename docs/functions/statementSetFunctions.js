@@ -71,6 +71,7 @@ function addStatementOverview(control) {
     const addStatementListItem = document.createElement("li");
     const addStatementButton = document.createElement("button");
     addStatementButton.className = "menu-button";
+    addStatementButton.id = "addStatementButton";
     addStatementButton.textContent = "+ Add Statement Set";
     addStatementButton.onclick = function() {
         addStatementSet(nestedList, control);

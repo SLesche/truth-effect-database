@@ -66,11 +66,13 @@ function generateOverviewPage(control) {
                 const progressData = JSON.parse(e.target.result);
 
                 if (progressData.progress_file) {
+                    // Simulate Clicks on Add Study and StatementSet
+                    initializeNavbarFromProgress(progressData);
                     // Override the existing control object
                     Object.assign(control, progressData);
                     addCheckmarksFromProgress(control);
-                    initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
-                    console.log(control);
+                    // initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
+                    // console.log(control);
                 } else {
                     alert("Invalid progress file. Please upload a valid progress file.");
                 }
