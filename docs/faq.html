@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth DB - FAQ</title>
+    <link rel="stylesheet" href="styles/color.css">
+    <link rel="stylesheet" href="styles/documentStyles.css">
+    <link rel="stylesheet" href="styles/buttonStyles.css">
+    <link rel="stylesheet" href="styles/surveyStyles.css">
+    <link rel="stylesheet" href="styles/faqStyles.css">
+</head>
+<body class="index-body">
+    <header>
+        <!-- Navigation Bar -->
+        <nav>
+            <div class="logo-container">
+                <img src="imgs/logo_fb.png" alt="Logo 1" class="logo">
+                <img src="imgs/logo_hd.png" alt="Logo 2" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#info">Info</a></li>
+                <li><a href="index.html#publications">Publications</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="data-submission.html" class="submit-btn">Contribute Data</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- FAQ Section -->
+        <section id="faq" class="section">
+            <h1>Frequently Asked Questions</h1>
+
+            <div class="faq-container" id="faq-container">
+                <!-- FAQ sections will be dynamically generated here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sven Lesche. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // FAQ data
+        const faqData = {
+            "Organization": [
+                {
+                    "question": "What is Truth DB?",
+                    "answer": "Truth DB is a database that collects and organizes research data related to truth and deception."
+                },
+                {
+                    "question": "Why should I contribute to this database?",
+                    "answer": "Contributing to Truth DB helps advance research in the field of truth and deception."
+                }
+            ],
+            "Issues Submitting": [
+                {
+                    "question": "How can I contribute data?",
+                    "answer": "You can contribute data by clicking on the 'Contribute Data' button in the navigation bar and following the submission guidelines."
+                },
+                {
+                    "question": "What if I encounter issues while submitting data?",
+                    "answer": "If you encounter issues, please contact us at support@truthdb.org."
+                }
+            ],
+            "Structure of Data": [
+                {
+                    "question": "What format should the data be in?",
+                    "answer": "The data should be in CSV format with the appropriate headers as specified in the submission guidelines."
+                }
+            ],
+            "Data Privacy": [
+                {
+                    "question": "How is my data protected?",
+                    "answer": "We take data privacy seriously and ensure that all submitted data is stored securely and used only for research purposes."
+                }
+            ]
+        };
+
+        // Generate FAQ sections
+        const faqContainer = document.getElementById('faq-container');
+        for (const section in faqData) {
+            const sectionElement = document.createElement('div');
+            sectionElement.classList.add('faq-section');
+
+            const sectionTitle = document.createElement('h2');
+            sectionTitle.textContent = section;
+            sectionElement.appendChild(sectionTitle);
+
+            faqData[section].forEach(faq => {
+                const faqItem = document.createElement('div');
+                faqItem.classList.add('faq-item');
+
+                const faqQuestion = document.createElement('button');
+                faqQuestion.classList.add('faq-question');
+                faqQuestion.textContent = faq.question;
+
+                const faqAnswer = document.createElement('div');
+                faqAnswer.classList.add('faq-answer');
+                faqAnswer.innerHTML = `<p>${faq.answer}</p>`;
+
+                faqItem.appendChild(faqQuestion);
+                faqItem.appendChild(faqAnswer);
+                sectionElement.appendChild(faqItem);
+            });
+
+            faqContainer.appendChild(sectionElement);
+        }
+
+        // Add accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqAnswer = button.nextElementSibling;
+                button.classList.toggle('active');
+                if (button.classList.contains('active')) {
+                    faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
+                } else {
+                    faqAnswer.style.maxHeight = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
