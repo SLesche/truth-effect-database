@@ -341,11 +341,11 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     const extra_presentation_identifiers = unique_sessions.filter(identifier => !data_available_identifiers.includes(identifier));
 
     if (missing_presentation_identifiers.length > 0) {
-        errorMessages.push(`The following test session identifiers are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`);
+        errorMessages.push(`The following presentation identifiers marked as "data available" are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`);
     }
 
     if (extra_presentation_identifiers.length > 0) {
-        errorMessages.push(`The following presentation identifiers in the uploaded file were not previously added to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`);
+        errorMessages.push(`The following presentation identifiers in the uploaded file were not previously added as "data available" to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`);
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
