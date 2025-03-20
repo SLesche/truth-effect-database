@@ -1,5 +1,5 @@
-add_submission_to_db <- function(conn, submission_obj, db_path){
-  db_overview = generate_db_overview_table(db_path)
+add_submission_to_db <- function(conn, submission_obj){
+  db_overview = generate_db_overview_table(conn)
   
   pub_code = submission_obj$publication_data$publication_code
   if (does_publication_code_exist(conn, pub_code) == TRUE){
@@ -32,7 +32,7 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
           statementset_publication, 
           "'"
         )
-        statementset_id = DBI::dbGetQuery(conn, sql_query)
+        statementset_id = DBI::dbGetQuery(conn, sql_query)[1, 1]
       } else {
         statementset_id = find_next_free_id(conn, "statementset_table")
       }
@@ -43,7 +43,10 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       
       statementset_keys[istatementset, "statementset_id"] = statementset_id
       
-      add_data_to_table(conn, statementset_info, "statementset_table", db_overview)
+      # only submit if entry does not already exist
+      if (does_statement_publication_exist(conn, statementset_publication) == FALSE){
+        add_data_to_table(conn, statementset_info, "statementset_table", db_overview)
+      }
       
       # For statements
       statement_id = find_next_free_id(conn, "statement_table")
@@ -66,10 +69,10 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     study_info$publication_id = pub_id
     study_info$study_id = study_id
     
-    if (n_statementsets > 0){
-      study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
-    } else {
+    if (n_statementsets == 0 | study_info$statementset_idx == 0){
       study_info$statementset_id = NA
+    } else {
+      study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
     }
     
     add_data_to_table(conn, study_info, "study_table", db_overview)
@@ -108,7 +111,7 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     if ("within_data" %in% names(submission_obj$study_info[[istudy]])){
       has_within_conditions = 1
       # Within
-      within_info = submission_obj$study_info[[istudy]]$within_tabe
+      within_info = submission_obj$study_info[[istudy]]$within_data
       within_info$within_id = within_id:(within_id + nrow(within_info) -1)
       within_info$study_id = study_id
       
@@ -127,7 +130,6 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
       add_data_to_table(conn, within_info, "within_table", db_overview)
       
     }
-    
     
     # presentation
     presentation_id = find_next_free_id(conn, "presentation_table")
@@ -158,7 +160,7 @@ add_submission_to_db <- function(conn, submission_obj, db_path){
     observation_table$subject = dplyr::dense_rank(observation_table$subject) + max_subject
     
     observation_table = replace_id_keys_in_data(observation_table, presentation_keys, "presentation", "_identifier")
-    if (n_statementsets > 0){
+    if (n_statementsets > 0 & study_info$statementset_idx != 0){
       observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
     } else {
       observation_table$statement_id = NA
