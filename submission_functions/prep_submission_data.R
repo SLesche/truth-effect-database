@@ -1,5 +1,5 @@
-prep_submission_data <- function(submission_obj, db_path){
-  overview_table = generate_db_overview_table(db_path)
+prep_submission_data <- function(conn, submission_obj){
+  overview_table = generate_db_overview_table(conn)
   
   submission_obj$publication_data = prep_publication_data(submission_obj$publication_data, overview_table)
   
