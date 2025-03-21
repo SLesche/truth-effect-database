@@ -51,7 +51,58 @@ statement_overview <- query_db(
 ) %>% distinct()
   
   
-  
+measure_overview <- query_db(
+  conn,
+  arguments,
+  c("default"),
+  "measure_table"
+)
+
+# Inspect statements and raw data
+statement_data <- query_db(
+  conn,
+  arguments,
+  c("default", "study_id", "statementset_publication", "statement_text", "statement_accuracy", "proportion_true")
+)
+
+# Inspect Phase and NA data
+phase_data <- query_db(
+  conn, 
+  arguments,
+  c("default", "phase", "study_id", "publication_id"),
+  "observation_table"
+)
+
+phase_data %>% 
+  filter(str_detect(phase, "est")) %>% 
+  filter(is.na(repeated)) %>% 
+  count(is.na(repeated), study_id)
+
+phase_data %>% 
+  filter(str_detect(phase, "est")) %>% 
+  filter(is.na(response)) %>% 
+  count(is.na(response), study_id)
+
+inspect_repeated_nas <- phase_data %>% 
+  filter(study_id == 4, phase == "test") %>% 
+  filter(is.na(repeated))
+
+# Inspect truth effect for oddities
+phase_data %>% 
+  filter(str_detect(phase, "est")) %>% 
+  group_by(study_id, repeated) %>% 
+  summarize(
+    mean_true = mean(response, na.rm = TRUE)
+  ) %>% 
+  print(n = nrow(.))
+
+
+query_db(
+  conn,
+  arguments %>% add_argument(conn, "study_id", "equal", "4")
+) %>% 
+  count(is.na(repeated))
+
 result <- query_db(conn,
                    arguments,
                    target_vars = c("default", "study_id", "publication_id", "presentation_id", "phase"),
