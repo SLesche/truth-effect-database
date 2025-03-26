@@ -4,10 +4,18 @@ prep_raw_data <- function(raw_data, db_overview){
     dplyr::filter(data_type %in% c("BOOLEAN", "INTEGER", "FLOAT")) |>
     dplyr::pull(column_name)
   
-  clean_raw_data = dplyr::mutate(
-    raw_data, 
-    dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
-  )
+  raw_data[grepl("^true$", raw_data, ignore.case = TRUE)] = 1
+  raw_data[grepl("^false$", raw_data, ignore.case = TRUE)] = 0
+  raw_data[grepl("^yes$", raw_data, ignore.case = TRUE)] = 1
+  raw_data[grepl("^no$", raw_data, ignore.case = TRUE)] = 0
+  
+  raw_data[raw_data == TRUE] = 1
+  raw_data[raw_data == FALSE] = 0
+  
+  clean_raw_data = raw_data |>
+    dplyr::mutate(
+      dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
+    )
   
   if ("rt" %in% colnames(clean_raw_data)){
     clean_raw_data$rt = ifelse(clean_raw_data$rt > 20, clean_raw_data$rt / 1000, clean_raw_data$rt)
