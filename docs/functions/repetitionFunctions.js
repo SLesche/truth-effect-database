@@ -68,7 +68,10 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
             <input type="text" id="repetition_location" name="repetition_location"><br>
 
             <label for="phase" class="survey-label">What phase was this session (i.e. exposure / test)?</label>
-            <input type="text" id="phase" name="phase"><br>
+            <div class="radio-buttons">
+                <label><input type="radio" name="phase" value="exposure"/>Exposure</label>
+                <label><input type="radio" name="phase" value="test"/>Test</label>
+            </div>
 
             <label for="data_available" class="survey-label">Is raw data available for this session?</label>
             <div class="radio-buttons">
@@ -221,7 +224,7 @@ function validateRepetitionSubmission() {
         response_deadline_s: document.getElementById('response_deadline_s').value,
         percent_repeated: document.getElementById('percent_repeated').value,
         presentation_type: document.getElementById('presentation_type').value,
-        phase: document.getElementById('phase').value,
+        phase: getRadioButtonSelection('phase'),
         data_available:getRadioButtonSelection('data_available'),
         repetition_instructions: getRadioButtonSelection('repetition_instructions'),
         repetition_instruction_timing: getRadioButtonSelection('repetition_instruction_timing')
@@ -297,7 +300,7 @@ function addRepetitionEntry() {
     const response_deadline_s = document.getElementById('response_deadline_s').value;
     const percent_repeated = document.getElementById('percent_repeated').value;
     const presentation_type = document.getElementById('presentation_type').value;
-    const phase = document.getElementById('phase').value;
+    const phase = getRadioButtonSelection('phase');
     const data_available = getRadioButtonSelection('data_available') == 1 ? 1 : 0;
     const repetition_instructions = getRadioButtonSelection('repetition_instructions') == 1 ? 1 : 0;
     const repetition_instruction_timing = repetition_instructions == 1 ? getRadioButtonSelection('repetition_instruction_timing') : '';
