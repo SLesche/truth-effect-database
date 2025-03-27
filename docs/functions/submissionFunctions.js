@@ -51,7 +51,7 @@ function submitData(control) {
     const cleaned_control = cleanDataForSubmission(control);
 
     console.log(cleaned_control);
-    
+
     // Write the data into a json file
     const submission_data = JSON.stringify(cleaned_control);
 
@@ -64,6 +64,8 @@ function submitData(control) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+
+    saveProgress(control);
 
     alert("Data submitted successfully!");
 }
@@ -128,7 +130,7 @@ function saveProgress(control){
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = "submission_progress.json";
+    a.download = `progress_${control.publication_info[0].publication_data.first_author}_${control.publication_info[0].publication_data.conducted}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
