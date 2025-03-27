@@ -131,17 +131,17 @@ add_submission_to_db <- function(conn, submission_obj){
       
     }
     
-    # presentation
-    presentation_id = find_next_free_id(conn, "presentation_table")
-    presentation_info = submission_obj$study_info[[istudy]]$presentation_data
+    # procedure
+    procedure_id = find_next_free_id(conn, "procedure_table")
+    procedure_info = submission_obj$study_info[[istudy]]$procedure_data
     
-    presentation_info$presentation_id = presentation_id:(presentation_id + nrow(presentation_info) - 1)
+    procedure_info$procedure_id = procedure_id:(procedure_id + nrow(procedure_info) - 1)
     
-    presentation_info$study_id = study_id
+    procedure_info$study_id = study_id
     
-    presentation_keys = presentation_info[, c("presentation_id", "presentation_identifier")]
+    procedure_keys = procedure_info[, c("procedure_id", "procedure_identifier")]
     
-    add_data_to_table(conn, presentation_info, "presentation_table", db_overview)
+    add_data_to_table(conn, procedure_info, "procedure_table", db_overview)
     
     
     # Observation
@@ -159,7 +159,7 @@ add_submission_to_db <- function(conn, submission_obj){
     
     observation_table$subject = dplyr::dense_rank(observation_table$subject) + max_subject
     
-    observation_table = replace_id_keys_in_data(observation_table, presentation_keys, "presentation", "_identifier")
+    observation_table = replace_id_keys_in_data(observation_table, procedure_keys, "procedure", "_identifier")
     if (n_statementsets > 0 & study_info$statementset_idx != 0){
       observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
     } else {
