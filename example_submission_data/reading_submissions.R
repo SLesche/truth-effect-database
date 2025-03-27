@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_db_test.db"
+db_path = "truth_db_test2.db"
 create_truth_db(db_path)
 
 hiwi_files <- list.files(paste0(path, "complete_data/hiwis_march/"), pattern = ".json$", full.names = TRUE)
@@ -12,10 +12,10 @@ for (isubmission in seq_along(hiwi_files)){
   raw_obj <- extract_from_submission_json(hiwi_files[isubmission])
   # 
   # inspect_publication_data(raw_obj)
-  # inspect_study_data(raw_obj)
+  inspect_study_data(raw_obj)
   inspect_statementset_data(raw_obj)
   # inspect_condition_data(raw_obj)
-  # inspect_raw_data(raw_obj)
+  inspect_raw_data(raw_obj)
   
   submission_obj <- prep_submission_data(conn, raw_obj)
   
@@ -37,7 +37,7 @@ library(tidyverse)
 arguments <- list() %>% 
   add_argument(
     conn,
-    "study_id",
+    "publication_id",
     "greater",
     "0"
   )
