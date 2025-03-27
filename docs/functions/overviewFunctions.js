@@ -44,7 +44,7 @@ function generateOverviewPage(control) {
             <input type="file" id="progressFileInput" accept=".json" style="display: none;">
 
             <h2>Submission</h2>
-            <button onclick="submitData(control)">Submit Data</button>
+            <button onclick="submitData(control)" id ="final-submit-button">Submit Data</button>
             
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>

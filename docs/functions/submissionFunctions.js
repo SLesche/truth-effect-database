@@ -41,12 +41,17 @@ function cleanDataForSubmission(control) {
 }
 
 function submitData(control) {
+    if (!validate_submission(control)) {
+        return;
+    }
+
     console.log(control);
 
     // clean the control data
     const cleaned_control = cleanDataForSubmission(control);
 
     console.log(cleaned_control);
+    
     // Write the data into a json file
     const submission_data = JSON.stringify(cleaned_control);
 
@@ -55,12 +60,62 @@ function submitData(control) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = "submission.json";
+    a.download = `submission_${cleaned_control.publication_data.first_author}_${cleaned_control.publication_data.conducted}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
 
     alert("Data submitted successfully!");
+}
+
+function validate_submission(control) {
+    clearValidationMessages();
+    
+    var alert_messages = [];
+
+    // Validate publication data
+    if (!control.publication_info[0].publication_data.validated) {
+        alert_messages.push("Please validate the publication data before submitting.");
+    }
+
+    // Validate study data
+    for (let study_idx in control.publication_info[0].study_info) {
+        let study = control.publication_info[0].study_info[study_idx];
+
+        if (!study.study_data.validated) {
+            alert_messages.push(`Please validate the study data of Study ${parseInt(study_idx) + 1} before submitting.`);
+        }
+
+        if (!study.repetition_validated) {
+            alert_messages.push(`Please validate the procedure data of Study ${parseInt(study_idx) + 1} before submitting.`);
+        }
+
+        if (!study.measurement_data.validated) {
+            alert_messages.push(`Please validate the measure data of Study ${parseInt(study_idx) + 1} before submitting.`);
+        }
+
+        if (!study.raw_data.validated) {
+            alert_messages.push(`Please validate the raw data of Study ${parseInt(study_idx) + 1} before submitting.`);
+        }
+
+        if (!study.condition_data.validated) {
+            alert_messages.push(`Please validate the condition data of Study ${parseInt(study_idx) + 1} before submitting.`);
+        }
+    }
+
+    // Validate statement set data
+    for (let statementset_idx in control.statementset_info) {
+        if (!control.statementset_info[statementset_idx].statementset_data.validated) {
+            alert_messages.push(`Please validate the statement set data of statementset ${parseInt(statementset_idx) + 1} before submitting.`);
+        }
+    }
+
+    if (alert_messages.length > 0) {
+        displayValidationError('final-submit-button', `❌ There were ${alert_messages.length} errors:<br>` + alert_messages.join('<br>'));
+        return false;
+    }
+
+    return true;
 }
 
 function saveProgress(control){
