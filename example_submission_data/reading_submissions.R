@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "update_truth_hiwi2.db"
+db_path = "truth_db_test.db"
 create_truth_db(db_path)
 
 hiwi_files <- list.files(paste0(path, "complete_data/hiwis_march/"), pattern = ".json$", full.names = TRUE)
@@ -10,23 +10,23 @@ hiwi_files <- list.files(paste0(path, "complete_data/hiwis_march/"), pattern = "
 conn <- acdcquery::connect_to_db(db_path)
 for (isubmission in seq_along(hiwi_files)){
   raw_obj <- extract_from_submission_json(hiwi_files[isubmission])
-  
-  inspect_publication_data(raw_obj)
-  inspect_study_data(raw_obj)
+  # 
+  # inspect_publication_data(raw_obj)
+  # inspect_study_data(raw_obj)
   inspect_statementset_data(raw_obj)
-  inspect_condition_data(raw_obj)
-  inspect_raw_data(raw_obj)
+  # inspect_condition_data(raw_obj)
+  # inspect_raw_data(raw_obj)
   
   submission_obj <- prep_submission_data(conn, raw_obj)
   
-  inspect_publication_data(submission_obj)
-  inspect_study_data(submission_obj)
+  # inspect_publication_data(submission_obj)
+  # inspect_study_data(submission_obj)
   inspect_statementset_data(submission_obj)
-  inspect_condition_data(submission_obj)
-  inspect_raw_data(submission_obj)
-  
-  inspect_study_data(submission_obj)
-  inspect_raw_data(submission_obj)[[1]] %>% count(certainty)
+  # inspect_condition_data(submission_obj)
+  # inspect_raw_data(submission_obj)
+  # 
+  # inspect_study_data(submission_obj)
+  # inspect_raw_data(submission_obj)[[1]] %>% count(certainty)
   
   add_submission_to_db(conn, submission_obj)
 }
@@ -41,6 +41,13 @@ arguments <- list() %>%
     "greater",
     "0"
   )
+
+result <- query_db(
+  conn,
+  arguments,
+  "default",
+  "statementset_table"
+) %>% distinct()
 
 db_overview = generate_db_overview_table(conn)
 
@@ -59,7 +66,7 @@ overview <- query_db(
 
 result <- query_db(conn,
                    arguments,
-                   target_vars = c("default", "study_id", "publication_id", "presentation_id", "phase"),
+                   target_vars = c("default", "study_id", "publication_id", "procedure_id", "phase"),
                    target_table = "observation_table")
 
 result %>% 
