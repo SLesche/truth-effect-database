@@ -20,7 +20,7 @@ prep_submission_data <- function(conn, submission_obj){
     if ("between_data" %in% names(submission_obj$study_info[[istudy]])){
       submission_obj$study_info[[istudy]]$between_data = prep_between_data(submission_obj$study_info[[istudy]]$between_data, overview_table)
     }
-    submission_obj$study_info[[istudy]]$presentation_data = prep_repetition_data(submission_obj$study_info[[istudy]]$repetition_data, overview_table)
+    submission_obj$study_info[[istudy]]$procedure_data = prep_repetition_data(submission_obj$study_info[[istudy]]$repetition_data, overview_table)
     submission_obj$study_info[[istudy]]$raw_data = prep_raw_data(submission_obj$study_info[[istudy]]$raw_data, overview_table)
     
     if ("measurement_data" %in% names(submission_obj$study_info[[istudy]])){
