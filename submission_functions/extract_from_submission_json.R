@@ -14,6 +14,11 @@ extract_from_submission_json <- function(json_path){
       submission_list$statementset_info = vector(mode = "list", n_statementsets)
       for (istatementset in 1:n_statementsets){
         submission_list$statementset_info[[istatementset]]$publication = json_obj$statementset_info[[istatementset]]$statementset_publication
+        
+        if (trimws(submission_list$statementset_info[[istatementset]]$publication) == ""){
+          submission_list$statementset_info[[istatementset]]$publication = submission_list$publication_data$apa_reference
+        }
+        
         submission_list$statementset_info[[istatementset]]$statementset_data = as.data.frame(data.table::rbindlist(json_obj$statementset_info[[istatementset]]$statementset_data))
         
         columns_to_extract = c("statement_identifier", "statement_text", "statement_accuracy", "statement_category", "proportion_true")

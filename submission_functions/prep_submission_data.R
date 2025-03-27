@@ -5,8 +5,22 @@ prep_submission_data <- function(conn, submission_obj){
   
   n_statementsets = length(submission_obj$statementset_info)
   if (n_statementsets > 0){
+    publication_refs = character(n_statementsets)
     for (istatementset in 1:n_statementsets){
+      publication_refs[istatementset] = submission_obj$statementset_info[[istatementset]]$publication
+      
       submission_obj$statementset_info[[istatementset]]$statementset_data = prep_statementset_data(submission_obj$statementset_info[[istatementset]]$statementset_data, overview_table)
+    }
+    
+    # If there are statementsets linked to the same publication but multiple entries
+    # Suffix the study number to them so they don't mess up the anti-duplication system
+    if (any(duplicated(tolower(trimws(publication_refs))))){
+      duplicated_refs = unique(publication_refs[which(duplicated(tolower(trimws(publication_refs))))])
+      publication_refs[which(publication_refs %in% duplicated_refs)] = paste0(publication_refs[which(publication_refs %in% duplicated_refs)], " - Study ", which(publication_refs %in% duplicated_refs))
+    }
+    
+    for (istatementset in 1:n_statementsets){
+      submission_obj$statementset_info[[istatementset]]$publication = publication_refs[istatementset]
     }
   }
   
