@@ -1,4 +1,4 @@
-files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+files_to_source = list.files("../../Amsterdam/inhibitiondb/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
 sapply(files_to_source, source)
 
 library(tidyverse)
@@ -11,6 +11,12 @@ conn <- connect_to_db(db_path)
 arguments <- list() %>% 
   add_argument(
     conn,
+    "statementset_id", 
+    "greater", 
+    0
+  ) %>% 
+  add_argument(
+    conn,
     "repetition_type",
     "equal",
     "exact"
@@ -20,26 +26,31 @@ arguments <- list() %>%
     "phase",
     "equal", 
     "test"
+  ) %>% 
+  add_argument(
+    conn,
+    "statement_accuracy",
+    "equal",
+    1
+  ) %>% 
+  add_argument(
+    conn, 
+    "n_participants",
+    "greater",
+    50
   )
 
-target_vars = "default"
+target_vars = c("default", "statement_accuracy", "n_participants")
 
-target_table = "publication_table"
+target_table = "statementset_table"
 
 argument_relation = "and"
 
 result <- query_db(
   conn,
   arguments,
-  c("study_id", "default", "statement_text"),
+  target_vars,
   "observation_table"
-)
-
-query_db(
-  conn,
-  arguments,
-  c("default", "publication_id", "authors"),
-  "statementset_table"
 )
 
 full_data = dbReadTable(conn, "observation_table")
