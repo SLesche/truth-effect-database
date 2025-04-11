@@ -2,14 +2,18 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_db_hiwis.db"
+db_path = "truth_test.db"
 create_truth_db(db_path)
 
 hiwi_files <- list.files(paste0(path, "complete_data/hiwis_march/"), pattern = ".json$", full.names = TRUE)
+other_files <- list.files(paste0(path, "complete_data/"), pattern = ".json$", full.names = TRUE)
 
 conn <- acdcquery::connect_to_db(db_path)
-for (isubmission in seq_along(hiwi_files)){
-  raw_obj <- extract_from_submission_json(hiwi_files[isubmission])
+
+valid_files <- c(other_files, hiwi_files[which(stringr::str_detect(hiwi_files, "2017|2018|2020"))])
+
+for (isubmission in seq_along(valid_files)){
+  raw_obj <- extract_from_submission_json(valid_files[isubmission])
   # 
   inspect_publication_data(raw_obj)
   inspect_study_data(raw_obj)
@@ -44,18 +48,24 @@ for (isubmission in seq_along(hiwi_files)){
   add_submission_to_db(conn, submission_obj)
 }
 
-library(acdcquery)
+# devtools::install_github("SLesche/acdc-query")
+
+files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+sapply(files_to_source, source)
+library(DBI)
+library(RSQLite)
+
 library(tidyverse)
 
 arguments <- list() %>% 
   add_argument(
     conn,
-    "publication_id",
+    "statementset_id",
     "greater",
     "0"
   )
 
-result <- query_db(
+result <- acdcquery::query_db(
   conn,
   arguments,
   "default",

@@ -4,7 +4,7 @@ sapply(files_to_source, source)
 library(tidyverse)
 library(DBI)
 library(RSQLite)
-db_path = "truth_db_test2.db"
+db_path = "truth_11_04.db"
 
 conn <- connect_to_db(db_path)
 
@@ -13,7 +13,7 @@ arguments <- list() %>%
     conn,
     "repetition_type",
     "equal",
-    "semantic"
+    "exact"
   ) %>% 
   add_argument(
     conn,
@@ -33,6 +33,13 @@ result <- query_db(
   arguments,
   c("study_id", "default", "statement_text"),
   "observation_table"
+)
+
+query_db(
+  conn,
+  arguments,
+  c("default", "publication_id", "authors"),
+  "statementset_table"
 )
 
 full_data = dbReadTable(conn, "observation_table")
