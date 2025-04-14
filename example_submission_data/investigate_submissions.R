@@ -10,11 +10,11 @@
 library(acdcquery)
 library(tidyverse)
 
-db_path = "update_truth_hiwi.db"
+db_path = "truth_11_04.db"
 conn <- acdcquery::connect_to_db(db_path)
 
 # Visual Inspection of tables
-arguments_overall <- list() %>% 
+arguments <- list() %>% 
   add_argument(
     conn,
     "study_id",
@@ -41,14 +41,13 @@ statementset_overview <- query_db(
   arguments,
   c("default", "study_id", "publication_id"),
   "statementset_table"
-) %>% distinct()
-
+)
 statement_overview <- query_db(
   conn, 
   arguments,
   c("default", "statementset_id", "study_id", "publication_id"),
   "statement_table"
-) %>% distinct()
+)
   
   
 measure_overview <- query_db(
@@ -74,22 +73,22 @@ phase_data <- query_db(
 )
 
 phase_data %>% 
-  filter(str_detect(phase, "est")) %>% 
-  filter(is.na(repeated)) %>% 
+  filter(str_detect(phase, "test")) %>% 
+  # filter(is.na(repeated)) %>% 
   count(is.na(repeated), study_id)
 
 phase_data %>% 
-  filter(str_detect(phase, "est")) %>% 
+  filter(str_detect(phase, "test")) %>% 
   filter(is.na(response)) %>% 
   count(is.na(response), study_id)
 
 inspect_repeated_nas <- phase_data %>% 
-  filter(study_id == 4, phase == "test") %>% 
+  filter(study_id == 12, phase == "test") %>% 
   filter(is.na(repeated))
 
 # Inspect truth effect for oddities
 phase_data %>% 
-  filter(str_detect(phase, "est")) %>% 
+  filter(str_detect(phase, "test")) %>% 
   group_by(study_id, repeated) %>% 
   summarize(
     mean_true = mean(response, na.rm = TRUE)
@@ -105,7 +104,7 @@ query_db(
 
 result <- query_db(conn,
                    arguments,
-                   target_vars = c("default", "study_id", "publication_id", "presentation_id", "phase"),
+                   target_vars = c("default", "study_id", "publication_id", "phase"),
                    target_table = "observation_table")
 
 result %>% 
