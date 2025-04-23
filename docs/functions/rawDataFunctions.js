@@ -67,7 +67,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>between_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
                 <li><strong>statement_identifier:</strong> A unique identifier for each statement used. This must be one of the identifiers encoded in the "Statementset" data you uploaded.</li>
                 <li><strong>response:</strong> The value of the truth rating. <b>Larger values must indicate higher truth ratings.</b></li>
-                <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0" or repeated with contradicting information "-1".</li>
+                <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0".</li>
                 <li><strong>certainty:</strong> (if measured) The value indicating the subjective certainty with which a participant gave their truth rating.</li>
                 <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
@@ -423,9 +423,9 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
 
     // Check that accuracy is only 0, 1 or NA
     const repeated_vals = raw_data.data.map(row => row.repeated);
-    const invalid_repeated_vals = repeated_vals.filter(val => val != '0' && val != '1' && val != '-1' && val !== 'NA');
+    const invalid_repeated_vals = repeated_vals.filter(val => val != '0' && val != '-1' && val !== 'NA');
     if (invalid_repeated_vals.length > 0) {
-        errorMessages.push(`The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "-1", "0", "1", or "NA".`);
+        errorMessages.push(`The "repeated" column contains invalid values: ${invalid_repeated_vals.slice(0, 5).join(', ')}. It should only contain "0", "1", or "NA".`);
     }
 
     // Check that response has a value maximum to that of the steps indicated by the study question and minimum of 0 or Na
