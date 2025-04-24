@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/"
-db_path = "truth_test.db"
+db_path = "truth_24_04.db"
 create_truth_db(db_path)
 
 hiwi_files <- list.files(paste0(path, "complete_data/hiwis_march/"), pattern = ".json$", full.names = TRUE)
@@ -10,7 +10,7 @@ other_files <- list.files(paste0(path, "complete_data/"), pattern = ".json$", fu
 
 conn <- acdcquery::connect_to_db(db_path)
 
-valid_files <- c(other_files, hiwi_files[which(stringr::str_detect(hiwi_files, "2017|2018|2020"))])
+valid_files <- c(other_files, hiwi_files[which(stringr::str_detect(hiwi_files, "2017|2018|2020|2021"))])
 
 for (isubmission in seq_along(valid_files)){
   raw_obj <- extract_from_submission_json(valid_files[isubmission])
@@ -60,7 +60,7 @@ library(tidyverse)
 arguments <- list() %>% 
   add_argument(
     conn,
-    "statementset_id",
+    "study_id",
     "greater",
     "0"
   )
