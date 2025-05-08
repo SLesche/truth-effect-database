@@ -111,6 +111,12 @@ function initializePublicationSurvey(control, publication_idx) {
             <label for="country" class = "survey-label">In what country was the study conducted?</label>
             <input type="text" id="country" name="country" value="${publication.country || ''}"><br>
 
+            <label for="peer_reviewed" class="survey-label">Was this publication peer-reviewed?</label>
+            <div class="radio-buttons" id = "peer_reviewed">
+                <label><input type="radio" name="peer_reviewed" value="1" ${publication.peer_reviewed == 1 ? 'checked' : ''}/>Yes</label>
+                <label><input type="radio" name="peer_reviewed" value="0" ${publication.peer_reviewed == 0 ? 'checked' : ''}/>No</label>
+            </div>
+
             <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
             <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}"><br>
             <p class="survey-label-additional-info">Separate the keywords by commas: "keyword 1, keyword 2, keyword 3</p>
@@ -142,6 +148,7 @@ function collectPublicationData(){
     const country = document.getElementById('country').value;
     const keywords = document.getElementById('keywords').value;
     const contact = document.getElementById('contact').value;
+    const peer_reviewed = getRadioButtonSelection('peer_reviewed');
 
     // Store the values in the control object
     const publication_data = {
@@ -153,6 +160,7 @@ function collectPublicationData(){
         country: country,
         keywords: keywords,
         contact: contact,
+        peer_reviewed: peer_reviewed,
     }
 
     return publication_data;
@@ -164,7 +172,7 @@ function validatePublicationData(publication_data){
     var alert_message = 'This field does not match validation criteria.';
     // Check if any of the fields are empty
 
-    const required_keys = ['authors', 'first_author', 'title', 'apa_reference', 'conducted', 'country', 'contact'];
+    const required_keys = ['authors', 'first_author', 'title', 'apa_reference', 'conducted', 'country', 'contact', 'peer_reviewed'];
     for (const key of required_keys) {
         if (!publication_data[key]) {
             alert_message = 'This field is required.';
