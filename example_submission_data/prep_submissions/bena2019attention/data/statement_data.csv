@@ -1,0 +1,129 @@
+"","enonce","enonce_verite","statement_identifier","statement_text","statement_accuracy"
+"1","Antonio Vivaldi a émigré en Allemagne en 1740.","f",1,"Antonio Vivaldi a émigré en Allemagne en 1740.",0
+"2","Bramante est un compositeur de la Renaissance.","f",2,"Bramante est un compositeur de la Renaissance.",0
+"3","Brecht a écrit la pièce 'La vie de Galilée' pendant son exil au Danemark.","t",3,"Brecht a écrit la pièce 'La vie de Galilée' pendant son exil au Danemark.",1
+"4","Charlemagne a été couronné Empereur d'Occident par le Pape le jour de Pâques.","f",4,"Charlemagne a été couronné Empereur d'Occident par le Pape le jour de Pâques.",0
+"5","Dans le conte de fées 'Les Souliers usés à la danse', le roi a 7 filles.","f",5,"Dans le conte de fées 'Les Souliers usés à la danse', le roi a 7 filles.",0
+"6","Dans les années 1930, la télévision était appelée 'cinéma avec son distant'.","t",6,"Dans les années 1930, la télévision était appelée 'cinéma avec son distant'.",1
+"7","En France, la téléphonie automatique a débuté en 1912.","t",7,"En France, la téléphonie automatique a débuté en 1912.",1
+"8","Falstaff est le dernier opéra de Verdi.","t",8,"Falstaff est le dernier opéra de Verdi.",1
+"9","Georg Philipp Telemann est né à Magdebourg.","t",9,"Georg Philipp Telemann est né à Magdebourg.",1
+"10","H. von Euler-Chelpin a reçu le Prix Nobel de Physique.","f",10,"H. von Euler-Chelpin a reçu le Prix Nobel de Physique.",0
+"11","Il n'y a pas de serpents domestiques en Irlande et en Nouvelle-Zélande.","t",11,"Il n'y a pas de serpents domestiques en Irlande et en Nouvelle-Zélande.",1
+"12","Jürgen Ovens a été l'élève de Paul Klee.","f",12,"Jürgen Ovens a été l'élève de Paul Klee.",0
+"13","L'écrivain Ronald Schernikau est enterré dans le quartier Friedrichshain de Berlin.","t",13,"L'écrivain Ronald Schernikau est enterré dans le quartier Friedrichshain de Berlin.",1
+"14","L'alphabet Hawaïen contient moins de lettres que l'alphabet Allemand.","t",14,"L'alphabet Hawaïen contient moins de lettres que l'alphabet Allemand.",1
+"15","L'effet Doppler s'applique à la vitesse de la lumière.","t",15,"L'effet Doppler s'applique à la vitesse de la lumière.",1
+"16","L'incapacité à reconnaître des séquences de sons et de rythmes est appelée amusie.","t",16,"L'incapacité à reconnaître des séquences de sons et de rythmes est appelée amusie.",1
+"17","La Berkeley Software Distribution est un système d'exploitation.","t",17,"La Berkeley Software Distribution est un système d'exploitation.",1
+"18","La cravate a été inventée en Italie.","f",18,"La cravate a été inventée en Italie.",0
+"19","La méduse la plus toxique au monde est la méduse Cotylorhiza tuberculatanus.","f",19,"La méduse la plus toxique au monde est la méduse Cotylorhiza tuberculatanus.",0
+"20","La musicienne Fiona Apple a grandi dans la ville de Los Angeles.","f",20,"La musicienne Fiona Apple a grandi dans la ville de Los Angeles.",0
+"21","La plus petite fleur au monde se trouve au Japon et mesure un demi-millimètre.","t",21,"La plus petite fleur au monde se trouve au Japon et mesure un demi-millimètre.",1
+"22","La rivière Gomal prend sa source au Pakistan.","f",22,"La rivière Gomal prend sa source au Pakistan.",0
+"23","La viole de gambe est un instrument de musique possédant généralement 8 cordes.","f",23,"La viole de gambe est un instrument de musique possédant généralement 8 cordes.",0
+"24","Le cholécalciférol est une vitamine trouvée dans les fruits.","f",24,"Le cholécalciférol est une vitamine trouvée dans les fruits.",0
+"25","Le cobalt est un élément chimique utilisé dans la fabrication des pneus de voitures.","t",25,"Le cobalt est un élément chimique utilisé dans la fabrication des pneus de voitures.",1
+"26","Le deuxième voyage de Gulliver est à destination de Luggnagg.","f",26,"Le deuxième voyage de Gulliver est à destination de Luggnagg.",0
+"27","Le Docteur Jonas Salk a développé le vaccin contre le tétanos.","f",27,"Le Docteur Jonas Salk a développé le vaccin contre le tétanos.",0
+"28","Le général Romain Lucius Cornelius Sulla a battu les Teutons en 101 avant Jésus-Christ.","f",28,"Le général Romain Lucius Cornelius Sulla a battu les Teutons en 101 avant Jésus-Christ.",0
+"29","Le grolsch est un poisson néerlandais.","f",29,"Le grolsch est un poisson néerlandais.",0
+"30","Le manifeste Russell-Einstein a été publié en 1955 pour mettre en garde contre le risque que présentent les armes nucléaires.","t",30,"Le manifeste Russell-Einstein a été publié en 1955 pour mettre en garde contre le risque que présentent les armes nucléaires.",1
+"31","Le nerf phrénique innerve le diaphragme.","t",31,"Le nerf phrénique innerve le diaphragme.",1
+"32","Le nom de famille du peintre Michel-Ange est Buonarotti.","t",32,"Le nom de famille du peintre Michel-Ange est Buonarotti.",1
+"33","Le perforateur a été inventé à Bonn.","t",33,"Le perforateur a été inventé à Bonn.",1
+"34","Le Peterbald est une race de chat siamois.","t",34,"Le Peterbald est une race de chat siamois.",1
+"35","Le phlogistique n'est pas inflammable.","t",35,"Le phlogistique n'est pas inflammable.",1
+"36","Le premier drapeau de la confédération des Etats-Unis a été appelé 'Gloire antique'.","f",36,"Le premier drapeau de la confédération des Etats-Unis a été appelé 'Gloire antique'.",0
+"37","Le premier enfant de Mick Jagger et de Jerry Hall est James Jagger.","f",37,"Le premier enfant de Mick Jagger et de Jerry Hall est James Jagger.",0
+"38","Le premier film d'animation est anglais.","f",38,"Le premier film d'animation est anglais.",0
+"39","Le premier match officiel de basket s'est déroulé à New York.","f",39,"Le premier match officiel de basket s'est déroulé à New York.",0
+"40","Le premier piano a été conçu en Italie en 1709.","f",40,"Le premier piano a été conçu en Italie en 1709.",0
+"41","Le principe de complémentarité a été énoncé par Paul Dirac.","f",41,"Le principe de complémentarité a été énoncé par Paul Dirac.",0
+"42","Le siège social de la compagnie Braun se situe à Francfort, dans le Main, en Allemagne.","f",42,"Le siège social de la compagnie Braun se situe à Francfort, dans le Main, en Allemagne.",0
+"43","Le Srang est une des monnaies historiques de la Thaïlande.","f",43,"Le Srang est une des monnaies historiques de la Thaïlande.",0
+"44","Le Tankenberg est le sommet le plus haut des Pays-Bas.","f",44,"Le Tankenberg est le sommet le plus haut des Pays-Bas.",0
+"45","Le Thulium est l'élément chimique le plus rare sur Terre.","f",45,"Le Thulium est l'élément chimique le plus rare sur Terre.",0
+"46","Les 'Sonnets pour Laura' ont été écrits par Pétrarque.","t",46,"Les 'Sonnets pour Laura' ont été écrits par Pétrarque.",1
+"47","Les émeraudes présentent des cassures esquilleuses.","f",47,"Les émeraudes présentent des cassures esquilleuses.",0
+"48","Les microhylidae éclosent totalement développés, sans passer par le stade de têtards.","t",48,"Les microhylidae éclosent totalement développés, sans passer par le stade de têtards.",1
+"49","Les plosives sont une partie des occlusives.","t",49,"Les plosives sont une partie des occlusives.",1
+"50","Les sachets de thé sont habituellement constitués en fibres de feuilles de Plaqueminier.","f",50,"Les sachets de thé sont habituellement constitués en fibres de feuilles de Plaqueminier.",0
+"51","Mark Twain a traduit 'Pierre l'ébouriffé' ('Der Struwwelpeter') en anglais.","t",51,"Mark Twain a traduit 'Pierre l'ébouriffé' ('Der Struwwelpeter') en anglais.",1
+"52","Nereid est une lune de la planète Neptune.","t",52,"Nereid est une lune de la planète Neptune.",1
+"53","Nerthus est une déesse allemande de la terre.","t",53,"Nerthus est une déesse allemande de la terre.",1
+"54","Un des fils d'Aphrodite était Priapus.","t",54,"Un des fils d'Aphrodite était Priapus.",1
+"55","Une coccinelle qui vient de naître est jaune et rouge.","t",55,"Une coccinelle qui vient de naître est jaune et rouge.",1
+"56","Vega est l'étoile la plus brillante de l'hémisphère nord.","t",56,"Vega est l'étoile la plus brillante de l'hémisphère nord.",1
+"57","Antonio Vivaldi a émigré en Autriche en 1740.","t",57,"Antonio Vivaldi a émigré en Autriche en 1740.",1
+"58","Bramante est un architecte de la Renaissance.","t",58,"Bramante est un architecte de la Renaissance.",1
+"59","Brecht a écrit la pièce 'La vie de Galilée' pendant son exil à Paris.","f",59,"Brecht a écrit la pièce 'La vie de Galilée' pendant son exil à Paris.",0
+"60","Charlemagne a été couronné Empereur d'Occident par le Pape le jour de Noël.","t",60,"Charlemagne a été couronné Empereur d'Occident par le Pape le jour de Noël.",1
+"61","Dans le conte de fées 'Les Souliers usés à la danse', le roi a 12 filles.","t",61,"Dans le conte de fées 'Les Souliers usés à la danse', le roi a 12 filles.",1
+"62","En France, la téléphonie automatique a débuté en 1907.","f",62,"En France, la téléphonie automatique a débuté en 1907.",0
+"63","Georg Philipp Telemann est né à Leipzig.","f",63,"Georg Philipp Telemann est né à Leipzig.",0
+"64","L'écrivain Ronald Schernikau est enterré dans le quartier St. Georg de Hambourg.","f",64,"L'écrivain Ronald Schernikau est enterré dans le quartier St. Georg de Hambourg.",0
+"65","L'alphabet Hawaïen contient plus de lettres que l'alphabet Allemand.","f",65,"L'alphabet Hawaïen contient plus de lettres que l'alphabet Allemand.",0
+"66","L'incapacité à reconnaître des séquences de sons et de rythmes est appelée dystonie.","f",66,"L'incapacité à reconnaître des séquences de sons et de rythmes est appelée dystonie.",0
+"67","La cravate est issue du col des mercenaires croates.","t",67,"La cravate est issue du col des mercenaires croates.",1
+"68","La méduse la plus toxique au monde est la méduse Chironex fleckeri.","t",68,"La méduse la plus toxique au monde est la méduse Chironex fleckeri.",1
+"69","La plus petite fleur au monde se trouve au Japon et mesure un millimètre.","f",69,"La plus petite fleur au monde se trouve au Japon et mesure un millimètre.",0
+"70","La rivière Gomal prend sa source en Afghanistan.","t",70,"La rivière Gomal prend sa source en Afghanistan.",1
+"71","Le cholécalciférol est une vitamine trouvée dans l'huile de foie de morue.","t",71,"Le cholécalciférol est une vitamine trouvée dans l'huile de foie de morue.",1
+"72","Le corps humain synthétise la quasi-totalité de la quantité de vitamines K nécessaire à sa survie.","f",72,"Le corps humain synthétise la quasi-totalité de la quantité de vitamines K nécessaire à sa survie.",0
+"73","Le cothurne était une chaussure portée par les acteurs en Grèce antique.","t",73,"Le cothurne était une chaussure portée par les acteurs en Grèce antique.",1
+"74","Le Docteur Jonas Salk a développé le vaccin contre la polio.","t",74,"Le Docteur Jonas Salk a développé le vaccin contre la polio.",1
+"75","Le nom de famille du peintre Michel-Ange est Santi.","f",75,"Le nom de famille du peintre Michel-Ange est Santi.",0
+"76","Le premier drapeau de la confédération des Etats-Unis a été appelé 'Etoiles et Lignes'.","t",76,"Le premier drapeau de la confédération des Etats-Unis a été appelé 'Etoiles et Lignes'.",1
+"77","Le premier enfant de Mick Jagger et de Jerry Hall est Elizabeth Jagger.","t",77,"Le premier enfant de Mick Jagger et de Jerry Hall est Elizabeth Jagger.",1
+"78","Le siège social de la compagnie Braun se situe à Kronberg, dans le Taunus, en Allemagne.","t",78,"Le siège social de la compagnie Braun se situe à Kronberg, dans le Taunus, en Allemagne.",1
+"79","Le Vaalserberg est le sommet le plus haut des Pays-Bas.","t",79,"Le Vaalserberg est le sommet le plus haut des Pays-Bas.",1
+"80","Les 'Sonnets pour Laura' ont été écrits par Boccacio.","f",80,"Les 'Sonnets pour Laura' ont été écrits par Boccacio.",0
+"81","Les plosives sont une partie d'un dispositif explosif.","f",81,"Les plosives sont une partie d'un dispositif explosif.",0
+"82","Nerthus est une déesse allemande de l'eau.","f",82,"Nerthus est une déesse allemande de l'eau.",0
+"83","Zeus et Leda sont les parents des trois épouses de la destinée.","f",83,"Zeus et Leda sont les parents des trois épouses de la destinée.",0
+"84","Dans les années 1930, la télévision était appelée 'cinéma-maison'.","f",84,"Dans les années 1930, la télévision était appelée 'cinéma-maison'.",0
+"85","Il n'y a pas de serpents domestiques en Ecosse et au Groenland.","f",85,"Il n'y a pas de serpents domestiques en Ecosse et au Groenland.",0
+"86","L'Astate est l'élément chimique le plus rare sur Terre.","t",86,"L'Astate est l'élément chimique le plus rare sur Terre.",1
+"87","La Berkeley Software Distribution est une chaîne américaine de magasins.","f",87,"La Berkeley Software Distribution est une chaîne américaine de magasins.",0
+"88","Le cobalt est un élément chimique utilisé dans la fabrication des sièges de voiture.","f",88,"Le cobalt est un élément chimique utilisé dans la fabrication des sièges de voiture.",0
+"89","Le corps humain synthétise la moitié de la quantité de vitamines K nécessaire à sa survie.","t",89,"Le corps humain synthétise la moitié de la quantité de vitamines K nécessaire à sa survie.",1
+"90","Le perforateur a été inventé à Brighton.","f",90,"Le perforateur a été inventé à Brighton.",0
+"91","Le premier film d'animation est français.","t",91,"Le premier film d'animation est français.",1
+"92","Le premier match officiel de basket s'est déroulé à Springfield.","t",92,"Le premier match officiel de basket s'est déroulé à Springfield.",1
+"93","Le premier piano a été conçu en Autriche en 1709.","t",93,"Le premier piano a été conçu en Autriche en 1709.",1
+"94","Le principe de complémentarité a été énoncé par Niels Bohr.","t",94,"Le principe de complémentarité a été énoncé par Niels Bohr.",1
+"95","Le stade de têtard dure deux fois plus longtemps chez les microhylidae que chez les autres espèces de grenouilles.","f",95,"Le stade de têtard dure deux fois plus longtemps chez les microhylidae que chez les autres espèces de grenouilles.",0
+"96","Les sachets de thé sont habituellement constitués en fibres de feuilles de Musacées.","t",96,"Les sachets de thé sont habituellement constitués en fibres de feuilles de Musacées.",1
+"97","Mark Twain a traduit 'Till l'espiègle' ('Till Eulenspiegel') en anglais.","f",97,"Mark Twain a traduit 'Till l'espiègle' ('Till Eulenspiegel') en anglais.",0
+"98","Nereid est une lune de la planète Saturne.","f",98,"Nereid est une lune de la planète Saturne.",0
+"99","Otello est le dernier opéra de Verdi.","f",99,"Otello est le dernier opéra de Verdi.",0
+"100","Un des fils d'Aphrodite était Anchise.","f",100,"Un des fils d'Aphrodite était Anchise.",0
+"101","Une coccinelle qui vient de naître est grise et jaune.","f",101,"Une coccinelle qui vient de naître est grise et jaune.",0
+"102","H. von Euler-Chelpin a reçu le Prix Nobel de Chimie.","t",102,"H. von Euler-Chelpin a reçu le Prix Nobel de Chimie.",1
+"103","Jürgen Ovens a été l'élève de Rembrandt.","t",103,"Jürgen Ovens a été l'élève de Rembrandt.",1
+"104","L'effet Doppler ne s'applique pas à la vitesse de la lumière.","f",104,"L'effet Doppler ne s'applique pas à la vitesse de la lumière.",0
+"105","La musicienne Fiona Apple a grandi dans la ville de New York.","t",105,"La musicienne Fiona Apple a grandi dans la ville de New York.",1
+"106","Le grolsch est une brasserie néerlandaise.","t",106,"Le grolsch est une brasserie néerlandaise.",1
+"107","Le manifeste Russell-Einstein a été publié en 1955 pour mettre en garde contre le risque que présentent les armes chimiques.","f",107,"Le manifeste Russell-Einstein a été publié en 1955 pour mettre en garde contre le risque que présentent les armes chimiques.",0
+"108","Le Srang est une des monnaies historiques du Tibet.","t",108,"Le Srang est une des monnaies historiques du Tibet.",1
+"109","Les émeraudes présentent des cassures conchoïdales.","t",109,"Les émeraudes présentent des cassures conchoïdales.",1
+"110","Vega est l'étoile la plus brillante de l'hémisphère sud.","f",110,"Vega est l'étoile la plus brillante de l'hémisphère sud.",0
+"111","Le général Romain Caius Marcus a battu les Teutons en 101 avant Jésus-Christ.","t",111,"Le général Romain Caius Marcus a battu les Teutons en 101 avant Jésus-Christ.",1
+"112","Le nerf phrénique innerve les muscles du bras.","f",112,"Le nerf phrénique innerve les muscles du bras.",0
+"113","Le Peterbald est un genre d'herbe médicinale.","f",113,"Le Peterbald est un genre d'herbe médicinale.",0
+"114","Le phlogistique est inflammable.","f",114,"Le phlogistique est inflammable.",0
+"115","La viole de gambe est un instrument de musique possédant généralement 6 cordes.","t",115,"La viole de gambe est un instrument de musique possédant généralement 6 cordes.",1
+"116","Zeus et Themis sont les parents des trois épouses de la destinée.","t",116,"Zeus et Themis sont les parents des trois épouses de la destinée.",1
+"117","Le cothurne était une ceinture romaine.","f",117,"Le cothurne était une ceinture romaine.",0
+"118","Le deuxième voyage de Gulliver est à destination de Brobdingnag.","t",118,"Le deuxième voyage de Gulliver est à destination de Brobdingnag.",1
+"119","L'alphabet Hawaïen contient plus de lettres que l'alphabet Allemand. ","f",119,"L'alphabet Hawaïen contient plus de lettres que l'alphabet Allemand. ",0
+"120","Dans le conte de fées 'Les Souliers usés Ã la danse', le roi a 7 filles.","f",120,"Dans le conte de fées 'Les Souliers usés Ã la danse', le roi a 7 filles.",0
+"121","Georg Philipp Telemann est né Ã Leipzig.","f",121,"Georg Philipp Telemann est né Ã Leipzig.",0
+"122","L'effet Doppler s'applique Ã la vitesse de la lumière.","t",122,"L'effet Doppler s'applique Ã la vitesse de la lumière.",1
+"123","L'incapacité Ã reconnaître des séquences de sons et de rythmes est appelée dystonie.","f",123,"L'incapacité Ã reconnaître des séquences de sons et de rythmes est appelée dystonie.",0
+"124","Le corps humain synthétise la quasi-totalité de la quantité de vitamines K nécessaire Ã sa survie.","f",124,"Le corps humain synthétise la quasi-totalité de la quantité de vitamines K nécessaire Ã sa survie.",0
+"125","Le deuxième voyage de Gulliver est Ã destination de Brobdingnag.","t",125,"Le deuxième voyage de Gulliver est Ã destination de Brobdingnag.",1
+"126","Le perforateur a été inventé Ã Brighton.","f",126,"Le perforateur a été inventé Ã Brighton.",0
+"127","Le premier match officiel de basket s'est déroulé Ã Springfield.","t",127,"Le premier match officiel de basket s'est déroulé Ã Springfield.",1
+"128","Le siège social de la compagnie Braun se situe Ã Francfort, dans le Main, en Allemagne.","f",128,"Le siège social de la compagnie Braun se situe Ã Francfort, dans le Main, en Allemagne.",0
