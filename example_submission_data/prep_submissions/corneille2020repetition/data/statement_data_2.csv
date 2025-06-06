@@ -1,0 +1,41 @@
+"","statement","truth","statement_identifier","statement_text","statement_accuracy"
+"1","The gas price is not contractually linked to the oil price.",TRUE,1,"The gas price is not contractually linked to the oil price.",1
+"2","The largest lithium deposits in the world are located in Bolivia.",TRUE,2,"The largest lithium deposits in the world are located in Bolivia.",1
+"3","Elvis and Priscilla Presley has a biological child.",TRUE,3,"Elvis and Priscilla Presley has a biological child.",1
+"4","Apart from humans, gorillas have only leopards as natural enemies.",TRUE,4,"Apart from humans, gorillas have only leopards as natural enemies.",1
+"5","Elon Musk was married three times.",TRUE,5,"Elon Musk was married three times.",1
+"6","Melania Trump was born in the Slovenian city of Novo Mesto.",TRUE,6,"Melania Trump was born in the Slovenian city of Novo Mesto.",1
+"7","The first heart transplantation took pace in Vienna.",TRUE,7,"The first heart transplantation took pace in Vienna.",1
+"8","Bond actor Pierce Brosnan worked as a fire-breather for three years.",TRUE,8,"Bond actor Pierce Brosnan worked as a fire-breather for three years.",1
+"9","With the Good Friday Agreement, Ireland reaffirmed its demand for reunification with Northern Ireland.",FALSE,9,"With the Good Friday Agreement, Ireland reaffirmed its demand for reunification with Northern Ireland.",0
+"10","The European state with the most inhabitants/km² is the Vatican.",FALSE,10,"The European state with the most inhabitants/km² is the Vatican.",0
+"11","Sinti and Roma originally come from India and Pakistan.",TRUE,11,"Sinti and Roma originally come from India and Pakistan.",1
+"12","Rapeseed oil damages the ground water.",FALSE,12,"Rapeseed oil damages the ground water.",0
+"13","The slogan of the European Union """"United in diversity"""" is based on an internet survey among students.",FALSE,13,"The slogan of the European Union """"United in diversity"""" is based on an internet survey among students.",0
+"14","In Italy, Spain, and Portugal solar power is more expensive than electricity from coal combustion.",FALSE,14,"In Italy, Spain, and Portugal solar power is more expensive than electricity from coal combustion.",0
+"15","Will Smith's full name is William Carroll Smith Jr.",FALSE,15,"Will Smith's full name is William Carroll Smith Jr.",0
+"16","Michael J. Fox is suffering from multiple sclerosis.",FALSE,16,"Michael J. Fox is suffering from multiple sclerosis.",0
+"17","According to his own statement, Andy Warhol was bisexual.",FALSE,17,"According to his own statement, Andy Warhol was bisexual.",0
+"18","Jaw muscles are the strongest muscles in the human body.",TRUE,18,"Jaw muscles are the strongest muscles in the human body.",1
+"19","Nelson Mandela did boxing as a hobby.",TRUE,19,"Nelson Mandela did boxing as a hobby.",1
+"20","Hugh Grant was twice convicted of public misdemeanor of sexual nature.",FALSE,20,"Hugh Grant was twice convicted of public misdemeanor of sexual nature.",0
+"21","In France, women were allowed to vote for the first time in 1919.",FALSE,21,"In France, women were allowed to vote for the first time in 1919.",0
+"22","The Spanish King Felipe VI is descended from the Merovingian dynasty.",FALSE,22,"The Spanish King Felipe VI is descended from the Merovingian dynasty.",0
+"23","Cats can be allergic to people.",TRUE,23,"Cats can be allergic to people.",1
+"24","The actor Stan Laurel died of a heart attack.",TRUE,24,"The actor Stan Laurel died of a heart attack.",1
+"25","People from Europe lose more hair per day than people from Africa.",TRUE,25,"People from Europe lose more hair per day than people from Africa.",1
+"26","People with blood group AB+ can be blood donors for all groups A and B.",FALSE,26,"People with blood group AB+ can be blood donors for all groups A and B.",0
+"27","The heart rate of an average women is higher than that of on average man.",TRUE,27,"The heart rate of an average women is higher than that of on average man.",1
+"28","The first world climate conference was held in Geneva in 1990.",FALSE,28,"The first world climate conference was held in Geneva in 1990.",0
+"29","The form of government of the United Arab Emirates is a constitutional monarchy.",FALSE,29,"The form of government of the United Arab Emirates is a constitutional monarchy.",0
+"30","Babies have more bones than adults.",TRUE,30,"Babies have more bones than adults.",1
+"31","Aspirin rarely (1 case in 1000 to 10000) leads to micro-bleeding in the gastrointestinal tract.",FALSE,31,"Aspirin rarely (1 case in 1000 to 10000) leads to micro-bleeding in the gastrointestinal tract.",0
+"32","In heterosexual people the number of new HIV infections has been stable since 2010.",FALSE,32,"In heterosexual people the number of new HIV infections has been stable since 2010.",0
+"33","Brad Pitt has a ban on entering China.",TRUE,33,"Brad Pitt has a ban on entering China.",1
+"34","The left lung is larger than the right lung.",FALSE,34,"The left lung is larger than the right lung.",0
+"35","Tsunami means “beach wave”.",FALSE,35,"Tsunami means “beach wave”.",0
+"36","Venezuela has less oil deposits than Norway.",FALSE,36,"Venezuela has less oil deposits than Norway.",0
+"37","Genetically chimpanzees are the closest relatives to humans.",TRUE,37,"Genetically chimpanzees are the closest relatives to humans.",1
+"38","If you perceive different smells in both nostrils you will only perceive one of the two smells.",TRUE,38,"If you perceive different smells in both nostrils you will only perceive one of the two smells.",1
+"39","Russia produces the most aluminum worldwide.",FALSE,39,"Russia produces the most aluminum worldwide.",0
+"40","Rolls-Royce uses only bull skins for its leather seats.",TRUE,40,"Rolls-Royce uses only bull skins for its leather seats.",1
