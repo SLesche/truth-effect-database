@@ -1,0 +1,177 @@
+"","statement","status","statement_identifier","statement_text","statement_accuracy"
+"1","Das hawaiianische Alphabet besteht aus nur 12 Buchstaben.",TRUE,1,"Das hawaiianische Alphabet besteht aus nur 12 Buchstaben.",1
+"2","Nur ca. zwei Prozent der Weltbevölkerung sind von Natur aus blond.",TRUE,2,"Nur ca. zwei Prozent der Weltbevölkerung sind von Natur aus blond.",1
+"3","Ende 2003 waren in Deutschland 15 Atomkraftwerke am Netz. ",FALSE,3,"Ende 2003 waren in Deutschland 15 Atomkraftwerke am Netz. ",0
+"4","Dreifarbige Katzen sind fast immer weiblich.",TRUE,4,"Dreifarbige Katzen sind fast immer weiblich.",1
+"5","Schwebfliegen sind die einzigen Insekten die rückwärts fliegen können.",FALSE,5,"Schwebfliegen sind die einzigen Insekten die rückwärts fliegen können.",0
+"6","Mitgliedern der Nazi-SS wurde ihre Blutgruppe in die Achselhöhle tätowiert.",TRUE,6,"Mitgliedern der Nazi-SS wurde ihre Blutgruppe in die Achselhöhle tätowiert.",1
+"7","Tennis wurde in englischen Klöstern erfunden. ",FALSE,7,"Tennis wurde in englischen Klöstern erfunden. ",0
+"8","Die Tanne ist der Nadelbaum mit den längsten Nadeln.",FALSE,8,"Die Tanne ist der Nadelbaum mit den längsten Nadeln.",0
+"9","Eine der ersten deutschen Internetsuchmaschinen hieß """"Alcazar"""".",FALSE,9,"Eine der ersten deutschen Internetsuchmaschinen hieß """"Alcazar"""".",0
+"10","Bei Nahrungsmangel kann ein Spulwurm bis zu 95% seines eigenen Körpers verzehren.",FALSE,10,"Bei Nahrungsmangel kann ein Spulwurm bis zu 95% seines eigenen Körpers verzehren.",0
+"11","Seoul bedeutet auf koreanisch """"Die Hauptstadt"""".",TRUE,11,"Seoul bedeutet auf koreanisch """"Die Hauptstadt"""".",1
+"12","Das Zwerghörnchen ist das kleinste Säugetier Europas.",FALSE,12,"Das Zwerghörnchen ist das kleinste Säugetier Europas.",0
+"13","In Uganda ist die Amtssprache Englisch.",TRUE,13,"In Uganda ist die Amtssprache Englisch.",1
+"14","1 Meter entspricht dem fünfzigmillionsten Teil des Erdumfangs.",FALSE,14,"1 Meter entspricht dem fünfzigmillionsten Teil des Erdumfangs.",0
+"15","Schären sind Talgletscher in Skandinavien.",FALSE,15,"Schären sind Talgletscher in Skandinavien.",0
+"16","Das einzige Bild, das Van Gogh zu seinen Lebzeiten verkaufte, war """"Der rote Weinberg"""".",TRUE,16,"Das einzige Bild, das Van Gogh zu seinen Lebzeiten verkaufte, war """"Der rote Weinberg"""".",1
+"17","Das Schnabeltier gehört nicht zur Gattung der Säugetiere.",FALSE,17,"Das Schnabeltier gehört nicht zur Gattung der Säugetiere.",0
+"18","Lachse können bis zu 20 Jahre alt werden. ",FALSE,18,"Lachse können bis zu 20 Jahre alt werden. ",0
+"19","Auf jedem Kontinent gibt es eine Stadt die Rom heißt.",TRUE,19,"Auf jedem Kontinent gibt es eine Stadt die Rom heißt.",1
+"20","Frauen blinzeln fast doppelt so viel wie Männer.",TRUE,20,"Frauen blinzeln fast doppelt so viel wie Männer.",1
+"21","Die Stilrichtung des Impressionismus entwickelte sich in Spanien. ",FALSE,21,"Die Stilrichtung des Impressionismus entwickelte sich in Spanien. ",0
+"22","Alexander Graham Bell erfand das Tragflügelboot.",TRUE,22,"Alexander Graham Bell erfand das Tragflügelboot.",1
+"23","In Bolivien liegt der höchstgelegene Regierungssitz der Welt.",TRUE,23,"In Bolivien liegt der höchstgelegene Regierungssitz der Welt.",1
+"24","Der Allradantrieb wurde 1938 in England erfunden.",FALSE,24,"Der Allradantrieb wurde 1938 in England erfunden.",0
+"25","Die Schwarzerle zählt zu den Buchengewächsen.",FALSE,25,"Die Schwarzerle zählt zu den Buchengewächsen.",0
+"26","Der Bereich zwischen den Augenbrauen heißt Glabella.",TRUE,26,"Der Bereich zwischen den Augenbrauen heißt Glabella.",1
+"27","Der Prophet Mohammed arbeitete vor seiner religiösen Berufung als Arzt. ",FALSE,27,"Der Prophet Mohammed arbeitete vor seiner religiösen Berufung als Arzt. ",0
+"28","Kaiser Konstantin IV wurde auf Befehl seiner eigenen Mutter ermordet.",TRUE,28,"Kaiser Konstantin IV wurde auf Befehl seiner eigenen Mutter ermordet.",1
+"29","Freddie Mercurys richtiger Name lautete Farrokh Bulsara.",TRUE,29,"Freddie Mercurys richtiger Name lautete Farrokh Bulsara.",1
+"30","Den Haag ist der offizielle Verwaltungssitz der Niederlande. ",TRUE,30,"Den Haag ist der offizielle Verwaltungssitz der Niederlande. ",1
+"31","Kanada hat die längste Küste von allen Staaten der Erde.",TRUE,31,"Kanada hat die längste Küste von allen Staaten der Erde.",1
+"32","Laut EU-Vorschrift darf ein iPod die Lautstärke von 80 Dezibel nicht  überschreiten. ",FALSE,32,"Laut EU-Vorschrift darf ein iPod die Lautstärke von 80 Dezibel nicht  überschreiten. ",0
+"33","Ein Dingo kann länger ohne Wasser leben als ein Kamel.",FALSE,33,"Ein Dingo kann länger ohne Wasser leben als ein Kamel.",0
+"34","Bolivien ist der kleinste Binnenstaat Südamerikas. ",FALSE,34,"Bolivien ist der kleinste Binnenstaat Südamerikas. ",0
+"35","Ein neugeborenes Panda-Baby ist kleiner als eine Maus.",TRUE,35,"Ein neugeborenes Panda-Baby ist kleiner als eine Maus.",1
+"36","Die Hälfte der Bürger Albaniens ist jünger als 30 Jahre.",FALSE,36,"Die Hälfte der Bürger Albaniens ist jünger als 30 Jahre.",0
+"37","Tiger haben nicht nur gestreiftes Fell, sondern auch gestreifte Haut.",TRUE,37,"Tiger haben nicht nur gestreiftes Fell, sondern auch gestreifte Haut.",1
+"38","Das Jojo war ursprünglich eine philippinische Jagdwaffe.",TRUE,38,"Das Jojo war ursprünglich eine philippinische Jagdwaffe.",1
+"39","Die italienische Flagge wurde von Giuseppe Garibaldi entworfen.",FALSE,39,"Die italienische Flagge wurde von Giuseppe Garibaldi entworfen.",0
+"40","Die Norfolkinseln im Pazifik gehören zu Neuseeland. ",FALSE,40,"Die Norfolkinseln im Pazifik gehören zu Neuseeland. ",0
+"41","Ibo ist wie Esperanto eine künstliche Welthilfssprache.",FALSE,41,"Ibo ist wie Esperanto eine künstliche Welthilfssprache.",0
+"42","Das meiste Gold wird derzeit in Südafrika gefördert.",TRUE,42,"Das meiste Gold wird derzeit in Südafrika gefördert.",1
+"43","März und April sind die heißesten Monate auf den Malediven.",TRUE,43,"März und April sind die heißesten Monate auf den Malediven.",1
+"44","Die Schweden führten als erste Kartons anstelle von Milchflaschen ein.",TRUE,44,"Die Schweden führten als erste Kartons anstelle von Milchflaschen ein.",1
+"45","Unter den Bären legt der Braunbär die größten Entfernungen zurück.",FALSE,45,"Unter den Bären legt der Braunbär die größten Entfernungen zurück.",0
+"46","Laut WHO sind Krebserkrankungen die häufigste Todesursache.  ",FALSE,46,"Laut WHO sind Krebserkrankungen die häufigste Todesursache.  ",0
+"47","Richard Gere und Cindy Crawford ließen sich in Mexiko trauen.",FALSE,47,"Richard Gere und Cindy Crawford ließen sich in Mexiko trauen.",0
+"48","Der Kilt stammt ursprünglich aus Irland, nicht aus Schottland.",FALSE,48,"Der Kilt stammt ursprünglich aus Irland, nicht aus Schottland.",0
+"49","Der Pavane ist ein spanisch-italienischer Volkstanz aus dem 16. Jahrhundert.",TRUE,49,"Der Pavane ist ein spanisch-italienischer Volkstanz aus dem 16. Jahrhundert.",1
+"50","Die in Südamerika beheimatete Kammspinne zählt zu den drei giftigsten Spinnenarten der Welt.",TRUE,50,"Die in Südamerika beheimatete Kammspinne zählt zu den drei giftigsten Spinnenarten der Welt.",1
+"51","Die Azoren gehören zu Spanien.",FALSE,51,"Die Azoren gehören zu Spanien.",0
+"52","Tuberkulose wird durch Viren übertragen.",FALSE,52,"Tuberkulose wird durch Viren übertragen.",0
+"53","Ein Menschenfloh kann 20cm hoch springen.",TRUE,53,"Ein Menschenfloh kann 20cm hoch springen.",1
+"54","Der erste Bordcomputer für Autos wurde in Amerika entwickelt. ",FALSE,54,"Der erste Bordcomputer für Autos wurde in Amerika entwickelt. ",0
+"55","Kendo ist eine aus Japan stammende waffenlose Kampfsportart.",FALSE,55,"Kendo ist eine aus Japan stammende waffenlose Kampfsportart.",0
+"56","Die Farbe von Hühnereiern kann man anhand der Farbe der Ohrenscheiben des Huhns voraussagen.",TRUE,56,"Die Farbe von Hühnereiern kann man anhand der Farbe der Ohrenscheiben des Huhns voraussagen.",1
+"57","Volleyball wurde in Florida erfunden.",FALSE,57,"Volleyball wurde in Florida erfunden.",0
+"58","Die Luftröhre eines Menschen ist durchschnittlich 24 cm lang. ",FALSE,58,"Die Luftröhre eines Menschen ist durchschnittlich 24 cm lang. ",0
+"59","Markus Merk wurde Weltschiedsrichter des Jahres 2006.",FALSE,59,"Markus Merk wurde Weltschiedsrichter des Jahres 2006.",0
+"60","Morpheus ist der griechische Gott der Träume.",TRUE,60,"Morpheus ist der griechische Gott der Träume.",1
+"61","Der Durchmesser des Wurfkreises beim Diskuswerfens beträgt 2,5 m.",TRUE,61,"Der Durchmesser des Wurfkreises beim Diskuswerfens beträgt 2,5 m.",1
+"62","Eine Stubenfliege hat eine maximale Lebensdauer von 70 Tagen.",TRUE,62,"Eine Stubenfliege hat eine maximale Lebensdauer von 70 Tagen.",1
+"63","Ein menschliches Haar wächst jährlich ca. 85 mm.",TRUE,63,"Ein menschliches Haar wächst jährlich ca. 85 mm.",1
+"64","Ultraschall sind Wellen und Schwingungen unterhalb von 16 Hertz.",FALSE,64,"Ultraschall sind Wellen und Schwingungen unterhalb von 16 Hertz.",0
+"65","Virginia war die erste englische Kolonie in Nordamerika.",TRUE,65,"Virginia war die erste englische Kolonie in Nordamerika.",1
+"66","Das Lieblingsgetränk von Benedikt XVI. ist Fanta.",TRUE,66,"Das Lieblingsgetränk von Benedikt XVI. ist Fanta.",1
+"67","Der Name BenQ steht für Bringing Enjoyment and Quality to Life.",TRUE,67,"Der Name BenQ steht für Bringing Enjoyment and Quality to Life.",1
+"68","Sumatra ist die viertgrößte Insel der Welt. ",FALSE,68,"Sumatra ist die viertgrößte Insel der Welt. ",0
+"69","Die Gebrüder Montgolfier entwarfen den ersten Fallschirm.",FALSE,69,"Die Gebrüder Montgolfier entwarfen den ersten Fallschirm.",0
+"70","Jürgen Klinsmann erhielt bei Bayern München den Spitznamen """"Flipper"""".",TRUE,70,"Jürgen Klinsmann erhielt bei Bayern München den Spitznamen """"Flipper"""".",1
+"71","Es gibt drei amerikanische Städte, die """"Santa Claus"""" heißen.",TRUE,71,"Es gibt drei amerikanische Städte, die """"Santa Claus"""" heißen.",1
+"72","Die Bach-Blütentherapie ist deutlich wirksamer als ein Placebo.",FALSE,72,"Die Bach-Blütentherapie ist deutlich wirksamer als ein Placebo.",0
+"73","Der spanische Ex-Diktator Francisco Franco hatte den Beinamen """"Conducator"""".",FALSE,73,"Der spanische Ex-Diktator Francisco Franco hatte den Beinamen """"Conducator"""".",0
+"74","Bob Dylan arbeitet nebenberuflich als Winzer.",TRUE,74,"Bob Dylan arbeitet nebenberuflich als Winzer.",1
+"75","Die Insel Ösel gehört zu Dänemark.",FALSE,75,"Die Insel Ösel gehört zu Dänemark.",0
+"76","Balsaholz ist die schwerste aller Holzarten.",FALSE,76,"Balsaholz ist die schwerste aller Holzarten.",0
+"77","Sheryl Crow war Hürdenläuferin.",TRUE,77,"Sheryl Crow war Hürdenläuferin.",1
+"78","Albert Einstein heiratete seine Cousine.",TRUE,78,"Albert Einstein heiratete seine Cousine.",1
+"79","Der Javagraben ist die tiefste Meerestiefe der Welt.",FALSE,79,"Der Javagraben ist die tiefste Meerestiefe der Welt.",0
+"80","Der Mond passt vierzigmal in die Erdkugel.",FALSE,80,"Der Mond passt vierzigmal in die Erdkugel.",0
+"81","Weibliche Frettchen können an Östrogenvergiftung sterben, wenn sie läufig sind und nicht gedeckt werden.",TRUE,81,"Weibliche Frettchen können an Östrogenvergiftung sterben, wenn sie läufig sind und nicht gedeckt werden.",1
+"82","Das Domino-Spiel besteht aus 28 Steinen.",TRUE,82,"Das Domino-Spiel besteht aus 28 Steinen.",1
+"83","Minerva ist die römische Göttin der Weisheit.",TRUE,83,"Minerva ist die römische Göttin der Weisheit.",1
+"84","Das indische Tadsch Mahal wurde aus Basalt-Stein erbaut.",FALSE,84,"Das indische Tadsch Mahal wurde aus Basalt-Stein erbaut.",0
+"85","Ein Schwan trägt ca. 50.000 Federn am Körper.",FALSE,85,"Ein Schwan trägt ca. 50.000 Federn am Körper.",0
+"86","Manama ist die Hauptstadt Bahrains.",TRUE,86,"Manama ist die Hauptstadt Bahrains.",1
+"87","Erdbeeren enthalten mehr Vitamin C als Orangen.",TRUE,87,"Erdbeeren enthalten mehr Vitamin C als Orangen.",1
+"88","Seepferdchen gehören zur Gattung der Fische.",TRUE,88,"Seepferdchen gehören zur Gattung der Fische.",1
+"89","Pamela Anderson ist kanadische Staatsbürgerin.",TRUE,89,"Pamela Anderson ist kanadische Staatsbürgerin.",1
+"90","Der richtige Name des Krümelmonsters aus der Sesamstraße lautet """"Sam"""".",FALSE,90,"Der richtige Name des Krümelmonsters aus der Sesamstraße lautet """"Sam"""".",0
+"91","Das geflügelte Wort """"Gelobt sei, was hart macht"""" geht auf  den Philosophen Friedrich Nietzsche zurück.",TRUE,91,"Das geflügelte Wort """"Gelobt sei, was hart macht"""" geht auf  den Philosophen Friedrich Nietzsche zurück.",1
+"92","Jean-Jaques Rousseau war alleinerziehender Vater.",FALSE,92,"Jean-Jaques Rousseau war alleinerziehender Vater.",0
+"93","Hamburg hat mehr Brücken als die Städte Venedig, Amsterdam und London zusammen.",TRUE,93,"Hamburg hat mehr Brücken als die Städte Venedig, Amsterdam und London zusammen.",1
+"94","Blaue Augen werden im Alter immer heller.",TRUE,94,"Blaue Augen werden im Alter immer heller.",1
+"95","Italien wurde 1934 zum ersten Mal Fußballweltmeister.",TRUE,95,"Italien wurde 1934 zum ersten Mal Fußballweltmeister.",1
+"96","Spanholz besteht hauptsächlich aus Birkenholz.",TRUE,96,"Spanholz besteht hauptsächlich aus Birkenholz.",1
+"97","Ein Mensch, der unter Androphobie leidet, hat Angst vor anderen Menschen.",FALSE,97,"Ein Mensch, der unter Androphobie leidet, hat Angst vor anderen Menschen.",0
+"98","Der weiße Hai hat keine natürlichen Feinde.",TRUE,98,"Der weiße Hai hat keine natürlichen Feinde.",1
+"99","Der rote Naturfarbstoff in den Schalen von Krustentieren heißt Xanthophyll.",FALSE,99,"Der rote Naturfarbstoff in den Schalen von Krustentieren heißt Xanthophyll.",0
+"100","Der Film """"Ein unmoralisches Angebot"""" bekam die goldene Himbeere verliehen.",TRUE,100,"Der Film """"Ein unmoralisches Angebot"""" bekam die goldene Himbeere verliehen.",1
+"101","Die Aktivität einer radioaktiven Substanz wird in Sievert gemessen.",FALSE,101,"Die Aktivität einer radioaktiven Substanz wird in Sievert gemessen.",0
+"102","Im arabischen Raum heißt Homer Simpson """"Omar Shamshoon"""".",TRUE,102,"Im arabischen Raum heißt Homer Simpson """"Omar Shamshoon"""".",1
+"103","Der preußische König August I. der Starke wurde auch der Soldatenkönig genannt.",FALSE,103,"Der preußische König August I. der Starke wurde auch der Soldatenkönig genannt.",0
+"104","Der erste Sinn, der im Alter nachlässt, ist das Gehör.",FALSE,104,"Der erste Sinn, der im Alter nachlässt, ist das Gehör.",0
+"105","Ein Polospiel ist in Zeitabschnitte von 7,5 Minuten unterteilt, die man """"Chukkas"""" nennt.",TRUE,105,"Ein Polospiel ist in Zeitabschnitte von 7,5 Minuten unterteilt, die man """"Chukkas"""" nennt.",1
+"106","Im Arabischen gibt es etwa 500 Worte für """"Kamel"""".",FALSE,106,"Im Arabischen gibt es etwa 500 Worte für """"Kamel"""".",0
+"107","In Griechenland gilt nicht Freitag der 13., sondern Mittwoch der 13. als Unglückstag.",FALSE,107,"In Griechenland gilt nicht Freitag der 13., sondern Mittwoch der 13. als Unglückstag.",0
+"108","Jassir Arafat kämpfte im Sueskrieg für die ägyptische Armee.",TRUE,108,"Jassir Arafat kämpfte im Sueskrieg für die ägyptische Armee.",1
+"109","Die Band """"Oasis"""" hat sich nach einem Fitness-Studio benannt.",TRUE,109,"Die Band """"Oasis"""" hat sich nach einem Fitness-Studio benannt.",1
+"110","Wenn sämtliches Eis der Erde schmilzt, steigt der Meeresspiegel um 150 Meter.",FALSE,110,"Wenn sämtliches Eis der Erde schmilzt, steigt der Meeresspiegel um 150 Meter.",0
+"111","Der See Genezareth ist das tiefst gelegenste stehende Gewässer der Erde.",FALSE,111,"Der See Genezareth ist das tiefst gelegenste stehende Gewässer der Erde.",0
+"112","Kleinohrigel haben keine Stacheln.",FALSE,112,"Kleinohrigel haben keine Stacheln.",0
+"113","Karl Marx wurde in London begraben.",TRUE,113,"Karl Marx wurde in London begraben.",1
+"114","Beim Rugby gibt es 30 Spieler.",TRUE,114,"Beim Rugby gibt es 30 Spieler.",1
+"115","Ebenso wie der Fingerabdruck ist auch der Zungenabdruck eines Menschen einzigartig.",TRUE,115,"Ebenso wie der Fingerabdruck ist auch der Zungenabdruck eines Menschen einzigartig.",1
+"116","Kamele sind über kurze Distanzen schneller als ein Rennpferd.",FALSE,116,"Kamele sind über kurze Distanzen schneller als ein Rennpferd.",0
+"117","Der einstige UNO-Generalsekretär Kofi Annan kommt aus Nigeria.",FALSE,117,"Der einstige UNO-Generalsekretär Kofi Annan kommt aus Nigeria.",0
+"118","Die Slavonia war das erste Schiff, das das SOS-Notsignal benutzte.",TRUE,118,"Die Slavonia war das erste Schiff, das das SOS-Notsignal benutzte.",1
+"119","Moritz Bleibtreu und Heike Makatsch wurden am gleichen Tag geboren.",TRUE,119,"Moritz Bleibtreu und Heike Makatsch wurden am gleichen Tag geboren.",1
+"120","Die längsten Opern stammen von Gioacchino Rossini.",FALSE,120,"Die längsten Opern stammen von Gioacchino Rossini.",0
+"121","Der hundertjährige Krieg dauerte in Wahrheit nur 93 Jahre.",FALSE,121,"Der hundertjährige Krieg dauerte in Wahrheit nur 93 Jahre.",0
+"122","Der Wassergehalt bei Beeren beträgt 90%.",TRUE,122,"Der Wassergehalt bei Beeren beträgt 90%.",1
+"123","Das älteste noch existierende Parlament der Welt ist das """"Sejm"""" in Polen.",FALSE,123,"Das älteste noch existierende Parlament der Welt ist das """"Sejm"""" in Polen.",0
+"124","Alle Uhren im Film """"Pulp Fiction"""" stehen auf 4.10 Uhr.",FALSE,124,"Alle Uhren im Film """"Pulp Fiction"""" stehen auf 4.10 Uhr.",0
+"125","Borkum ist die größte ostfriesische Insel.",TRUE,125,"Borkum ist die größte ostfriesische Insel.",1
+"126","Papst Johannes Paul II wurde seinerzeit als """"Mann des Jahres"""" ausgezeichnet.",FALSE,126,"Papst Johannes Paul II wurde seinerzeit als """"Mann des Jahres"""" ausgezeichnet.",0
+"127","Die Wüste Dahna liegt in Saudi-Arabien.",TRUE,127,"Die Wüste Dahna liegt in Saudi-Arabien.",1
+"128","Jimmy Carter war der einzige geschiedene US-Präsident.",FALSE,128,"Jimmy Carter war der einzige geschiedene US-Präsident.",0
+"129","John Wayne hieß in Wirklichkeit Jonathan Walter Miller.",FALSE,129,"John Wayne hieß in Wirklichkeit Jonathan Walter Miller.",0
+"130","Der neue Airbus A380 kann maximal 777 Passagiere transportieren. ",FALSE,130,"Der neue Airbus A380 kann maximal 777 Passagiere transportieren. ",0
+"131","Der erste Geldautomat wurde bereits 1939 von der City Bank of New York betrieben.",TRUE,131,"Der erste Geldautomat wurde bereits 1939 von der City Bank of New York betrieben.",1
+"132","In Deutschland leiden ca. 1 Millionen Menschen an Alzheimer.",TRUE,132,"In Deutschland leiden ca. 1 Millionen Menschen an Alzheimer.",1
+"133","Die Luftpumpe ist eine französische Erfindung.",FALSE,133,"Die Luftpumpe ist eine französische Erfindung.",0
+"134","Die Torstangen im Eishockey sind rot.",TRUE,134,"Die Torstangen im Eishockey sind rot.",1
+"135","Das Capybara ist das größte aller Beuteltiere.",FALSE,135,"Das Capybara ist das größte aller Beuteltiere.",0
+"136","Gisèle Bündchen hat einen Zwillingsbruder.",FALSE,136,"Gisèle Bündchen hat einen Zwillingsbruder.",0
+"137","Der griechische Gott Apollon ist der Schutzherr der Küste.",TRUE,137,"Der griechische Gott Apollon ist der Schutzherr der Küste.",1
+"138","König Karl IV von Frankreich wurde auch """"Karl der Böse"""" genannt.",FALSE,138,"König Karl IV von Frankreich wurde auch """"Karl der Böse"""" genannt.",0
+"139","Die Gruppe Tokio Hotel hieß früher """"Devilish"""".",TRUE,139,"Die Gruppe Tokio Hotel hieß früher """"Devilish"""".",1
+"140","Tom Cruise ist Legastheniker.",TRUE,140,"Tom Cruise ist Legastheniker.",1
+"141","Henry Maske wurde Weltmeister im Cruisergewicht. ",FALSE,141,"Henry Maske wurde Weltmeister im Cruisergewicht. ",0
+"142","Das Osterfest fällt immer auf den ersten Sonntag nach Neumond nach dem 21. März.",FALSE,142,"Das Osterfest fällt immer auf den ersten Sonntag nach Neumond nach dem 21. März.",0
+"143","Der größte Riesenmammutbaum der Welt heißt """"King Arthur"""".",FALSE,143,"Der größte Riesenmammutbaum der Welt heißt """"King Arthur"""".",0
+"144","Von allen Staaten hat Singapur die höchste Einwohnerdichte.",FALSE,144,"Von allen Staaten hat Singapur die höchste Einwohnerdichte.",0
+"145","Der Segozero in Russland ist der größte See Europas.",FALSE,145,"Der Segozero in Russland ist der größte See Europas.",0
+"146","Bei einer HIV-Infizierung sind die weißen Blutkörperchen von dem Virus befallen.",TRUE,146,"Bei einer HIV-Infizierung sind die weißen Blutkörperchen von dem Virus befallen.",1
+"147","Der Philosoph Platon war einer der besten Speerwerfer seiner Zeit.",FALSE,147,"Der Philosoph Platon war einer der besten Speerwerfer seiner Zeit.",0
+"148","Ein frei neben der Kirche stehender Glockenturm wird Kemenate genannt.",FALSE,148,"Ein frei neben der Kirche stehender Glockenturm wird Kemenate genannt.",0
+"149","Der Biss der großen Blauringkrake führt innerhalb weniger Minuten zum Tod.",TRUE,149,"Der Biss der großen Blauringkrake führt innerhalb weniger Minuten zum Tod.",1
+"150","In Ecuador liegt die höchstgelegene Millionenstadt der Welt.",TRUE,150,"In Ecuador liegt die höchstgelegene Millionenstadt der Welt.",1
+"151","Die Wüste Gobi ist eine Felswüste.",FALSE,151,"Die Wüste Gobi ist eine Felswüste.",0
+"152","Die Nachtwache ist das berühmteste Bild von Rembrandt.",TRUE,152,"Die Nachtwache ist das berühmteste Bild von Rembrandt.",1
+"153","Die Erde wird in 340 Längenkreise unterteilt.",TRUE,153,"Die Erde wird in 340 Längenkreise unterteilt.",1
+"154","Der Friedensvertrag, der den Deutsch-Französischen Krieg beendete, wurde in Frankfurt am Main geschlossen.",TRUE,154,"Der Friedensvertrag, der den Deutsch-Französischen Krieg beendete, wurde in Frankfurt am Main geschlossen.",1
+"155","11,9% der Erdoberfläche liegen 1000 Meter über dem Meeresspiegel. ",FALSE,155,"11,9% der Erdoberfläche liegen 1000 Meter über dem Meeresspiegel. ",0
+"156","Nauru ist die kleinste souveräne Republik der Erde.",TRUE,156,"Nauru ist die kleinste souveräne Republik der Erde.",1
+"157","Der Null-Meridian läuft durch den Londoner Stadtteil Kingston.",FALSE,157,"Der Null-Meridian läuft durch den Londoner Stadtteil Kingston.",0
+"158","Eine wirkungsvolle Art eine Kakerlake zu töten ist ihr den Kopf abzutrennen.",FALSE,158,"Eine wirkungsvolle Art eine Kakerlake zu töten ist ihr den Kopf abzutrennen.",0
+"159","Julius Cäsar und Alexander der Große litten beide unter Epilepsie.",TRUE,159,"Julius Cäsar und Alexander der Große litten beide unter Epilepsie.",1
+"160","Tony Blair und Rowan Atkinson gingen auf die gleiche Schule.",TRUE,160,"Tony Blair und Rowan Atkinson gingen auf die gleiche Schule.",1
+"161","Sauberer Schnee schmilzt schneller als schmutziger Schnee.",FALSE,161,"Sauberer Schnee schmilzt schneller als schmutziger Schnee.",0
+"162","Die Zielscheibe beim Gewehrschießen ist in 9 Kreise aufgeteilt.",TRUE,162,"Die Zielscheibe beim Gewehrschießen ist in 9 Kreise aufgeteilt.",1
+"163","Die alten Perser kelterten den ersten Wein.",TRUE,163,"Die alten Perser kelterten den ersten Wein.",1
+"164","Die frühesten Vorläufer des Sudoku waren die lateinischen Quadrate des Mathematikers Leonhard Euler.",TRUE,164,"Die frühesten Vorläufer des Sudoku waren die lateinischen Quadrate des Mathematikers Leonhard Euler.",1
+"165","Der heißeste Ort im jährlichen Mittel ist Duri in Somalia mit 34,4° Celsius.",FALSE,165,"Der heißeste Ort im jährlichen Mittel ist Duri in Somalia mit 34,4° Celsius.",0
+"166","Otto Rehhagel wurde 2004 als """"Grieche des Jahres"""" ausgezeichnet.",TRUE,166,"Otto Rehhagel wurde 2004 als """"Grieche des Jahres"""" ausgezeichnet.",1
+"167","Spanien schaffte als letztes aller EU-Länder 1996 die Todesstrafe ab.",FALSE,167,"Spanien schaffte als letztes aller EU-Länder 1996 die Todesstrafe ab.",0
+"168","Sambia hieß früher Nordrhodesien.",TRUE,168,"Sambia hieß früher Nordrhodesien.",1
+"169","Das erste Taschenbuch der Geschichte war Goethes """"Faust"""".",TRUE,169,"Das erste Taschenbuch der Geschichte war Goethes """"Faust"""".",1
+"170","Disneyworld ist größer als die zehn kleinsten Länder der Erde.",FALSE,170,"Disneyworld ist größer als die zehn kleinsten Länder der Erde.",0
+"171","Bei Männern heißt übermäßiger Geschlechtstrieb nicht Nymphomanie sondern Satyriasis.",TRUE,171,"Bei Männern heißt übermäßiger Geschlechtstrieb nicht Nymphomanie sondern Satyriasis.",1
+"172","Das Gehäuse des ersten Apple Computers bestand aus Aluminium.",FALSE,172,"Das Gehäuse des ersten Apple Computers bestand aus Aluminium.",0
+"173","Mongolen geben Salz statt Zucker in ihren Tee.",TRUE,173,"Mongolen geben Salz statt Zucker in ihren Tee.",1
+"174","Ein Systemabsturz eines Mac-Rechners wird durch ein Warndreieck angezeigt.",FALSE,174,"Ein Systemabsturz eines Mac-Rechners wird durch ein Warndreieck angezeigt.",0
+"175","In Angola ist Spanisch die offizielle Amtssprache.",FALSE,175,"In Angola ist Spanisch die offizielle Amtssprache.",0
+"176","Die Maßeinheit für die Größe von Knöpfen heißt """"Linie"""".",TRUE,176,"Die Maßeinheit für die Größe von Knöpfen heißt """"Linie"""".",1
