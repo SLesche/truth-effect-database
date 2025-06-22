@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "truth_18_06.db"
+db_path = "truth_22_06.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
