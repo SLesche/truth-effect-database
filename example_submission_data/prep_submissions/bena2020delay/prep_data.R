@@ -25,7 +25,7 @@ clean_data <- data %>%
     within_identifier = 1,
     between_identifier = 1,
     response = ifelse(truth_response == "VRAI", 1, 0),
-    repeated = ifelse(repetition == "new", 1, 0)
+    repeated = ifelse(repetition == "rep", 1, 0)
   ) %>% 
   select(subject, ends_with("identifier"), response, repeated, trial)
 
