@@ -14,6 +14,27 @@ add_submission_to_db <- function(conn, submission_obj){
   # Then add that to db
   add_data_to_table(conn, pub_info, "publication_table", db_overview)
   
+  # Add a placeholder entry to statementset table
+  placeholder_statementset = data.frame(
+    statementset_id = 1,
+    statementset_publication = "no information"
+  )
+  
+  placeholder_statement = data.frame(
+    statement_id = 1,
+    statementset_id = 1,
+    statement_text = NA,
+    statement_accuracy = NA,
+    statement_category = NA,
+    proportion_true = NA
+  )
+  
+  # only submit if entry does not already exist
+  if (does_statement_publication_exist(conn, placeholder_statementset$statementset_publication) == FALSE){
+    add_data_to_table(conn, placeholder_statementset, "statementset_table", db_overview)
+    add_data_to_table(conn, placeholder_statement, "statement_table", db_overview)
+  }
+  
   n_statementsets = length(submission_obj$statementset_info)
   
   if (n_statementsets > 0){
@@ -70,7 +91,7 @@ add_submission_to_db <- function(conn, submission_obj){
     study_info$study_id = study_id
     
     if (n_statementsets == 0 | study_info$statementset_idx == 0){
-      study_info$statementset_id = NA
+      study_info$statementset_id = 1
     } else {
       study_info$statementset_id = statementset_keys[statementset_keys$statementset_index == study_info$statementset_idx, "statementset_id"]
     }
@@ -163,7 +184,7 @@ add_submission_to_db <- function(conn, submission_obj){
     if (n_statementsets > 0 & study_info$statementset_idx != 0){
       observation_table = replace_id_keys_in_data(observation_table, statement_keys_list[[study_info$statementset_idx]], "statement", "_identifier")
     } else {
-      observation_table$statement_id = NA
+      observation_table$statement_id = 1
     }
     
     if (has_within_conditions){

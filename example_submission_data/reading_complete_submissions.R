@@ -2,7 +2,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "truth_22_06.db"
+db_path = "truth_23_06.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
@@ -57,12 +57,12 @@ library(tidyverse)
 arguments <- list() %>% 
   add_argument(
     conn,
-    "study_id",
+    "publication_id",
     "greater",
     "0"
   )
 
-result <- acdcquery::query_db(
+result <- query_db(
   conn,
   arguments,
   "default",
@@ -84,9 +84,9 @@ overview <- query_db(
   "study_table"
 )
 
-result <- query_db(conn,
+result <- acdcquery::query_db(conn,
                    arguments,
-                   target_vars = c("default", "study_id", "publication_id", "procedure_id", "phase"),
+                   target_vars = c("default", "study_id", "publication_id", "statement_text", "statementset_publication", "procedure_id", "phase"),
                    target_table = "observation_table")
 
 length(unique(result$study_id))
