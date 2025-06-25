@@ -1,8 +1,9 @@
+library(tidyverse)
 files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "truth_23_06.db"
+db_path = "truth_25_06.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
@@ -46,9 +47,9 @@ for (isubmission in seq_along(valid_files)){
 }
 
 # devtools::install_github("SLesche/acdc-query")
-
-files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
-sapply(files_to_source, source)
+# files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+# sapply(files_to_source, source)
+library(acdcquery)
 library(DBI)
 library(RSQLite)
 
@@ -84,7 +85,7 @@ overview <- query_db(
   "study_table"
 )
 
-result <- acdcquery::query_db(conn,
+result <- query_db(conn,
                    arguments,
                    target_vars = c("default", "study_id", "publication_id", "statement_text", "statementset_publication", "procedure_id", "phase"),
                    target_table = "observation_table")
