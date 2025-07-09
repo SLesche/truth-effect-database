@@ -48,81 +48,101 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
-    <div class="display-text">      
-    <h1>${study_name}: Experimental Conditions</h1>
-    <p>This section is designed to collect detailed information about the experimental conditions of your study. Importantly, this should only pertain to manipulations not already encoded through other parts of the questionnaire. For example, the within condition "repeated vs. new statement" should be encoded in its own column in the raw data and not here. Similarly, manipulations of the measurement sessions should be endoced through different measurement sessions in the questionnaire "Measurement Sessions" and then be encoded in the column "session". Only those manipulations that cannot be adequately captured by those parts of the questionnaire should be added here. For example, a between condition of "old vs. young" participants should be coded here.</p>
-    <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
-        <form id="conditionSurvey" class="survey-form">
-            <label for="has_within_conditions" class="survey-label">Does this data contain any additional within conditions?</label>
-            <div class="form-item" id = "has_within_conditions">
-                <label><input type="radio" name="has_within_conditions" value="1" ${condition_data.has_within_conditions == 1 ? 'checked' : ''}/>Yes</label>
-                <label><input type="radio" name="has_within_conditions" value="0" ${condition_data.has_within_conditions == 0 ? 'checked' : ''}/>No</label>
+    <div class="container py-4">      
+      <h1 class="mb-4">${study_name}: Experimental Conditions</h1>
+      <p>This section is designed to collect detailed information about the experimental conditions of your study. Importantly, this should only pertain to manipulations not already encoded through other parts of the questionnaire. For example, the within condition "repeated vs. new statement" should be encoded in its own column in the raw data and not here. Similarly, manipulations of the measurement sessions should be encoded through different measurement sessions in the questionnaire "Measurement Sessions" and then be encoded in the column "session". Only those manipulations that cannot be adequately captured by those parts of the questionnaire should be added here. For example, a between condition of "old vs. young" participants should be coded here.</p>
+      <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
+
+      <form id="conditionSurvey">
+
+        <div class="mb-3">
+          <label class="form-label">Does this data contain any additional within conditions?</label>
+          <div id="has_within_conditions">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="has_within_conditions" id="withinCondYes" value="1" ${condition_data.has_within_conditions == 1 ? 'checked' : ''}>
+              <label class="form-check-label" for="withinCondYes">Yes</label>
             </div>
-
-            
-            <fieldset id="withinConditionsFieldset" ${condition_data.has_within_conditions == 1 ? '' : 'disabled'}>
-                <label for="within_condition_name" class="survey-label">Add a description of the condition:</label>
-                <input type="text" id="within_condition_name" name="within_condition_name"><br>
-
-                <label for="within_condition_identifier" class="survey-label">How is that condition identified in the raw data?</label>
-                <input type="text" id="within_condition_identifier" name="within_condition_identifier"><br>
-
-                <button type="button" onclick="addWithinCondition()" class="add-button">Add Condition</button><br><br>
-
-                <label class="survey-label" id = "within_conditions_list" style = "display: none;">List of within conditions:</label>
-                <ul id="withinConditionsList" class = "list-of-entries"></ul>
-            </fieldset>
-
-            <label for="has_between_conditions" class="survey-label">Does this data contain any additional between conditions?</label>
-            <div class="form-item" id = "has_between_conditions">
-                <label><input type="radio" name="has_between_conditions" value="1" ${condition_data.has_between_conditions == 1 ? 'checked' : ''}/>Yes</label>
-                <label><input type="radio" name="has_between_conditions" value="0" ${condition_data.has_between_conditions == 0 ? 'checked' : ''}/>No</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="has_within_conditions" id="withinCondNo" value="0" ${condition_data.has_within_conditions == 0 ? 'checked' : ''}>
+              <label class="form-check-label" for="withinCondNo">No</label>
             </div>
+          </div>
+        </div>
 
-            <fieldset id="betweenConditionsFieldset" ${condition_data.has_between_conditions == 1 ? '' : 'disabled'}>
-                <label for="between_condition_name" class="survey-label">Add a description of the condition:</label>
-                <input type="text" id="between_condition_name" name="between_condition_name"><br>
+        <fieldset id="withinConditionsFieldset" ${condition_data.has_within_conditions == 1 ? '' : 'disabled'} class="border p-3 rounded mb-4">
+          <div class="mb-3">
+            <label for="within_condition_name" class="form-label">Add a description of the condition:</label>
+            <input type="text" class="form-control" id="within_condition_name" name="within_condition_name" />
+          </div>
+          <div class="mb-3">
+            <label for="within_condition_identifier" class="form-label">How is that condition identified in the raw data?</label>
+            <input type="text" class="form-control" id="within_condition_identifier" name="within_condition_identifier" />
+          </div>
+          <button type="button" onclick="addWithinCondition()" class="btn btn-primary mb-3">Add Condition</button>
+          <label class="form-label d-none" id="within_conditions_list">List of within conditions:</label>
+          <ul id="withinConditionsList" class="list-group"></ul>
+        </fieldset>
 
-                <label for="between_condition_identifier" class="survey-label">How is that condition identified in the raw data?</label>
-                <input type="text" id="between_condition_identifier" name="between_condition_identifier"><br>
+        <div class="mb-3">
+          <label class="form-label">Does this data contain any additional between conditions?</label>
+          <div id="has_between_conditions">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="has_between_conditions" id="betweenCondYes" value="1" ${condition_data.has_between_conditions == 1 ? 'checked' : ''}>
+              <label class="form-check-label" for="betweenCondYes">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="has_between_conditions" id="betweenCondNo" value="0" ${condition_data.has_between_conditions == 0 ? 'checked' : ''}>
+              <label class="form-check-label" for="betweenCondNo">No</label>
+            </div>
+          </div>
+        </div>
 
-                <button type="button" onclick="addBetweenCondition()" class="add-button">Add Condition</button><br><br>
+        <fieldset id="betweenConditionsFieldset" ${condition_data.has_between_conditions == 1 ? '' : 'disabled'} class="border p-3 rounded mb-4">
+          <div class="mb-3">
+            <label for="between_condition_name" class="form-label">Add a description of the condition:</label>
+            <input type="text" class="form-control" id="between_condition_name" name="between_condition_name" />
+          </div>
+          <div class="mb-3">
+            <label for="between_condition_identifier" class="form-label">How is that condition identified in the raw data?</label>
+            <input type="text" class="form-control" id="between_condition_identifier" name="between_condition_identifier" />
+          </div>
+          <button type="button" onclick="addBetweenCondition()" class="btn btn-primary mb-3">Add Condition</button>
+          <label class="form-label d-none" id="between_conditions_list">List of between conditions:</label>
+          <ul id="betweenConditionsList" class="list-group"></ul>
+        </fieldset>
 
-                <label class="survey-label" id = "between_conditions_list" style = "display: none;">List of between conditions:</label>
-                <ul id="betweenConditionsList" class = "list-of-entries"></ul>
-            </fieldset>
-            <button type="submit" class="survey-button">Submit</button>
-        </form>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
     </div>
     `;
 
-    // Display previous submission if available
+    // Show previously added within conditions if available
     if (condition_data && condition_data.has_within_conditions == 1) {
-        document.getElementById("within_conditions_list").style.display = "block";
-        var withinConditionsList = document.getElementById("withinConditionsList");
+        document.getElementById("within_conditions_list").classList.remove("d-none");
+        const withinConditionsList = document.getElementById("withinConditionsList");
         condition_data.within_condition_details.forEach(function(condition) {
-            var li = document.createElement("li");
+            const li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
-
+            li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
             add_delete_button_to_list_item(li);
             withinConditionsList.appendChild(li);
         });
     }
 
+    // Show previously added between conditions if available
     if (condition_data && condition_data.has_between_conditions == 1) {
-        document.getElementById("between_conditions_list").style.display = "block";
-        var betweenConditionsList = document.getElementById("betweenConditionsList");
+        document.getElementById("between_conditions_list").classList.remove("d-none");
+        const betweenConditionsList = document.getElementById("betweenConditionsList");
         condition_data.between_condition_details.forEach(function(condition) {
-            var li = document.createElement("li");
+            const li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
-
+            li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
             add_delete_button_to_list_item(li);
-
             betweenConditionsList.appendChild(li);
         });
     }
 
-    
+    // Toggle fieldsets enabled/disabled on radio change
     document.querySelectorAll('input[name="has_within_conditions"]').forEach(radio => {
         radio.addEventListener('change', function() {
             document.getElementById('withinConditionsFieldset').disabled = this.value == '0';
@@ -135,6 +155,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
         });
     });
 
+    // Form submit handler
     document.getElementById('conditionSurvey').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
         if (validateConditionData(collectConditionData()) || control.testing){
