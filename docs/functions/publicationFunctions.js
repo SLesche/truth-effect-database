@@ -82,51 +82,76 @@ function initializePublicationSurvey(control, publication_idx) {
     const publication = control.publication_info[publication_idx].publication_data;
     const publication_name = control.publication_info[publication_idx].publication_name;
     document.getElementById("content").innerHTML = `
-    <div class = "display-text">
-        <h1>${publication_name}</h1>
-        <p>Before you begin entering your data, please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
-        <p>In this section, you'll be asked to provide key information about the publication, such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
-        <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
-        <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
-        <p>Feel free to add as many studies as needed.</p>        
-        
-        <form id="publicationSurvey" class = "survey-form">
-            <label for="authors" class = "survey-label">Who are the authors of the publication?</label>
-            <input type="text" id="authors" name="authors" value="${publication.authors || ''}"><br>
-            <p class="survey-label-additional-info">Please list only the surnames of the authors separated by comma, i.e. "Smith, Müller, Garcia".</p>
+   <div class="container my-5">
+    <h1>${publication_name}</h1>
+    <p>Before you begin entering your data, please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
+    <p>In this section, you'll be asked to provide key information about the publication, such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
+    <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
+    <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
+    <p>Feel free to add as many studies as needed.</p>
 
-            <label for="first_author" class = "survey-label">Who was the first author of this publication?</label>
-            <input type="text" id="first_author" name="first_author" value="${publication.first_author || ''}"><br>
-            <p class="survey-label-additional-info">Please list only the surname of the first author. If there were multiple first authors, list the surnames separated by commas.</p>
+    <form id="publicationSurvey">
+        <div class="mb-4">
+        <label for="authors" class="form-label">Who are the authors of the publication?</label>
+        <input type="text" class="form-control" id="authors" name="authors" value="${publication.authors || ''}">
+        <div class="form-text">List surnames only, separated by commas (e.g., "Smith, Müller, Garcia").</div>
+        </div>
 
-            <label for="title" class = "survey-label">What was the title of this publication?</label>
-            <input type="text" id="title" name="title" value="${publication.title || ''}"><br>
+        <div class="mb-4">
+        <label for="first_author" class="form-label">Who was the first author of this publication?</label>
+        <input type="text" class="form-control" id="first_author" name="first_author" value="${publication.first_author || ''}">
+        <div class="form-text">List surnames only. If multiple first authors, separate with commas.</div>
+        </div>
 
-            <label for="apa_reference" class = "survey-label">Please provide an APA7 style reference for the publication:</label>
-            <input type="text" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}"><br>
+        <div class="mb-4">
+        <label for="title" class="form-label">What was the title of this publication?</label>
+        <input type="text" class="form-control" id="title" name="title" value="${publication.title || ''}">
+        </div>
 
-            <label for="conducted" class = "survey-label">In what year was the study conducted?</label>
-            <input type="number" id="conducted" name="conducted" value="${publication.conducted || ''}"><br>
+        <div class="mb-4">
+        <label for="apa_reference" class="form-label">APA7 style reference for the publication:</label>
+        <input type="text" class="form-control" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}">
+        </div>
 
-            <label for="country" class = "survey-label">In what country was the study conducted?</label>
-            <input type="text" id="country" name="country" value="${publication.country || ''}"><br>
+        <div class="mb-4">
+        <label for="conducted" class="form-label">In what year was the study conducted?</label>
+        <input type="number" class="form-control" id="conducted" name="conducted" value="${publication.conducted || ''}">
+        </div>
 
-            <label for="peer_reviewed" class="survey-label">Was this publication peer-reviewed?</label>
-            <div class="radio-buttons" id = "peer_reviewed">
-                <label><input type="radio" name="peer_reviewed" value="1" ${publication.peer_reviewed == 1 ? 'checked' : ''}/>Yes</label>
-                <label><input type="radio" name="peer_reviewed" value="0" ${publication.peer_reviewed == 0 ? 'checked' : ''}/>No</label>
+        <div class="mb-4">
+        <label for="country" class="form-label">In what country was the study conducted?</label>
+        <input type="text" class="form-control" id="country" name="country" value="${publication.country || ''}">
+        </div>
+
+        <div class="mb-4">
+        <label class="form-label">Was this publication peer-reviewed?</label>
+        <div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="peer_reviewed" id="peerYes" value="1" ${publication.peer_reviewed == 1 ? 'checked' : ''}>
+            <label class="form-check-label" for="peerYes">Yes</label>
             </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="peer_reviewed" id="peerNo" value="0" ${publication.peer_reviewed == 0 ? 'checked' : ''}>
+            <label class="form-check-label" for="peerNo">No</label>
+            </div>
+        </div>
+        </div>
 
-            <label for="keywords" class = "survey-label">What are the keywords associated with the publication?</label>
-            <input type="text" id="keywords" name="keywords" value="${publication.keywords || ''}"><br>
-            <p class="survey-label-additional-info">Separate the keywords by commas: "keyword 1, keyword 2, keyword 3</p>
-            
-            <label for="contact" class = "survey-label">Provide contact information for further questions:</label>
-            <input type="text" id="contact" name="contact" value="${publication.contact || ''}"><br>
+        <div class="mb-4">
+        <label for="keywords" class="form-label">Keywords associated with the publication:</label>
+        <input type="text" class="form-control" id="keywords" name="keywords" value="${publication.keywords || ''}">
+        <div class="form-text">Separate keywords by commas (e.g., "keyword 1, keyword 2").</div>
+        </div>
 
-            <button type="submit" class = "survey-button">Submit</button>
-        </form>
+        <div class="mb-4">
+        <label for="contact" class="form-label">Contact information for further questions:</label>
+        <input type="text" class="form-control" id="contact" name="contact" value="${publication.contact || ''}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
     </div>
+
     `;
 
     // Add event listener to the form's submit button
