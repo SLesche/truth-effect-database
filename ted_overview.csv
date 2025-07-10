@@ -1,0 +1,75 @@
+table,column_name,data_type,description
+between_table,between_id,INTEGER,Identifier for between-subjects manipulations
+between_table,study_id,INTEGER,Identifier for studies
+between_table,between_description,VARCHAR(10000),Description of between-subjects manipulations
+measure_table,measure_id,INTEGER,Identifier for additional measurements
+measure_table,study_id,INTEGER,Identifier for studies
+measure_table,construct,VARCHAR(255),Construct name of additional measure collected during the experiment (short)
+measure_table,measure_details,VARCHAR(1023),Details of additional measure collected during the experiment (detailed)
+observation_table,observation_id,INTEGER,Identifier for a trial
+observation_table,between_id,INTEGER,Identifier for between-subjects manipulations
+observation_table,within_id,INTEGER,Identifier for within-subjects manipulations
+observation_table,procedure_id,INTEGER,Identifier for procedure manipulations
+observation_table,subject,INTEGER,Identifier for a subject
+observation_table,trial,INTEGER,Trial number within an experiment
+observation_table,statement_id,INTEGER,Identifier for a statement
+observation_table,rt,FLOAT,Response time (in s)
+observation_table,response,FLOAT,"Response to statement (maximum-scaled) - 0 = false, 1 = true"
+observation_table,repeated,INTEGER,"Repetition status of the statement - 0 = new, 1 = repeated"
+observation_table,certainty,FLOAT,"Subjective certainty of rating (maximum-scaled) - 0 = most uncertain, 1 = most certain"
+procedure_table,procedure_id,INTEGER,Identifier for procedure manipulations
+procedure_table,study_id,INTEGER,Identifier for studies
+procedure_table,repetition_time,FLOAT,Time since the exposure to the statement (in minutes)
+procedure_table,repetition_location,VARCHAR(255),Location of the experiment
+procedure_table,repetition_type,VARCHAR(255),Type of repetition
+procedure_table,max_n_repetitions,INTEGER,Maximum number of times a statement was repeated within a session
+procedure_table,n_statements,INTEGER,Number of statements presented during a measurement session
+procedure_table,truth_instructions,INTEGER,
+procedure_table,truth_instruction_timing,VARCHAR(255),
+procedure_table,presented_until_response,BOOLEAN,
+procedure_table,presentation_time_s,FLOAT,
+procedure_table,response_deadline,BOOLEAN,
+procedure_table,response_deadline_s,FLOAT,
+procedure_table,percent_repeated,FLOAT,
+procedure_table,presentation_type,VARCHAR(255),
+procedure_table,phase,VARCHAR(255),
+procedure_table,repetition_instructions,INTEGER,
+procedure_table,repetition_instruction_timing,VARCHAR(255),
+publication_table,publication_id,INTEGER,
+publication_table,authors,VARCHAR(10000),
+publication_table,conducted,DATE,
+publication_table,added,DATE,
+publication_table,country,VARCHAR(255),
+publication_table,contact,VARCHAR(10000),
+publication_table,apa_reference,VARCHAR(2047),
+publication_table,keywords,VARCHAR(1023),
+publication_table,publication_code,VARCHAR(255),
+statement_table,statement_id,INTEGER,
+statement_table,statementset_id,INTEGER,
+statement_table,statement_text,VARCHAR(2047),
+statement_table,statement_accuracy,INTEGER,
+statement_table,statement_category,VARCHAR(255),
+statement_table,proportion_true,FLOAT,
+statementset_table,statementset_id,INTEGER,
+statementset_table,statementset_publication,VARCHAR(2047),
+study_table,study_id,INTEGER,Identifier for studies
+study_table,statementset_id,INTEGER,
+study_table,publication_id,INTEGER,
+study_table,study_comment,VARCHAR(10000),
+study_table,raw_data_link,VARCHAR(255),
+study_table,n_participants,INTEGER,
+study_table,participant_age,FLOAT,
+study_table,percentage_female,FLOAT,
+study_table,rt_measured,INTEGER,
+study_table,rt_onset,VARCHAR(255),
+study_table,subjective_certainty,BOOLEAN,
+study_table,physiological_measures,BOOLEAN,
+study_table,cognitive_models,BOOLEAN,
+study_table,filler_task_yesno,BOOLEAN,
+study_table,filler_task_type,VARCHAR(63),
+study_table,filler_task_name,VARCHAR(255),
+study_table,truth_rating_scale,VARCHAR(255),
+study_table,truth_rating_steps,INTEGER,
+within_table,within_id,INTEGER,Identifier for within-subjects manipulations
+within_table,study_id,INTEGER,Identifier for studies
+within_table,within_description,VARCHAR(10000),Description of within-subjects manipulations
