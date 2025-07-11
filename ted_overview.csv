@@ -55,21 +55,21 @@ statementset_table,statementset_publication,VARCHAR(2047),Reference for the publ
 study_table,study_id,INTEGER,Identifier for studies
 study_table,statementset_id,INTEGER,Identifier for sets of statements
 study_table,publication_id,INTEGER,Identifier for publications
-study_table,study_comment,VARCHAR(10000),
-study_table,raw_data_link,VARCHAR(255),
-study_table,n_participants,INTEGER,
-study_table,participant_age,FLOAT,
-study_table,percentage_female,FLOAT,
-study_table,rt_measured,INTEGER,
-study_table,rt_onset,VARCHAR(255),
-study_table,subjective_certainty,BOOLEAN,
-study_table,physiological_measures,BOOLEAN,
-study_table,cognitive_models,BOOLEAN,
-study_table,filler_task_yesno,BOOLEAN,
-study_table,filler_task_type,VARCHAR(63),
-study_table,filler_task_name,VARCHAR(255),
-study_table,truth_rating_scale,VARCHAR(255),
-study_table,truth_rating_steps,INTEGER,
+study_table,study_comment,VARCHAR(10000),Comment containing additional information
+study_table,raw_data_link,VARCHAR(255),Link to the raw dataset on a data sharing platform
+study_table,n_participants,INTEGER,Number of participants in the study
+study_table,participant_age,FLOAT,Average age of participants in the study (in years)
+study_table,percentage_female,FLOAT,Percentage of participants who identifiy as female
+study_table,rt_measured,INTEGER,Was response time measured?
+study_table,rt_onset,VARCHAR(255),What event marked the onset of the response time measurement?
+study_table,subjective_certainty,BOOLEAN,Was subjective certainty in sentence judgment measured?
+study_table,physiological_measures,BOOLEAN,Were any physiological measures collected?
+study_table,cognitive_models,BOOLEAN,Were any cognitive models employed in the analysis of the data?
+study_table,filler_task_yesno,BOOLEAN,Was there a filler task between exposure and test?
+study_table,filler_task_type,VARCHAR(63),What type was the filler task (verbal / non-verbal)?
+study_table,filler_task_name,VARCHAR(255),What was the name of the filler task?
+study_table,truth_rating_scale,VARCHAR(255),What scale was used to provide truth judgments?
+study_table,truth_rating_steps,INTEGER,How many steps did the rating scale have?
 within_table,within_id,INTEGER,Identifier for within-subjects manipulations
 within_table,study_id,INTEGER,Identifier for studies
 within_table,within_description,VARCHAR(10000),Description of within-subjects manipulations
