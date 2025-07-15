@@ -38,13 +38,25 @@ function generateOverviewPage(control) {
 
             ${printProgressReport(getNumberOfSubmissions(control))}
 
-            <h2>Save / Load progess</h2>
-            <button onclick="saveProgress(control)">Save Progress</button>
-            <button id="uploadProgressButton">Upload Progress</button>
-            <input type="file" id="progressFileInput" accept=".json" style="display: none;">
+            <div class="my-4">
+                <h2>Save / Load / Submit</h2>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn btn-info" onclick="saveProgress(control)">
+                        <i class="bi bi-save"></i> Save Progress
+                    </button>
 
-            <h2>Submission</h2>
-            <button onclick="submitData(control)" id ="final-submit-button">Submit Data</button>
+                    <button class="btn btn-warning" id="uploadProgressButton">
+                        <i class="bi bi-upload"></i> Upload Progress
+                    </button>
+
+                    <button class="btn btn-success" onclick="submitData(control)" id="final-submit-button">
+                        <i class="bi bi-check-circle"></i> Submit Data
+                    </button>
+
+                    <input type="file" id="progressFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+
             
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>
@@ -91,36 +103,51 @@ function getNumberOfSubmissions(control) {
     let num_publications_validated = 0;
     let num_studies_validated = 0;
 
-    // Iterate over statement sets
+    let total_checkpoints = 0;
+    let validated_checkpoints = 0;
+
     for (let statementset_idx = 0; statementset_idx < num_statement_sets; statementset_idx++) {
+        total_checkpoints++; // One checkpoint per statement set
         if (control.statementset_info[statementset_idx].statementset_data.validated) {
             num_statement_sets_validated += 1;
+            validated_checkpoints++;
         }
     }
 
-    // Iterate over publications
     for (let publication_idx in control.publication_info) {
-        const current_num_studies = Object.keys(control.publication_info[publication_idx].study_info).length;
+        const publication = control.publication_info[publication_idx];
+        const current_num_studies = Object.keys(publication.study_info).length;
         num_total_studies += current_num_studies;
 
-        // Iterate over studies within the publication
-        for (let study_idx in control.publication_info[publication_idx].study_info) {
-            // Check if the study is validated
-            if (control.publication_info[publication_idx].study_info[study_idx].study_data.validated) {
-                num_studies_validated += 1;
-            }        
+        total_checkpoints++; // One per publication
+        if (publication.publication_data.validated) {
+            num_publications_validated += 1;
+            validated_checkpoints++;
         }
 
-        // Check if the publication is validated
-        if (control.publication_info[publication_idx].publication_data.validated) {
-            num_publications_validated += 1;
+        for (let study_idx in publication.study_info) {
+            const study = publication.study_info[study_idx];
+            total_checkpoints++; // Main study validation
+            if (study.study_data.validated) {
+                num_studies_validated += 1;
+                validated_checkpoints++;
+            }
+
+            // Sub-validations
+            const subkeys = ['procedure', 'conditions', 'measures', 'raw_data'];
+            subkeys.forEach(key => {
+                total_checkpoints++;
+                if (study.study_data[key] && study.study_data[key].validated) {
+                    validated_checkpoints++;
+                }
+            });
         }
     }
 
-    // Compute percentages
     const percent_statement_sets_validated = (num_statement_sets_validated / num_statement_sets) * 100;
     const percent_publication_validated = (num_publications_validated / num_total_publications) * 100;
     const percent_studies_validated = (num_studies_validated / num_total_studies) * 100;
+    const percent_overall_validated = (validated_checkpoints / total_checkpoints) * 100;
 
     return {
         num_total_publications,
@@ -132,6 +159,9 @@ function getNumberOfSubmissions(control) {
         percent_statement_sets_validated,
         percent_publication_validated,
         percent_studies_validated,
+        percent_overall_validated,
+        total_checkpoints,
+        validated_checkpoints
     };
 }
 
@@ -148,7 +178,7 @@ function printProgressReport(progress_report) {
                 <div class="mb-3">
                     <label><strong>Publications Validated:</strong> ${progress_report.num_publications_validated}</label>
                     <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" 
+                        <div class="progress-bar bg-primary" role="progressbar" 
                             style="width: ${progress_report.percent_publication_validated.toFixed(1)}%;" 
                             aria-valuenow="${progress_report.percent_publication_validated.toFixed(1)}" 
                             aria-valuemin="0" aria-valuemax="100">
@@ -180,6 +210,21 @@ function printProgressReport(progress_report) {
                         </div>
                     </div>
                 </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <label><strong>Overall Progress:</strong> ${progress_report.validated_checkpoints} / ${progress_report.total_checkpoints}</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                            style="width: ${progress_report.percent_overall_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_overall_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_overall_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     `;
