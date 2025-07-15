@@ -135,21 +135,52 @@ function getNumberOfSubmissions(control) {
     };
 }
 
-function printProgressReport(progress_report){
-    html = `
-        <div class="progress-report">
-            <h2>Progress Report</h2>
-            <p>Total Publications: ${progress_report.num_total_publications}</p>
-            <p>Total Statement Sets: ${progress_report.num_statement_sets}</p>
-            <p>Total Studies: ${progress_report.num_total_studies}</p>
-            <p>Publications Validated: ${progress_report.num_publications_validated}</p>
-            <p>Studies Validated: ${progress_report.num_studies_validated}</p>
-            <p>Statement Sets Validated: ${progress_report.num_statement_sets_validated}</p>
-            <p>Percentage of Statement Sets Validated: ${progress_report.percent_statement_sets_validated}%</p>
-            <p>Percentage of Publications Validated: ${progress_report.percent_publication_validated}%</p>
-            <p>Percentage of Studies Validated: ${progress_report.percent_studies_validated}%</p>
+function printProgressReport(progress_report) {
+    return `
+        <div class="progress-report card my-4">
+            <div class="card-body">
+                <h2 class="card-title">Progress Report</h2>
+
+                <p><strong>Total Publications:</strong> ${progress_report.num_total_publications}</p>
+                <p><strong>Total Statement Sets:</strong> ${progress_report.num_statement_sets}</p>
+                <p><strong>Total Studies:</strong> ${progress_report.num_total_studies}</p>
+
+                <div class="mb-3">
+                    <label><strong>Publications Validated:</strong> ${progress_report.num_publications_validated}</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                            style="width: ${progress_report.percent_publication_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_publication_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_publication_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label><strong>Studies Validated:</strong> ${progress_report.num_studies_validated}</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" 
+                            style="width: ${progress_report.percent_studies_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_studies_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_studies_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label><strong>Statement Sets Validated:</strong> ${progress_report.num_statement_sets_validated}</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-warning" role="progressbar" 
+                            style="width: ${progress_report.percent_statement_sets_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_statement_sets_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_statement_sets_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     `;
-
-    return html;
 }
