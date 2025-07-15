@@ -217,3 +217,41 @@ function getStatementSetIndex(statementset_name) {
 
     return index;
 }
+
+function showAlert(message, type = "info", containerId = "content") {
+    const iconMap = {
+        success: "check-circle",
+        danger: "exclamation-triangle",
+        warning: "exclamation-circle",
+        info: "info-circle"
+    };
+
+    const icon = iconMap[type] || "info-circle";
+
+    const container = document.getElementById(containerId);
+
+    // Remove existing alert if any
+    const existingAlert = container.querySelector(".alert");
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+
+    // Create alert element
+    const alertWrapper = document.createElement("div");
+    alertWrapper.className = `alert alert-${type} alert-dismissible fade d-flex align-items-center mt-3`;
+    alertWrapper.setAttribute("role", "alert");
+
+    alertWrapper.innerHTML = `
+        <i class="bi bi-${icon} me-2"></i>
+        <div>${message}</div>
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Prepend alert and trigger fade-in
+    container.prepend(alertWrapper);
+    void alertWrapper.offsetWidth;
+    alertWrapper.classList.add("show");
+
+    // Scroll smoothly to alert
+    alertWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+}

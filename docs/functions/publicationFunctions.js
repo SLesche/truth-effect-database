@@ -230,7 +230,7 @@ function updatePublicationSurvey(control, publication_idx) {
     control.publication_info[publication_idx].publication_data = publication_data;
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id = "publication-" + publication_idx;

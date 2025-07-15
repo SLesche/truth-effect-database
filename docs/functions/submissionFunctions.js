@@ -73,7 +73,7 @@ function submitData(control) {
 
     saveProgress(control);
 
-    alert("Data submitted successfully!");
+    showAlert("Data submitted successfully!", 'success');
 }
 
 function validate_submission(control) {
@@ -141,7 +141,7 @@ function saveProgress(control){
     a.click();
     document.body.removeChild(a);
 
-    alert("Progress file downloaded successfully!");
+    showAlert("Progress file downloaded successfully!", 'success');
 }
 
 function addCheckmarksFromProgress(control) {
