@@ -91,15 +91,15 @@ function createTableFromCSV(csvObject, n_rows) {
     // Start Bootstrap table
     let table = `
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-sm align-middle">
-                <thead class="table-light">
+            <table class="table table-striped table-bordered table-sm align-middle small">
+                <thead class="text-capitalize-none">
                     <tr>
     `;
 
     // Extract headers
     const headers = Object.keys(csvObject[0]);
     headers.forEach(header => {
-        table += `<th scope="col">${header}</th>`;
+        table += `<th style="text-transform: none;" scope="col">${header}</th>`;
     });
 
     table += `

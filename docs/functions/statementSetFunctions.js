@@ -106,76 +106,117 @@ function initializeStatementSetSurvey(control, statementset_idx) {
     document.getElementById("content").innerHTML = `
     <div class="display-text">
         <h1>${statementset_name}</h1>
-        <p>In this section, please provide a file containing the statements used in your study. Including this file allows researchers to more closely replicate your study by reviewing the exact statements that were presented to participants.</p>
-        <p>It is important that the statement IDs in this file match exactly with those used in your raw data. This consistency ensures that the statements can be correctly linked to the corresponding data points in your dataset.</p>
-        <p>If available, please include columns with the following information:</p>
-        <ul class = "list-of-entries">
-            <li><strong>statement_identifier:</strong> A unique identifier for each statement.</li>
-            <li><strong>statement_text:</strong> The text of the statement as it was presented to participants.</li>
-            <li><strong>statement_accuracy:</strong> The accuracy of the statement, indicating whether it is true or false.</li>
-            <li><strong>statement_category:</strong> The category or type of the statement, if applicable.</li>
-            <li><strong>proportion_true:</strong> The percentage of participants who rated the statement as true.</li>
-        </ul>
+        <div class="alert alert-info" role="alert">
+            <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
+            <p>In this section, please provide a file containing the statements used in your study. Including this file allows researchers to more closely replicate your study by reviewing the exact statements that were presented to participants.</p>
+            <p>It is important that the statement IDs in this file match exactly with those used in your raw data. This consistency ensures that the statements can be correctly linked to the corresponding data points in your dataset.</p>
+            <p>If available, please include columns with the following information:</p>
+            <ul class = "list-of-entries">
+                <li><strong>statement_identifier:</strong> A unique identifier for each statement.</li>
+                <li><strong>statement_text:</strong> The text of the statement as it was presented to participants.</li>
+                <li><strong>statement_accuracy:</strong> The accuracy of the statement, indicating whether it is true or false.</li>
+                <li><strong>statement_category:</strong> The category or type of the statement, if applicable.</li>
+                <li><strong>proportion_true:</strong> The percentage of participants who rated the statement as true.</li>
+            </ul>
 
-        <p>The file you upload below should look similar to this:</p>
-        <div class = "table-container" id = "tableContainerExample">
-            <table>
-                <tr>
-                    <th>statement_identifier</th>
-                    <th>statement_text</th>
-                    <th>statement_accuracy</th>
-                    <th>statement_category</th>
-                    <th>proportion_true</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>This is a sample statement</td>
-                    <td>1</td>
-                    <td>category</td>
-                    <td>0.6</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>This is a sample statement</td>
-                    <td>0</td>
-                    <td>category</td>
-                    <td>0.53</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>This is a sample statement</td>
-                    <td>1</td>
-                    <td>category</td>
-                    <td>0.46</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>This is a sample statement</td>
-                    <td>1</td>
-                    <td>category</td>
-                    <td>0.35</td>
-                </tr>
-            </table>
-        </div>
+            <p>The file you upload below should look similar to this:</p>
 
-        <p>Including these details will enhance the reproducibility of your study and provide valuable context for those analyzing your data.</p>
-        <p>Once you have prepared your statement file according to these specifications, you can upload it using the form provided below. Thank you for your contribution!</p>
-
-        <form id="statementSetSurvey" class="survey-form">
-            <label for="statement_publication_file" class="survey-label">Please upload a .csv file where the statements you used are listed.</label>
-            <input type="file" id="statement_publication_file" name="statement_publication_file" accept=".csv" required><br>
-            <span id="file-name-display">${statementset_data.statement_publication_file ? `File: ${statementset_data.statement_publication_file.name}` : ''}</span><br>
-
-            <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
-            <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
+            <div class="table-responsive" id="tableContainerExample">
+                <table class="table table-bordered table-striped table-sm table-hover align-middle small">
+                    <thead class="text-capitalize-none">
+                    <tr>
+                        <th style="text-transform: none;">statement_identifier</th>
+                        <th style="text-transform: none;">statement_text</th>
+                        <th style="text-transform: none;">statement_accuracy</th>
+                        <th style="text-transform: none;">statement_category</th>
+                        <th style="text-transform: none;">proportion_true</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>This is a sample statement</td>
+                        <td>1</td>
+                        <td>category</td>
+                        <td>0.6</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>This is a sample statement</td>
+                        <td>0</td>
+                        <td>category</td>
+                        <td>0.53</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>This is a sample statement</td>
+                        <td>1</td>
+                        <td>category</td>
+                        <td>0.46</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>This is a sample statement</td>
+                        <td>1</td>
+                        <td>category</td>
+                        <td>0.35</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <label for="statement_publication" class="survey-label">If available, provide an APA-style reference to the publication where this set of statements originates from.</label>
-            <input type="text" id="statement_publication" name="statement_publication" value="${statementset_data.statement_publication || ''}"><br>
-            <p class="additional-info">Please provide a link to the paper in which the set of statements is outlined, not a reference to the raw data repository. If the set of statements first appears in the present dataset, leave this field blank.</p>
+            <p>Including these details will enhance the reproducibility of your study and provide valuable context for those analyzing your data.</p>
+            <p>Once you have prepared your statement file according to these specifications, you can upload it using the form provided below. Thank you for your contribution!</p>
+        </div>
 
-            <button type="submit" class="survey-button">Submit</button>
+        <h3 class="mb-3">Upload Statement Set</h3>
+        <form id="statementSetSurvey" class="survey-form p-3 border rounded shadow-sm bg-light">
+        <div class="mb-3">
+            <label for="statement_publication_file" class="form-label">
+            Please upload a .csv file where the statements you used are listed.
+            </label>
+            <input 
+            type="file" 
+            id="statement_publication_file" 
+            name="statement_publication_file" 
+            accept=".csv" 
+            class="form-control" 
+            required
+            >
+        </div>
+
+        <div class="mb-2 text-muted" id="file-name-display">
+            ${statementset_data.statement_publication_file ? `File: ${statementset_data.statement_publication_file.name}` : ''}
+        </div>
+
+        <p id="textUploadPreview" class="fw-semibold" style="display: none;">Uploaded file preview:</p>
+
+        <div id="tableContainerUploaded" class="table-responsive" style="display: none;">
+            <!-- Table will be injected here -->
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label for="statement_publication" class="form-label">
+            If available, provide an APA-style reference to the publication where this set of statements originates from.
+            </label>
+            <input 
+            type="text" 
+            id="statement_publication" 
+            name="statement_publication" 
+            value="${statementset_data.statement_publication || ''}" 
+            class="form-control"
+            >
+            <div class="form-text">
+            Please provide a link to the paper in which the set of statements is outlined, not a reference to the raw data repository. 
+            If the set of statements first appears in the present dataset, leave this field blank.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">
+            Submit
+        </button>
         </form>
+
     </div>
     `;
 
@@ -311,7 +352,7 @@ async function updateStatementSetSurvey(control, statementset_idx) {
     control.statementset_info[statementset_idx].statementset_data = statementset_data;
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "statementset-" + statementset_idx;

@@ -74,20 +74,20 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
             <div class="table-responsive" id="tableContainerExample">
-                <table class="table table-bordered table-striped table-sm table-hover align-middle text-center">
-                    <thead class="table-light">
-                        <tr>
-                            <th>subject</th>
-                            <th>presentation_identifier</th>
-                            <th>trial</th>
-                            <th>within_identifier</th>
-                            <th>between_identifier</th>
-                            <th>statement_identifier</th>
-                            <th>rt</th>
-                            <th>response</th>
-                            <th>repeated</th>
-                            <th>certainty</th>
-                        </tr>
+                <table class="table table-bordered table-striped table-sm table-hover align-middle small">
+                    <thead class="text-capitalize-none">
+                    <tr>
+                        <th style="text-transform: none;">subject</th>
+                        <th style="text-transform: none;">presentation_identifier</th>
+                        <th style="text-transform: none;">trial</th>
+                        <th style="text-transform: none;">within_identifier</th>
+                        <th style="text-transform: none;">between_identifier</th>
+                        <th style="text-transform: none;">statement_identifier</th>
+                        <th style="text-transform: none;">rt</th>
+                        <th style="text-transform: none;">response</th>
+                        <th style="text-transform: none;">repeated</th>
+                        <th style="text-transform: none;">certainty</th>
+                    </tr>
                     </thead>
                     <tbody>
                         <tr>
