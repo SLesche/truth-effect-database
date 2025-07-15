@@ -93,7 +93,7 @@ function initializePublicationSurvey(control, publication_idx) {
         <p class="mb-0">Feel free to add as many studies as needed.</p>
     </div>
 
-    <h2>Publication Details</h2>
+    <h3>Publication Details</h2>
     
     <form id="publicationSurvey">
         <div class="mb-4">
