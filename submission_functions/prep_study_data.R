@@ -23,6 +23,7 @@ prep_study_data <- function(study_data, db_overview){
   )
   
   study_data$participant_age = ifelse(study_data$participant_age == 99, NA, study_data$participant_age)
+  study_data$percentage_female = ifelse(study_data$percentage_female == 99, NA, study_data$percentage_female)
   
   study_data = clean_char_columns(study_data, db_overview, "study_table")
   

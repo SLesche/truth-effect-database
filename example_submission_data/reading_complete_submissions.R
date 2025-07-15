@@ -67,7 +67,7 @@ result <- query_db(
   conn,
   arguments,
   "default",
-  "statementset_table"
+  "study_table"
 ) %>% distinct()
 
 db_overview = generate_db_overview_table(conn)
