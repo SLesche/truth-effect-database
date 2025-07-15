@@ -188,7 +188,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 
     <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 0 ? '' : 'disabled'} class="mb-3">
       <label for="presentation_time_s" class="form-label">For how long (in seconds) was each statement presented?</label>
-      <input type="number" class="form-control" id="presentation_time_s" name="presentation_time_s" step="0.5" />
+      <input type="number" class="form-control" id="presentation_time_s" name="presentation_time_s" step="0.001" />
     </fieldset>
 
     <fieldset class="mb-3">
