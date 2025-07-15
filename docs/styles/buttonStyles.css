@@ -79,3 +79,8 @@
     margin-left: 8px; /* Adjust as needed */
     font-weight: bold;
 }
+
+.form-check-input:not(:checked) {
+    background-color: #ebebeb; /* Change to a darker shade as desired */
+    border-color: #888;
+}
