@@ -1,11 +1,5 @@
 
-/* Style for the question labels */
-.survey-label {
-    font-weight: bold;
-    font-size: 1.1em; /* Adjust size as needed */
-    display: block;
-    margin-top: 10px;
-}
+
 
 /* Style for the input fields */
 input[type="text"], input[type="number"], input[type="date"] {
@@ -15,16 +9,6 @@ input[type="text"], input[type="number"], input[type="date"] {
     border: 1px solid #ccc;
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-/* Style for the form container */
-.survey-form {
-    margin: auto auto;
-    padding: 0px;
-    background-color: var(--form-background-color);
-    border-radius: 15px;
-    max-width: 95%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Style for the submit button */
@@ -47,17 +31,6 @@ input[type="text"], input[type="number"], input[type="date"] {
     margin-left: 10px;
     margin-bottom: 10px;
 }
-
-.survey-button:hover {
-    background-color: var(--submit-button-hover);
-}
-
-
-input:disabled {
-    border: darkgray thin solid;
-    background-color: lightgray;
-}
-
 fieldset:disabled {
     display: none;
 }

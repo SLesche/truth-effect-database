@@ -83,8 +83,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
             <p>This information is crucial for ensuring that your study is well-documented and can be effectively integrated into our database. Thank you for taking the time to provide these details.</p>
         </div>
 
-        <h3>Study Survey</h2>
-        <form id="studySurvey">
+        <h3 class="mb-3">Study Survey</h2>
+        <form id="studySurvey"  class="survey-form p-3 border rounded shadow-sm bg-light">
             <div class="mb-4">
                 <label class="form-label">With what scale did you measure the truth rating of a statement?</label>
                 <div id = "truth_rating_scale">

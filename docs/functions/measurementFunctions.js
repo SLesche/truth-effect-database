@@ -53,8 +53,8 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     const constructs = ["intelligence", "extraversion", "anxiety", "memory", "creativity"];
 
     document.getElementById("content").innerHTML = `
-        <div class="container mt-4">
-            <div class="mb-4">
+        <div class="display-text">
+            <div class="mb-3">
                 <h1 class="h3">${study_name}: Additional Measurements</h1>
                 <p>In this section, we want to know if you collected any additional measurements beyond the primary variables of your study. This information is valuable for helping others identify datasets that include external variables they may be interested in.</p>
                 <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires.</p>
@@ -75,7 +75,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
                 </div>
             </div>
 
-            <form id="measures_form" class="bg-light p-4 rounded shadow-sm mb-4" style="display: none;">
+            <form id="measures_form" class="survey-form p-3 border rounded shadow-sm bg-light" style="display: none;">
                 <div class="mb-3">
                     <label for="measure_input_details" class="form-label fw-bold">Add any additional variables you measured in the study:</label>
                     <input type="text" class="form-control" id="measure_input_details" name="measure_input_details">

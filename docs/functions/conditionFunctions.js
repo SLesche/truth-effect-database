@@ -56,8 +56,8 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
         <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
       </div>  
 
-      <h3>Condition Survey</h3>
-      <form id="conditionSurvey">
+      <h3 class="mb-3">Condition Survey</h3>
+      <form id="conditionSurvey" class="survey-form p-3 border rounded shadow-sm bg-light">
 
         ${generateYesNoField('has_within_conditions', 'Does this data contain any additional within conditions?', condition_data.has_within_conditions)}
         

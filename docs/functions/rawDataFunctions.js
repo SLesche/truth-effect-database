@@ -49,7 +49,9 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
     <div class="display-text">
-        <h1>${study_name}: Raw Data</h1> 
+        <h1 class ="mb-3">${study_name}: Raw Data</h1> 
+        <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
             <p>Here, please provide information about your raw data by uploading it through the interface below. Your data should adhere to the following guidelines:</p>
             <ul class = "list-of-entries">
                 <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
@@ -71,131 +73,156 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>certainty:</strong> (if measured) The value indicating the subjective certainty with which a participant gave their truth rating.</li>
                 <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
-            <div class = "table-container" id = "tableContainerExample">
-                <table>
-                    <tr>
-                        <th>subject</th>
-                        <th>presentation_identifier</th>
-                        <th>trial</th>
-                        <th>within_identifier</th>
-                        <th>between_identifier</th>
-                        <th>statement_identifier</th>
-                        <th>rt</th>
-                        <th>response</th>
-                        <th>repeated</th>
-                        <th>certainty</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0.64</td>
-                        <td><i>NA</i></td>
-                        <td>0</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>0.75</td>
-                        <td>7</td>
-                        <td>1</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>0.75</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0.76</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0.64</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>0.75</td>
-                        <td>7</td>
-                        <td>1</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>0.75</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0.76</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>6</td>
-                    </tr>
+            <div class="table-responsive" id="tableContainerExample">
+                <table class="table table-bordered table-striped table-hover align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>subject</th>
+                            <th>presentation_identifier</th>
+                            <th>trial</th>
+                            <th>within_identifier</th>
+                            <th>between_identifier</th>
+                            <th>statement_identifier</th>
+                            <th>rt</th>
+                            <th>response</th>
+                            <th>repeated</th>
+                            <th>certainty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0.64</td>
+                            <td><i>NA</i></td>
+                            <td>0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>0.75</td>
+                            <td>7</td>
+                            <td>1</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.75</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0.76</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0.64</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>0.75</td>
+                            <td>7</td>
+                            <td>1</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.75</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0.76</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>6</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>         
             <p>Once you’ve prepared your data according to these specifications, you can upload it using the form provided below. Thank you for your cooperation!</p>
-            <form id="rawDataSurvey" class="survey-form">
-                <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
-                <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
-                <span id="file-name-display">${raw_data.raw_data_file ? `File: ${raw_data.raw_data_file.name}` : ''}</span><br>
-                <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
-                <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
-                </div>
+        </div>
 
-                <button type="submit" class="survey-button">Submit</button>
-            </form>
+        <h3 class ="mb-3">Upload Raw Data</h3>
+       <form id="rawDataSurvey" class="survey-form p-3 border rounded shadow-sm bg-light">
+        <div class="mb-3">
+            <label for="raw_data_file" class="form-label">
+            Please upload a .csv file with the raw data in the correct format.
+            </label>
+            <input 
+            type="file" 
+            id="raw_data_file" 
+            name="raw_data_file" 
+            accept=".csv" 
+            class="form-control" 
+            required
+            >
+        </div>
 
+        <div class="mb-2 text-muted" id="file-name-display">
+            ${raw_data.raw_data_file ? `File: ${raw_data.raw_data_file.name}` : ''}
+        </div>
+
+        <p id="textUploadPreview" class="fw-semibold" style="display: none;">Uploaded file preview:</p>
+
+        <div id="tableContainerUploaded" class="table-responsive" style="display: none;">
+            <!-- Table will be injected here -->
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">
+            Submit
+        </button>
         </form>
+
     </div>
     `;
 

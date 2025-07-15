@@ -93,9 +93,9 @@ function initializePublicationSurvey(control, publication_idx) {
         <p class="mb-0">Feel free to add as many studies as needed.</p>
     </div>
 
-    <h3>Publication Details</h2>
+    <h3 class="mb-3">Publication Details</h3>
     
-    <form id="publicationSurvey">
+    <form id="publicationSurvey" class="survey-form p-3 border rounded shadow-sm bg-light">
         <div class="mb-3">
         <label for="authors" class="form-label">Who are the authors of the publication?</label>
         <input type="text" class="form-control" id="authors" name="authors" value="${publication.authors || ''}">
