@@ -128,19 +128,7 @@ function initializePublicationSurvey(control, publication_idx) {
         <input type="text" class="form-control" id="country" name="country" value="${publication.country || ''}">
         </div>
 
-        <div class="mb-4">
-        <label class="form-label">Was this publication peer-reviewed?</label>
-        <div>
-            <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="peer_reviewed" id="peerYes" value="1" ${publication.peer_reviewed == 1 ? 'checked' : ''}>
-            <label class="form-check-label" for="peerYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="peer_reviewed" id="peerNo" value="0" ${publication.peer_reviewed == 0 ? 'checked' : ''}>
-            <label class="form-check-label" for="peerNo">No</label>
-            </div>
-        </div>
-        </div>
+        ${generateYesNoField('peer_reviewed', 'Was this publication peer-reviewed?', publication.peer_reviewed)}
 
         <div class="mb-4">
         <label for="keywords" class="form-label">Keywords associated with the publication:</label>

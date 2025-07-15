@@ -250,3 +250,20 @@ function showAlert(message, type = "info", containerId = "content") {
     // Scroll smoothly to alert
     alertWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+function generateYesNoField(id, label, value, yesLabel = "Yes", noLabel = "No") {
+    return `
+    <div class="mb-4">
+        <label class="form-label">${label}</label>
+        <div id=${id}>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="${id}" id="${id}_yes" value="1" ${value == 1 ? 'checked' : ''}>
+                <label class="form-check-label" for="${id}_yes">${yesLabel}</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="${id}" id="${id}_no" value="0" ${value == 0 ? 'checked' : ''}>
+                <label class="form-check-label" for="${id}_no">${noLabel}</label>
+            </div>
+        </div>
+    </div>`;
+}
