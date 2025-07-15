@@ -74,7 +74,7 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
                 <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
             <div class="table-responsive" id="tableContainerExample">
-                <table class="table table-bordered table-striped table-hover align-middle text-center">
+                <table class="table table-bordered table-striped table-sm table-hover align-middle text-center">
                     <thead class="table-light">
                         <tr>
                             <th>subject</th>

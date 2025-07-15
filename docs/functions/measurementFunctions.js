@@ -55,10 +55,13 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
     document.getElementById("content").innerHTML = `
         <div class="display-text">
             <div class="mb-3">
-                <h1 class="h3">${study_name}: Additional Measurements</h1>
-                <p>In this section, we want to know if you collected any additional measurements beyond the primary variables of your study. This information is valuable for helping others identify datasets that include external variables they may be interested in.</p>
-                <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires.</p>
-                <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
+                <h1 class="mb3">${study_name}: Additional Measurements</h1>
+                <div class="alert alert-info" role="alert">
+                    <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
+                    <p>In this section, we want to know if you collected any additional measurements beyond the primary variables of your study. This information is valuable for helping others identify datasets that include external variables they may be interested in.</p>
+                    <p>To make the data more searchable and easier to navigate, we encourage you to use broad construct terms, such as "extraversion," "intelligence," or "anxiety," rather than specific test batteries or questionnaires.</p>
+                    <p>By providing this information, you contribute to a more comprehensive and accessible dataset, enabling others to explore connections between truth ratings and various other factors.</p>
+                </div>
             </div>
 
             <div class="mb-3">

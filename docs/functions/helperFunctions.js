@@ -87,19 +87,28 @@ function csvFileToObject(file) {
         reader.readAsText(file);
     });
 }
-
 function createTableFromCSV(csvObject, n_rows) {
-    // Create table element
-    let table = '<table><thead><tr>';
+    // Start Bootstrap table
+    let table = `
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-sm align-middle">
+                <thead class="table-light">
+                    <tr>
+    `;
 
-    // Extract table headers
+    // Extract headers
     const headers = Object.keys(csvObject[0]);
     headers.forEach(header => {
-        table += `<th>${header}</th>`;
+        table += `<th scope="col">${header}</th>`;
     });
-    table += '</tr></thead><tbody>';
 
-    // Populate table rows with CSV data
+    table += `
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+
+    // Add table rows
     csvObject.slice(0, n_rows).forEach(row => {
         table += '<tr>';
         headers.forEach(header => {
@@ -107,10 +116,17 @@ function createTableFromCSV(csvObject, n_rows) {
         });
         table += '</tr>';
     });
-    table += '</tbody></table>';
 
-    return table
+    // Close table
+    table += `
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    return table;
 }
+
 function displayValidationError(questionId, message) {
     const questionElement = document.getElementById(questionId);
     if (!questionElement) {
