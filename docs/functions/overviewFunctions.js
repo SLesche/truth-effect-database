@@ -29,7 +29,7 @@ function addOverview(control) {
 function generateOverviewPage(control) {
     document.getElementById("content").innerHTML = `
         <div class = "display-text">
-            <h1>Welcome to the Truth Effect Data Entry Page</h1>
+            <h1 class = "mb-3">Welcome to the Truth Effect Data Entry Page</h1>
             <p>Thank you for contributing to our growing database of truth effect research. By entering your data here, you help make research more accessible and reusable for everyone.</p>
             <p>You can explore and download the dataset under this link: <a href="https://example.com/dataset" target="_blank">Dataset Link</a></p>
             <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as may studies in your publication as you wish.</p>

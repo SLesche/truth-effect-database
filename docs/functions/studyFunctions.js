@@ -74,8 +74,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
-   <div class="container my-5">
-        <h1>${study_name}</h1>
+   <div class="display-text">
+        <h1 class = "mb-3">${study_name}</h1>
         <div class="alert alert-info" role="alert">
             <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
             <p>This section is designed to collect key details about the study you conducted. The information you provide here will help us better understand the scope and methodology of your research. You'll be asked about how you measured truth ratings, what other measures were included in your study, the types of analysis you performed, and the specific statements or stimuli used in your research.</p>

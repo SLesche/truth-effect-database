@@ -48,8 +48,8 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
-    <div class="container my-5">
-    <h1>${study_name}: Procedure</h1>
+    <div class="display-text">
+    <h1 class = "mb-3">${study_name}: Procedure</h1>
     <div class="alert alert-info" role="alert">
       <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
       <p>This section focuses on gathering detailed information about the times statements were presented to participants.</p>

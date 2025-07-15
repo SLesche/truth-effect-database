@@ -48,27 +48,19 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     const study_name = control.publication_info[publication_idx].study_info[study_idx].study_name;
 
     document.getElementById("content").innerHTML = `
-    <div class="container py-4">      
-      <h1 class="mb-4">${study_name}: Experimental Conditions</h1>
-      <p>This section is designed to collect detailed information about the experimental conditions of your study. Importantly, this should only pertain to manipulations not already encoded through other parts of the questionnaire. For example, the within condition "repeated vs. new statement" should be encoded in its own column in the raw data and not here. Similarly, manipulations of the measurement sessions should be encoded through different measurement sessions in the questionnaire "Measurement Sessions" and then be encoded in the column "session". Only those manipulations that cannot be adequately captured by those parts of the questionnaire should be added here. For example, a between condition of "old vs. young" participants should be coded here.</p>
-      <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
+   <div class="display-text">
+      <h1 class = "mb-3">${study_name}: Experimental Conditions</h1>
+      <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
+        <p>This section is designed to collect detailed information about the experimental conditions of your study. Importantly, this should only pertain to manipulations not already encoded through other parts of the questionnaire. For example, the within condition "repeated vs. new statement" should be encoded in its own column in the raw data and not here. Similarly, manipulations of the measurement sessions should be encoded through different measurement sessions in the questionnaire "Measurement Sessions" and then be encoded in the column "session". Only those manipulations that cannot be adequately captured by those parts of the questionnaire should be added here. For example, a between condition of "old vs. young" participants should be coded here.</p>
+        <p>You will also be asked about any experimental manipulations that were applied within the dataset. This information is important for providing context in case there were any unusual occurrences during the study, helping others understand possible variations in the data.</p>
+      </div>  
 
+      <h3>Condition Survey</h3>
       <form id="conditionSurvey">
 
-        <div class="mb-3">
-          <label class="form-label">Does this data contain any additional within conditions?</label>
-          <div id="has_within_conditions">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="has_within_conditions" id="withinCondYes" value="1" ${condition_data.has_within_conditions == 1 ? 'checked' : ''}>
-              <label class="form-check-label" for="withinCondYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="has_within_conditions" id="withinCondNo" value="0" ${condition_data.has_within_conditions == 0 ? 'checked' : ''}>
-              <label class="form-check-label" for="withinCondNo">No</label>
-            </div>
-          </div>
-        </div>
-
+        ${generateYesNoField('has_within_conditions', 'Does this data contain any additional within conditions?', condition_data.has_within_conditions)}
+        
         <fieldset id="withinConditionsFieldset" ${condition_data.has_within_conditions == 1 ? '' : 'disabled'} class="border p-3 rounded mb-4">
           <div class="mb-3">
             <label for="within_condition_name" class="form-label">Add a description of the condition:</label>
@@ -78,37 +70,32 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
             <label for="within_condition_identifier" class="form-label">How is that condition identified in the raw data?</label>
             <input type="text" class="form-control" id="within_condition_identifier" name="within_condition_identifier" />
           </div>
-          <button type="button" onclick="addWithinCondition()" class="btn btn-primary mb-3">Add Condition</button>
-          <label class="form-label d-none" id="within_conditions_list">List of within conditions:</label>
-          <ul id="withinConditionsList" class="list-group"></ul>
+          <button type="button" onclick="addWithinCondition()" class="btn btn-warning mb-3">Add Condition</button>
+
+          <div class="mb-3" id="within_conditions_list" style="display: none;">
+            <label class="form-label fw-bold">List of within conditions:</label>
+            <ul id="withinConditionsList" class="list-group ps-3"></ul>
+          </div>
         </fieldset>
 
-        <div class="mb-3">
-          <label class="form-label">Does this data contain any additional between conditions?</label>
-          <div id="has_between_conditions">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="has_between_conditions" id="betweenCondYes" value="1" ${condition_data.has_between_conditions == 1 ? 'checked' : ''}>
-              <label class="form-check-label" for="betweenCondYes">Yes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="has_between_conditions" id="betweenCondNo" value="0" ${condition_data.has_between_conditions == 0 ? 'checked' : ''}>
-              <label class="form-check-label" for="betweenCondNo">No</label>
-            </div>
-          </div>
-        </div>
+        ${generateYesNoField('has_between_conditions', 'Does this data contain any additional within conditions?', condition_data.has_between_conditions)}
 
-        <fieldset id="betweenConditionsFieldset" ${condition_data.has_between_conditions == 1 ? '' : 'disabled'} class="border p-3 rounded mb-4">
-          <div class="mb-3">
-            <label for="between_condition_name" class="form-label">Add a description of the condition:</label>
-            <input type="text" class="form-control" id="between_condition_name" name="between_condition_name" />
-          </div>
-          <div class="mb-3">
-            <label for="between_condition_identifier" class="form-label">How is that condition identified in the raw data?</label>
-            <input type="text" class="form-control" id="between_condition_identifier" name="between_condition_identifier" />
-          </div>
-          <button type="button" onclick="addBetweenCondition()" class="btn btn-primary mb-3">Add Condition</button>
-          <label class="form-label d-none" id="between_conditions_list">List of between conditions:</label>
-          <ul id="betweenConditionsList" class="list-group"></ul>
+        <fieldset id="betweenConditionsFieldset" class="bg-light p-4 rounded shadow-sm mb-4" ${condition_data.has_between_conditions == 1 ? '' : 'disabled'}>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="between_condition_name">Description of the condition:</label>
+                <input type="text" class="form-control" id="between_condition_name" name="between_condition_name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-bold" for="between_condition_identifier">How is it identified in raw data?</label>
+                <input type="text" class="form-control" id="between_condition_identifier" name="between_condition_identifier">
+            </div>
+            <div class="mb-3">
+                <button type="button" onclick="addBetweenCondition()" class="btn btn-warning text-secondary">Add Condition</button>
+            </div>
+            <div class="mb-3" id="between_conditions_list" style="display: none;">
+                <label class="form-label fw-bold">List of between conditions:</label>
+                <ul id="betweenConditionsList" class="list-group ps-3"></ul>
+            </div>
         </fieldset>
 
         <button type="submit" class="btn btn-success">Submit</button>
@@ -174,6 +161,7 @@ function addWithinCondition() {
 
         // Create a new list item for the condition
         const listItem = document.createElement('li');
+        listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
         listItem.textContent = `Condition: ${condition_name}, Identifier: ${condition_identifier}`;
 
         add_delete_button_to_list_item(listItem);
@@ -206,6 +194,7 @@ function addBetweenCondition() {
 
         // Create a new list item for the condition
         const listItem = document.createElement('li');
+        listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
         listItem.textContent = `Condition: ${condition_name}, Identifier: ${condition_identifier}`;
 
         add_delete_button_to_list_item(listItem);
@@ -336,7 +325,7 @@ function updateConditionSurvey(control, publication_idx, study_idx) {
     control.publication_info[publication_idx].study_info[study_idx].condition_data = condition_data
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "conditions-" + publication_idx + "-" + study_idx;

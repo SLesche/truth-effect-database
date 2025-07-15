@@ -253,7 +253,7 @@ function showAlert(message, type = "info", containerId = "content") {
 
 function generateYesNoField(id, label, value, yesLabel = "Yes", noLabel = "No") {
     return `
-    <div class="mb-4">
+    <div class="mb-3">
         <label class="form-label">${label}</label>
         <div id=${id}>
             <div class="form-check form-check-inline">

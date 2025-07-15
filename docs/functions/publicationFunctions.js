@@ -82,8 +82,8 @@ function initializePublicationSurvey(control, publication_idx) {
     const publication = control.publication_info[publication_idx].publication_data;
     const publication_name = control.publication_info[publication_idx].publication_name;
     document.getElementById("content").innerHTML = `
-   <div class="container my-5">
-    <h1>${publication_name}</h1>
+   <div class="display-text">
+    <h1 class = "mb-3">${publication_name}</h1>
     <div class="alert alert-info" role="alert">
         <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
         <p>Please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
@@ -96,47 +96,47 @@ function initializePublicationSurvey(control, publication_idx) {
     <h3>Publication Details</h2>
     
     <form id="publicationSurvey">
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="authors" class="form-label">Who are the authors of the publication?</label>
         <input type="text" class="form-control" id="authors" name="authors" value="${publication.authors || ''}">
         <div class="form-text">List surnames only, separated by commas (e.g., "Smith, Müller, Garcia").</div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="first_author" class="form-label">Who was the first author of this publication?</label>
         <input type="text" class="form-control" id="first_author" name="first_author" value="${publication.first_author || ''}">
         <div class="form-text">List surnames only. If multiple first authors, separate with commas.</div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="title" class="form-label">What was the title of this publication?</label>
         <input type="text" class="form-control" id="title" name="title" value="${publication.title || ''}">
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="apa_reference" class="form-label">APA7 style reference for the publication:</label>
         <input type="text" class="form-control" id="apa_reference" name="apa_reference" value="${publication.apa_reference || ''}">
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="conducted" class="form-label">In what year was the study conducted?</label>
         <input type="number" class="form-control" id="conducted" name="conducted" value="${publication.conducted || ''}">
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="country" class="form-label">In what country was the study conducted?</label>
         <input type="text" class="form-control" id="country" name="country" value="${publication.country || ''}">
         </div>
 
         ${generateYesNoField('peer_reviewed', 'Was this publication peer-reviewed?', publication.peer_reviewed)}
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="keywords" class="form-label">Keywords associated with the publication:</label>
         <input type="text" class="form-control" id="keywords" name="keywords" value="${publication.keywords || ''}">
         <div class="form-text">Separate keywords by commas (e.g., "keyword 1, keyword 2").</div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-3">
         <label for="contact" class="form-label">Contact information for further questions:</label>
         <input type="text" class="form-control" id="contact" name="contact" value="${publication.contact || ''}">
         </div>

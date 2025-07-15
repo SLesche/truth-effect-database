@@ -247,14 +247,8 @@ function addMeasureToList() {
     li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
     li.textContent = `Construct: ${construct}, Details: ${detailsInput.value}`;
 
-    const removeButton = document.createElement("button");
-    removeButton.innerHTML = '&times;';
-    removeButton.classList.add('btn', 'btn-sm', 'btn-outline-danger', 'ms-3');
-    removeButton.onclick = function() {
-        this.parentElement.remove();
-    };
+    add_delete_button_to_list_item(li);
 
-    li.appendChild(removeButton);
     const listContainer = document.getElementById("measuresList");
     listContainer.appendChild(li);
 
