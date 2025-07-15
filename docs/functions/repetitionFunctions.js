@@ -56,180 +56,128 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
 
   <h2>Procedure Information:</h2>
   <form id="repetitionSurvey">
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="presentation_identifier" class="form-label">How is this statement presentation condition identified in the raw data?</label>
       <input type="text" class="form-control" id="presentation_identifier" name="presentation_identifier" />
       <div class="form-text">This identifier <strong>must</strong> be identical to the value of the column "presentation_identifier" in the raw data. This encodes information about different presentation settings, caused either by repeated measurements or experimental manipulations of the settings entered below.</div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="repetition_time" class="form-label">When was this presentation session conducted relative to the first exposure to the statements? Enter the amount of minutes since the first session.</label>
-      <input type="number" class="form-control" id="repetition_time" name="repetition_time" step="1" />
+      <input type="number" class="form-control" id="repetition_time" name="repetition_time" step="0.1" />
       <div class="form-text">This should be "0", if it is the first session. It would be "60", if the session was conducted one hour after the first session.</div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="repetition_location" class="form-label">Where was this session conducted? (Lab / Online)</label>
       <input type="text" class="form-control" id="repetition_location" name="repetition_location" />
     </div>
 
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">What phase was this session (i.e. exposure / test)?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="phase" id="phase_exposure" value="exposure" />
-        <label class="form-check-label" for="phase_exposure">Exposure</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="phase" id="phase_test" value="test" />
-        <label class="form-check-label" for="phase_test">Test</label>
-      </div>
-    </fieldset>
+    ${generateYesNoField("phase", "What phase was this session (i.e. exposure / test)?", null, "Exposure", "Test")}
 
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">Is raw data available for this session?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="data_available" id="data_available_yes" value="1" />
-        <label class="form-check-label" for="data_available_yes">Yes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="data_available" id="data_available_no" value="0" />
-        <label class="form-check-label" for="data_available_no">No</label>
-      </div>
-    </fieldset>
 
-    <div class="mb-3">
+    ${generateYesNoField("data_available", "Is raw data available for this session?", null)}
+
+    <div class="mb-4">
       <label for="repetition_type" class="form-label">What type was the repetition of statements (exact / semantic)?</label>
       <input type="text" class="form-control" id="repetition_type" name="repetition_type" />
       <div class="form-text">Even if none of the statements presented were repeated in this session, enter the type of repetition that will occur.</div>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="presentation_type" class="form-label">How were the statements presented (visual / auditory)?</label>
       <input type="text" class="form-control" id="presentation_type" name="presentation_type" />
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="max_n_repetitions" class="form-label">What was the maximum number of times a statement was presented during this session? Enter 1, if statements were only presented once.</label>
       <input type="number" class="form-control" id="max_n_repetitions" name="max_n_repetitions" />
     </div>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="n_statements" class="form-label">How many statements were presented to each participant?</label>
       <input type="number" class="form-control" id="n_statements" name="n_statements" />
     </div>
 
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">Were the participants instructed that some of these statements may be false?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="truth_instructions" id="truth_instructions_yes" value="1" />
-        <label class="form-check-label" for="truth_instructions_yes">Yes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="truth_instructions" id="truth_instructions_no" value="0" />
-        <label class="form-check-label" for="truth_instructions_no">No</label>
+    ${generateYesNoField("truth_instructions", "Were the participants instructed that some of these statements may be false?", null)}
+
+    <fieldset id="truthInstructionsFieldset" ${repetition_data.truth_instructions == 1 ? '' : 'disabled'} class="mb-4">
+      <div class="mb-4">
+        <label class="form-label">When were the participants instructed that some of these statements may be false?</label>
+        <div id=truth_instruction_timing>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_exposure">
+                <label class="form-check-label" for="truth_instruction_timing_exposure">Before the exposure session</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_test">
+                <label class="form-check-label" for="truth_instruction_timing_test">Before the test session</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_both">
+                <label class="form-check-label" for="truth_instruction_timing_both">Before both the exposure and the test session</label>
+            </div>
+        </div>
       </div>
     </fieldset>
 
-    <fieldset id="truthInstructionsFieldset" ${repetition_data.truth_instructions == 1 ? '' : 'disabled'} class="mb-3">
-      <legend class="col-form-label pt-0">When were the participants instructed that some of these statements may be false?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_exposure" value="exposure" />
-        <label class="form-check-label" for="truth_instruction_timing_exposure">Before the exposure session</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_test" value="test" />
-        <label class="form-check-label" for="truth_instruction_timing_test">Before the test session</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_both" value="both" />
-        <label class="form-check-label" for="truth_instruction_timing_both">Before both the exposure and the test session</label>
+    ${generateYesNoField("repetition_instructions", "Were the participants instructed that some of the statements may be repeated?", null)}
+
+    <fieldset id="repetitionInstructionsFieldset" ${repetition_data.repetition_instructions == 1 ? '' : 'disabled'} class="mb-4">
+      <div class="mb-4">
+        <label class="form-label">When were the participants instructed that some of these statements may be repeated?</label>
+        <div id=repetition_instruction_timing>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_exposure">
+                <label class="form-check-label" for="repetition_instruction_timing_exposure">Before the exposure session</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_test">
+                <label class="form-check-label" for="repetition_instruction_timing_test">Before the test session</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_both">
+                <label class="form-check-label" for="repetition_instruction_timing_both">Before both the exposure and the test session</label>
+            </div>
+        </div>
       </div>
     </fieldset>
 
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">Were the participants instructed that some of the statements may be repeated?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="repetition_instructions" id="repetition_instructions_yes" value="1" />
-        <label class="form-check-label" for="repetition_instructions_yes">Yes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="repetition_instructions" id="repetition_instructions_no" value="0" />
-        <label class="form-check-label" for="repetition_instructions_no">No</label>
-      </div>
-    </fieldset>
+    ${generateYesNoField("presented_until_response", "Were the statements presented until response?", null)}
 
-    <fieldset id="repetitionInstructionsFieldset" ${repetition_data.repetition_instructions == 1 ? '' : 'disabled'} class="mb-3">
-      <legend class="col-form-label pt-0">When were the participants instructed that some of these statements may be repeated?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_exposure" value="exposure" />
-        <label class="form-check-label" for="repetition_instruction_timing_exposure">Before the exposure session</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_test" value="test" />
-        <label class="form-check-label" for="repetition_instruction_timing_test">Before the test session</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_both" value="both" />
-        <label class="form-check-label" for="repetition_instruction_timing_both">Before both the exposure and the test session</label>
-      </div>
-    </fieldset>
-
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">Were the statements presented until response?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="presented_until_response" id="presented_until_response_yes" value="1" />
-        <label class="form-check-label" for="presented_until_response_yes">Yes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="presented_until_response" id="presented_until_response_no" value="0" />
-        <label class="form-check-label" for="presented_until_response_no">No</label>
-      </div>
-    </fieldset>
-
-    <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 0 ? '' : 'disabled'} class="mb-3">
+    <fieldset id="presentationTimeFieldset" ${repetition_data.presented_until_response == 0 ? '' : 'disabled'} class="mb-4">
       <label for="presentation_time_s" class="form-label">For how long (in seconds) was each statement presented?</label>
       <input type="number" class="form-control" id="presentation_time_s" name="presentation_time_s" step="0.001" />
     </fieldset>
 
-    <fieldset class="mb-3">
-      <legend class="col-form-label pt-0">Was there a response deadline?</legend>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="response_deadline" id="response_deadline_yes" value="1" />
-        <label class="form-check-label" for="response_deadline_yes">Yes</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="response_deadline" id="response_deadline_no" value="0" />
-        <label class="form-check-label" for="response_deadline_no">No</label>
-      </div>
-    </fieldset>
+    ${generateYesNoField("response_deadline", "Was there a response deadline?", null)}
 
-    <fieldset id="responseDeadlineFieldset" ${repetition_data.response_deadline == 1 ? '' : 'disabled'} class="mb-3">
+    <fieldset id="responseDeadlineFieldset" ${repetition_data.response_deadline == 1 ? '' : 'disabled'} class="mb-4">
       <label for="response_deadline_s" class="form-label">How long (in seconds) did participants have to respond?</label>
       <input type="number" class="form-control" id="response_deadline_s" name="response_deadline_s" step="0.5" />
     </fieldset>
 
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="percent_repeated" class="form-label">What percentage of the statements was repeated?</label>
       <input type="number" class="form-control" id="percent_repeated" name="percent_repeated" step="0.01" />
       <div class="form-text">If 50% of your statements was repeated, enter "50".</div>
     </div>
 
-    <button type="button" onclick="addRepetitionEntry()" class="btn btn-primary mb-4">Add Presentation Condition</button>
+    <div class="mb-4">
+      <button type="button" onclick="addRepetitionEntry()" class="btn btn-primary">Add Presentation Condition</button>
+    </div>
 
     <label id="listOfRepetitions" class="form-label d-none">List of Conditions</label>
     <div id="repetitionTableContainer" class="table-responsive d-none mb-4">
       <table id="repetitionsTable" class="table table-bordered table-striped">
-        <thead>
-          <!-- Header will be populated by JavaScript -->
-        </thead>
-        <tbody>
-          <!-- Body will be populated by JavaScript -->
-        </tbody>
+        <thead></thead>
+        <tbody></tbody>
       </table>
     </div>
 
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
+
 </div>
 
     `;
@@ -473,7 +421,7 @@ function updateRepetitionSurvey(control, publication_idx, study_idx) {
     control.publication_info[publication_idx].study_info[study_idx].repetition_validated = true;
     
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "repetitions-" + publication_idx + "-" + study_idx;

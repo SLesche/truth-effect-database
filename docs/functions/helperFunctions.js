@@ -225,11 +225,11 @@ function showAlert(message, type = "info", containerId = "content") {
 
     const container = document.getElementById(containerId);
 
-    // Remove existing alert if any
-    const existingAlert = container.querySelector(".alert");
-    if (existingAlert) {
-        existingAlert.remove();
-    }
+    // // Remove existing alert if any
+    // const existingAlert = container.querySelector(".alert");
+    // if (existingAlert) {
+    //     existingAlert.remove();
+    // }
 
     // Create alert element
     const alertWrapper = document.createElement("div");
