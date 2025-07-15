@@ -84,12 +84,17 @@ function initializePublicationSurvey(control, publication_idx) {
     document.getElementById("content").innerHTML = `
    <div class="container my-5">
     <h1>${publication_name}</h1>
-    <p>Before you begin entering your data, please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
-    <p>In this section, you'll be asked to provide key information about the publication, such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
-    <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
-    <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
-    <p>Feel free to add as many studies as needed.</p>
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
+        <p>Please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
+        <p>In this section, you'll be asked to provide key information such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
+        <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
+        <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
+        <p class="mb-0">Feel free to add as many studies as needed.</p>
+    </div>
 
+    <h2>Publication Details</h2>
+    
     <form id="publicationSurvey">
         <div class="mb-4">
         <label for="authors" class="form-label">Who are the authors of the publication?</label>
@@ -148,7 +153,7 @@ function initializePublicationSurvey(control, publication_idx) {
         <input type="text" class="form-control" id="contact" name="contact" value="${publication.contact || ''}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
     </div>
 

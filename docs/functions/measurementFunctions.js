@@ -103,7 +103,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
                 </div>
             </form>
 
-            <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
+            <button type="submit" class="btn btn-success" id="submit-button">Submit</button>
         </div>
     `;
 
@@ -137,7 +137,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
             var removeButton = document.createElement("button");
             removeButton.innerHTML = '&times;';
-            removeButton.classList.add('btn', 'btn-sm', 'btn-outline-danger', 'ms-3');
+            removeButton.classList.add('btn', 'btn-sm', 'btn-outline-warning', 'ms-3');
             removeButton.onclick = function() {
                 this.parentElement.remove();
             };
