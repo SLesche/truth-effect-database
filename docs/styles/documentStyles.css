@@ -77,6 +77,15 @@ ul {
 .active::before {
     content: '\25BC'; /* Down-pointing triangle */
 }
+
+.collapsible::before,
+.active::before {
+  font-family: Arial, sans-serif !important;
+  color: inherit !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
 .actions {
     display: none;
     position: absolute;
