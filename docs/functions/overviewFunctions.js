@@ -143,14 +143,15 @@ function getNumberOfSubmissions(control) {
                 validated_checkpoints++;
             }
 
-            // Sub-validations
             const subkeys = ['repetition_validated', 'condition_data', 'measurement_data', 'raw_data'];
             subkeys.forEach(key => {
                 total_checkpoints++;
-                if (study[key].validated) {
+                
+                if (study.hasOwnProperty(key) && study[key] && study[key].validated) {
                     validated_checkpoints++;
                 }
             });
+
         }
     }
 

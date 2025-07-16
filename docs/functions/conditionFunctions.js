@@ -107,6 +107,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     if (condition_data && condition_data.has_within_conditions == 1) {
         document.getElementById("within_conditions_list").classList.remove("d-none");
         const withinConditionsList = document.getElementById("withinConditionsList");
+        document.getElementById("within_conditions_list").style.display = "block";
         condition_data.within_condition_details.forEach(function(condition) {
             const li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
@@ -120,6 +121,8 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
     if (condition_data && condition_data.has_between_conditions == 1) {
         document.getElementById("between_conditions_list").classList.remove("d-none");
         const betweenConditionsList = document.getElementById("betweenConditionsList");
+        document.getElementById("between_conditions_list").style.display = "block";
+
         condition_data.between_condition_details.forEach(function(condition) {
             const li = document.createElement("li");
             li.textContent = `Condition: ${condition.name}, Identifier: ${condition.identifier}`;
