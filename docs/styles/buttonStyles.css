@@ -74,12 +74,13 @@
     margin-right: 0;
 }
 
-.green-checkmark-custom {
-    color: green !important;
-    margin-left: 8px; /* Adjust as needed */
-    font-weight: bold;
-}
-
+.green-checkmark-custom i {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1;
+    vertical-align: middle;
+    display: inline-block;
+  }
 .form-check-input:not(:checked) {
     background-color: #ebebeb; /* Change to a darker shade as desired */
     border-color: #888;
