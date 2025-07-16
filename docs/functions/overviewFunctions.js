@@ -73,6 +73,13 @@ function generateOverviewPage(control) {
         document.getElementById('progressFileInput').click();
     });
 
+    const user = 'sven.lesche';
+    const domain = 'psychologie.uni-heidelberg.de';
+    const email = `${user}@${domain}`;
+    const link = document.getElementById('email1');
+    link.href = `mailto:${email}`;
+    link.textContent = email;
+
     document.getElementById('progressFileInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
         if (file) {
