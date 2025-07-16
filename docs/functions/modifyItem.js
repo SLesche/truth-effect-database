@@ -23,12 +23,27 @@ function renameItem(span, oldName) {
     }
 }
 
+function showBootstrapConfirm(callback) {
+    const modalElement = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const confirmButton = document.getElementById('confirmDeleteBtn');
+
+    const onConfirm = () => {
+        confirmButton.removeEventListener('click', onConfirm);
+        callback(); // Your delete function or logic
+        modalElement.hide();
+    };
+
+    confirmButton.addEventListener('click', onConfirm);
+    modalElement.show();
+}
+
+
 function removeItem(listItem, control) {
-    if (confirm("Are you sure you want to remove this item?")) {
+    showBootstrapConfirm(() => {
         const item_id = listItem.dataset.index;
         const type = item_id.split("-")[0];
         const num_idx = item_id.split("-").slice(1).map(Number);
-    
+
         if (type === "publication") {
             delete control.publication_info[num_idx[0]];
         } else if (type === "study") {
@@ -36,12 +51,13 @@ function removeItem(listItem, control) {
         } else if (type === "dataset") {
             delete control.publication_info[num_idx[0]].study_info[num_idx[1]].dataset_info[num_idx[2]];
         } else if (type === "measures") {
-            delete control.publication_info[num_idx[0]].study_info[num_idx[1]].measurement_info
+            delete control.publication_info[num_idx[0]].study_info[num_idx[1]].measurement_info;
         } else if (type === "statementset") {
             delete control.statementset_info[num_idx[0]];
         }
 
         listItem.remove();
+
         // Clear content area if the removed item was displayed
         const content = document.getElementById("content");
         if (content.querySelector("h2").textContent === listItem.querySelector("span").textContent) {
@@ -52,5 +68,5 @@ function removeItem(listItem, control) {
         }
 
         console.log(control);
-    }
+    });
 }

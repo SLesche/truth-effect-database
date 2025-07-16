@@ -41,21 +41,27 @@ function addGreenCheckmarkById(sidebarItemId) {
         console.error(`No span element found within the sidebar item with ID ${sidebarItemId}.`);
         return;
     }
-    // Create a new span element for the checkmark
-    const checkmark = document.createElement('span');
-    checkmark.textContent = ' ✔'; // Unicode checkmark character
-    checkmark.classList.add('green-checkmark');
 
     // Check if the textSpan already has a checkmark
-    const existingCheckmark = textSpan.querySelector('.green-checkmark');
+    const existingCheckmark = textSpan.querySelector('.green-checkmark-custom');
     if (existingCheckmark) {
         console.log('Checkmark already exists.');
         return;
     }
 
+    // Create the icon element
+    const icon = document.createElement('i');
+    icon.classList.add('bi', 'bi-check', 'text-success', 'fs-2', 'align-middle');
+
+    // Create a new span element for the checkmark
+    const checkmark = document.createElement('span');
+    checkmark.classList.add('green-checkmark-custom');
+    checkmark.appendChild(icon);
+
     // Append the checkmark to the existing span
     textSpan.appendChild(checkmark);
 }
+
 
 function csvFileToObject(file) {
     return new Promise((resolve, reject) => {

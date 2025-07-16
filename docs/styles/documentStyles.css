@@ -212,36 +212,3 @@ html {
 .card:hover {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
-
-.title {
-    font-size: 1.5em;
-    color: #333;
-    margin: 0 0 10px;
-}
-
-.author, .journal {
-    font-size: 0.9em;
-    color: #777;
-    margin: 5px 0;
-}
-
-.abstract {
-    font-size: 1em;
-    color: #555;
-    margin: 15px 0;
-}
-
-.read-more {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #007BFF;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
-}
-
-.read-more:hover {
-    background-color: #0056b3;
-}

@@ -8,7 +8,7 @@ function addConditions(parentElement, control, publication_idx, study_idx) {
 
     // Create a span for the dataset name
     const span = document.createElement("span");
-    span.textContent = "Experimental Conditions";
+    span.textContent = "Conditions";
 
     // // Create action buttons
     // const actions = document.createElement("div");

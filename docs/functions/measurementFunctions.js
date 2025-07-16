@@ -1,5 +1,5 @@
 function addMeasurement(parentElement, control, publication_idx, study_idx) {
-    const measurement_name = "Additional Measurements";
+    const measurement_name = "Measurements";
 
     // Create a new list item for the dataset
     const listItem = document.createElement("li");
@@ -138,14 +138,7 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
             li.textContent = `Construct: ${measure.construct}, Details: ${measure.details}`;
 
-            var removeButton = document.createElement("button");
-            removeButton.innerHTML = '&times;';
-            removeButton.classList.add('btn', 'btn-sm', 'btn-outline-warning', 'ms-3');
-            removeButton.onclick = function() {
-                this.parentElement.remove();
-            };
-
-            li.appendChild(removeButton);
+            add_delete_button_to_list_item(li);
             measuresList.appendChild(li);
         });
     }
