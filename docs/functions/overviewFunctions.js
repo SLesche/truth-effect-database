@@ -134,7 +134,7 @@ function getNumberOfSubmissions(control) {
             }
 
             // Sub-validations
-            const subkeys = ['repetition_data', 'condition_data', 'measurement_data', 'raw_data'];
+            const subkeys = ['repetition_validated', 'condition_data', 'measurement_data', 'raw_data'];
             subkeys.forEach(key => {
                 total_checkpoints++;
                 if (study[key].validated) {
