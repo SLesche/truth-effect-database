@@ -224,7 +224,7 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
     control.publication_info[publication_idx].study_info[study_idx].measurement_data = measurement_data;
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "measures-" + publication_idx + "-" + study_idx;
@@ -242,7 +242,7 @@ function addMeasureToList() {
     }
 
     if (construct === "" || detailsInput.value.trim() === "") {
-        alert("Please fill in both the construct and details.");
+        showAlert("Please fill in both the construct and details.", 'warning');
         return;
     }
 

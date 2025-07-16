@@ -321,7 +321,7 @@ function updateStudySurvey(control, publication_idx, study_idx) {
     control.publication_info[publication_idx].study_info[study_idx].study_data = study_data;
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "study-" + publication_idx + "-" + study_idx;

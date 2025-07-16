@@ -512,19 +512,19 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
     if (!statementset_validated || !study_info.condition_data.validated || !study_info.repetition_data.validated || !study_info.study_data.validated) {
         // Display which sections are missing
         if (!study_info.study_data.validated) {
-            alert('Please enter information about the overall study before submitting the raw data.')
+            showAlert('Please enter information about the overall study before submitting the raw data.', 'danger')
             return false;
         }
         if (!study_info.condition_data.validated) {
-            alert('Please enter information about the experimental conditions before submitting the raw data.');
+            showAlert('Please enter information about the experimental conditions before submitting the raw data.', 'danger');
             return false;
         }
         if (!study_info.repetition_validated) {
-            alert('Please enter information about the statement presentations before submitting the raw data.')
+            showAlert('Please enter information about the statement presentations before submitting the raw data.', 'danger')
             return false;
         }
         if (!statementset_validated) {
-            alert('Please enter information about the statement set before submitting the raw data.');
+            showAlert('Please enter information about the statement set before submitting the raw data.', 'danger');
             return false;
         }
     }
@@ -540,7 +540,7 @@ async function updateRawDataSurvey(control, publication_idx, study_idx) {
     control.publication_info[publication_idx].study_info[study_idx].raw_data = raw_data
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "rawdata-" + publication_idx + "-" + study_idx;

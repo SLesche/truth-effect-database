@@ -171,14 +171,10 @@ function printProgressReport(progress_report) {
             <div class="card-body">
                 <h2 class="card-title">Progress Report</h2>
 
-                <p><strong>Total Publications:</strong> ${progress_report.num_total_publications}</p>
-                <p><strong>Total Statement Sets:</strong> ${progress_report.num_statement_sets}</p>
-                <p><strong>Total Studies:</strong> ${progress_report.num_total_studies}</p>
-
                 <div class="mb-3">
-                    <label><strong>Publications Validated:</strong> ${progress_report.num_publications_validated}</label>
+                    <label><strong>Publications Validated:</strong> ${progress_report.num_publications_validated} / ${progress_report.num_total_publications}</label>
                     <div class="progress">
-                        <div class="progress-bar bg-primary" role="progressbar" 
+                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" 
                             style="width: ${progress_report.percent_publication_validated.toFixed(1)}%;" 
                             aria-valuenow="${progress_report.percent_publication_validated.toFixed(1)}" 
                             aria-valuemin="0" aria-valuemax="100">
@@ -188,9 +184,9 @@ function printProgressReport(progress_report) {
                 </div>
 
                 <div class="mb-3">
-                    <label><strong>Studies Validated:</strong> ${progress_report.num_studies_validated}</label>
+                    <label><strong>Studies Validated:</strong> ${progress_report.num_studies_validated} / ${progress_report.num_total_studies}</label>
                     <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" 
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" 
                             style="width: ${progress_report.percent_studies_validated.toFixed(1)}%;" 
                             aria-valuenow="${progress_report.percent_studies_validated.toFixed(1)}" 
                             aria-valuemin="0" aria-valuemax="100">
@@ -200,9 +196,9 @@ function printProgressReport(progress_report) {
                 </div>
 
                 <div class="mb-3">
-                    <label><strong>Statement Sets Validated:</strong> ${progress_report.num_statement_sets_validated}</label>
+                    <label><strong>Statement Sets Validated:</strong> ${progress_report.num_statement_sets_validated} / ${progress_report.num_statement_sets}</label>
                     <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" 
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" 
                             style="width: ${progress_report.percent_statement_sets_validated.toFixed(1)}%;" 
                             aria-valuenow="${progress_report.percent_statement_sets_validated.toFixed(1)}" 
                             aria-valuemin="0" aria-valuemax="100">
