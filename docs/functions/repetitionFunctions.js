@@ -93,8 +93,9 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
       </div>
 
       <div class="mb-3">
-        <label for="max_n_repetitions" class="form-label">What was the maximum number of times a statement was presented during this session? Enter 1, if statements were only presented once.</label>
+        <label for="max_n_repetitions" class="form-label">What was the maximum number of times a statement was presented during this session?</label>
         <input type="number" class="form-control" id="max_n_repetitions" name="max_n_repetitions" />
+        <div class="form-text">Enter 1, if each statement was only presented once within this procedure condition.</div>
       </div>
 
       <div class="mb-3">
