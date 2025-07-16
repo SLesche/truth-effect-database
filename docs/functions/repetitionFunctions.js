@@ -101,6 +101,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
       <div class="mb-3">
         <label for="n_statements" class="form-label">How many statements were presented to each participant?</label>
         <input type="number" class="form-control" id="n_statements" name="n_statements" />
+        <div class="form-text">Provide the number of statements retained for analysis, so excluding control or distractor statements.</div>
       </div>
 
       ${generateYesNoField("truth_instructions", "Were the participants instructed that some of these statements may be false?", null)}
