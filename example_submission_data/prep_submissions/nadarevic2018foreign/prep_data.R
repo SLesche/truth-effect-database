@@ -8,6 +8,7 @@ statement_data <- readxl::read_excel(paste0(script_dir, "./data/1. Statements Ex
 colnames(statement_data) = c("item_nr", "set", "english_text", "hungarian_text", "status", "difficulty", "accuracy")
 
 statement_data <- statement_data %>% 
+  mutate(item_nr = ifelse(english_text == "The Yonghe Temple is in Shanghai.", 30, item_nr)) %>% 
   mutate(
     statement_identifier = paste0(item_nr, set),
     statement_text = paste0(english_text, "/", hungarian_text),
@@ -44,9 +45,9 @@ clean_data_hungarian <- data %>%
 clean_data <- rbind(clean_data_english, clean_data_hungarian) 
 
 clean_data <- clean_data %>% 
-  filter(filter == "selected", phase == "TruthRating") %>% 
+  filter(filter == "selected", phase == "TruthRating", nativelanguage == "Hungarian") %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = difficulty,
     between_identifier = condition,
     response = truthrating,
@@ -102,7 +103,7 @@ clean_data <- rbind(clean_data_english, clean_data_german)
 clean_data <- clean_data %>% 
   filter(filter == "selected", set != "Controlitem", phase %in% c("TruthJudgment1", "TruthJudgment2")) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = phase,
     within_identifier = difficulty,
     between_identifier = condition,
     response = ifelse(truthjudgment, 1, 0),
