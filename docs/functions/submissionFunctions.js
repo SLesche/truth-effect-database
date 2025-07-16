@@ -45,6 +45,13 @@ function showSubmissionSuccessModal() {
     const modalEl = document.getElementById('confirmModalSubmission');
     const modal = new bootstrap.Modal(modalEl);
     
+    const user = 'sven.lesche';
+    const domain = 'psychologie.uni-heidelberg.de';
+    const email = `${user}@${domain}`;
+    const link = document.getElementById('email-success1');
+    link.href = `mailto:${email}`;
+    link.textContent = email;
+
     // Show the modal
     modal.show();
   

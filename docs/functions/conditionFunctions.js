@@ -78,7 +78,7 @@ function initializeConditionSurvey(control, publication_idx, study_idx){
           </div>
         </fieldset>
 
-        ${generateYesNoField('has_between_conditions', 'Does this data contain any additional within conditions?', condition_data.has_between_conditions)}
+        ${generateYesNoField('has_between_conditions', 'Does this data contain any additional between conditions?', condition_data.has_between_conditions)}
 
         <fieldset id="betweenConditionsFieldset" class="bg-light p-4 rounded shadow-sm mb-4" ${condition_data.has_between_conditions == 1 ? '' : 'disabled'}>
             <div class="mb-3">
