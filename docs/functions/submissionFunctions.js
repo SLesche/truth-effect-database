@@ -40,15 +40,27 @@ function cleanDataForSubmission(control) {
     return cleaned_control
 }
 
+function showSubmissionSuccessModal() {
+    // Initialize Bootstrap modal instance for the modal element
+    const modalEl = document.getElementById('confirmModalSubmission');
+    const modal = new bootstrap.Modal(modalEl);
+    
+    // Show the modal
+    modal.show();
+  
+    // Optional: handle "Got it!" button click to close the modal
+    const confirmBtn = document.getElementById('confirmEmailBtn');
+    confirmBtn.onclick = () => modal.hide();
+  }
+  
+
 function submitData(control) {
     if (!validate_submission(control)) {
         return;
     }
 
-    console.log(control);
+    //console.log(control);
     const version_number = "1.0.0"; // Replace with the actual version number
-
-    console.log(control);
 
     // clean the control data
     const cleaned_control = cleanDataForSubmission(control);
@@ -73,7 +85,7 @@ function submitData(control) {
 
     saveProgress(control);
 
-    showAlert("Data submitted successfully!", 'success');
+    showSubmissionSuccessModal();
 }
 
 function validate_submission(control) {

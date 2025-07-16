@@ -289,3 +289,14 @@ function generateYesNoField(id, label, value, yesLabel = "Yes", noLabel = "No") 
         </div>
     </div>`;
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const user = 'sven.lesche';
+    const domain = 'psychologie.uni-heidelberg.de';
+    const email = `${user}@${domain}`;
+    const link = document.getElementById('email1');
+    link.href = `mailto:${email}`;
+    link.textContent = email;
+  });
+  
