@@ -110,9 +110,9 @@ function initializeStatementSetSurvey(control, statementset_idx) {
             <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
             <p>In this section, please provide a file containing the statements used in your study. Including this file allows researchers to more closely replicate your study by reviewing the exact statements that were presented to participants.</p>
             <p>It is important that the statement IDs in this file match exactly with those used in your raw data. This consistency ensures that the statements can be correctly linked to the corresponding data points in your dataset.</p>
-            <p>If available, please include columns with the following information:</p>
+            <p>Please include columns with the following information and the respective column-names printed in bold.</p>
             <ul class = "list-of-entries">
-                <li><strong>statement_identifier:</strong> A unique identifier for each statement.</li>
+                <li><strong>statement_identifier (mandatory):</strong> A unique identifier for each statement. - Must be present in the raw data</li>
                 <li><strong>statement_text:</strong> The text of the statement as it was presented to participants.</li>
                 <li><strong>statement_accuracy:</strong> The accuracy of the statement, indicating whether it is true or false.</li>
                 <li><strong>statement_category:</strong> The category or type of the statement, if applicable.</li>

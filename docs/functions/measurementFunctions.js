@@ -80,20 +80,15 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
 
             <form id="measures_form" class="survey-form p-3 border rounded shadow-sm bg-light" style="display: none;">
                 <div class="mb-3">
+                    <label for="measure_select_construct" class="form-label fw-bold">Add the name of the construct:</label>
+                    <input type="text" class="form-control" id="measure_select_construct" name="measure_select_construct">
+                    <small class="form-text text-muted fst-italic ms-1">Use broad terms like "intelligence" or "extraversion".</small>
+                </div>    
+            
+                <div class="mb-3">
                     <label for="measure_input_details" class="form-label fw-bold">Add any additional variables you measured in the study:</label>
                     <input type="text" class="form-control" id="measure_input_details" name="measure_input_details">
-                    <small class="form-text text-muted fst-italic ms-1">This can include the scale used: "APM Performance" or "BFI-2-XS".</small>
-                </div>
-
-                <div class="mb-3">
-                    <label for="measure_select_construct" class="form-label fw-bold">Add the name of the construct:</label>
-                    <select class="form-select" id="measure_select_construct" name="measure_select_construct">
-                        <option value="">--Select a construct--</option>
-                        ${constructs.map(construct => `<option value="${construct}">${construct}</option>`).join('')}
-                        <option value="other">Other</option>
-                    </select>
-                    <input type="text" class="form-control mt-2" id="measure_input_construct" name="measure_input_construct" style="display: none;" placeholder="Enter construct">
-                    <small class="form-text text-muted fst-italic ms-1">Use broad terms like "intelligence" or "extraversion".</small>
+                    <small class="form-text text-muted fst-italic ms-1">Be detailed! This can include the scale used: "APM Performance" or "BFI-2-XS".</small>
                 </div>
 
                 <div class="mb-3">
@@ -116,13 +111,6 @@ function initializeMeasurementSurvey(control, publication_idx, study_idx){
             const measuresForm = document.getElementById('measures_form');
             measuresForm.style.display = (this.value == 1) ? 'block' : 'none';
         });
-    });
-
-    // Toggle custom construct field
-    document.getElementById('measure_select_construct').addEventListener('change', function() {
-        const otherInput = document.getElementById('measure_input_construct');
-        otherInput.style.display = (this.value === 'other') ? 'block' : 'none';
-        if (this.value !== 'other') otherInput.value = '';
     });
 
     // Prepopulate form if data exists
@@ -226,7 +214,6 @@ function updateMeasurementSurvey(control, publication_idx, study_idx){
 
 function addMeasureToList() {
     const constructSelect = document.getElementById('measure_select_construct');
-    const constructInput = document.getElementById('measure_input_construct');
     const detailsInput = document.getElementById('measure_input_details');
 
     let construct = constructSelect.value;
@@ -253,6 +240,5 @@ function addMeasureToList() {
 
     // Clear the input fields
     constructSelect.value = "";
-    constructInput.value = "";
     detailsInput.value = "";
 }

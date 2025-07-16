@@ -37,7 +37,7 @@ function generateOverviewPage(control) {
                 <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
                 <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as may studies in your publication as you wish.</p>
                 <p>In order to properly integrate your data into our database, we ask you to follow our instructions precisely. Importantly, this includes our restrictions placed on the uploaded data. Make sure that your column names match ours exactly and that the identifiers in the raw data match those you enter in the respective overview surveys.</p>
-                <p>After submission, our team will review your data and add it to the database as soon as possible.</p>
+                <p>After submission, send the downloaded .json files to us via email. Our team will review your data and add it to the database as soon as possible.</p>
             </div>
 
             ${printProgressReport(getNumberOfSubmissions(control))}

@@ -54,7 +54,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
       <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
       <p>This section focuses on gathering detailed information about the times statements were presented to participants.</p>
       <p>Importantly, this is also where you have to enter multiple conditions if settings of statement presentation <strong>differed</strong> between or within participants. If you had two sessions for all participants - an exposure and a test session - and manipulated any of the settings asked below between participants, e.g. you told half of the participants that some of the statements may be repeated (but only in the test phase), then you should enter a total of 3 distinct conditions of statement presentation. One common exposure condition with identical settings for all participants and two different test conditions encoding the two experimental groups.</p>
-      <p>If you manipulated any part of the experiment (between or within participants) and cannot encode this through different conditions here because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Experimental Conditions" tab.</p>
+      <p>If you manipulated any part of the experiment (between or within participants) and cannot encode this through different conditions here because we did not provide a precise question, you will have the opportunity to add this manipulation in the "Conditions" tab.</p>
     </div>
 
     <h3 class="mb-3">Procedure Information:</h2>
@@ -62,7 +62,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
       <div class="mb-3">
         <label for="presentation_identifier" class="form-label">How is this statement presentation condition identified in the raw data?</label>
         <input type="text" class="form-control" id="presentation_identifier" name="presentation_identifier" />
-        <div class="form-text">This identifier <strong>must</strong> be identical to the value of the column "presentation_identifier" in the raw data. This encodes information about different presentation settings, caused either by repeated measurements or experimental manipulations of the settings entered below.</div>
+        <div class="form-text">This identifier <strong>must</strong> be identical to the value of the column "procedure_identifier" in the raw data. This encodes information about different presentation settings, caused either by repeated measurements or experimental manipulations of the settings entered below.</div>
       </div>
 
       <div class="mb-3">

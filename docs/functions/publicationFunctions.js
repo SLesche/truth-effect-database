@@ -86,11 +86,12 @@ function initializePublicationSurvey(control, publication_idx) {
     <h1 class = "mb-3">${publication_name}</h1>
     <div class="alert alert-info" role="alert">
         <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
-        <p>Please start by providing details about the publication. This refers to the overall paper or article to which your data is associated.</p>
         <p>In this section, you'll be asked to provide key information such as the title, authors, and publication date. This helps us organize and connect your data to the correct sources, making it easier for others to reference and understand the context of your research.</p>
-        <p>After completing the publication details, you will have the opportunity to add one or more studies associated with this publication. Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
-        <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use.</p>
-        <p class="mb-0">Feel free to add as many studies as needed.</p>
+        <p>You also have the opportunity to add one or more studies associated with this publication on the left side by clicking "+ Add Study". Each study represents a distinct experiment or analysis conducted within the scope of the publication.</p>
+        <p>By following this structure, you help ensure that your data is accurately represented and easily accessible for future use. Feel free to add as many studies as needed.</p>
+        <p>Similarly, you can add sets of statements that were used in the studies by clicking "+ Add Statement Set" on the left side. If you used the same set of statements for all studies, you only need to initialize one set of statements. If information on the statements is not available, you may also refrain from adding any sets of statements.</p>
+        <p class="mb-0">After you have completed this form on the publication details, start by setting up the correct number of studies and sets of statements in your publication. </p>
+
     </div>
 
     <h3 class="mb-3">Publication Details</h3>
