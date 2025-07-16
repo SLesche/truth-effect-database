@@ -60,7 +60,7 @@ function submitData(control) {
     }
 
     //console.log(control);
-    const version_number = "1.0.0"; // Replace with the actual version number
+    const version_number = "1.0.1"; // Replace with the actual version number
 
     // clean the control data
     const cleaned_control = cleanDataForSubmission(control);
