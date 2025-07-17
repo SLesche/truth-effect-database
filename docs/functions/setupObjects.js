@@ -6,6 +6,7 @@ function setupStudyInfo(study_name){
         raw_data: {},
         condition_data: {},
         repetition_data: {},
+        repetition_validated: {},
     };
     return study_info
 }

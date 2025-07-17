@@ -1,0 +1,121 @@
+"","Statement","Status","statement_identifier","statement_text","statement_accuracy"
+"1","Der Koloss von Rhodos zählt zu den sieben Weltwundern der Antike",TRUE,1,"Der Koloss von Rhodos zählt zu den sieben Weltwundern der Antike",1
+"2","Die Ostsee hat einen höheren Salzgehalt als die Nordsee.",FALSE,2,"Die Ostsee hat einen höheren Salzgehalt als die Nordsee.",0
+"3","Die vier apokalyptischen Reiter stehen für Krieg, Hunger, Pest und Tod.",TRUE,3,"Die vier apokalyptischen Reiter stehen für Krieg, Hunger, Pest und Tod.",1
+"4","Kathete ist die längere Seite eines Dreiecks.",FALSE,4,"Kathete ist die längere Seite eines Dreiecks.",0
+"5","Die erste künstliche Atomkernreaktion wurde 1919 erzielt.",TRUE,5,"Die erste künstliche Atomkernreaktion wurde 1919 erzielt.",1
+"6","Wolfgang Amadeus Mozart begab sich von 1769 bis 1772 auf seine Italienreise. ",TRUE,6,"Wolfgang Amadeus Mozart begab sich von 1769 bis 1772 auf seine Italienreise. ",1
+"7","In Grönland leben keine wilden Eisbären.",FALSE,7,"In Grönland leben keine wilden Eisbären.",0
+"8","Der Planet Erde besteht zu einem großen Teil aus Eisen.",TRUE,8,"Der Planet Erde besteht zu einem großen Teil aus Eisen.",1
+"9","20% der 85-jährigen leiden an Alzheimer.",TRUE,9,"20% der 85-jährigen leiden an Alzheimer.",1
+"10","Der russische Name für Berggipfel lautet Pik.",TRUE,10,"Der russische Name für Berggipfel lautet Pik.",1
+"11","Berlin ist die größte Stadt der europäischen Union.",FALSE,11,"Berlin ist die größte Stadt der europäischen Union.",0
+"12","Der Mount Everest ist der höchste Berg Asiens.",TRUE,12,"Der Mount Everest ist der höchste Berg Asiens.",1
+"13","Der Kölner Dom war vier Jahre lang das höchste Gebäude der Welt.",TRUE,13,"Der Kölner Dom war vier Jahre lang das höchste Gebäude der Welt.",1
+"14","James Connolly war der erste Olypiasieger der Neuzeit.",TRUE,14,"James Connolly war der erste Olypiasieger der Neuzeit.",1
+"15","Ein Oxymoron ist eine Formulierung mit einem inneren Widerspruch.",TRUE,15,"Ein Oxymoron ist eine Formulierung mit einem inneren Widerspruch.",1
+"16","Der Pentameter ist das klassische Versmaß epischer Dichtung.",FALSE,16,"Der Pentameter ist das klassische Versmaß epischer Dichtung.",0
+"17","Eine reife Banane enthält ca 18% Zucker.",TRUE,17,"Eine reife Banane enthält ca 18% Zucker.",1
+"18","Deutschlands erstes Hochhaus entstand 1950.",FALSE,18,"Deutschlands erstes Hochhaus entstand 1950.",0
+"19","3,5% des Wassers auf der Erde ist Süßwasser.",TRUE,19,"3,5% des Wassers auf der Erde ist Süßwasser.",1
+"20","Nolan Bushnell ist Gründer der Firma ATARI.",TRUE,20,"Nolan Bushnell ist Gründer der Firma ATARI.",1
+"21","Joschka Fischer ist Mitglied der SPD.",FALSE,21,"Joschka Fischer ist Mitglied der SPD.",0
+"22","Ein Liter Apfelsaft enthält ca. 50 Gramm Eiweiß.",FALSE,22,"Ein Liter Apfelsaft enthält ca. 50 Gramm Eiweiß.",0
+"23","Kürbis fördert die Sehfähigkeit.",FALSE,23,"Kürbis fördert die Sehfähigkeit.",0
+"24","Albert Einstein wurde 1792 geboren.",FALSE,24,"Albert Einstein wurde 1792 geboren.",0
+"25","Artur Rubinstein ist ein bekannter Pianist.",TRUE,25,"Artur Rubinstein ist ein bekannter Pianist.",1
+"26","Der nördlichste Punkt von Norwegen nennt sich Nordkap.",TRUE,26,"Der nördlichste Punkt von Norwegen nennt sich Nordkap.",1
+"27","Der Hinduismus ist die Religion mit den meisten Anhängern.",FALSE,27,"Der Hinduismus ist die Religion mit den meisten Anhängern.",0
+"28","60% der Erdoberfläche sind mit Wasser bedeckt.",FALSE,28,"60% der Erdoberfläche sind mit Wasser bedeckt.",0
+"29","Eisen ist das einzige Metall, das rostet.",FALSE,29,"Eisen ist das einzige Metall, das rostet.",0
+"30","Bei harmonischen Schwingungen ist die Frequenz unabhängig von der Amplitude.",TRUE,30,"Bei harmonischen Schwingungen ist die Frequenz unabhängig von der Amplitude.",1
+"31","Der Planet Merkur ist der Sonne am nächsten.",TRUE,31,"Der Planet Merkur ist der Sonne am nächsten.",1
+"32","Die Haare intelligenterer Menschen enthalten mehr Eisen. ",FALSE,32,"Die Haare intelligenterer Menschen enthalten mehr Eisen. ",0
+"33","1% der Geburten sind Zwillingsgeburten.",TRUE,33,"1% der Geburten sind Zwillingsgeburten.",1
+"34","Eine berühmte Bucht in Kuba heißt Rinderbucht.",FALSE,34,"Eine berühmte Bucht in Kuba heißt Rinderbucht.",0
+"35","Der höchste IQ-Wert den ein Mensch bisher erzielt hat liegt bei 228.",TRUE,35,"Der höchste IQ-Wert den ein Mensch bisher erzielt hat liegt bei 228.",1
+"36","Durch Verabreichung von Zimt bei Diabetikern kann der Blutzuckerspiegel gesenkt werden.",TRUE,36,"Durch Verabreichung von Zimt bei Diabetikern kann der Blutzuckerspiegel gesenkt werden.",1
+"37","Methusalem ist nach dem Buch Genesis der Großvater von Noach.",TRUE,37,"Methusalem ist nach dem Buch Genesis der Großvater von Noach.",1
+"38","Seit Mitte des 20. Jahrhunderts kennt man in Europa die Kaffeebohne.",FALSE,38,"Seit Mitte des 20. Jahrhunderts kennt man in Europa die Kaffeebohne.",0
+"39","Der Ätna ist der höchste Vulkan Europas.",TRUE,39,"Der Ätna ist der höchste Vulkan Europas.",1
+"40","Die Grande Arche ist ein Denkmal in Toulouse. ",FALSE,40,"Die Grande Arche ist ein Denkmal in Toulouse. ",0
+"41","Salze haben eine aus Ionen bestehende Kristallstruktur.",TRUE,41,"Salze haben eine aus Ionen bestehende Kristallstruktur.",1
+"42","Die Schallgeschwindigkeit ist unabhängig von der Temperatur.",FALSE,42,"Die Schallgeschwindigkeit ist unabhängig von der Temperatur.",0
+"43","Die Donau mündet ins Kaspische Meer.",FALSE,43,"Die Donau mündet ins Kaspische Meer.",0
+"44","Die Zentralkartei für alle Verkehrssünder befindet sich in Freiburg.",FALSE,44,"Die Zentralkartei für alle Verkehrssünder befindet sich in Freiburg.",0
+"45","Der Film Avatar ist der erfolgreichste Film aller Zeiten",TRUE,45,"Der Film Avatar ist der erfolgreichste Film aller Zeiten",1
+"46","Die erste Atombombe wurde über Tokio angeworfen.",FALSE,46,"Die erste Atombombe wurde über Tokio angeworfen.",0
+"47","Die Sprache Mandarin wird von fast einer Milliarde Menschen gesprochen",TRUE,47,"Die Sprache Mandarin wird von fast einer Milliarde Menschen gesprochen",1
+"48","Perlen werden in der Regel in Jakobsmuscheln gefunden.",FALSE,48,"Perlen werden in der Regel in Jakobsmuscheln gefunden.",0
+"49","Die meisten Schweißdrüsen hat ein Mensch in den Handflächen.",TRUE,49,"Die meisten Schweißdrüsen hat ein Mensch in den Handflächen.",1
+"50","In den USA wurde der erste Kühlschrank ohne FCKW und FKW entwickelt.",FALSE,50,"In den USA wurde der erste Kühlschrank ohne FCKW und FKW entwickelt.",0
+"51","Die Vereinten Nationen existieren seit 1848.",FALSE,51,"Die Vereinten Nationen existieren seit 1848.",0
+"52","Die Kinderbuch Hexe Bibi Blocksberg feierte 2010 ihren 60. Geburtstag ",FALSE,52,"Die Kinderbuch Hexe Bibi Blocksberg feierte 2010 ihren 60. Geburtstag ",0
+"53","Amtssprache der Vatikanstadt ist neben italienisch auch latein",TRUE,53,"Amtssprache der Vatikanstadt ist neben italienisch auch latein",1
+"54","Es existieren vier Edelgase: Helium, Neon, Argon, und Radon.",FALSE,54,"Es existieren vier Edelgase: Helium, Neon, Argon, und Radon.",0
+"55","Italienisch ist keine Amtssprache der Schweiz.",FALSE,55,"Italienisch ist keine Amtssprache der Schweiz.",0
+"56","Der Neufundländer ist eine Pferderasse.",FALSE,56,"Der Neufundländer ist eine Pferderasse.",0
+"57","Galileo entdeckte die Schwerkraft. ",FALSE,57,"Galileo entdeckte die Schwerkraft. ",0
+"58","Die Seufzerbrücke steht in Venedig",TRUE,58,"Die Seufzerbrücke steht in Venedig",1
+"59","Die griechischen Schöpfungsgötter waren Gaia, Erebos und Kreon.",FALSE,59,"Die griechischen Schöpfungsgötter waren Gaia, Erebos und Kreon.",0
+"60","Benjamin Blümchen wurde von der Autorin Elfie Donnelly erfunden.",TRUE,60,"Benjamin Blümchen wurde von der Autorin Elfie Donnelly erfunden.",1
+"61","Isaac Newton entdeckte, dass sich die Farbe des Lichts aus Spektralfarben zusammensetzt.",TRUE,61,"Isaac Newton entdeckte, dass sich die Farbe des Lichts aus Spektralfarben zusammensetzt.",1
+"62","Der Name Google geht auf den Spitznamen seines Erfinders zurück.",FALSE,62,"Der Name Google geht auf den Spitznamen seines Erfinders zurück.",0
+"63","Ein Ironman muss 42 km Laufen, 3,8 km schwimmen und 180 km Radfahren können.",TRUE,63,"Ein Ironman muss 42 km Laufen, 3,8 km schwimmen und 180 km Radfahren können.",1
+"64","Vitamin A ist wasserlöslich.",FALSE,64,"Vitamin A ist wasserlöslich.",0
+"65","Die Hauptstadt von Madagaskar ist Toamasina.",FALSE,65,"Die Hauptstadt von Madagaskar ist Toamasina.",0
+"66","Jeder Deutsche trinkt durchschnittlich 25 Liter Tee pro Jahr.",TRUE,66,"Jeder Deutsche trinkt durchschnittlich 25 Liter Tee pro Jahr.",1
+"67","Eine Vollmilchschokolade enthält mindestens 60% Kakao.",FALSE,67,"Eine Vollmilchschokolade enthält mindestens 60% Kakao.",0
+"68","Die Hauptstadt der DDR war Dresden.",FALSE,68,"Die Hauptstadt der DDR war Dresden.",0
+"69","Olivenöl ist das einzige Lebensmittel, das nicht verdirbt.",FALSE,69,"Olivenöl ist das einzige Lebensmittel, das nicht verdirbt.",0
+"70","Es gibt rund 435 Brücken in Venedig.",TRUE,70,"Es gibt rund 435 Brücken in Venedig.",1
+"71","Pluto ist der größte Planet des Sonnensystems.",FALSE,71,"Pluto ist der größte Planet des Sonnensystems.",0
+"72","Kakteen können sich durch Parthenogenese fortpflanzen.",FALSE,72,"Kakteen können sich durch Parthenogenese fortpflanzen.",0
+"73","Die Masse eines Körpers ist ungleich seiner Gewichtskraft.",TRUE,73,"Die Masse eines Körpers ist ungleich seiner Gewichtskraft.",1
+"74","Ameisenköniginnen werden maximal 15 Jahre alt.",FALSE,74,"Ameisenköniginnen werden maximal 15 Jahre alt.",0
+"75","Der Laizismus fordert eine Zusammenlegung von Kirche und Staat.",FALSE,75,"Der Laizismus fordert eine Zusammenlegung von Kirche und Staat.",0
+"76","Der Speisesaal eines Klosters nennt sich Refektorium.",TRUE,76,"Der Speisesaal eines Klosters nennt sich Refektorium.",1
+"77","Die Ungarische Währung nennt sich Forint.",TRUE,77,"Die Ungarische Währung nennt sich Forint.",1
+"78","Benzoesäure wird als Konservierungsstoff in Lebensmitteln verwendet.",TRUE,78,"Benzoesäure wird als Konservierungsstoff in Lebensmitteln verwendet.",1
+"79","Das Rote Kreuz wurde dreimal mit dem Friedensnobelpreis ausgezeichnet.",TRUE,79,"Das Rote Kreuz wurde dreimal mit dem Friedensnobelpreis ausgezeichnet.",1
+"80","Der erste elektrische Stuhl wurde von Thomas Eddison  entwickelt.",TRUE,80,"Der erste elektrische Stuhl wurde von Thomas Eddison  entwickelt.",1
+"81","Die Freiheitsstatue hält die Fackel in der linken Hand. ",FALSE,81,"Die Freiheitsstatue hält die Fackel in der linken Hand. ",0
+"82","Eine Wespe kann ungefähr 3 km/h schnell fliegen.",FALSE,82,"Eine Wespe kann ungefähr 3 km/h schnell fliegen.",0
+"83","Die USA ist das flächenmäßig größte Land der Welt.",FALSE,83,"Die USA ist das flächenmäßig größte Land der Welt.",0
+"84","An 2 Tagen innerhalb eines Menstruationszyklus besteht die Möglichkeit einer Schwangerschaft.",FALSE,84,"An 2 Tagen innerhalb eines Menstruationszyklus besteht die Möglichkeit einer Schwangerschaft.",0
+"85","Männliche Seeelefanten wiegen fast dreimal so viel wie weibliche.",TRUE,85,"Männliche Seeelefanten wiegen fast dreimal so viel wie weibliche.",1
+"86","Ein Elefant kann alle seine Füße gleichzeitig sehen.",FALSE,86,"Ein Elefant kann alle seine Füße gleichzeitig sehen.",0
+"87","Die erste Frau im Weltall hieß Sunita Williams.",FALSE,87,"Die erste Frau im Weltall hieß Sunita Williams.",0
+"88","Martin Luther wurde in Eisleben geboren. ",TRUE,88,"Martin Luther wurde in Eisleben geboren. ",1
+"89","Alma Mater ist ein alter Begriff für Krankenhaus.",FALSE,89,"Alma Mater ist ein alter Begriff für Krankenhaus.",0
+"90","Die meisten Radarfallen für Verkehrssünder gibt es in Großbritannien.",TRUE,90,"Die meisten Radarfallen für Verkehrssünder gibt es in Großbritannien.",1
+"91","Der Spielanstoß beim Hockey wird Bully genannt.",TRUE,91,"Der Spielanstoß beim Hockey wird Bully genannt.",1
+"92","Die Semiotik ist die allgemeine Lehre von Zeichenprozessen.",TRUE,92,"Die Semiotik ist die allgemeine Lehre von Zeichenprozessen.",1
+"93","Hoffmann von Fallersleben verfasste den Text zum Lied der Deutschen.",TRUE,93,"Hoffmann von Fallersleben verfasste den Text zum Lied der Deutschen.",1
+"94","Das weltbekannte Spiel Monopoly wurde 1935 erstmalig veröffentlicht",TRUE,94,"Das weltbekannte Spiel Monopoly wurde 1935 erstmalig veröffentlicht",1
+"95","Auf der Tagseite des Mondes beträgt die Temperatur ca. 30° Celsius.",FALSE,95,"Auf der Tagseite des Mondes beträgt die Temperatur ca. 30° Celsius.",0
+"96","Der Apple Computer Macintosh geht auf die Apfelsorte Mcintosh zurück.",TRUE,96,"Der Apple Computer Macintosh geht auf die Apfelsorte Mcintosh zurück.",1
+"97","Eine Frau, die unter Arachnophobie leidet, fürchtet sich vor Außerirdischen.",FALSE,97,"Eine Frau, die unter Arachnophobie leidet, fürchtet sich vor Außerirdischen.",0
+"98","Der Planet Neptun ist bekannt für seine Ringe.",FALSE,98,"Der Planet Neptun ist bekannt für seine Ringe.",0
+"99","Die BILD-Zeitung hat  ungefähr 12 Millionen Leser",TRUE,99,"Die BILD-Zeitung hat  ungefähr 12 Millionen Leser",1
+"100","Eine Legehenne legt ca 500 Eier pro Jahr.",FALSE,100,"Eine Legehenne legt ca 500 Eier pro Jahr.",0
+"101","Beethoven schrieb die Oper Apollo und Hyacinth.",FALSE,101,"Beethoven schrieb die Oper Apollo und Hyacinth.",0
+"102","Rio de Janeiro ist die Hauptstadt Brasiliens",FALSE,102,"Rio de Janeiro ist die Hauptstadt Brasiliens",0
+"103","Der Grand Canyon entstand durch den Wasserlauf des Colorado River.",TRUE,103,"Der Grand Canyon entstand durch den Wasserlauf des Colorado River.",1
+"104","Frankreich ist ständiges Mitglied des UN-Sicherheitsrates",TRUE,104,"Frankreich ist ständiges Mitglied des UN-Sicherheitsrates",1
+"105","Papst Johannes Paul I war nur 33 Tage im Amt.",TRUE,105,"Papst Johannes Paul I war nur 33 Tage im Amt.",1
+"106","25% der Kinder in Deutschland haben keine Geschwister.",TRUE,106,"25% der Kinder in Deutschland haben keine Geschwister.",1
+"107","Die Katastrophe des Kernkraftwerkes Tschernobyl ereignete sich 1986",TRUE,107,"Die Katastrophe des Kernkraftwerkes Tschernobyl ereignete sich 1986",1
+"108","Die Mutter von Martin Luther King war Lehrerin.",TRUE,108,"Die Mutter von Martin Luther King war Lehrerin.",1
+"109","Gold ist leichter als Aluminium.",FALSE,109,"Gold ist leichter als Aluminium.",0
+"110","Die erste Fotografie der Welt entstand 1822.",TRUE,110,"Die erste Fotografie der Welt entstand 1822.",1
+"111","Martin Luther King wurde in Memphis erschossen.",TRUE,111,"Martin Luther King wurde in Memphis erschossen.",1
+"112","Alkohol entsteht durch die Vergärung von Zucker.",TRUE,112,"Alkohol entsteht durch die Vergärung von Zucker.",1
+"113","Kinetischer Druck wird in Millimetern Wassersäule gemessen.",FALSE,113,"Kinetischer Druck wird in Millimetern Wassersäule gemessen.",0
+"114","Die Maßeinheit für magnetischen Fluss ist ein Henry.",FALSE,114,"Die Maßeinheit für magnetischen Fluss ist ein Henry.",0
+"115","Es existieren 24 bekannte Saturn-Monde.",FALSE,115,"Es existieren 24 bekannte Saturn-Monde.",0
+"116","Lichtjahre sind eine Einheit der Geschwindigkeitsmessung.",FALSE,116,"Lichtjahre sind eine Einheit der Geschwindigkeitsmessung.",0
+"117","Nelson Mandela war der erste schwarze Präsident Südafrikas",TRUE,117,"Nelson Mandela war der erste schwarze Präsident Südafrikas",1
+"118","Das Grab Luthers befindet sich in der Jenaer Stadtkirche.",FALSE,118,"Das Grab Luthers befindet sich in der Jenaer Stadtkirche.",0
+"119","Alice Schwarzer ist Gründerin des Frauenmagazins Paula",FALSE,119,"Alice Schwarzer ist Gründerin des Frauenmagazins Paula",0
+"120","Alexandria wurde 331 v. Chr. Von Alexander dem Großen gegründet.",TRUE,120,"Alexandria wurde 331 v. Chr. Von Alexander dem Großen gegründet.",1

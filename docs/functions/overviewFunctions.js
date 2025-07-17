@@ -29,27 +29,42 @@ function addOverview(control) {
 function generateOverviewPage(control) {
     document.getElementById("content").innerHTML = `
         <div class = "display-text">
-            <h1>Welcome to the Truth Effect Data Entry Page</h1>
+            <h1 class = "mb-3">TED: Data Entry Page</h1>
             <p>Thank you for contributing to our growing database of truth effect research. By entering your data here, you help make research more accessible and reusable for everyone.</p>
-            <p>You can explore and download the dataset under this link: <a href="https://example.com/dataset" target="_blank">Dataset Link</a></p>
-            <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as may studies in your publication as you wish.</p>
-            <p>In order to properly integrate your data into our database, we ask you to follow our instructions precisely. Importantly, this includes our restrictions placed on the uploaded data. Make sure that your column names match ours exactly and that the identifiers in the raw data match those you enter in the respective overview surveys.</p>
-            <p>After submission, our team will review your data and add it to the database as soon as possible.</p>
+            <p>You can explore and download the dataset under this link: <a href="https://github.com/SLesche/truth-db" target="_blank">Link to Dataset</a></p>
+            
+            <div class="alert alert-info" role="alert">
+                <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
+                <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as may studies in your publication as you wish.</p>
+                <p>In order to properly integrate your data into our database, we ask you to follow our instructions precisely. Importantly, this includes our restrictions placed on the uploaded data. Make sure that your column names match ours exactly and that the identifiers in the raw data match those you enter in the respective overview surveys.</p>
+                <p>After submission, send the downloaded .json files to us via email. Our team will review your data and add it to the database as soon as possible.</p>
+            </div>
 
             ${printProgressReport(getNumberOfSubmissions(control))}
 
-            <h2>Save / Load progess</h2>
-            <button onclick="saveProgress(control)">Save Progress</button>
-            <button id="uploadProgressButton">Upload Progress</button>
-            <input type="file" id="progressFileInput" accept=".json" style="display: none;">
+            <div class="my-4">
+                <h2>Save / Load / Submit</h2>
+                <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn btn-info" onclick="saveProgress(control)">
+                        <i class="bi bi-save"></i> Save Progress
+                    </button>
 
-            <h2>Submission</h2>
-            <button onclick="submitData(control)" id ="final-submit-button">Submit Data</button>
+                    <button class="btn btn-warning" id="uploadProgressButton">
+                        <i class="bi bi-upload"></i> Upload Progress
+                    </button>
+
+                    <button class="btn btn-success" onclick="submitData(control)" id="final-submit-button">
+                        <i class="bi bi-check-circle"></i> Submit Data
+                    </button>
+
+                    <input type="file" id="progressFileInput" accept=".json" style="display: none;">
+                </div>
+            </div>
+
             
             <h2>Contact Information</h2>
             <p>If you have any questions or need assistance, feel free to contact us at: <br>
-                <a href="mailto:sven.lesche@psychologie.uni-heidelberg.de">sven.lesche@psychologie.uni-heidelberg.de</a><br>
-                <a href="mailto:annika.stump@psychologie.uni-freiburg.de">annika.stump@psychologie.uni-freiburg.de</a>
+                <a href="#" id="email1">[email protected]</a>
             </p>
         </div>
     `;
@@ -57,6 +72,13 @@ function generateOverviewPage(control) {
     document.getElementById('uploadProgressButton').addEventListener('click', function() {
         document.getElementById('progressFileInput').click();
     });
+
+    const user = 'sven.lesche';
+    const domain = 'psychologie.uni-heidelberg.de';
+    const email = `${user}@${domain}`;
+    const link = document.getElementById('email1');
+    link.href = `mailto:${email}`;
+    link.textContent = email;
 
     document.getElementById('progressFileInput').addEventListener('change', function(event) {
         const file = event.target.files[0];
@@ -74,7 +96,7 @@ function generateOverviewPage(control) {
                     // initializePublicationSurvey(control); // Initialize the publication survey with the updated control object
                     // console.log(control);
                 } else {
-                    alert("Invalid progress file. Please upload a valid progress file.");
+                    showAlert("Invalid progress file. Please upload a valid progress file.", 'danger');
                 }
             };
             reader.readAsText(file);
@@ -91,36 +113,52 @@ function getNumberOfSubmissions(control) {
     let num_publications_validated = 0;
     let num_studies_validated = 0;
 
-    // Iterate over statement sets
+    let total_checkpoints = 0;
+    let validated_checkpoints = 0;
+
     for (let statementset_idx = 0; statementset_idx < num_statement_sets; statementset_idx++) {
+        total_checkpoints++; // One checkpoint per statement set
         if (control.statementset_info[statementset_idx].statementset_data.validated) {
             num_statement_sets_validated += 1;
+            validated_checkpoints++;
         }
     }
 
-    // Iterate over publications
     for (let publication_idx in control.publication_info) {
-        const current_num_studies = Object.keys(control.publication_info[publication_idx].study_info).length;
+        const publication = control.publication_info[publication_idx];
+        const current_num_studies = Object.keys(publication.study_info).length;
         num_total_studies += current_num_studies;
 
-        // Iterate over studies within the publication
-        for (let study_idx in control.publication_info[publication_idx].study_info) {
-            // Check if the study is validated
-            if (control.publication_info[publication_idx].study_info[study_idx].study_data.validated) {
-                num_studies_validated += 1;
-            }        
+        total_checkpoints++; // One per publication
+        if (publication.publication_data.validated) {
+            num_publications_validated += 1;
+            validated_checkpoints++;
         }
 
-        // Check if the publication is validated
-        if (control.publication_info[publication_idx].publication_data.validated) {
-            num_publications_validated += 1;
+        for (let study_idx in publication.study_info) {
+            const study = publication.study_info[study_idx];
+            total_checkpoints++; // Main study validation
+            if (study.study_data.validated) {
+                num_studies_validated += 1;
+                validated_checkpoints++;
+            }
+
+            const subkeys = ['repetition_validated', 'condition_data', 'measurement_data', 'raw_data'];
+            subkeys.forEach(key => {
+                total_checkpoints++;
+                
+                if (study.hasOwnProperty(key) && study[key] && study[key].validated) {
+                    validated_checkpoints++;
+                }
+            });
+
         }
     }
 
-    // Compute percentages
     const percent_statement_sets_validated = (num_statement_sets_validated / num_statement_sets) * 100;
     const percent_publication_validated = (num_publications_validated / num_total_publications) * 100;
     const percent_studies_validated = (num_studies_validated / num_total_studies) * 100;
+    const percent_overall_validated = (validated_checkpoints / total_checkpoints) * 100;
 
     return {
         num_total_publications,
@@ -132,24 +170,69 @@ function getNumberOfSubmissions(control) {
         percent_statement_sets_validated,
         percent_publication_validated,
         percent_studies_validated,
+        percent_overall_validated,
+        total_checkpoints,
+        validated_checkpoints
     };
 }
 
-function printProgressReport(progress_report){
-    html = `
-        <div class="progress-report">
-            <h2>Progress Report</h2>
-            <p>Total Publications: ${progress_report.num_total_publications}</p>
-            <p>Total Statement Sets: ${progress_report.num_statement_sets}</p>
-            <p>Total Studies: ${progress_report.num_total_studies}</p>
-            <p>Publications Validated: ${progress_report.num_publications_validated}</p>
-            <p>Studies Validated: ${progress_report.num_studies_validated}</p>
-            <p>Statement Sets Validated: ${progress_report.num_statement_sets_validated}</p>
-            <p>Percentage of Statement Sets Validated: ${progress_report.percent_statement_sets_validated}%</p>
-            <p>Percentage of Publications Validated: ${progress_report.percent_publication_validated}%</p>
-            <p>Percentage of Studies Validated: ${progress_report.percent_studies_validated}%</p>
+function printProgressReport(progress_report) {
+    return `
+        <div class="progress-report card my-4">
+            <div class="card-body">
+                <h2 class="card-title">Progress Report</h2>
+
+                <div class="mb-3">
+                    <label><strong>Publications Validated:</strong> ${progress_report.num_publications_validated} / ${progress_report.num_total_publications}</label>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" 
+                            style="width: ${progress_report.percent_publication_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_publication_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_publication_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label><strong>Studies Validated:</strong> ${progress_report.num_studies_validated} / ${progress_report.num_total_studies}</label>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" 
+                            style="width: ${progress_report.percent_studies_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_studies_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_studies_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label><strong>Statement Sets Validated:</strong> ${progress_report.num_statement_sets_validated} / ${progress_report.num_statement_sets}</label>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" 
+                            style="width: ${progress_report.percent_statement_sets_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_statement_sets_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_statement_sets_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-3">
+                    <label><strong>Overall Progress:</strong> ${progress_report.validated_checkpoints} / ${progress_report.total_checkpoints}</label>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" 
+                            style="width: ${progress_report.percent_overall_validated.toFixed(1)}%;" 
+                            aria-valuenow="${progress_report.percent_overall_validated.toFixed(1)}" 
+                            aria-valuemin="0" aria-valuemax="100">
+                            ${progress_report.percent_overall_validated.toFixed(1)}%
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     `;
-
-    return html;
 }

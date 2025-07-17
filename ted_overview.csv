@@ -1,0 +1,75 @@
+table,column_name,data_type,description
+between_table,between_id,INTEGER,Identifier for between-subjects manipulations
+between_table,study_id,INTEGER,Identifier for studies
+between_table,between_description,VARCHAR(10000),Description of between-subjects manipulations
+measure_table,measure_id,INTEGER,Identifier for additional measurements
+measure_table,study_id,INTEGER,Identifier for studies
+measure_table,construct,VARCHAR(255),Construct name of additional measure collected during the experiment (short)
+measure_table,measure_details,VARCHAR(1023),Details of additional measure collected during the experiment (detailed)
+observation_table,observation_id,INTEGER,Identifier for a trial
+observation_table,between_id,INTEGER,Identifier for between-subjects manipulations
+observation_table,within_id,INTEGER,Identifier for within-subjects manipulations
+observation_table,procedure_id,INTEGER,Identifier for procedure manipulations
+observation_table,subject,INTEGER,Identifier for a subject
+observation_table,trial,INTEGER,Trial number within an experiment
+observation_table,statement_id,INTEGER,Identifier for a statement
+observation_table,rt,FLOAT,Response time (in s)
+observation_table,response,FLOAT,"Response to statement (maximum-scaled) - 0 = false, 1 = true"
+observation_table,repeated,INTEGER,"Repetition status of the statement - 0 = new, 1 = repeated"
+observation_table,certainty,FLOAT,"Subjective certainty of rating (maximum-scaled) - 0 = most uncertain, 1 = most certain"
+procedure_table,procedure_id,INTEGER,Identifier for procedure manipulations
+procedure_table,study_id,INTEGER,Identifier for studies
+procedure_table,repetition_time,FLOAT,Time since the exposure to the statement (in minutes)
+procedure_table,repetition_location,VARCHAR(255),Location of the experiment
+procedure_table,repetition_type,VARCHAR(255),Type of repetition
+procedure_table,max_n_repetitions,INTEGER,Maximum number of times a statement was repeated within a session
+procedure_table,n_statements,INTEGER,Number of statements presented during a measurement session
+procedure_table,truth_instructions,INTEGER,Were participants instructed that some of the statements may be false?
+procedure_table,truth_instruction_timing,VARCHAR(255),At what point in time (exposure/test/both) were participants instructed that some of the statements may be false?
+procedure_table,presented_until_response,BOOLEAN,Were statements presented until response?
+procedure_table,presentation_time_s,FLOAT,How long were statements presented (in s)?
+procedure_table,response_deadline,BOOLEAN,Was there a response deadline?
+procedure_table,response_deadline_s,FLOAT,How long was the response deadline (in s)?
+procedure_table,percent_repeated,FLOAT,What percentage of statements was repeated?
+procedure_table,presentation_type,VARCHAR(255),How were the statements presented (visual / auditory)?
+procedure_table,phase,VARCHAR(255),Which phase does the data come from (exposure / test)?
+procedure_table,repetition_instructions,INTEGER,Were participants instructed that some of the statements may be repeated?
+procedure_table,repetition_instruction_timing,VARCHAR(255),At what point in time (exposure/test/both) were participants instructed that some of the statements may be repeated?
+publication_table,publication_id,INTEGER,Identifier for publications
+publication_table,authors,VARCHAR(10000),"Authors of the publication, separated by commas"
+publication_table,conducted,DATE,When was the study conducted (year)?
+publication_table,added,DATE,When was the study added to the database (year)?
+publication_table,country,VARCHAR(255),In which country was the study conducted?
+publication_table,contact,VARCHAR(10000),Contact information for the publication submission
+publication_table,apa_reference,VARCHAR(2047),APA-style reference
+publication_table,keywords,VARCHAR(1023),"keywords of the publication, separated by commas"
+publication_table,publication_code,VARCHAR(255),Custom generated code of the publication (author_year_firstWordTitle)
+statement_table,statement_id,INTEGER,Identifier for statements
+statement_table,statementset_id,INTEGER,Identifier for sets of statements
+statement_table,statement_text,VARCHAR(2047),Statement text
+statement_table,statement_accuracy,INTEGER,Accuracy of the statement
+statement_table,statement_category,VARCHAR(255),Category of the statement 
+statement_table,proportion_true,FLOAT,"Proportion of participants who rated this statement as ""true"""
+statementset_table,statementset_id,INTEGER,Identifier for sets of statements
+statementset_table,statementset_publication,VARCHAR(2047),Reference for the publication with information on the set of statements
+study_table,study_id,INTEGER,Identifier for studies
+study_table,statementset_id,INTEGER,Identifier for sets of statements
+study_table,publication_id,INTEGER,Identifier for publications
+study_table,study_comment,VARCHAR(10000),Comment containing additional information
+study_table,raw_data_link,VARCHAR(255),Link to the raw dataset on a data sharing platform
+study_table,n_participants,INTEGER,Number of participants in the study
+study_table,participant_age,FLOAT,Average age of participants in the study (in years)
+study_table,percentage_female,FLOAT,Percentage of participants who identifiy as female
+study_table,rt_measured,INTEGER,Was response time measured?
+study_table,rt_onset,VARCHAR(255),What event marked the onset of the response time measurement?
+study_table,subjective_certainty,BOOLEAN,Was subjective certainty in sentence judgment measured?
+study_table,physiological_measures,BOOLEAN,Were any physiological measures collected?
+study_table,cognitive_models,BOOLEAN,Were any cognitive models employed in the analysis of the data?
+study_table,filler_task_yesno,BOOLEAN,Was there a filler task between exposure and test?
+study_table,filler_task_type,VARCHAR(63),What type was the filler task (verbal / non-verbal)?
+study_table,filler_task_name,VARCHAR(255),What was the name of the filler task?
+study_table,truth_rating_scale,VARCHAR(255),What scale was used to provide truth judgments?
+study_table,truth_rating_steps,INTEGER,How many steps did the rating scale have?
+within_table,within_id,INTEGER,Identifier for within-subjects manipulations
+within_table,study_id,INTEGER,Identifier for studies
+within_table,within_description,VARCHAR(10000),Description of within-subjects manipulations

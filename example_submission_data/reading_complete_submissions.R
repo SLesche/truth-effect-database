@@ -3,7 +3,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "truth_25_06.db"
+db_path = "ted.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
@@ -30,19 +30,6 @@ for (isubmission in seq_along(valid_files)){
   # inspect_study_data(submission_obj)
   # inspect_raw_data(submission_obj)[[1]] %>% count(certainty)
   
-  if (inspect_publication_data(submission_obj)$publication_code == "nadarevic_2018_foreign"){
-    # In this data, proportion_true was wrongfully entered with accuracy values
-    submission_obj$statementset_info[[1]]$statementset_data <- submission_obj$statementset_info[[1]]$statementset_data %>% 
-      mutate(
-        proportion_true = ifelse(statement_accuracy == 0, 1 - proportion_true, proportion_true)
-      )
-    
-    submission_obj$statementset_info[[2]]$statementset_data <- submission_obj$statementset_info[[2]]$statementset_data %>% 
-      mutate(
-        proportion_true = ifelse(statement_accuracy == 0, 1 - proportion_true, proportion_true)
-      )
-  }
-  
   add_submission_to_db(conn, submission_obj)
 }
 
@@ -67,7 +54,7 @@ result <- query_db(
   conn,
   arguments,
   "default",
-  "statementset_table"
+  "study_table"
 ) %>% distinct()
 
 db_overview = generate_db_overview_table(conn)

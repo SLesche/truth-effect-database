@@ -49,153 +49,180 @@ function initializeRawDataSurvey(control, publication_idx, study_idx) {
 
     document.getElementById("content").innerHTML = `
     <div class="display-text">
-        <h1>${study_name}: Raw Data</h1> 
+        <h1 class ="mb-3">${study_name}: Raw Data</h1> 
+        <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
             <p>Here, please provide information about your raw data by uploading it through the interface below. Your data should adhere to the following guidelines:</p>
             <ul class = "list-of-entries">
                 <li>Ensure that your dataset includes all columns as specified in the guidelines. If certain measurements (e.g., reaction times) were not collected, you may leave those columns out.</li>
                 <li>It is crucial that the columns you do include have the exact names we specified. This consistency is essential for accurate integration and analysis.</li>
-                <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Experimental Conditions" and "Statementset" surveys. This ensures that your data can be correctly interpreted in the context of the study.</li>
+                <li>Make sure that your experimental conditions and statements used are using exactly the same identifiers as indicated in the "Conditions" and "Statementset" surveys. This ensures that your data can be correctly interpreted in the context of the study.</li>
                 <li>For any missing values, please encode them as <i>NA</i>. For example, accuracy can only take the values "0", "1" or "<i>NA</i>". If you chose any other encodings to mark missing or incomplete values, please recode these to <i>NA</i>.</li>
             </ul>
             
             <p>Below, you can find an example of how your data should be formatted. Please follow this format to ensure compatibility and ease of use:</p>
             <ul class = "list-of-entries">
                 <li><strong>subject:</strong> A unique identifier for each subject.</li>
-                <li><strong>presentation_identifier:</strong> A unique identifier for each presentation condition. This must be one of the identifiers encoded in "Statement Presentations".</li>
+                <li><strong>procedure_identifier:</strong> A unique identifier for each procedure condition. This must be one of the identifiers encoded in "Procedure".</li>
                 <li><strong>trial:</strong> A unique identifier for each trial for a given subject.</li>
-                <li><strong>within_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
-                <li><strong>between_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Experimental Conditions".</li>
+                <li><strong>within_identifier:</strong> A unique identifier for a within subject conditions. This must be one of the identifiers encoded in "Conditions".</li>
+                <li><strong>between_identifier:</strong> A unique identifier for a between subject conditions. This must be one of the identifiers encoded in "Conditions".</li>
                 <li><strong>statement_identifier:</strong> A unique identifier for each statement used. This must be one of the identifiers encoded in the "Statementset" data you uploaded.</li>
                 <li><strong>response:</strong> The value of the truth rating. <b>Larger values must indicate higher truth ratings.</b></li>
                 <li><strong>repeated:</strong> The value indicating whether a statement was repeated "1" or not "0".</li>
                 <li><strong>certainty:</strong> (if measured) The value indicating the subjective certainty with which a participant gave their truth rating.</li>
                 <li><strong>rt:</strong> (if measured) The value indicating the response time <b>in seconds</b>.</li>
             </ul>
-            <div class = "table-container" id = "tableContainerExample">
-                <table>
+            <div class="table-responsive" id="tableContainerExample">
+                <table class="table table-bordered table-striped table-sm table-hover align-middle small">
+                    <thead class="text-capitalize-none">
                     <tr>
-                        <th>subject</th>
-                        <th>presentation_identifier</th>
-                        <th>trial</th>
-                        <th>within_identifier</th>
-                        <th>between_identifier</th>
-                        <th>statement_identifier</th>
-                        <th>rt</th>
-                        <th>response</th>
-                        <th>repeated</th>
-                        <th>certainty</th>
+                        <th style="text-transform: none;">subject</th>
+                        <th style="text-transform: none;">procedure_identifier</th>
+                        <th style="text-transform: none;">trial</th>
+                        <th style="text-transform: none;">within_identifier</th>
+                        <th style="text-transform: none;">between_identifier</th>
+                        <th style="text-transform: none;">statement_identifier</th>
+                        <th style="text-transform: none;">rt</th>
+                        <th style="text-transform: none;">response</th>
+                        <th style="text-transform: none;">repeated</th>
+                        <th style="text-transform: none;">certainty</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0.64</td>
-                        <td><i>NA</i></td>
-                        <td>0</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>0.75</td>
-                        <td>7</td>
-                        <td>1</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>0.75</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0.76</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>6</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>0.64</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>2</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>0.75</td>
-                        <td>7</td>
-                        <td>1</td>
-                        <td>7</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>1</td>
-                        <td>0.75</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>0.76</td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td>6</td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0.64</td>
+                            <td><i>NA</i></td>
+                            <td>0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>0.75</td>
+                            <td>7</td>
+                            <td>1</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.75</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0.76</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>0.64</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>0.75</td>
+                            <td>7</td>
+                            <td>1</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.75</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>0.76</td>
+                            <td>5</td>
+                            <td>1</td>
+                            <td>6</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>         
             <p>Once you’ve prepared your data according to these specifications, you can upload it using the form provided below. Thank you for your cooperation!</p>
-            <form id="rawDataSurvey" class="survey-form">
-                <label for="raw_data_file" class="survey-label">Please upload a .csv file with the raw data in the correct format.</label>
-                <input type="file" id="raw_data_file" name="raw_data_file" accept=".csv" required><br>
-                <span id="file-name-display">${raw_data.raw_data_file ? `File: ${raw_data.raw_data_file.name}` : ''}</span><br>
-                <p id = "textUploadPreview" style = "display: none;">Uploaded file preview:</p>
-                <div id="tableContainerUploaded" class = "table-container" style = "display: none;">
-                </div>
+        </div>
 
-                <button type="submit" class="survey-button">Submit</button>
-            </form>
+        <h3 class ="mb-3">Upload Raw Data</h3>
+       <form id="rawDataSurvey" class="survey-form p-3 border rounded shadow-sm bg-light">
+        <div class="mb-3">
+            <label for="raw_data_file" class="form-label">
+            Please upload a .csv file with the raw data in the correct format.
+            </label>
+            <input 
+            type="file" 
+            id="raw_data_file" 
+            name="raw_data_file" 
+            accept=".csv" 
+            class="form-control" 
+            required
+            >
+        </div>
 
+        <div class="mb-2 text-muted" id="file-name-display">
+            ${raw_data.raw_data_file ? `File: ${raw_data.raw_data_file.name}` : ''}
+        </div>
+
+        <p id="textUploadPreview" class="fw-semibold" style="display: none;">Uploaded file preview:</p>
+
+        <div id="tableContainerUploaded" class="table-responsive" style="display: none;">
+            <!-- Table will be injected here -->
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3">
+            Submit
+        </button>
         </form>
+
     </div>
     `;
 
@@ -281,7 +308,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         return false;
     }
  
-    var required_headers = ['subject', 'presentation_identifier', 'trial', 'response', 'repeated'];
+    var required_headers = ['subject', 'procedure_identifier', 'trial', 'response', 'repeated'];
 
     // if there were experimental conditions, add those to required headers
     const study_info = control.publication_info[publication_idx].study_info[study_idx];
@@ -322,7 +349,7 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
         warningMessages.push(`The uploaded file contains unknown columns: ${unknown_columns.join(', ')}`);
     }
 
-    // Filter presentation_identifiers to exclude test phase
+    // Filter procedure_identifiers to exclude test phase
     const data_available_identifiers = study_info.repetition_data
         .filter(data => data.data_available == 1)
         .map(data => data.presentation_identifier);
@@ -330,22 +357,22 @@ function validateRawData(raw_data, control, publication_idx, study_idx) {
     // Extract unique session identifiers from raw data, excluding 'NA'
     const unique_sessions = [...new Set(
         raw_data.data
-            .map(row => row.presentation_identifier)
-            .filter(presentation_identifier => presentation_identifier !== 'NA')
+            .map(row => row.procedure_identifier)
+            .filter(procedure_identifier => procedure_identifier !== 'NA')
         )].map(String);
 
     // Check for missing identifiers
-    const missing_presentation_identifiers = data_available_identifiers.filter(identifier => !unique_sessions.includes(identifier));
+    const missing_procedure_identifiers = data_available_identifiers.filter(identifier => !unique_sessions.includes(identifier));
 
     // Check for extra presentation identifiers
-    const extra_presentation_identifiers = unique_sessions.filter(identifier => !data_available_identifiers.includes(identifier));
+    const extra_procedure_identifiers = unique_sessions.filter(identifier => !data_available_identifiers.includes(identifier));
 
-    if (missing_presentation_identifiers.length > 0) {
-        errorMessages.push(`The following presentation identifiers marked as "data available" are missing from the uploaded file: ${missing_presentation_identifiers.join(', ')}.`);
+    if (missing_procedure_identifiers.length > 0) {
+        errorMessages.push(`The following procedure identifiers marked as "data available" are missing from the uploaded file: ${missing_procedure_identifiers.join(', ')}.`);
     }
 
-    if (extra_presentation_identifiers.length > 0) {
-        errorMessages.push(`The following presentation identifiers in the uploaded file were not previously added as "data available" to the experimental conditions: ${extra_presentation_identifiers.join(', ')}.`);
+    if (extra_procedure_identifiers.length > 0) {
+        errorMessages.push(`The following procedure identifiers in the uploaded file were not previously added as "data available": ${extra_procedure_identifiers.join(', ')}.`);
     }
 
     // if there were experimental conditions, check that all identifiers are present in the experimental conditions
@@ -485,19 +512,19 @@ function checkOtherSubmissions(control, publication_idx, study_idx) {
     if (!statementset_validated || !study_info.condition_data.validated || !study_info.repetition_data.validated || !study_info.study_data.validated) {
         // Display which sections are missing
         if (!study_info.study_data.validated) {
-            alert('Please enter information about the overall study before submitting the raw data.')
+            showAlert('Please enter information about the overall study before submitting the raw data.', 'danger')
             return false;
         }
         if (!study_info.condition_data.validated) {
-            alert('Please enter information about the experimental conditions before submitting the raw data.');
+            showAlert('Please enter information about the experimental conditions before submitting the raw data.', 'danger');
             return false;
         }
         if (!study_info.repetition_validated) {
-            alert('Please enter information about the statement presentations before submitting the raw data.')
+            showAlert('Please enter information about the procedure before submitting the raw data.', 'danger')
             return false;
         }
         if (!statementset_validated) {
-            alert('Please enter information about the statement set before submitting the raw data.');
+            showAlert('Please enter information about the statement set before submitting the raw data.', 'danger');
             return false;
         }
     }
@@ -513,7 +540,7 @@ async function updateRawDataSurvey(control, publication_idx, study_idx) {
     control.publication_info[publication_idx].study_info[study_idx].raw_data = raw_data
 
     // Optionally, display a confirmation message
-    alert('Survey submitted successfully!');
+    showAlert('Survey submitted successfully!', 'success');
 
     // Add a checkmark to the currently selected sidebar item
     const item_id =  "rawdata-" + publication_idx + "-" + study_idx;

@@ -1,0 +1,121 @@
+"","Statement","Status","statement_identifier","statement_text","statement_accuracy"
+"1","Bei der Geburt haben Kängurus die Größe eines Tennisballs",FALSE,1,"Bei der Geburt haben Kängurus die Größe eines Tennisballs",0
+"2","Die Biene Maja wurde 1912 von Waldemar Bonsels erfunden",TRUE,2,"Die Biene Maja wurde 1912 von Waldemar Bonsels erfunden",1
+"3","Chopsuey ist eine amerikanische Erfindung, keine chinesische",TRUE,3,"Chopsuey ist eine amerikanische Erfindung, keine chinesische",1
+"4","Elvis Presley gab prinzipiell immer nur eine einzige Zugabe",FALSE,4,"Elvis Presley gab prinzipiell immer nur eine einzige Zugabe",0
+"5","Zuckerwatte wurde von einem Flugzeugpiloten erfunden",FALSE,5,"Zuckerwatte wurde von einem Flugzeugpiloten erfunden",0
+"6","Termiten erzeugen 30% des Methangehaltes der Atmosphäre",TRUE,6,"Termiten erzeugen 30% des Methangehaltes der Atmosphäre",1
+"7","Der Geschäftssitz der Rolling Stones befindet sich in Kanada",FALSE,7,"Der Geschäftssitz der Rolling Stones befindet sich in Kanada",0
+"8","Model Gisele Bündchen wollte Rettungsschwimmerin werden",FALSE,8,"Model Gisele Bündchen wollte Rettungsschwimmerin werden",0
+"9","DAT steht in der Medizin für Demenz vom Alzheimer-Typ",TRUE,9,"DAT steht in der Medizin für Demenz vom Alzheimer-Typ",1
+"10","Wer in Vietnam einen Hamster besitzt, muss Strafe bezahlen",TRUE,10,"Wer in Vietnam einen Hamster besitzt, muss Strafe bezahlen",1
+"11","Der bisher größte Regentropfen hatte einen Radius von 0,6 cm",FALSE,11,"Der bisher größte Regentropfen hatte einen Radius von 0,6 cm",0
+"12","Die römische Gottheit Pluto steht für Streit und Zwietracht",FALSE,12,"Die römische Gottheit Pluto steht für Streit und Zwietracht",0
+"13","Bei den italienischen Wahlen 2008 traten 62 Parteien an",FALSE,13,"Bei den italienischen Wahlen 2008 traten 62 Parteien an",0
+"14","Laut Descartes wies Schielen bei Frauen auf Frigidität hin",FALSE,14,"Laut Descartes wies Schielen bei Frauen auf Frigidität hin",0
+"15","In Mexiko werden lebendige Käfer als Schmuck verwendet",TRUE,15,"In Mexiko werden lebendige Käfer als Schmuck verwendet",1
+"16","Katzen haben in England sprichwörtlich elf Leben",FALSE,16,"Katzen haben in England sprichwörtlich elf Leben",0
+"17","In Düsseldorf wird pro Jahr mehr Bier gebraut als in München",FALSE,17,"In Düsseldorf wird pro Jahr mehr Bier gebraut als in München",0
+"18","In Papua-Neuguinea werden über 50 Sprachen gesprochen",FALSE,18,"In Papua-Neuguinea werden über 50 Sprachen gesprochen",0
+"19","Das größte bekannte Lebewesen ist der Hallimasch-Pilz",TRUE,19,"Das größte bekannte Lebewesen ist der Hallimasch-Pilz",1
+"20","Die Frau des größten Mannes der Welt ist 2,03 m groß",FALSE,20,"Die Frau des größten Mannes der Welt ist 2,03 m groß",0
+"21","Die Tochter von Sydney Poitier heißt Sydney Poitier",TRUE,21,"Die Tochter von Sydney Poitier heißt Sydney Poitier",1
+"22","Clint Eastwood leidet an einer starken Schlangenphobie",FALSE,22,"Clint Eastwood leidet an einer starken Schlangenphobie",0
+"23","Regenwürmer kommen aus der Erde, um nicht zu ersticken",FALSE,23,"Regenwürmer kommen aus der Erde, um nicht zu ersticken",0
+"24","Es gibt 56 verschiedene Arten eine Krawatte zu binden",FALSE,24,"Es gibt 56 verschiedene Arten eine Krawatte zu binden",0
+"25","Die Angst vor dem Küssen nennt man Philemaphobie",TRUE,25,"Die Angst vor dem Küssen nennt man Philemaphobie",1
+"26","Die kanadische Sängerin Celine Dion hat acht Geschwister",FALSE,26,"Die kanadische Sängerin Celine Dion hat acht Geschwister",0
+"27","Den Torbau eines griechischen Tempels nennt man Propyläen",TRUE,27,"Den Torbau eines griechischen Tempels nennt man Propyläen",1
+"28","Seelöwen flüchten, wenn man sie mit Wasser bespritzt",TRUE,28,"Seelöwen flüchten, wenn man sie mit Wasser bespritzt",1
+"29","Die Slowakei gehört nicht zu den NATO-Staaten",FALSE,29,"Die Slowakei gehört nicht zu den NATO-Staaten",0
+"30","Eine Basilika ist ein römischer Tempel in quadratischer Form",FALSE,30,"Eine Basilika ist ein römischer Tempel in quadratischer Form",0
+"31","Eine Kugelschreibermine reicht für einen 10 km langen Strich",TRUE,31,"Eine Kugelschreibermine reicht für einen 10 km langen Strich",1
+"32","Der Brachiosaurus war der größte existierende Dinosaurier",TRUE,32,"Der Brachiosaurus war der größte existierende Dinosaurier",1
+"33","Albatrosse legen über 500 Kilometer an einem Tag zurück",FALSE,33,"Albatrosse legen über 500 Kilometer an einem Tag zurück",0
+"34","Eskimos haben Kühlschränke, damit ihr Essen nicht einfriert",TRUE,34,"Eskimos haben Kühlschränke, damit ihr Essen nicht einfriert",1
+"35","Edmund Stoiber schrieb seine Dissertation über Erbrecht",FALSE,35,"Edmund Stoiber schrieb seine Dissertation über Erbrecht",0
+"36","Ein erwachsener Mensch schluckt rund 1500 Mal am Tag",FALSE,36,"Ein erwachsener Mensch schluckt rund 1500 Mal am Tag",0
+"37","Libyen ist das einzige Land mit einer einfarbigen Flagge",TRUE,37,"Libyen ist das einzige Land mit einer einfarbigen Flagge",1
+"38","Der Name Kaviar geht auf das türkische Wort khavia zurück",TRUE,38,"Der Name Kaviar geht auf das türkische Wort khavia zurück",1
+"39","Die Trefferquote von Wahrsagungen liegt laut Studie bei 20%",FALSE,39,"Die Trefferquote von Wahrsagungen liegt laut Studie bei 20%",0
+"40","In der DDR gab es keinen einzigen erfolgreichen Banküberfall",TRUE,40,"In der DDR gab es keinen einzigen erfolgreichen Banküberfall",1
+"41","Die Hälfte aller Herzinfarkte tritt zwischen 6 und 12 Uhr auf",FALSE,41,"Die Hälfte aller Herzinfarkte tritt zwischen 6 und 12 Uhr auf",0
+"42","Der Diätexperte Robert Atkins starb an Magersucht",FALSE,42,"Der Diätexperte Robert Atkins starb an Magersucht",0
+"43","Der kürzeste Krieg aller Zeiten dauerte nur 38 Minuten",TRUE,43,"Der kürzeste Krieg aller Zeiten dauerte nur 38 Minuten",1
+"44","Aufzeichnungen zufolge fiel in der Sahara schon 3 Mal Schnee",FALSE,44,"Aufzeichnungen zufolge fiel in der Sahara schon 3 Mal Schnee",0
+"45","1971 wurde ein Zeiger der Berliner Gedächtniskirche gestohlen",FALSE,45,"1971 wurde ein Zeiger der Berliner Gedächtniskirche gestohlen",0
+"46","Eine mittelgroße Wolke wiegt etwa so viel wie 20 Elefanten",FALSE,46,"Eine mittelgroße Wolke wiegt etwa so viel wie 20 Elefanten",0
+"47","Der Ketchup war ursprünglich eine mexikanische Erfindung",FALSE,47,"Der Ketchup war ursprünglich eine mexikanische Erfindung",0
+"48","Den Predigtstuhl einer Moschee nennt man Minbar",TRUE,48,"Den Predigtstuhl einer Moschee nennt man Minbar",1
+"49","Chromatophobie ist die unbegründete Angst vor Farben",TRUE,49,"Chromatophobie ist die unbegründete Angst vor Farben",1
+"50","Teebeutel bestehen meist aus Fasern der Bananenstaude",TRUE,50,"Teebeutel bestehen meist aus Fasern der Bananenstaude",1
+"51","Der nicht sichtbare Teil des Eisbergs heißt Eisbergkiel",TRUE,51,"Der nicht sichtbare Teil des Eisbergs heißt Eisbergkiel",1
+"52","Ein Blauwal-Junges trinkt bis zu 600 Liter Muttermilch am Tag",TRUE,52,"Ein Blauwal-Junges trinkt bis zu 600 Liter Muttermilch am Tag",1
+"53","Die erste Ampel stand 1868 in England und explodierte",TRUE,53,"Die erste Ampel stand 1868 in England und explodierte",1
+"54","In den USA gibt es die meisten Milliardäre auf der Welt",FALSE,54,"In den USA gibt es die meisten Milliardäre auf der Welt",0
+"55","Der Teil der Nase, der die Nasenlöcher trennt, heißt Kolumella",TRUE,55,"Der Teil der Nase, der die Nasenlöcher trennt, heißt Kolumella",1
+"56","Parmesan ist in Italien das am häufigsten gestohlene Produkt",TRUE,56,"Parmesan ist in Italien das am häufigsten gestohlene Produkt",1
+"57","Beim Noodling versucht man mit der Hand Fische zu fangen",TRUE,57,"Beim Noodling versucht man mit der Hand Fische zu fangen",1
+"58","Der Maikäfer heißt in den USA übersetzt Junikäfer",TRUE,58,"Der Maikäfer heißt in den USA übersetzt Junikäfer",1
+"59","Der Apollo 8 gelang die erste bemannte Mondlandung",FALSE,59,"Der Apollo 8 gelang die erste bemannte Mondlandung",0
+"60","Bis dato haben rund 107 Mrd. Menschen auf der Erde gelebt",TRUE,60,"Bis dato haben rund 107 Mrd. Menschen auf der Erde gelebt",1
+"61","In Deutschland werden ausgemusterte Geldscheine verbrannt",FALSE,61,"In Deutschland werden ausgemusterte Geldscheine verbrannt",0
+"62","Der Höchstwert einer Briefmarke am Automat ist 36,75 Euro",TRUE,62,"Der Höchstwert einer Briefmarke am Automat ist 36,75 Euro",1
+"63","Pseudokyesis bedeutet Empfindung ohne einen Reiz",FALSE,63,"Pseudokyesis bedeutet Empfindung ohne einen Reiz",0
+"64","Vier von fünf Menschen atmen nur durch ein Nasenloch",TRUE,64,"Vier von fünf Menschen atmen nur durch ein Nasenloch",1
+"65","Die Augen eines Straußes sind größer als sein Gehirn",TRUE,65,"Die Augen eines Straußes sind größer als sein Gehirn",1
+"66","In Schweden ist  Y erst seit kurzem ein offizieller Buchstabe",FALSE,66,"In Schweden ist  Y erst seit kurzem ein offizieller Buchstabe",0
+"67","Pamela Andersons Vater ist in einem Hochbegabtenverein",TRUE,67,"Pamela Andersons Vater ist in einem Hochbegabtenverein",1
+"68","Der Durchmesser des Äquators beträgt 12.714 Kilometer",FALSE,68,"Der Durchmesser des Äquators beträgt 12.714 Kilometer",0
+"69","Die Freiheitsstatue misst 112,53 Meter bis zur Fackelspitze",FALSE,69,"Die Freiheitsstatue misst 112,53 Meter bis zur Fackelspitze",0
+"70","Die Fettschicht von Walen und Robben nennt man Blubber",TRUE,70,"Die Fettschicht von Walen und Robben nennt man Blubber",1
+"71","Keime sterben auf Holz schneller ab als auf Plastik",TRUE,71,"Keime sterben auf Holz schneller ab als auf Plastik",1
+"72","Um eine Mahlzeit zu verdauen benötigt ein Wombat 14 Tage",TRUE,72,"Um eine Mahlzeit zu verdauen benötigt ein Wombat 14 Tage",1
+"73","Delphine schwimmen höchstens 54 Kilometer pro Stunde",TRUE,73,"Delphine schwimmen höchstens 54 Kilometer pro Stunde",1
+"74","Der richtige Name des Krümelmonsters lautet Sidney",FALSE,74,"Der richtige Name des Krümelmonsters lautet Sidney",0
+"75","Der Erfinder des Bikini war ursprünglich Schuhdesigner",FALSE,75,"Der Erfinder des Bikini war ursprünglich Schuhdesigner",0
+"76","Elefanten können als einzige Säugetiere nicht springen",TRUE,76,"Elefanten können als einzige Säugetiere nicht springen",1
+"77","Goethe schrieb genau 64 Jahre lang an seinem Faust",TRUE,77,"Goethe schrieb genau 64 Jahre lang an seinem Faust",1
+"78","Einen kastrierten Esel nennt man auch Macker oder Knilch",TRUE,78,"Einen kastrierten Esel nennt man auch Macker oder Knilch",1
+"79","Frauen bekommen häufiger einen Schluckauf als Männer",FALSE,79,"Frauen bekommen häufiger einen Schluckauf als Männer",0
+"80","Die meisten Arbeitsunfälle passieren an einem Mittwoch",FALSE,80,"Die meisten Arbeitsunfälle passieren an einem Mittwoch",0
+"81","Das italienische Tiramisu heißt übersetzt Halt mich fest!",FALSE,81,"Das italienische Tiramisu heißt übersetzt Halt mich fest!",0
+"82","Der Speisesaal eines Klosters wird Refektorium genannt",TRUE,82,"Der Speisesaal eines Klosters wird Refektorium genannt",1
+"83","Auf indischen Rupienscheinen sind 12 verschiedene Schriften",FALSE,83,"Auf indischen Rupienscheinen sind 12 verschiedene Schriften",0
+"84","Blut fließt in ca. 46 Sekunden einmal durch den ganzen Körper",FALSE,84,"Blut fließt in ca. 46 Sekunden einmal durch den ganzen Körper",0
+"85","Männliche Affen können im Alter eine Glatze bekommen",TRUE,85,"Männliche Affen können im Alter eine Glatze bekommen",1
+"86","Das Rote Meer verdankt seinen Namen einem Schreibfehler",TRUE,86,"Das Rote Meer verdankt seinen Namen einem Schreibfehler",1
+"87","Für ein Kilo Honig müssen Bienen 1 Millionen Blüten anfliegen",FALSE,87,"Für ein Kilo Honig müssen Bienen 1 Millionen Blüten anfliegen",0
+"88","Der Ausdruck 08/15 geht auf einen Militärbefehl zurück",FALSE,88,"Der Ausdruck 08/15 geht auf einen Militärbefehl zurück",0
+"89","Der Nacktmull ist das schmerzempfindlichste Tier der Welt",FALSE,89,"Der Nacktmull ist das schmerzempfindlichste Tier der Welt",0
+"90","Deutsche Windmühlen drehen sich immer im Uhrzeigersinn",FALSE,90,"Deutsche Windmühlen drehen sich immer im Uhrzeigersinn",0
+"91","Das erste Instrument, das Jimi Hendrix spielte, war eine Geige",FALSE,91,"Das erste Instrument, das Jimi Hendrix spielte, war eine Geige",0
+"92","Michael Jackson besaß ein Patent auf seinen Tanzstil",FALSE,92,"Michael Jackson besaß ein Patent auf seinen Tanzstil",0
+"93","Das Cc bei E-Mails steht für Carbon Copy (Kohledurchschlag)",TRUE,93,"Das Cc bei E-Mails steht für Carbon Copy (Kohledurchschlag)",1
+"94","Die Franzosen essen rund 1 Milliarde Schnecken pro Jahr",FALSE,94,"Die Franzosen essen rund 1 Milliarde Schnecken pro Jahr",0
+"95","Der erste Roman wurde von einer Chinesin geschrieben",FALSE,95,"Der erste Roman wurde von einer Chinesin geschrieben",0
+"96","Die Giraffe und der Mensch haben gleich viele Halswirbel",TRUE,96,"Die Giraffe und der Mensch haben gleich viele Halswirbel",1
+"97","Die größte Kaninchenrasse der Welt ist der Deutsche Hammler",FALSE,97,"Die größte Kaninchenrasse der Welt ist der Deutsche Hammler",0
+"98","Die US-Präsidenten Adams und Jefferson starben am 4.Juli",TRUE,98,"Die US-Präsidenten Adams und Jefferson starben am 4.Juli",1
+"99","Die abergläubische Angst vor der Zahl 13 heißt Triptophobie",FALSE,99,"Die abergläubische Angst vor der Zahl 13 heißt Triptophobie",0
+"100","Das spanische Wort für Ehefrau ist das gleiche wie für Kerker",FALSE,100,"Das spanische Wort für Ehefrau ist das gleiche wie für Kerker",0
+"101","Ein Mensch geht am Tag durchschnittlich 6000 Schritte",TRUE,101,"Ein Mensch geht am Tag durchschnittlich 6000 Schritte",1
+"102","Der Otto Normalverbraucher heißt in Italien Sergio Rossi",FALSE,102,"Der Otto Normalverbraucher heißt in Italien Sergio Rossi",0
+"103","Nur Menschen und Affen besitzen einen Bauchnabel",TRUE,103,"Nur Menschen und Affen besitzen einen Bauchnabel",1
+"104","Das lauteste Geräusch im Tierreich erzeugt der Pistolenkrebs",TRUE,104,"Das lauteste Geräusch im Tierreich erzeugt der Pistolenkrebs",1
+"105","Bud Spencer hat ein Patent auf einen Spazierstock mit Sitz",TRUE,105,"Bud Spencer hat ein Patent auf einen Spazierstock mit Sitz",1
+"106","Rainer Maria Rilke wurde wie ein Mädchen erzogen",TRUE,106,"Rainer Maria Rilke wurde wie ein Mädchen erzogen",1
+"107","In der Gebärdensprache gibt es auch regionale Dialekte",TRUE,107,"In der Gebärdensprache gibt es auch regionale Dialekte",1
+"108","Ein Blauwal kann einen ausgewachsenen Ochsen schlucken",FALSE,108,"Ein Blauwal kann einen ausgewachsenen Ochsen schlucken",0
+"109","Das erste Land, in dem Frauen wählen durften, war Finnland",FALSE,109,"Das erste Land, in dem Frauen wählen durften, war Finnland",0
+"110","Das Wort Kanada bedeutet ursprünglich kleines Städtchen",FALSE,110,"Das Wort Kanada bedeutet ursprünglich kleines Städtchen",0
+"111","Die Ohren der Laubheuschrecke sitzen unter ihren Knien",TRUE,111,"Die Ohren der Laubheuschrecke sitzen unter ihren Knien",1
+"112","Kleopatra war keine Ägypterin, sie kam aus Griechenland",TRUE,112,"Kleopatra war keine Ägypterin, sie kam aus Griechenland",1
+"113","Schnapserfinder Jim Beam hieß eigentlich Jakob Böhm",TRUE,113,"Schnapserfinder Jim Beam hieß eigentlich Jakob Böhm",1
+"114","Der Name Wowereit heißt auf Litauisch Eichhörnchen",TRUE,114,"Der Name Wowereit heißt auf Litauisch Eichhörnchen",1
+"115","Jährlich fallen rund 20.000 Meteoriten auf die Erde herab",TRUE,115,"Jährlich fallen rund 20.000 Meteoriten auf die Erde herab",1
+"116","Es gibt ein deutschsprachiges Dorf nahe der Grenze zu China",TRUE,116,"Es gibt ein deutschsprachiges Dorf nahe der Grenze zu China",1
+"117","Nicole Kidman hat panische Angst vor Schmetterlingen",TRUE,117,"Nicole Kidman hat panische Angst vor Schmetterlingen",1
+"118","Im alten Ägypten wurde mit Krokodilmist verhütet",TRUE,118,"Im alten Ägypten wurde mit Krokodilmist verhütet",1
+"119","Die Angst vor langen Wörtern nennt man Hippoendomanie",FALSE,119,"Die Angst vor langen Wörtern nennt man Hippoendomanie",0
+"120","John Lennons voller Name war John George William Lennon",FALSE,120,"John Lennons voller Name war John George William Lennon",0

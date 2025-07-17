@@ -36,7 +36,7 @@ extract_from_submission_json <- function(json_path){
     submission_list$study_info[[istudy]]$study_data = as.data.frame(json_obj$study_info[[istudy]]$study_data)
     submission_list$study_info[[istudy]]$repetition_data = as.data.frame(data.table::rbindlist(json_obj$study_info[[istudy]]$repetition_data))
 
-    columns_to_extract = c("subject", "presentation_identifier", "trial", "response", "repeated")
+    columns_to_extract = c("subject", "presentation_identifier", "procedure_identifier", "trial", "response", "repeated")
     
     # Here check if has conditions
     if (json_obj$study_info[[istudy]]$condition_data$has_within_conditions == "1"){
@@ -65,7 +65,9 @@ extract_from_submission_json <- function(json_path){
       columns_to_extract = c(columns_to_extract, "certainty")
     }
     
-    submission_list$study_info[[istudy]]$raw_data = as.data.frame(submission_list$study_info[[istudy]]$raw_data)[, columns_to_extract]
+    available_columns <- intersect(columns_to_extract, colnames(submission_list$study_info[[istudy]]$raw_data))
+
+    submission_list$study_info[[istudy]]$raw_data = as.data.frame(submission_list$study_info[[istudy]]$raw_data)[, available_columns]
     
     # Deal with submitted additional measures
     if (json_obj$study_info[[istudy]]$measurement_data$additional_measures == "1"){

@@ -4,10 +4,12 @@ prep_raw_data <- function(raw_data, db_overview){
     dplyr::filter(data_type %in% c("BOOLEAN", "INTEGER", "FLOAT")) |>
     dplyr::pull(column_name)
   
-  raw_data = dplyr::rename(
-    raw_data,
-    "procedure_identifier" = "presentation_identifier",
-  )
+  if ("presentation_identifier" %in% colnames(raw_data)){
+    raw_data = dplyr::rename(
+      raw_data,
+      "procedure_identifier" = "presentation_identifier",
+    )
+  }
   
   raw_data[grepl("^true$", raw_data, ignore.case = TRUE)] = 1
   raw_data[grepl("^false$", raw_data, ignore.case = TRUE)] = 0

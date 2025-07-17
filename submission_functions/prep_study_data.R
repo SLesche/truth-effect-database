@@ -22,6 +22,9 @@ prep_study_data <- function(study_data, db_overview){
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
   
+  study_data$participant_age = ifelse(study_data$participant_age == 99, NA, study_data$participant_age)
+  study_data$percentage_female = ifelse(study_data$percentage_female == 99, NA, study_data$percentage_female)
+  
   study_data = clean_char_columns(study_data, db_overview, "study_table")
   
   return (study_data)

@@ -40,15 +40,34 @@ function cleanDataForSubmission(control) {
     return cleaned_control
 }
 
+function showSubmissionSuccessModal() {
+    // Initialize Bootstrap modal instance for the modal element
+    const modalEl = document.getElementById('confirmModalSubmission');
+    const modal = new bootstrap.Modal(modalEl);
+    
+    const user = 'sven.lesche';
+    const domain = 'psychologie.uni-heidelberg.de';
+    const email = `${user}@${domain}`;
+    const link = document.getElementById('email-success1');
+    link.href = `mailto:${email}`;
+    link.textContent = email;
+
+    // Show the modal
+    modal.show();
+  
+    // Optional: handle "Got it!" button click to close the modal
+    const confirmBtn = document.getElementById('confirmEmailBtn');
+    confirmBtn.onclick = () => modal.hide();
+  }
+  
+
 function submitData(control) {
     if (!validate_submission(control)) {
         return;
     }
 
-    console.log(control);
-    const version_number = "1.0.0"; // Replace with the actual version number
-
-    console.log(control);
+    //console.log(control);
+    const version_number = "1.0.1"; // Replace with the actual version number
 
     // clean the control data
     const cleaned_control = cleanDataForSubmission(control);
@@ -73,7 +92,7 @@ function submitData(control) {
 
     saveProgress(control);
 
-    alert("Data submitted successfully!");
+    showSubmissionSuccessModal();
 }
 
 function validate_submission(control) {
@@ -141,7 +160,7 @@ function saveProgress(control){
     a.click();
     document.body.removeChild(a);
 
-    alert("Progress file downloaded successfully!");
+    showAlert("Progress file downloaded successfully!", 'success');
 }
 
 function addCheckmarksFromProgress(control) {
