@@ -54,8 +54,8 @@ result <- query_db(
   conn,
   arguments,
   "default",
-  "study_table"
-) %>% distinct()
+  "procedure_table"
+) %>% View()
 
 db_overview = generate_db_overview_table(conn)
 

@@ -9,6 +9,13 @@ prep_repetition_data <- function(repetition_data, db_overview){
     dplyr::across(dplyr::any_of(numeric_columns), ~as.numeric(sub(",", ".", ., fixed = TRUE)))
   )
   
+  # In some versions, phase == "exposure" might be coded as 1, but return to char
+  clean_repetition_data$phase = ifelse(
+    clean_repetition_data$phase %in% c(0, 1),
+    ifelse(clean_repetition_data$phase == 1, "Exposure", "Test"),
+    clean_repetition_data$phase
+  )
+  
   clean_repetition_data = dplyr::rename(
     clean_repetition_data,
     "procedure_identifier" = "presentation_identifier",

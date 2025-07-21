@@ -249,7 +249,7 @@ function validateRepetitionSubmission() {
         response_deadline_s: document.getElementById('response_deadline_s').value,
         percent_repeated: document.getElementById('percent_repeated').value,
         presentation_type: document.getElementById('presentation_type').value,
-        phase: getRadioButtonSelection('phase'),
+        phase: getRadioButtonSelection('phase') == 1 ? 'Exposure' : 'Test',
         data_available:getRadioButtonSelection('data_available'),
         repetition_instructions: getRadioButtonSelection('repetition_instructions'),
         repetition_instruction_timing: getRadioButtonSelection('repetition_instruction_timing')
@@ -325,7 +325,7 @@ function addRepetitionEntry() {
     const response_deadline_s = document.getElementById('response_deadline_s').value;
     const percent_repeated = document.getElementById('percent_repeated').value;
     const presentation_type = document.getElementById('presentation_type').value;
-    const phase = getRadioButtonSelection('phase');
+    const phase = getRadioButtonSelection('phase') == '1' ? 'Exposure' : 'Test';
     const data_available = getRadioButtonSelection('data_available') == 1 ? 1 : 0;
     const repetition_instructions = getRadioButtonSelection('repetition_instructions') == 1 ? 1 : 0;
     const repetition_instruction_timing = repetition_instructions == 1 ? getRadioButtonSelection('repetition_instruction_timing') : '';
