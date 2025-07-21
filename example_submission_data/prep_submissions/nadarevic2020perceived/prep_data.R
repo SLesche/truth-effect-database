@@ -36,6 +36,9 @@ clean_data <- data %>%
     trial = row_number(),
     repeated = ifelse(Repetition == "Yes", 1, 0)
   ) %>% 
+  mutate(
+    response = ifelse(response == 7, 6, response)
+  ) %>% 
   select(subject, ends_with("identifier"), response, repeated, trial)
 
 write.csv(clean_data, paste0(script_dir, "./data/clean_data_2.csv"))
@@ -59,7 +62,8 @@ statement_data <-  data %>%
     statement_text = Statement,
     statement_accuracy = NA,
     proportion_true = NA
-  )
+  ) %>% 
+  filter(!is.na(Statement))
 
 write.csv(statement_data, paste0(script_dir, "./data/statement_data_3.csv"))
 
@@ -103,7 +107,8 @@ statement_data <- data %>%
     statement_text = paste0(first, "/", second),
     statement_accuracy = NA,
     proportion_true = NA
-  )
+  ) %>% 
+  filter(!is.na(first))
 
 write.csv(statement_data, paste0(script_dir, "./data/statement_data_4.csv"))
 
@@ -116,7 +121,7 @@ clean_data <- data %>%
     within_identifier = Source,
     between_identifier = 1,
     response = TruthRating,
-    rt = TruthRating.RT,
+    rt = TruthRating.RT / 1000,
     subject = Subject,
     trial = Trial,
     repeated = case_when(
