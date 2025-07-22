@@ -253,7 +253,7 @@ function collectStudyData() {
     const statementset_name = document.getElementById('statementset_name').value;
 
     const secondary_tasks = getRadioButtonSelection('secondary_tasks');
-    const secondary_task_type = secondary_tasks == 1 ? getRadioButtonSelection('secondary_task_type') : '';
+    const secondary_task_type = secondary_tasks == 1 ? (getRadioButtonSelection('secondary_task_type') == 1 ? 'verbal' : 'non-verbal') : '';
     const secondary_task_name = secondary_tasks == 1 ? document.getElementById('secondary_task_name').value : '';
 
     // Store the values in the control object
