@@ -150,6 +150,8 @@ function initializeStudySurvey(control, publication_idx, study_idx) {
                 <div class="form-text">Enter number after excluding invalid data.</div>
             </div>
 
+            ${generateYesNoField('student_sample', 'Was this a student sample?', study_data.student_sample)}
+
             <div class="mb-4">
                 <label for="participant_age" class="form-label">What was the average age of your participants?</label>
                 <input type="number" step="0.01" class="form-control" id="participant_age" name="participant_age" value="${study_data.participant_age || ''}">
@@ -251,6 +253,7 @@ function collectStudyData() {
     const open_data_link = document.getElementById('open_data_link').value;
     const study_comment = document.getElementById('study_comment').value;
     const statementset_name = document.getElementById('statementset_name').value;
+    const student_sample = getRadioButtonSelection('student_sample');
 
     const secondary_tasks = getRadioButtonSelection('secondary_tasks');
     const secondary_task_type = secondary_tasks == 1 ? (getRadioButtonSelection('secondary_task_type') == 1 ? 'verbal' : 'non-verbal') : '';
@@ -275,6 +278,7 @@ function collectStudyData() {
         secondary_tasks: secondary_tasks,
         secondary_task_type: secondary_task_type,
         secondary_task_name: secondary_task_name,
+        student_sample: student_sample,
     }
 
     return study_data;
@@ -289,6 +293,7 @@ function validateStudyData(study_data) {
     var required_keys = [
         'truth_rating_scale', 'truth_rating_steps', 'subjective_certainty', 'rt_measured', 'participant_age', 'n_participants',
         'percentage_female', 'physiological_measures', 'cognitive_models', 'statementset_name', 'secondary_tasks',
+        'student_sample'
     ];
 
     if (study_data.secondary_tasks == 1) {
