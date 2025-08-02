@@ -7,7 +7,7 @@ data <- readxl::read_excel(paste0(script_dir, "./data/study1_data_long_anonym.xl
 statement_data <- data %>% 
   distinct(session, statement_number) %>% 
   mutate(
-    statement_identifier = paste0(session, statement_number),
+    statement_identifier = paste0(session,"_", statement_number),
     statement_text = NA,
     statement_accuracy = NA
   )
@@ -37,7 +37,7 @@ data <- readxl::read_excel(paste0(script_dir, "./data/study2_data_long_anonym.xl
 statement_data <- data %>% 
   distinct(session, statement_number) %>% 
   mutate(
-    statement_identifier = paste0(session, statement_number),
+    statement_identifier = paste0(session,"_", statement_number),
     statement_text = NA,
     statement_accuracy = NA
   )
@@ -60,3 +60,4 @@ clean_data <- data %>%
   select(subject, ends_with("identifier"), response, repeated, rt, trial)
 
 write.csv(clean_data, paste0(script_dir, "./data/clean_data_2.csv"))
+
