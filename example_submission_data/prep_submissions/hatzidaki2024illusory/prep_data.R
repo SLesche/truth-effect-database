@@ -36,6 +36,16 @@ write.csv(clean_data, paste0(script_dir, "./data/clean_data_1.csv"))
 ## Exp2 ----
 data <- data_gen %>% filter(Experiment == "Athens")
 
+statement_data <- data %>% 
+  distinct(Item) %>% 
+  mutate(
+    statement_identifier = paste0(Item),
+    statement_text = NA,
+    statement_accuracy = NA
+  )
+
+write.csv(statement_data, paste0(script_dir, "./data/statement_data_2.csv"))
+
 clean_data <- data %>% 
   left_join(statement_data) %>% 
   mutate(
