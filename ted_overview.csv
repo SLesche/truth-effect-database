@@ -31,6 +31,8 @@ procedure_table,presentation_time_s,FLOAT,How long were statements presented (in
 procedure_table,response_deadline,BOOLEAN,Was there a response deadline?
 procedure_table,response_deadline_s,FLOAT,How long was the response deadline (in s)?
 procedure_table,percent_repeated,FLOAT,What percentage of statements was repeated?
+procedure_table,exposure_task,VARCHAR(255),What was the participants task during the exposure phase?
+procedure_table,exposure_task,BOOLEAN,Did participants rate the truth of statements in the exposure phase?
 procedure_table,presentation_type,VARCHAR(255),How were the statements presented (visual / auditory)?
 procedure_table,phase,VARCHAR(255),Which phase does the data come from (exposure / test)?
 procedure_table,repetition_instructions,INTEGER,Were participants instructed that some of the statements may be repeated?
@@ -65,6 +67,7 @@ study_table,rt_onset,VARCHAR(255),What event marked the onset of the response ti
 study_table,subjective_certainty,BOOLEAN,Was subjective certainty in sentence judgment measured?
 study_table,physiological_measures,BOOLEAN,Were any physiological measures collected?
 study_table,cognitive_models,BOOLEAN,Were any cognitive models employed in the analysis of the data?
+study_table,student_sample,BOOLEAN,Was this a student sample?
 study_table,filler_task_yesno,BOOLEAN,Was there a filler task between exposure and test?
 study_table,filler_task_type,VARCHAR(63),What type was the filler task (verbal / non-verbal)?
 study_table,filler_task_name,VARCHAR(255),What was the name of the filler task?

@@ -38,6 +38,7 @@ create_truth_db <- function(file_path){
     filler_task_name VARCHAR(255),
     truth_rating_scale VARCHAR(255),
     truth_rating_steps INTEGER,
+    student_sample BOOLEAN,
     FOREIGN KEY (statementset_id) REFERENCES statementset_table(statementset_id),
     FOREIGN KEY (publication_id) REFERENCES publication_table(publication_id)
     );"
@@ -111,6 +112,8 @@ create_truth_db <- function(file_path){
     response_deadline BOOLEAN,
     response_deadline_s FLOAT,
     percent_repeated FLOAT,
+    exposure_task_truth BOOLEAN,
+    exposure_task VARCHAR(255),
     presentation_type VARCHAR(255),
     phase VARCHAR(255),
     repetition_instructions INTEGER,
