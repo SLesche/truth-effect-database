@@ -20,7 +20,7 @@ write.csv(statement_data, paste0(script_dir, "./data/statement_data.csv"))
 clean_data <- data %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = judgmentphase,
+    procedure_identifier = judgmentphase,
     within_identifier = 1,
     between_identifier = 1,
     response = trating,

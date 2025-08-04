@@ -37,8 +37,8 @@ for (isubmission in seq_along(valid_files)){
 # files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
 # sapply(files_to_source, source)
 library(acdcquery)
-library(DBI)
-library(RSQLite)
+# library(DBI)
+# library(RSQLite)
 
 library(tidyverse)
 
