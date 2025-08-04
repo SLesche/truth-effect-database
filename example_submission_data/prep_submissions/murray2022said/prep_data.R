@@ -23,7 +23,7 @@ clean_data <- data %>%
     subject = WorkerID,
     repeated = Repeated,
     response = truthRating,
-    rt = RT,
+    rt = NA,
     trial = NA,
   ) %>% 
   select(subject, ends_with("identifier"), response, repeated, rt, trial) %>% 
