@@ -113,7 +113,7 @@ function validate_submission(control) {
             alert_messages.push(`Please validate the study data of Study ${parseInt(study_idx) + 1} before submitting.`);
         }
 
-        if (!study.repetition_validated) {
+        if (!study.repetition_validated.validated) {
             alert_messages.push(`Please validate the procedure data of Study ${parseInt(study_idx) + 1} before submitting.`);
         }
 
@@ -186,7 +186,7 @@ function addCheckmarksFromProgress(control) {
             }
 
             // Add checkmarks for repetition data
-            if (study.repetition_validated) {
+            if (study.repetition_validated.validated) {
                 addGreenCheckmarkById(`repetitions-${publication_idx}-${study_idx}`);
             }
 
