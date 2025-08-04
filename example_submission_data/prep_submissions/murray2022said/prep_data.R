@@ -10,7 +10,8 @@ statement_data <- data %>%
     statement_identifier = item,
     statement_text = NA,
     statement_accuracy = NA
-  )
+  ) %>% 
+  filter(!is.na(statement_identifier))
 
 write.csv(statement_data, paste0(script_dir, "./data/statement_data_1.csv"))
 
