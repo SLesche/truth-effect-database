@@ -2,6 +2,7 @@ prep_raw_data <- function(raw_data, db_overview){
   numeric_columns = db_overview |>
     dplyr::filter(table == "observation_table") |>
     dplyr::filter(data_type %in% c("BOOLEAN", "INTEGER", "FLOAT")) |>
+    dplyr::filter(!grepl("_identifier$" ,column_name)) |>
     dplyr::pull(column_name)
   
   if ("presentation_identifier" %in% colnames(raw_data)){
@@ -10,6 +11,8 @@ prep_raw_data <- function(raw_data, db_overview){
       "procedure_identifier" = "presentation_identifier",
     )
   }
+  
+  raw_data$subject = dplyr::dense_rank(raw_data$subject)
   
   raw_data[grepl("^true$", raw_data, ignore.case = TRUE)] = 1
   raw_data[grepl("^false$", raw_data, ignore.case = TRUE)] = 0
