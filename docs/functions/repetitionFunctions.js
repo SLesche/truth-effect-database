@@ -111,15 +111,15 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
           <label class="form-label">When were the participants instructed that some of these statements may be false?</label>
           <div id=truth_instruction_timing>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_exposure">
+                  <input class="form-check-input" type="radio" value="exposure" name="truth_instruction_timing" id="truth_instruction_timing_exposure">
                   <label class="form-check-label" for="truth_instruction_timing_exposure">Before the exposure session</label>
               </div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_test">
+                  <input class="form-check-input" type="radio" value="test" name="truth_instruction_timing" id="truth_instruction_timing_test">
                   <label class="form-check-label" for="truth_instruction_timing_test">Before the test session</label>
               </div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="truth_instruction_timing" id="truth_instruction_timing_both">
+                  <input class="form-check-input" type="radio" value="both" name="truth_instruction_timing" id="truth_instruction_timing_both">
                   <label class="form-check-label" for="truth_instruction_timing_both">Before both the exposure and the test session</label>
               </div>
           </div>
@@ -133,15 +133,15 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
           <label class="form-label">When were the participants instructed that some of these statements may be repeated?</label>
           <div id=repetition_instruction_timing>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_exposure">
+                  <input class="form-check-input" type="radio" value="exposure" name="repetition_instruction_timing" id="repetition_instruction_timing_exposure">
                   <label class="form-check-label" for="repetition_instruction_timing_exposure">Before the exposure session</label>
               </div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_test">
+                  <input class="form-check-input" type="radio" value="test"  name="repetition_instruction_timing" id="repetition_instruction_timing_test">
                   <label class="form-check-label" for="repetition_instruction_timing_test">Before the test session</label>
               </div>
               <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="repetition_instruction_timing" id="repetition_instruction_timing_both">
+                  <input class="form-check-input" type="radio" value="both"  name="repetition_instruction_timing" id="repetition_instruction_timing_both">
                   <label class="form-check-label" for="repetition_instruction_timing_both">Before both the exposure and the test session</label>
               </div>
           </div>
@@ -196,7 +196,7 @@ function initializeRepetitionSurvey(control, publication_idx, study_idx) {
     `;
 
    // Display previous submission if available
-    if (control.publication_info[publication_idx].study_info[study_idx].repetition_validated.validated) {
+    if (control.publication_info[publication_idx].study_info[study_idx].repetition_validated.validated | control.publication_info[publication_idx].study_info[study_idx].repetition_validated) {
         displayRepetitionSummary(repetition_data);
         document.getElementById('repetitionTableContainer').classList.remove('d-none');
         document.getElementById('listOfRepetitions').classList.remove('d-none');
