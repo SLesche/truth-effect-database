@@ -66,7 +66,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   mutate(
     subject = ppt,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     trial = pos_judgment_phase,
     within_identifier = 1,
     between_identifier = 1,
@@ -98,7 +98,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   mutate(
     subject = ppt,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     trial = pos_judgment_phase,
     within_identifier = 1,
     between_identifier = instructions,
