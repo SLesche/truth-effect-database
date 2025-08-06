@@ -5,7 +5,7 @@ script_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 data <- data.table::fread(paste0(script_dir, "./data/data_E1.csv"))
 
 clean_data <- data %>% 
-  select(Condition, ends_with("_IQ")) %>% 
+  select(Condition, ends_with("_BR")) %>% 
   mutate(subject = row_number()) %>% 
   pivot_longer(
     cols = -c(Condition, subject),
@@ -16,7 +16,7 @@ clean_data <- data %>%
     repeated = ifelse(Condition == "NE", 0, 1)
   ) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     statement_identifier = type,
     trial = NA,
     rt = NA,
