@@ -42,7 +42,7 @@ clean_data <- data %>%
     truth_rating = 7 - as.numeric(truth_rating),
   ) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = fluency_condition
   ) %>% 

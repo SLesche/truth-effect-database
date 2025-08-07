@@ -52,7 +52,7 @@ clean_data <- data %>%
   mutate(
     subject = CASE,
     statement_identifier = NA,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = 1,
     repeated = ifelse(item_nr > 28, 0, 1),
@@ -95,7 +95,7 @@ clean_data <- data %>%
   ) %>% 
   mutate(
     subject = CASE,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     statement_identifier = NA,
     within_identifier = 1,
     between_identifier = 1,
@@ -135,7 +135,7 @@ clean_data <- data %>%
   ) %>% 
   mutate(
     subject = CASE,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     statement_identifier = NA,
     within_identifier = 1,
     between_identifier = 1,

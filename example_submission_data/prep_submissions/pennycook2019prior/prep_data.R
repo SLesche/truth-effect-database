@@ -28,7 +28,7 @@ clean_data <- data %>%
     statement_number = as.numeric(str_extract(item, "\\d"))
   ) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     trial = NA,
     between_identifier = 1,
     repeated = case_when(
@@ -75,7 +75,7 @@ clean_data <- data %>%
   ) %>% 
   filter(type != "rt") %>% 
   mutate(
-    presentation_identifier = Warning,
+    procedure_identifier = Warning,
     trial = NA,
     between_identifier = 1,
     repeated = case_when(
@@ -120,7 +120,7 @@ clean_session1_data <-  session1_data %>%
     statement_number = as.numeric(str_extract(item, "\\d+")),
   ) %>% 
   mutate(
-    presentation_identifier = paste0(Warning, "_session_", 1),
+    procedure_identifier = paste0(Warning, "_session_", 1),
     trial = NA,
     between_identifier = 1,
     repeated = case_when(
@@ -155,7 +155,7 @@ clean_session2_data <- session2_data %>%
     statement_number = as.numeric(str_extract(item, "\\d+")),
   ) %>% 
   mutate(
-    presentation_identifier = paste0(Warning, "_session_", 2),
+    procedure_identifier = paste0(Warning, "_session_", 2),
     trial = NA,
     between_identifier = 1,
     repeated = case_when(

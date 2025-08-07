@@ -26,7 +26,7 @@ clean_data <- data %>%
     repeated = ifelse(as.numeric(number) > 24, 1, 0)
   ) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     statement_identifier = NA,
     trial = NA,
     rt = NA,

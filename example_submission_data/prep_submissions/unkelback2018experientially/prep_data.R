@@ -97,7 +97,7 @@ clean_data <- df %>%
     statement_text = NA,
     trial = NA,
     rt = t / 1000,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     response = d,
   ) %>% 
   select(subject, ends_with("identifier"), contains("statement"), response, repeated, rt, trial)
@@ -206,7 +206,7 @@ clean_data <- df %>%
     statement_text = NA,
     trial = NA,
     rt = t / 1000,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     response = d + 50,
   ) %>% 
   select(subject, ends_with("identifier"), contains("statement"), response, repeated, rt, trial)
@@ -309,7 +309,7 @@ clean_data <- df %>%
     statement_text = NA,
     trial = NA,
     rt = t / 1000,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     response = r + 50,
   ) %>% 
   select(subject, ends_with("identifier"), contains("statement"), response, repeated, rt, trial)
@@ -412,7 +412,7 @@ clean_data <- df %>%
     statement_text = NA,
     trial = NA,
     rt = t / 1000,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     response = r + 50,
   ) %>% 
   filter(statement_number %in% c(1:20, 31:50, 61:80, 91:110) | subject == 3) %>% 

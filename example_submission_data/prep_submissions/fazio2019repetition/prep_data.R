@@ -29,7 +29,7 @@ clean_data <- data %>%
   ) %>% 
   mutate(
     subject = Subject,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     statement_identifier = type,
     trial = NA,
     rt = NA,

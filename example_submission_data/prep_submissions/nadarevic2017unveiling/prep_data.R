@@ -21,7 +21,7 @@ clean_data <- data %>%
   filter(filter == "selected") %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = paste0(groupdescription, phase),
+    procedure_identifier = paste0(groupdescription, phase),
     within_identifier = 1,
     between_identifier = group,
     response = trating,
@@ -58,7 +58,7 @@ clean_data <- data %>%
                          165, 81, 121, 56, 87, 110, 83, 8, 38, 187, 161)) %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = paste0(groupdescription),
+    procedure_identifier = paste0(groupdescription),
     within_identifier = 1,
     between_identifier = group,
     response = trating,

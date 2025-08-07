@@ -20,7 +20,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   mutate(
     subject = n_ppt,
-    presentation_identifier = ifelse(cond_delay == 1, "nodelay", "delay"),
+    procedure_identifier = ifelse(cond_delay == 1, "nodelay", "delay"),
     trial = NA,
     within_identifier = 1,
     between_identifier = 1,

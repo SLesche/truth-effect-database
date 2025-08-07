@@ -34,7 +34,7 @@ clean_data <- clean_data %>%
   left_join(old_statements) %>% 
   mutate(
     subject = componentResultId,
-    presentation_identifier = phase,
+    procedure_identifier = phase,
     trial = NA,
     within_identifier = 1,
     between_identifier = 1,

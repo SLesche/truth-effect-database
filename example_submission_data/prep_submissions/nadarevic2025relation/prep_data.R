@@ -27,7 +27,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   janitor::clean_names() %>% 
   mutate(
-    presentation_identifier = old_ratio,
+    procedure_identifier = old_ratio,
     within_identifier = 1,
     between_identifier = 1,
     response = t_rating,
@@ -54,7 +54,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   janitor::clean_names() %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = 1,
     response = t_rating,
@@ -88,7 +88,7 @@ clean_data <- data %>%
   filter(ExternalHelp == "no", Compliance == "yes") %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     subject = Subject,
     within_identifier = 1,
     between_identifier = 1,

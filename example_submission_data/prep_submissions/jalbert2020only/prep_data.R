@@ -51,7 +51,7 @@ data_exp_1_clean <- data_exp_1 %>%
   ) %>% 
   select(
     subject,
-    presentation_identifier = session,
+    procedure_identifier = session,
     within_identifier,
     between_identifier,
     trial,
@@ -103,7 +103,7 @@ data_exp_2_clean <- data_exp_2 %>%
   )%>% 
   select(
     subject,
-    presentation_identifier = session,
+    procedure_identifier = session,
     within_identifier,
     between_identifier,
     trial,
@@ -155,7 +155,7 @@ data_exp_3_clean <- data_exp_3 %>%
   )%>% 
   select(
     subject,
-    presentation_identifier = session,
+    procedure_identifier = session,
     within_identifier,
     between_identifier,
     trial,

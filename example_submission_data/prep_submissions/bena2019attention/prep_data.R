@@ -20,7 +20,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   mutate(
     subject = ppt,
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     trial = NA,
     within_identifier = 1,
     between_identifier = case_when(

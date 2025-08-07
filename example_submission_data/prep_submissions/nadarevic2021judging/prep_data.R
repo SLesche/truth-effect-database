@@ -20,7 +20,7 @@ write.csv(statement_data, paste0(script_dir, "./data/statement_data_1.csv"))
 clean_data <- data %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = paste0(GroupDescription, Phase),
+    procedure_identifier = paste0(GroupDescription, Phase),
     within_identifier = 1,
     between_identifier = 1,
     response = ifelse(TruthJudgment, 1, 0),
@@ -53,7 +53,7 @@ write.csv(statement_data, paste0(script_dir, "./data/statement_data_2.csv"))
 clean_data <- data %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = paste0(GroupDescription, Phase),
+    procedure_identifier = paste0(GroupDescription, Phase),
     within_identifier = Difficulty,
     between_identifier = 1,
     response = ifelse(TruthJudgment, 1, 0),
@@ -95,7 +95,7 @@ clean_data <- data %>%
   left_join(statement_data) %>% 
   filter(Phase %in% c("Test1", "Test2"), Repetition %in% c("yes", "no")) %>% 
   mutate(
-    presentation_identifier = paste0(GroupDescription, Phase),
+    procedure_identifier = paste0(GroupDescription, Phase),
     within_identifier = Difficulty,
     between_identifier = 1,
     response = ifelse(TruthJudgment, 1, 0),

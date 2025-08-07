@@ -81,7 +81,7 @@ clean_data <- data %>%
   )) %>% 
   left_join(final_statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = 1,
     subject = ID,
@@ -190,7 +190,7 @@ clean_data <- data %>%
   )) %>% 
   left_join(final_statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = 1,
     subject = ID,
@@ -307,7 +307,7 @@ clean_data <- data %>%
   )) %>% 
   left_join(final_statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     subject = ID,
     rt = NA,
@@ -369,7 +369,7 @@ clean_data <- data %>%
   )) %>% 
   left_join(final_statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     subject = ID,
     rt = NA,
@@ -429,7 +429,7 @@ clean_data <- data %>%
   )) %>% 
   left_join(final_statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     subject = ID,
     rt = NA,

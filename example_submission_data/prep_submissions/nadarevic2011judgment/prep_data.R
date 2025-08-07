@@ -21,7 +21,7 @@ write.csv(statement_data, paste0(script_dir, "./data/statement_data.csv"))
 clean_data <- data %>% 
   left_join(statement_data) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     within_identifier = 1,
     between_identifier = group,
     response = truthrating,

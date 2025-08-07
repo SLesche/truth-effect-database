@@ -54,7 +54,7 @@ clean_data <- data %>%
     repeated = ifelse(Condition == "NE", 0, 1)
   ) %>% 
   mutate(
-    presentation_identifier = ifelse(str_detect(Condition, "D$"), "delayed", "immediate"),
+    procedure_identifier = ifelse(str_detect(Condition, "D$"), "delayed", "immediate"),
     trial = NA,
     rt = NA,
     statement_identifier = type,
@@ -81,7 +81,7 @@ clean_data <- data %>%
     repeated = ifelse(Cond == "NE", 0, 1)
   ) %>% 
   mutate(
-    presentation_identifier = 1,
+    procedure_identifier = 1,
     trial = NA,
     rt = NA,
     within_identifier = ifelse(str_detect(type, "^M"), "myth", "fact"),
