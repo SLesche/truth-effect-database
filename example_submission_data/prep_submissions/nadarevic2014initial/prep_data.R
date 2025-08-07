@@ -48,9 +48,9 @@ clean_data <- data %>%
   filter(runningtrial == "TruthRating") %>%
   filter(phase == 2) %>% 
   mutate(
-    procedure_identifier = 1,
+    procedure_identifier = group_description,
     within_identifier = 1,
-    between_identifier = group_description,
+    between_identifier = 1,
     response = trating,
     rt = trating.rt / 1000,
     repeated = ifelse(repetition == "Yes", 1, 0)
