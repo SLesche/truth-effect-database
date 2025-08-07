@@ -72,10 +72,13 @@ function submitData(control) {
     // clean the control data
     const cleaned_control = cleanDataForSubmission(control);
 
+
     console.log(cleaned_control);
 
     control.version_number = version_number;
     cleaned_control.version_number = version_number;
+    // Save the progress before submission
+    saveProgress(control);
 
     // Write the data into a json file
     const submission_data = JSON.stringify(cleaned_control);
@@ -89,8 +92,6 @@ function submitData(control) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
-    saveProgress(control);
 
     showSubmissionSuccessModal();
 }
@@ -113,7 +114,7 @@ function validate_submission(control) {
             alert_messages.push(`Please validate the study data of Study ${parseInt(study_idx) + 1} before submitting.`);
         }
 
-        if (!study.repetition_validated.validated) {
+        if (!study.repetition_validated.validated) { // && !study.repetition_validated
             alert_messages.push(`Please validate the procedure data of Study ${parseInt(study_idx) + 1} before submitting.`);
         }
 
@@ -186,7 +187,7 @@ function addCheckmarksFromProgress(control) {
             }
 
             // Add checkmarks for repetition data
-            if (study.repetition_validated.validated) {
+            if (study.repetition_validated.validated) { //  || study.repetition_validated
                 addGreenCheckmarkById(`repetitions-${publication_idx}-${study_idx}`);
             }
 
