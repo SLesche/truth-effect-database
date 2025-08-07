@@ -1,4 +1,4 @@
-"","subject","statement_identifier","presentation_identifier","within_identifier","between_identifier","response","repeated","rt","trial"
+"","subject","statement_identifier","procedure_identifier","within_identifier","between_identifier","response","repeated","rt","trial"
 "1",3,49,1,1,1,3,0,2.479,5
 "2",3,70,1,1,1,1,1,1.935,6
 "3",3,13,1,1,1,1,0,1.067,7
