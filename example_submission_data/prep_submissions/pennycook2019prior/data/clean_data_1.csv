@@ -1,4 +1,4 @@
-"","subject","within_identifier","statement_identifier","presentation_identifier","between_identifier","statement_text","statement_accuracy","statement_number","response","repeated","trial"
+"","subject","within_identifier","statement_identifier","procedure_identifier","between_identifier","statement_text","statement_accuracy","statement_number","response","repeated","trial"
 "1",1,"Imp","Imp1_2",1,1,NA,0,1,1,1,NA
 "2",1,"Imp","Imp2_2",1,1,NA,0,2,1,1,NA
 "3",1,"Imp","Imp3_2",1,1,NA,0,3,1,0,NA

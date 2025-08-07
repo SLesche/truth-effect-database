@@ -1,4 +1,4 @@
-"","subject","statement_identifier","presentation_identifier","between_identifier","statement_text","statement_accuracy","statement_number","response","repeated","trial"
+"","subject","statement_identifier","procedure_identifier","between_identifier","statement_text","statement_accuracy","statement_number","response","repeated","trial"
 "1",1,"Fake5","1_session_1",1,NA,0,5,2,0,NA
 "2",1,"Fake6","1_session_1",1,NA,0,6,2,0,NA
 "3",1,"Fake7","1_session_1",1,NA,0,7,2,0,NA
