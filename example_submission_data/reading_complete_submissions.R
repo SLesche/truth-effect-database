@@ -3,7 +3,7 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "ted.db"
+db_path = "ted2.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
@@ -53,7 +53,7 @@ arguments <- list() %>%
 result <- query_db(
   conn,
   arguments,
-  "default",
+  c("default", "authors", "conducted"),
   "procedure_table"
 ) %>% View()
 
