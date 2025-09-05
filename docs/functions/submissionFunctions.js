@@ -70,28 +70,25 @@ function submitData(control) {
     const version_number = "1.0.1"; // Replace with the actual version number
 
     // clean the control data
-    const cleaned_control = cleanDataForSubmission(control);
-
-
-    console.log(cleaned_control);
+    // const cleaned_control = cleanDataForSubmission(control);
 
     control.version_number = version_number;
-    cleaned_control.version_number = version_number;
+    // cleaned_control.version_number = version_number;
     // Save the progress before submission
-    saveProgress(control);
+    saveProgress(control, true);
 
-    // Write the data into a json file
-    const submission_data = JSON.stringify(cleaned_control);
+    // // Write the data into a json file
+    // const submission_data = JSON.stringify(cleaned_control);
 
-    // Download the data locally
-    const blob = new Blob([submission_data], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `submission_${cleaned_control.publication_data.first_author}_${cleaned_control.publication_data.conducted}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // // Download the data locally
+    // const blob = new Blob([submission_data], { type: "application/json" });
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = `submission_${cleaned_control.publication_data.first_author}_${cleaned_control.publication_data.conducted}.json`;
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
 
     showSubmissionSuccessModal();
 }
@@ -146,7 +143,7 @@ function validate_submission(control) {
     return true;
 }
 
-function saveProgress(control){
+function saveProgress(control, is_submission = false){
     control.progress_file = true;
     // Write the data into a json file
     const submission_data = JSON.stringify(control);
@@ -156,7 +153,9 @@ function saveProgress(control){
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `progress_${control.publication_info[0].publication_data.first_author}_${control.publication_info[0].publication_data.conducted}.json`;
+    
+    const type = is_submission ? 'submission' : 'progress';
+    a.download = `${type}_${control.publication_info[0].publication_data.first_author}_${control.publication_info[0].publication_data.conducted}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
