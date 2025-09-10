@@ -16,6 +16,13 @@ prep_repetition_data <- function(repetition_data, db_overview){
     clean_repetition_data$phase
   )
   
+  # For an issue in Nada 2017
+  clean_repetition_data$presentation_type = ifelse(
+    clean_repetition_data$presentation_type == "exact",
+    "visual",
+    clean_repetition_data$presentation_type
+  )
+  
   clean_repetition_data = dplyr::rename(
     clean_repetition_data,
     "procedure_identifier" = "presentation_identifier",
