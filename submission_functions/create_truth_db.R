@@ -9,6 +9,7 @@ create_truth_db <- function(file_path){
     authors VARCHAR(10000),
     conducted DATE,
     added DATE,
+    peer_reviewed BOOLEAN,
     country VARCHAR(255),
     contact VARCHAR(10000),
     apa_reference VARCHAR(2047),

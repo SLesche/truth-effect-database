@@ -50,6 +50,13 @@ arguments <- list() %>%
     "0"
   )
 
+pub_result <- query_db(
+  conn,
+  arguments,
+  "default",
+  "publication_table"
+)
+
 result <- query_db(
   conn,
   arguments,
