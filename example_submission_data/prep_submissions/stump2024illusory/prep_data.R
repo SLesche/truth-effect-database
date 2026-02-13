@@ -25,9 +25,9 @@ clean_data <- data %>%
     response = responses,
     rt = NA,
     trial = NA,
-    confidence = confidence
+    certainty = confidence
   ) %>% 
-  select(subject, ends_with("identifier"), response, repeated, rt, confidence, trial) %>% 
+  select(subject, ends_with("identifier"), response, repeated, rt, certainty, trial) %>% 
   filter(!is.na(subject))
 
 write.csv(clean_data, paste0(script_dir, "./data/clean_data_1.csv"))
