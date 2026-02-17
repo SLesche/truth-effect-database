@@ -1,4 +1,4 @@
-"","subject","statement_identifier","procedure_identifier","within_identifier","between_identifier","response","repeated","rt","confidence","trial"
+"","subject","statement_identifier","procedure_identifier","within_identifier","between_identifier","response","repeated","rt","certainty","trial"
 "1",2,1,2,1,0,1,0,0.933,3,NA
 "2",2,2,2,1,0,0,0,1.985,1,NA
 "3",2,3,2,1,0,0,0,2.019,1,NA

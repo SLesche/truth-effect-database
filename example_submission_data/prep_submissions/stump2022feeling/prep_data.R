@@ -26,16 +26,16 @@ clean_data <- data %>%
     response = TruthRating,
     rt = TruthRating.RT / 1000,
     trial = NA,
-    confidence = Confidence.RESP
+    certainty = Confidence.RESP
   ) %>% 
-  select(subject, ends_with("identifier"), response, repeated, rt, confidence, trial) %>% 
+  select(subject, ends_with("identifier"), response, repeated, rt, certainty, trial) %>% 
   filter(!is.na(subject)) %>% 
   filter(!subject %in% c(13, 70, 101, 118, 119, 36, 51, 57, 59, 6, 85, 89))
 
 write.csv(clean_data, paste0(script_dir, "./data/clean_data_1.csv"))
 
 ## Data 2 ----
-data <- data.table::fread(paste0(script_dir, "./data/TruthData_Experiment2.csv")) 
+data2 <- data.table::fread(paste0(script_dir, "./data/TruthData_Experiment2.csv")) 
 
 statement_data <- data2 %>%
   distinct(ItemID, factual_truth) %>%
@@ -58,9 +58,9 @@ clean_data <- data2 %>%
     response = responses,
     rt = rts / 1000,
     trial = NA,
-    confidence = confidence
+    certainty = confidence
   ) %>% 
-  select(subject, ends_with("identifier"), response, repeated, rt, confidence, trial) %>% 
+  select(subject, ends_with("identifier"), response, repeated, rt, certainty, trial) %>% 
   filter(!is.na(subject)) %>% 
   filter(!subject %in% c(63, 22, 38, 7, 29, 45, 46, 48, 65, 77, 35))
 
