@@ -4,19 +4,18 @@ script_dir <- dirname(rstudioapi::getSourceEditorContext()$path)
 
 data <- readxl::read_excel(paste0(script_dir, "./data/summed_data_both_sessions_10_2025.xlsx")) 
 
-# statement_data <- data %>% 
-#   distinct(statements) %>% 
-#   mutate(
-#     statement_identifier = row_number(),
-#     statement_text = statements,
-#     statement_accuracy = NA
-#   )
-statement_data <- read.csv(paste0(script_dir, "/../stump2024illusory/data/statement_data_1.csv"))
+statement_data <- data %>%
+  distinct(statements) %>%
+  mutate(
+    statement_identifier = row_number(),
+    statement_text = statements,
+    statement_accuracy = NA
+  )
 
-# write.csv(statement_data, paste0(script_dir, "./data/statement_data_1.csv"))
+write.csv(statement_data, paste0(script_dir, "./data/statement_data_1.csv"))
 
 clean_data <- data %>% 
-  left_join(statement_data %>% select(-X)) %>% 
+  left_join(statement_data) %>% 
   mutate(
     procedure_identifier = session,
     within_identifier = 1,
