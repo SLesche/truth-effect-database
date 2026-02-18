@@ -24,16 +24,21 @@ We place no restrictions on usage — feel free to explore, analyze, and publish
 Please remember:
 🔔 All studies used in your final dataset must be cited individually.
 
-To work with TED, download `ted.db` from this repository: [Link](ted.db)
+In order to enable all users to interact with TED, we have built an R-package to aid extraction from the database: [`acdcquery`](https://github.com/SLesche/acdc-query)
+
+To work with TED, download `ted.db` using `acdcquery::donwload_ted(filepath)` or download `ted.db` from this repository: [Link](ted.db)
 
 You can then use any SQL tool to interact with the database.
 
-In order to enable all users to interact with TED, we have built an R-package to aid extraction from the database: [`acdcquery`](https://github.com/SLesche/acdc-query)
-
-This package provides functions to connect with the database, define filter arguments, and extract data from TED:
+To simplify usage, the package `acdcquery` provides functions to download the database, connect with the database, define filter arguments, and extract data from TED:
 
 ```R
 library(acdcquery)
+
+download_ted("path/to/ted.db")
+
+# OR check whether your version is up-to-date using check_ted("path/to/ted.db")
+# and update it using update_ted("path/to/ted.db")
 
 conn <- connect_to_db("path/to/ted.db")
 
