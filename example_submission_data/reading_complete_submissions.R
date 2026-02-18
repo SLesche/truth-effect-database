@@ -3,7 +3,8 @@ files_to_source = list.files("./submission_functions", pattern = "\\.R$", full.n
 sapply(files_to_source, source)
 
 path <- "example_submission_data/prep_submissions/"
-db_path = "ted2.db"
+# Delete ted.db old version
+db_path = "ted.db"
 create_truth_db(db_path)
 
 conn <- acdcquery::connect_to_db(db_path)
@@ -22,8 +23,8 @@ for (isubmission in seq_along(valid_files)){
   submission_obj <- prep_submission_data(conn, raw_obj)
   
   # inspect_publication_data(submission_obj)
-  # inspect_study_data(submission_obj)
-  # inspect_statementset_data(submission_obj)
+  inspect_study_data(submission_obj)
+  inspect_statementset_data(submission_obj)
   # inspect_condition_data(submission_obj)
   # inspect_raw_data(submission_obj)
   # 
@@ -34,9 +35,11 @@ for (isubmission in seq_along(valid_files)){
 }
 
 # devtools::install_github("SLesche/acdc-query")
-# files_to_source = list.files("../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+# files_to_source = list.files("../../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
 # sapply(files_to_source, source)
 library(acdcquery)
+
+create_sqlite_hash_file(db_path)
 # library(DBI)
 # library(RSQLite)
 
