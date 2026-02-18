@@ -35,8 +35,8 @@ for (isubmission in seq_along(valid_files)){
 }
 
 # devtools::install_github("SLesche/acdc-query")
-# files_to_source = list.files("../../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
-# sapply(files_to_source, source)
+files_to_source = list.files("../../acdc/acdc-query/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+sapply(files_to_source, source)
 library(acdcquery)
 
 create_sqlite_hash_file(db_path)

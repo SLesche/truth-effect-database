@@ -1,10 +1,9 @@
-files_to_source = list.files("../../Amsterdam/inhibitiondb/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
-sapply(files_to_source, source)
+# files_to_source = list.files("../../Amsterdam/inhibitiondb/R", pattern = "\\.R$", full.names = TRUE, include.dirs = FALSE)
+# sapply(files_to_source, source)
 
 library(tidyverse)
 library(DBI)
 library(RSQLite)
-db_path = "../truth-db-paper/markdown/data/ted.db"
 db_path2 = "./ted.db"
 check_ted(db_path2)
 
