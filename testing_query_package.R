@@ -4,14 +4,21 @@ sapply(files_to_source, source)
 library(tidyverse)
 library(DBI)
 library(RSQLite)
-db_path = "truth_11_04.db"
+db_path = "../truth-db-paper/markdown/data/ted.db"
+db_path2 = "./ted.db"
+check_ted(db_path2)
 
-conn <- connect_to_db(db_path)
+update_ted(
+  db_path2,
+
+)
+
+conn <- connect_to_db(db_path2)
 
 arguments <- list() %>% 
   add_argument(
     conn,
-    "statementset_id", 
+    "publication_id", 
     "greater", 
     0
   ) %>% 
@@ -42,7 +49,7 @@ arguments <- list() %>%
 
 target_vars = c("default", "statement_accuracy", "n_participants")
 
-target_table = "statementset_table"
+target_table = "statmentset_table"
 
 argument_relation = "and"
 
@@ -50,7 +57,7 @@ result <- query_db(
   conn,
   arguments,
   target_vars,
-  "observation_table"
+  target_table
 )
 
 full_data = dbReadTable(conn, "observation_table")
