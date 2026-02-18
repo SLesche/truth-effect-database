@@ -154,7 +154,7 @@ function saveProgress(control, is_submission = false){
     const a = document.createElement('a');
     a.href = url;
     
-    const type = is_submission ? 'submission' : 'progress';
+    const type = is_submission ? 'submission_check' : 'progress';
     a.download = `${type}_${control.publication_info[0].publication_data.first_author}_${control.publication_info[0].publication_data.conducted}.json`;
     document.body.appendChild(a);
     a.click();
