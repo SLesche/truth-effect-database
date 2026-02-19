@@ -34,6 +34,7 @@ To simplify usage, the package `acdcquery` provides functions to download the da
 
 ```R
 library(acdcquery)
+library(magrittr) # for pipes
 
 download_ted("path/to/")
 
