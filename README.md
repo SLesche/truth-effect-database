@@ -40,7 +40,7 @@ download_ted("path/to/")
 # OR check whether your version is up-to-date using check_ted("path/to/ted.db")
 # and update it using update_ted("path/to/ted.db")
 
-conn <- connect_to_db("path/to/ted.db")
+conn <- connect_to_db("path/to/")
 
 arguments <- list() %>% add_argument(
     conn = conn,
