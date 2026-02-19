@@ -1,7 +1,7 @@
 # Truth Effect Database (TED)
 
 Welcome to the Truth Effect Database (TED) — a large, open-source repository dedicated to research on the illusory truth effect.
-TED currently contains: 50+ Studies, 10.000+ Participants, 500.000+ Trials
+TED currently contains: 59 Studies, 12.000+ Participants, 800.000+ Trials
 
 You can find more information on TED at its website: https://slesche.github.io/ted-site/
 
@@ -35,7 +35,7 @@ To simplify usage, the package `acdcquery` provides functions to download the da
 ```R
 library(acdcquery)
 
-download_ted("path/to/ted.db")
+download_ted("path/to/")
 
 # OR check whether your version is up-to-date using check_ted("path/to/ted.db")
 # and update it using update_ted("path/to/ted.db")
