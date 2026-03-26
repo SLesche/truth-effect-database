@@ -32,7 +32,8 @@ function generateOverviewPage(control) {
             <h1 class = "mb-3">TED: Data Entry Page</h1>
             <p>Thank you for contributing to our growing database of truth effect research. By entering your data here, you help make research more accessible and reusable for everyone.</p>
             <p>You can explore and download the dataset under this link: <a href="https://github.com/SLesche/truth-db" target="_blank">Link to Dataset</a></p>
-            
+            <p>You can download a list of all questions asked here to prepare information ahead of time under this link: <a href="https://raw.githubusercontent.com/SLesche/truth-effect-database/main/example_submission_data/List%20of%20Questions%20TED%20Entry.pdf" target="_blank">PDF Download</a> OR <a href="https://raw.githubusercontent.com/SLesche/truth-effect-database/main/example_submission_data/List%20of%20Questions%20TED%20Entry.docx" target="_blank">Word Download</a></p>
+
             <div class="alert alert-info" role="alert">
                 <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Before You Begin</h5>
                 <p>On the side, you find a navigation page to enter your data. We recommend you start with "Publication" to provide general information about the publication, then move on to "Sets of Statements" in order to upload the statements you used in your studies and then enter information about each individual study. You may add as many studies in your publication as you wish.</p>
