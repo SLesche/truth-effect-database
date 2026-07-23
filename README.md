@@ -1,7 +1,7 @@
 # Truth Effect Database (TED)
 
 Welcome to the Truth Effect Database (TED) — a large, open-source repository dedicated to research on the illusory truth effect.
-TED currently contains: 59 Studies, 12.000+ Participants, 800.000+ Trials
+TED currently contains: 64 Studies, 13.000+ Participants, 900.000+ Trials
 
 You can find more information on TED at its website: https://slesche.github.io/ted-site/
 
