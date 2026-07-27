@@ -286,13 +286,13 @@ function validateConditionData(condition_data){
 
     // if has_within_conditions is true, check if there are any conditions
     if (condition_data.has_within_conditions == 1 && condition_data.within_condition_details.length < 2) {
-        alert_message = 'Please add at least one two within conditions.';
+        alert_message = 'Please add at least two within conditions.';
         displayValidationError("withinConditionsList", alert_message);
         return false;
     }
     //same for between conditions
     if (condition_data.has_between_conditions == 1 && condition_data.between_condition_details.length < 2) {
-        alert_message = 'Please add at least one two between conditions.';
+        alert_message = 'Please add at least two between conditions.';
         displayValidationError("betweenConditionsList", alert_message);
         return false;
     }
