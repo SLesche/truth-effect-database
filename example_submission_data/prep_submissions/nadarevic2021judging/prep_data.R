@@ -26,7 +26,7 @@ clean_data <- data %>%
     response = ifelse(TruthJudgment, 1, 0),
     rt = TruthJudgment.RT/1000,
     trial = Trial,
-    repeated = ifelse(Repetition == "Yes", 1, 0)
+    repeated = ifelse(Repetition == "yes", 1, 0)
   ) %>% 
   select(subject = Subject, ends_with("identifier"), response, repeated, rt, trial) %>% 
   filter(!is.na(statement_identifier))
@@ -59,7 +59,7 @@ clean_data <- data %>%
     response = ifelse(TruthJudgment, 1, 0),
     rt = TruthJudgment.RT/1000,
     trial = Trial,
-    repeated = ifelse(Repetition == "Yes", 1, 0)
+    repeated = ifelse(Repetition == "yes", 1, 0)
   ) %>% 
   select(subject = Subject, ends_with("identifier"), response, repeated, rt, trial) %>% 
   filter(!is.na(statement_identifier))
