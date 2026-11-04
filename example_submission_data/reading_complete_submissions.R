@@ -10,6 +10,7 @@ create_truth_db(db_path)
 conn <- acdcquery::connect_to_db(db_path)
 
 valid_files <- list.files(path, pattern = "^submission_.*\\.json$", full.names = TRUE, recursive = TRUE)
+valid_files <- valid_files[!grepl("check", valid_files)]
 
 for (isubmission in seq_along(valid_files)){
   raw_obj <- extract_from_submission_json(valid_files[isubmission])
