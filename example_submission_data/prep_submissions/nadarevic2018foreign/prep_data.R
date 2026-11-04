@@ -52,7 +52,7 @@ clean_data <- clean_data %>%
     between_identifier = condition,
     response = truthrating,
     trial = trial,
-    repeated = ifelse(repetition == "Yes", 1, 0)
+    repeated = ifelse(repetition == "yes", 1, 0)
   ) %>% 
   select(subject, ends_with("identifier"), response, repeated, trial)
 
